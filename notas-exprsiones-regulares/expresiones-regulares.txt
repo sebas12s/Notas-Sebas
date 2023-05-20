@@ -1,0 +1,98 @@
+la principal funcion de las expresiones regulares es para buscar
+cuando buscamos algo lo hacemos por el nombre o algo asi 
+pero las expresiones regulares es por un patron son mas potentes que solo buscar por palabras
+
+/d -> Digito
+/w -> Letra
+
+Dar forma
+Dar repetición
+
+un archivo de texto un conjunto de cadenas de caracteres, un caracter es incluso un espacio aunque no lo veamos 
+cada espacio se ocupa por un caracter      
+si seleccionaramos toda la linea de arriba no estamos seleccionando la linea si no todos los caracteres que estan en ella
+
+Digito 
+palabra
+espacios        tab es un espacio especial  hay un caracter especifico que es un tab
+
+expresiones regulares
+caracter .
+si buscamos con el punto decimos que encuentre todo lo que sea un caracter entonces todo
+.       si ponemos punto y espacio decimos que todos los caracteres que tengan un espacio       es ver ya el espacio como un caracter
+.3      da lo mismo que con el espacio decimos que cualquier caracter que tenga un 3 despues
+.....       asi podemos buscar 5 caracteres que esten juntos   cuidado con los caracteres invisible
+...         si ponemos asi y tenemos una linea muy larga selecciona grupos de tres caracteres 
+
+para buscar digitos 
+\d  
+\n          no estoy seguro pero es un salto de linea
+\d\d\d      tambien se puede hacer con mas
+\w      con esto toma todo lo que se puede hacer una palabra puede ser tambien un guion bajo letras y numeros solo eso tampoco toma los acentos y la ñ
+\s      los espacios
+[0-9]       esto es igual a decir \d    busca del 0 al 9
+[6-9]       asi se puede ir poniendo    clases se le llama cuando definimos entre corchetes
+[a-zA-Z]       tambien con letras aunque solo pueden ser minusculas y mayusculas
+[a-zA-Z0-9_]        aqui le dijimos de la a a la z del 0 al 9 y el guion bajo
+[a-z\.]         con diagonal punto decimos que el caracter punto no la clase punto que nos muestra todo     se le llama escaparla
+[abcd]      asi tambien se pueden construir una clase
+
+dos no entiendo todavia     
+#
+{}      esto lo vi en un comentario pero no entendi muy bien
+
+.*       esto busca todos pero no por caracteres si no todos ya no es por cada uno si no por todos
+entonces si antes teniamos "123"    con el punto hace que sean 3 digitos pero el * hace que solo sea uno
+*   0 a muchos         con el asterisco es que haya o no haya digitos       otra forma de decir es      {0,}
++   uno o mas           con el mas es obligatorio que haya uno o mas        otra forma                  {1,}
+?   0 o 1       que haya o no haya                                          otra forma                  {0,1}
+
+\d+[a-z]        con esto le estamos diciendo que tenga un o mas digitos pero despues tenga una letra de la a a la z
+\d*[a-z]        le decimos que tiene que haber letras lo que puede o no son los digitos     
+\d*[a-z][a-z]?      0 o 1 haya o no entonces le decimos que una letra si tiene que haber pero no importa si esta la segunda
+
+\d{2,2}         con esto le decimos que sean dos el primer 2 es el minimo y el segundo el maximo 
+\d{2,8}         con esto le estamos diciendo que hayan del 2 al 8 de dijitos
+\d{4,}          con esto decimos que sean de 4 a mas digitos
+-       el guion es un reservado entonces hay que reservarlo
+\d{4-4}\-?      con esto le decimos que si haya numeros de 4 digitos separadados con un guion 
+\d{4-4}[\-\.]           con esto decimos que numeros de 4 digitos que despues tengan un guion o un punto cualquiera de las dos  
+\d{4-4}[\.\- ]          igual que el anterior pero agregamos que despues tenga un espacio
+(\d{4-4}[\.\- ]){2,2}           con esto decimos que se repita dos veces la expresion que pusimos adentro asi podriamos encontrar un numero celular
+
+
+.*,     aqui hace el mach completo hasta donde haya una coma no importa si hay mas comas en medio de eso
+.*?,     con esto hacemos que nos muestre los mach mas pequeños que encuentre entonces si encuentra una coma en medio hasta ahi termino el mach y despues comienza uno nuevo
+es como decir lo mas rapido entonces si encontro un mach trae ese y despues el otro y asi       ponemos igual el asterisco por que si solo ponemos un punto decimos que puede haber o no un digito antes de la coma entoces solo uno no sirve 
+entonces puede tener dos usos 
+1. que haya o no 
+2. que sea el mach mas pequeño posible  
+
+negacion
+\D      lo contrario a la de minuscula 
+\W      igual 
+\S 
+en la clases se pone al comienzo        "^"
+[^0-4]      es la negacion entonces me trae lo que no sea eso 
+
+(\d{4,4}\W){2,2}    este es un reto que hice
+
+
+^ esto tambien se le conoce como inicio de linea 
+$ final de linea
+^\d$        aqui le estoy diciendo que solo quiero que me encuentre una linea que solo tenga un digito solo uno, no todos los macht que encontroba 
+cuando especificamos que queremos con estos signos solo nos muestra los que cumplan con lo que esta adentro nada mas
+
+
+logs
+^\[Log.*\[WARN\].*$     esto busca algo como            [LOG ENTRY] [WARN] The system
+
+ejemplo de numero de telefono una buena practica antes de crear una expresion regular es ver en un archivo algunas combinaciones posibles y posibles errores
+
+telefonos
+^(\+?\d{2,2}[^a-z]?){3,3}[pe#]?.*$      esto busca telefonos de 6 dijitos de dos en dos
+
+url     
+https?          con esto no toma toda la palabra https si no solo valida si es 0 o 1 la s al final
+https?:\/\/[\w\.:/\-\?=&]{1,}          esta es mi solcion para buscar url pero no esta tan buena
+https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*     y esta es la del profe

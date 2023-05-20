@@ -1,0 +1,26 @@
+RDBMS       asi se llama a lso sowftware que se encargan de nuestras bases de datos se podria decir como MySql o oracle 
+sistema de gestion de base de datos se llama
+hay un termino algo importante pero no se mucho que es crud
+C reat              crear un registro
+R ead               de leer un registro 
+U pdate             actualizar un registro 
+D elete             eleminar registros
+
+todo esto se tiene que realizar un query = consulta
+esto es como una pregunta que le hacemos en este coso si creamos y asi
+
+en las tablas estan las columnas y de forma horizontal se le llama registros y en cada casilla se le conoce como dato
+
+si nosotros no agrupamos la inforamcion de una manera que tuviera sentido, solo tenemos datos sueltos pero cuando le damos nombre a la tabla o le damos sentidos ahi es cuando tenemos informacion
+
+un usuario puede crear muchos prodoctos pero un producto solo peude ser creado por un usuario ahi es donde entra el 1:N
+
+a las columnas con id se le conoce como primary key 
+pero si esta este id en otra tabla se le dice foreing key 
+
+mysql workbench     es una herramienta grafica 
+
+tipos de datos
+int         numero entero
+float       numeros con decimales
+varchar     cadena de caracteres, palabras o oraciones

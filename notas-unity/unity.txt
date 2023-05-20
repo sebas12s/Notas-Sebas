@@ -1,0 +1,19 @@
+el orden de los gameobject no importa como esten puesto al lado izquierdo
+entonces no afecta en el orden que son renderizados en el juego 
+pero si hay que tener cuidado con los que son padres e hijos
+
+incluso se pueden crear objetos simplemente para ordenar
+
+letra q = nos ayuda para mover la camaara
+w = nos ayuda a mover el objeto dependiendo el eje
+e = es para la rotacion 
+r = para escalarlo o agrandar
+t = tambien para escalar pero de una manera recta
+y = posicion escala y rotacion
+
+si nos aparecen diferentes los ejes del objeto y las de la camara se cambia arriba a local o global
+tambien presionando la tecla x
+
+
+para vicular un script con un objeto solo arrastremos el script al objeto
+

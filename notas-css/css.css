@@ -1,0 +1,688 @@
+/*hay que estar pendiente a los elementos en bloque y liena aqui es muy importante*/
+/*hago un recordatorio elementos en bloque son los que llenan toda la pantalla los elementos en linea son los que solo ocupan el espacio que tiene el texto o lo que contienen*/
+
+* { 	/*1*/
+		/*asi es como funciona css con selectores les dicemos que queremos cambiar, hay muchas formas de selectores*/
+	 	/*este es el selector universal con el asterisco decimos que lo que este adentro le cambiara a toda la pagina*/
+	color: #302; 	/*despues la propiedad que nos dice que vamos a cambiar en este caso el color, puede ser ancho tamano y muchas propiedades*/
+	padding: 0;		/*un padding es el espacio interno que hay en la caja que lo contiene*/
+	margin: 0;		/*el margin es el espacion externo que tiene la caja*/
+
+
+	font-family: 'Indie Flower', cursive; 	/*16*/
+											/*esto es con una tipo de fuente afuera del navegador*/
+											/*en google fonts buscamos una que nos guste despues copiamos el link y lo ponemos en head y ya aqui ponemos el nombre o tambien esta para solo copiar y pegar en la pagina*/
+
+}
+
+
+h2 { 	/*2*/
+		/*tambien podemos cambiarles propiedades desde que etiqueta es, esto cambia a todos los h2 y dice que tengan lo que le pusimos*/
+	color: #284;
+}
+
+
+.boa { 	/*3*/
+		/*con este cambiamos propiedades con clases que nombramos en html se pone un punto y el nombre de la clase*/
+		/*algo de las clases es que se pueden nombrar a varias etiquetas, puedo poner una clase a 2 h2 y asi*/
+	color: #759;
+}
+
+
+#reze {	/*4*/
+		/*con id es igual que clases pero lo que diferencia al id es que solo tiene que haber uno, no como las clases que es pueden dar a mas*/
+		/*y siempre lleva ese numero al comienzo y el nombre del id*/
+	color: #890;
+}
+
+
+[boa="linda"] {	/*5*/
+				/*esto es por atributos ponemos en medio de corchetes el atributo y el que tenga ese atrubuto se editara*/
+	color: #f35;
+}
+
+
+div h6 {	/*6*/
+			/*cuando ponemos asi es por forma decendiente estamos diciendo que cambie las propiedades del h6 que estan en el div*/
+	color: #f89;
+}
+
+
+.rous b {	/*7*/
+			/*tambien se puede hacer con clases editamos los h4 que estan en las etiquetas que tienen la clase rous*/
+	color: #f00;
+}
+
+
+
+p:hover {	/*8*/
+			/*hover es cuando pasemos la flechita se cambia la propiedad*/
+			/*tambien se puede con clases*/
+	color: #f09;
+}
+
+
+
+b {		/*9*/ 
+		/*este lenguaje es en cascada entonces siempre tomara lo ultimo cuando estan dos propiedades iguales, es por que opera todo entonces es como decirle que primero fue ese color y despues se puso del ultimo color ya que no esta em segundos */
+		/*hay un nivel de gerarquia o de importancia mientras este en la misma gerarquia se trabajara en cascada*/
+	color: #232 ;
+}
+
+b {
+	color: #298 !important;
+}
+/*los niveles de gerarquia se quedarian asi
+1. !important
+2. estilos en linea (son los que se ponen con style en la etiqueta de html)
+3. identificadores (ID)
+4. clases, pseudo-clases y atributos
+5. elementos y pseudo-elementos*/
+
+b {	/*la cascada diria que se pone verde pero como !important esta en el tope de gerarquia se pone celeste*/
+	color: #194;
+}
+
+
+.boa__input{	/*10*/
+				/*esta es la metodologia ben pues en si solo es una forma de trabajar que son, nombrando la clase de la caja que los contiene y poniendo los dos giones bajos y el nombre esa es la metodologia*/
+
+	color: #267;
+}
+.boa__input--reze {	/*esta es una forma de cuando hay mas de uno en la forma de arriba entonces se ponen esos dos guiones y se pone un numbre que la distinga en pocas palbras es para que se lleve un mejor orden*/
+	color: #f34;
+}
+
+
+.boa__p-h2 {	/*11*/
+				/*esta es otra metodologia pero con los nombres de las etiquetas, son para llevar nejor orden*/
+	color: #292;
+}
+
+/*tenemos dos tipos de medidas las fijas y las relativas, las fijas son las que no cambian pixeles(px) puntos entre otras
+las relativas son las que pueden cambiar como cuando pasa de pc a telefono ahi cambian los tamanos*/
+
+
+.sawa__p {		/*12*/
+	font-size: 30px;	/*esta propiedad es para cambiarle el tamano a la letra*/
+						/*pueden ser mas medidas como cm, mm, m pt (puntos) y asi muchas medidas exactas*/
+						/*aunque es mejor trabajar con medidas relativas por si cambia de tamano*/
+						/*esto se puede hacer respondive dising _ desktop first, que es adapatable a otros dispositivos*/
+}
+
+
+.sawako__ru {	/*13*/
+	font-size: 2em; 	/*por lo general 1 em es 16px aunque puede cambiar*/
+}
+.sawako {
+	font-size: 30px; 	/*aqui el em tiene 30px por em pero es por que el contenedor que lo contiene le puse 30px entonces aqui es donde cambia el em*/
+						/*el em tendra la medida que tenga la caja contenedora*/
+}
+
+
+.boaxl { 	/*14*/
+			/*el vw que en ingles es como viupor width es una medida que toma por porcentaje del tamano de la pagina entonces si le damos 100vw estamos diciendo que el widt cubra el 100% y si le ponemos 50 el 50% cubrira*/
+			/*width quiere decir anchura, entonces es el ancho de contenido de un elemento*/
+	font-size: 20px;
+	background-color: #296;
+	width: 100vw;
+	height: 50vh;	/*lo mismo se puede hacer con heigth pero aqui se pone vh y funciona igual*/
+					/*solo que heigth significa altura*/
+					/*tambien se puede trabajar con porcentajes pero con porcentajes se trabaja con la caja que lo contiene*/
+}
+.boaxlu {
+	font-size: 20px;
+	background-color: #190;
+	width: 50vw;
+}
+
+
+
+.reze {		/*15*/
+	font-size: 20px;
+	font-family: georgia, sans-serif; 	/*este es el tipo de letra*/
+										/*se pueden poner dos separadas con una coma por si no encuentra una hace la otra*/
+	line-height: 4; 	/*el linie height es para decirle cuantos espacios ocupa ahorita es 4 entonces de espacio esta ocupando 4 es como 4 letras afiladas aunque la letra queda del mismo tamano el espacio ocupa mas*/
+	/*un line height es el tamano de la letra  normal si ponemos dos ocupa un espacio para arriba y uno para abajo y la letra siempre se pone en medio*/
+	font-weight: 600;	/*esto es para el grosor de la letra*/
+}
+
+
+/*17*/
+/*en normalize se hacen unos cambios cuando lo necesite en otras ocaciones*/
+	/*	max-width: 100%;	/*en img linea 148 agregamos que es para ajustar en los telefonos al 100%*/
+/*tambien agragamos lo siguiente en las primeras lineas*/
+**{	/*puse dos pero es solo uno*/
+	box-sizing: border-box;	/*esto dunciona para que las cajas aunque les des mas medida no midan mas, que midan siempre lo que valian*/
+	padding: 0;
+	margin: 0;
+}
+
+
+
+.rezez h2 {		/*18*/
+	display: inline;	/*con esta propiedad podemos cambiar los elementos en bloque a elementos en linea*/
+	height: 400px;		/*a los elementos en linea no se les puede dar height (altura) por que solo ocupan su espacio en linea*/
+	background-color: #f34;
+}
+.rezez b {
+	display: block;		/*lo mismo podemos hacer con elementos en linea pasarlos a elementos en bloque*/
+	height: 100px;		/*a los elemtos en bloque si se puede por que este si ocupa un width completo*/
+	width: 100px;		/*width tambien solo se les puede dar a los elementos en bloque*/
+						/*tengo una teoria del por que esto es asi como un elemto en bloque es completo se le puede editar el heigth y width pero como un elemento en linea solo ocupa lo que tiene escrito no es completo asi que no queda espacio para editar*/
+	background-color: #f34;
+
+}
+
+
+.ella h4 {		/*19*/
+	display: inline-block;
+	background-color: #277;
+	padding: 2px;	/*padding es la distancia que tiene el texto con la caja que lo contiene*/
+				/*y esta propiedad es una manera de resumir*/
+				/*ya que padding se puede dividir asi por cada direccion o posicion que quiere uno ponerle*/
+	padding-top: 20px;		/*top es arriba*/
+	padding-right: 20px;	/*right es derecha*/
+	padding-bottom: 20px;	/*bottom es abajo*/
+	padding-left: 20px;		/*left es izquierda*/
+}
+.ella h3 {
+	color: #000;
+	display: inline-block;
+	background-color: #f46;
+	padding: 100px;		/*solo asi suma el padding y ek height y el width*/
+							/*con padding crece tambien la caja por que le decimos que tenga esa distancia con la caja*/
+	height: 100px;	/*alto*/
+	width: 100px;	/*ancho*/
+	box-sizing: border-box; 	/*con esta propiedad hacemos que el tamano de la caja solo sea como lo dice el height y width*/
+								/*aunque con esta propiedad no estoy seguro*/
+								/*como con que con esta propiedad hace que el padding este en el calculo de los height y width entonces mientras no pase lo que esta en el width o height pero sin esta suma el padding mas el height y width*/
+	box-sizing: content-box;	/*esto es como que me centrara el texto como que toma de referencia el texto pero lo centra y ahi si toma en cuenta cuanto tiene que alargar el padding y w y h*/
+	text-align: center;		/*con esto centramos el centro en la caja*/
+}
+
+
+.ella h5 {
+	display: inline-block;
+	background-color: #aaafff;
+	padding: 20px;		/*cuando solo ponemos una medida estamos diciendo que le de 20 a las 4 direcciones*/
+	padding: 20px 80px;		/*cuando ponemos dos le estamos diciendo que*/
+							/*primero eje Y y despues eje X*/
+							/*Y es vertical y X horizontal*/
+    padding: 30px, 60px, 10px;	/*siempre comenzara con top y asi entonces si no tiene uno el que falta seria left entonces ya que falta agarra su eje que es x y pone el de right*/
+	padding: 30px 60px 10px 10px;	/*asi es para poner por separado cada uno y va como las agujas del reloj*/
+									/*primero top, right, bottom y left en ese orden*/
+}
+
+.ella h2 {
+	display: inline;
+	margin: 10px;	/*el margin funciona como el padding esta el top bottom right y left tambien se puede resumir*/
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;	/*este es para redondear los bordes, si ponemos 50% se hacen circulos*/
+	border: 4px solid #f12;		/*esta es una propiedad acortada*/
+									/*primero  el tamano del borde despues el estilo despues del color*/
+									/*hay bastantes tipos de bordes: solid, dashed, double, groove, inset, outset, ridge entre otros */
+}
+
+/*boxmodel es el conjunto de estas cuatro de aqui abajo*/
+/*content: contenido se modifica con el line-height
+  padding
+  border
+  margin*/
+/*esto tienen un rango de gerarquia*/
+/*primero el contenido despues el padding despues el border y de ultimo el margin*/
+
+.ella h6 {
+	display: inline;
+	font-size: 100px;
+	box-shadow: 3px 3px 40px 0px #929;	/*es como la sombra que se le da*/
+									/*primero se le da el eje x despues el eje y despues cuan desenfocada estara la sombra despues el borde y de ultimo el color*/
+	text-shadow: 4px 3px 30px #291;		/*esto es lo mismo pero con el texto pero esta no tiene borde*/
+	text-shadow: 4px 3px 30px #291, 4px 3px 30px #291;	/*asi se puede hacer mas intenso */
+																/*cuando repito codigo le pongo una coma*/
+	transform: rotate(45deg);	/*esto es una funcion para que gire la caja*/
+}
+
+
+.noelle {		/*20*/
+	width: 200px;
+	height: 200px;
+	background-color: #299;
+	margin: auto;	/*con margin auto de width te calcula automaticamente la mitad y ahi te pone la caja, la centro*/
+	border: 10px solid blue;	/*en el notmalice le pusimos el box-sizing: border-box*/
+	box-sizing: content-box;	/*pero esta es la propiedad que tiene por defecto y esto lo que hace es que si tenemos una caja de 100 y el borde de 10 ahora el espacio ocupado sera de 120 por los bordes*/							
+	outline: 10px solid blueviolet;		/*lo que pasa con el outline es como como un borde pero no es que ocupe espaico ni agranda la caja es como para marcar solo se pone como queramos pero no afecta ni modifica la caja*/
+}		/*el borde ocupa un lugar real mas el autline no*/
+.noelle2 {
+	width: 200px;
+	height: 200px;
+	background-color: #812;
+	margin: auto;
+	box-sizing: border-box;		/*con esta propiedad lo que hace es que la caja no aumente su tamano como hace con content-box*/
+}
+.noelle, .noelle2 {	/*asi podemos hacer lo que hicimos arriba para ahorrarnos unas lineas de codigo*/
+	width: 200px;
+	height: 200px;
+}
+
+
+.hinata {
+	width: 120px;
+	height: 120px;
+	display: block;
+	background-color: #284;
+	position: relative;		/*el html cada caja tiene su espacio entonces si le ponemos esto el espacio se queda aunque movamos la caja con top o left el espacio de la caja se sigue quendando*/
+							/*esto da z index*/
+							/*pero solo funciona si las cajas estan posicionadas o si no se posicionan como quieren :(*/
+	z-index: 1;		/*si tenemos dos cajas pero queremos que una este arriba de la otra solo le damos un z idex mayor pero recuerda que solo funcioona si las cajas estan posicionadas*/
+					/*por defecto el position relative trae un z index 0*/
+					/*el z index puedes poenr la cantidad que quieras asi que mejor si tienes que posicionar bastantes mejor numeroarlos en 20 en 20 o asi cantidades grandes*/
+					/*hay un dilema con la posicion de hijos y padres cuando tengamoso a hijos y pasres y queramos que el padre este erriba del hijo, le tenemos que dar al hijo un z index de -1 y al padre nada*/
+	left: 50px;
+	top: 50px;
+	bottom: 600px;		/*aqui no importa el bottom le toma mas importancia a left y top*/
+}
+
+/*el z index es la posicion del eje z en otras palabras si tenemos muchas cajas en la misma posicion cual se vera*/
+
+
+
+.nejire {
+	width: 150px;
+	height: 150px;
+	display: block;
+	position: static;	/*este position es el valor que ya tienen definido*/
+	background: #926;
+}
+.ryuko {
+	width: 150px;
+	height: 150px;
+	display: block;
+	background: #288;
+	position: absolute;	/*recordar que cada uno tiene una caja y un espacio reservado como nosotros lo queramos pero si lo posicionamos como posiion absolute ese espacio desaparece entonces ahorita que tenemos 3 cajas la segunda desaparece entonces la 3 pasa al espacio de la segunda pero la caja no desaparece solo el espacio en si*/
+						/*cuando trabajamos con position absolute aunque la caja sea en bloque el conctenedor se ajustara al contenido*/
+	opacity: .8;	/*esto es la transparencia*/
+}
+.ruby {			/*las cajas pueden tomar el punto de referencia la caja padre pero solamente si esta posicionada en otras palabras si tenemos una caja adentro de la otra pero la queremos mover pero tomando de referencia la caja contenedora las posicionamos la caja contenedora con position relative y las otras con position absulute o como queramos pero tiene que estar psocionadas*/
+	width: 150px;
+	height: 150px;
+	display: block;
+	background: #214;
+	/*hay un truco para centrar alguna caja que queramos se hace lo siguiente*/
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;	/*con esto se centra*/
+}
+
+.corto, .largo {		/*21*/
+	font-size: 40px;
+}
+
+.corto {
+	background: #537;
+	position: fixed;	/*este es como el absolute pierde su espacio pero este se queda fijo en la pantalla aunque bajemos esa caja estara fija*/
+}
+.mediano {
+	background: #619;
+	position: sticky;	/*este es muy interaste por que guarda su espacio en la caja pero si llega a donde le pongamos en este caso a top 0 se quedara como el fixed fijo  en la pantalla*/
+	top: 0;
+}
+
+
+.hanck {
+	background: #275;	/*esto esta en bloque por defecto*/
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+}
+
+.hanck {
+	background: #275;	
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+	display: inline;	/*en linea se ajusta a su contenido*/
+}
+
+.hanck {
+	background: #275;	
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+	display: inline-block;	/*esto se comporta en linea una a la par de otra pero guardando su espacio no acoplandose al contenido*/
+}
+
+
+.estella { 	/*22*/
+	margin: auto;
+	margin-top: 50px;
+	width: 320px;
+	height: 350px;
+	border: 4px solid red;
+	background: #591;
+	overflow: auto;		/*esto es la cosa que nos ayuda para bajar con auto detecta que se sale de la caja el texto y te pone uno*/
+	overflow: scroll;	/*esto obligatoriamente pone la barra aunque no sea necesario auto solo la pone cuando es necesario*/
+	overflow-y: hidden;	/*overflow es un shorhan hidden es para ocultar*/
+						/*con este hidden tambien se puede usar para las imagenes pero esto como que lo recorta lo que sobra*/
+}
+
+.contenedor div {	/*23*/
+	float: right;	/*con el float como que los puede poner a la par pero tambien necesitamos el width pero no estoy muy seguro*/
+					/*float es vieja escuela*/
+	width: 50%;
+}
+.primario {			
+	background: #825;
+}
+.secundario {
+	background: #275;
+}
+/*a continuacion un ejemplo donde si puede funcionar float pero esta un poco largo*/
+
+.cont {
+	margin: auto;
+	margin-top: 50px;		/*el "vh" es algo que dice la visualisacion commpleta del heigth o bueno si le ponemos un 100*/
+	border: 4px solid darkred;
+	background: #821;
+	width: 50%;
+}
+.cont img {
+	float: left;	/*esto es el efecto que hace como que envolviera la imagen el texto*/
+	width: 300px;
+}
+
+.padre {	/*24*/
+	/*paginas para conocer mejor el flex
+	https://www.samanthaming.com/flexbox30/
+	https://flexboxfroggy.com/#es
+		
+	*/
+
+	display: flex;	/*siempre que trabajamos con flex al padre le tenemos que dar el display flex*/
+}
+
+.hijo {
+	width: 100px;
+	height: 100px;
+	padding: 10px;	/*aqui con el padding aumenta el tamano de la caja si no queremos eso agregamos la siguiente propiedad*/
+	box-sizing: border-box;	/*con esta propiedad le da el padding pero sigue teniendo el tamano de 100x100*/
+	/*esta propiedad se recomienda ponerla universal ya que no queremos que ninguna caja cambie sin que nosotros queramos*/
+	display: none;	/*con esto estamos como ocultandolo asi funciona el display none oculta o lo quita*/
+}
+
+
+
+
+
+
+.header-nav {
+    list-style: none;		/*con esta linea cuando tenemos una lista desordenada quita los puntitos*/
+}
+
+.header-nav__item a {
+    text-decoration: none;		/*con esta linea podemos eliminiar la linea que esta abajo cuando ponemos un link*/
+    color: white;
+}
+
+.header-nav__item a:hover {   /*esta pseudocalase es para cuadno ponemos el cursor arriba del elemento*/
+    color: #6a994e;
+}
+
+.header-nav__item a::after {			/*este pseudo elemento es despues del elemento pondra lo que especifiquemos*/
+    content: " | ";		/*content es como que pone el elemento*/
+}
+
+* {
+    box-sizing: border-box;		/*esto nos ayuda para si le damos un tamaño a la caja se quede de ese tamaño y no crezca cuando le demos un paddinig o un borde*/
+}
+
+.caja-hijo
+{
+	width: calc(50% - 20px);		/*con esto le decimos que tenga un 50% de ancho menos 20px asi podemos hacer calculos */
+	color: inherit;			/*con esto le decimos que tenga el color del padre para eso es inherit o herencia*/
+}
+
+.header-nav__item a:hover {			
+    color: #6a994e !important;		/*hacemos que el estilo se ejecute si o si*/
+	color: #190;		/*pero si no esta el important y hay un line style es mas importante el inline style
+							que es un inline style <h1 style="color: red;">hola<h1>		esto es un inline style*/	
+}
+
+/*la especifidad se va suamndo y se puede ver cuando pasamos el cursos en algo de css, los id valen mas que las clases y las clses mas que las etiquetas*/
+
+h2 + p {
+    color: #bc4749;		/*con esto le estoy diciendo que me modifique los p que esten despues de un h2 pero solo un elemento despues*/
+}
+
+h2 p {		/*con esto le digo que me modifique p que esten adentro de un h2*/
+	color: #267;
+}
+
+h2, p { /*con esto le digo que me modifique los h2 y p*/
+	color: #821;	
+}
+
+h2 ~ p {		/*con esto le digo que me modifique todos los que esten despues de un h2*/
+				/*se traduce si tiene como hermano general el h2 modifica el p aunque no este despues del h2 como con el +*/
+	color: mediumaquamarine;		
+}
+
+div > p {		/*esto solo es hijo directo solos los p hijos de esta class*/
+    color: chartreuse;
+}
+
+/*medidas
+	relativa : pueden cambiar dependiendo del tamaño del dispositivo
+	absolutas : son fijas 
+*/
+
+
+.text-container {
+    font-size: 24px;
+}
+
+.text-container p {
+    font-size: 1.5em;		/*1 em es la medida del padre entonces en este caso un em es 24px*/
+}
+
+
+
+html {
+	font-size: 62.5%;	/*esto es un truco para usar el rem*/
+}
+p {
+	font-size: 1.6rem;	/*el rem toma como referencia a lo que trae por defecto el navegador en otras palabras html*/
+	/*entonces con el truco de arriba si quiero 16px pongo 1.6 si quiero 30px pongo 3.0rem*/
+}
+
+.text-container {
+    background: #386641;
+    width: 50vw;	/*el vh y vw funcionan como porcentaje pero de toda la pagina lo que se mira*/
+    height: 100%;	/*el porcentaje funciona por el porcentaje de la caja no toda la pantalla que se mira*/
+	min-height: 50rem;	/*le estoy diciendo que sea 500px minimo de ahi no se hara mas pequeño por eso min*/
+	max-width: 50rem;	/*se puede decir que de maximo tendra 500px no mas pero si menos se puede hacer con height y width*/
+}
+
+
+
+/*position static como viene por defecto no deja moverlo con top right y asi solo cambiandolo ahi si deja mover */
+
+#two {
+    background: #6a994e;
+    position: static;		/*position static es el que trae por defecto asi uno abajo del otro o uno al lado del otro si son inline-block*/
+	position: absolute;		/*con absolute hace que pierde su espacio por defecto se podria decir y ano tiene su espacio a la par del otro esta la pierde entonces se puede colar arriba de otra o atras como queramos*/
+	position: relative; 	/*relative no pierde su espacio entonces se puede comnezar a mover desde su espacio	*/
+}
+
+/*display
+block son los que ocupan toda la pagina
+inline son los que solo ocupan el espacio del contenido que esta adentro
+
+los elemenotos inline no se le puede dar un margin y paddin top y buttom ni un with ni height
+
+
+inline-block se transforman en elemenots inline asi que se puede poner uno al lado de otro pero si te deja agregarle el margin y padding y poder ejecutar el heigth y widht
+*/
+
+
+
+
+/*display felx*/
+
+.container-flex {
+    font-size: 1.6rem;
+    border: .3rem solid black;
+    display: flex;		/*solo con esto podemos hacer que sus hijos pueddan estar uno del lado del otro el display siempre se le da a la caja padre*/
+	flex-direction: column;		/*esta es la direccion que se colocan los hijios*/
+	flex-direction: column-reverse;		/*en columnas pero al reves*/
+	flex-direction: row row-reverse;		/*lo mismo aqui*/
+	flex-wrap: wrap wrap-reverse;		/*esto parece normal pero si la pantalla se va haciendo pequena el contenido se ira poniendo abajo*/
+
+
+	/*esto alinea horizontalmente solo asi no vertical*/
+	justify-content: center;		/*el justify nos ayuda a alinear los hijos en este caso los alinea al centro*/
+	justify-content: flex-end;		/*lo pone todo al final*/
+	justify-content: flex-start;		/*al principio*/
+	justify-content: space-around;		/*el espacio que sobre lo divide entre todas las cajas el mismo tamaño de margin*/
+	justify-content: space-between;		/*igaul divide los espacio o el margin pero no toma el comienzo y el final*/
+	justify-content: space-evenly;		/*esto toma por igual todos los espacio igual que el comienzo y el final ya no mucho por le margin*/
+
+	/*esto puede alinear aunque la caja este mas grande peude alinear por el centro y verticalmente*/
+	align-items: center;		/*esto alinea a los hijos */
+	align-items: flex-end;		/*y asi hay muchos pero hay dos que no los habia visto*/
+	align-items: stretch;		/*con esto se haran al tamaño que tenga el padre mientras no le definamos previamente un tamaño*/
+	align-items: baseline;		/*con esto media vez no le definamos un tamaño a los hijos el tamaño de la caja se ajusta al tamaño del contenido esto es verticalmente*/
+	order: 2;	/*esto se les da a los hijos y es para decirle que orden queremos que vayan 
+	pero si hay algunos hijos que no les ponemos orden los manda a la izquierda*/
+}
+
+.box1 {
+    background: #56FEC0;
+    flex-grow: 1;			/*esto divide el espacio sobrante*/
+}
+.box2 {
+    background: #9B62FC;
+    flex-grow: 3;			/*aqui le digo que tenga una tercera parte y arriba una parte de lo sobrante*/
+}		
+
+.padre {
+	display: flex;
+	flex-wrap: wrap;
+}
+.box {		/*esta clase la tienen todos los hijos este ejemplo esta en la clase 41*/
+	height: 10rem;
+	flex-basis: 10rem;
+	flex-grow: 1;
+}
+
+
+
+
+/*variables en css*/
+:root {		/*asi se crean el :root es obligatorio y los dos guiones*/
+    --primary-color: #1b4332;
+    --secundary-color: #b7e4c7;
+    --header-size: 4rem;
+    --font: 1.8rem;
+}
+.variable header {
+    width: 100vw;
+    height: 15vh;
+    background: var(--primary-color);		/*y asi se llaman con el nombre var*/
+}
+
+
+
+/*Responsive*/
+
+/*se usan los media query*/
+/*mobile first o mobile only esto es comenzar desde un diseño de telefono que cuando comenzamos desde el desktop y lp vamos haciendo mas pequeño eso solo es responsive*/
+/*se recomeinda crear archivos para el estilo de telefono para tablet y para computador*/
+
+@media (min-width: 480px) {		/*con esto le estoy diciendo que cuando llegue a minimo 480px hara el codigo que esta en las llaves*/
+
+}
+
+/*lo que vamos hacer se llama mostly fluid*/
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.c1, .c2, .c3, .c4, .c5 {
+    width: 100%;
+    min-width: 150px;
+    height: 15rem;
+}
+
+.c1 {
+    background-color: #344e41;
+}
+.c2 {
+    background-color: #3a5a40;
+}
+.c3 {
+    background-color: #588157;
+}
+.c4 {
+    background-color: #a3b18a;
+}
+.c5 {
+    background-color: #dad7cd;
+}		/*esto solo son cajas*/
+
+@media (min-width: 600px) {  /*cuando sea mas grande que 600 hara el codigo que ponemos abajo*/
+    .c2, .c3, .c4, .c5 {
+        width: 50%;
+    }
+} /*los media query tienen que ir hasta abajo*/
+
+
+@media (min-width: 800px) {		/*esto se recimienda que se haga desde diferentes archivos */
+	.container {	
+		width: 800px;		/*con esto le dije que maximo tuviera este tamaño entonces no crecera mas*/
+		margin-left: auto;	/*estas lineas no las entiendo muy bien pero es el margin asi que se podria decir que se queda en medio */
+		margin-right: auto;	/*el auto crece mediante su contenido*/
+	  }
+	  .c1 {
+		width: 60%;
+	  }
+	  .c2 {
+		width: 40%;
+	  }
+	  .c3,
+	  .c4 {
+		width: 33%;
+	  }
+	  .c5 {
+		width: 34%;
+	}
+}
+
+/*hay un patron que se llama column drop*/
+
+
+
+
+/*medidas relativas con el texto no usar px
+al usar medidas absolutas no cambian mejor usar rem que ya sabemos para que es 
+*/
+
+/*despues de esto es css visto en el curso de react css que no conocia*/
+.react {
+	font-weight: 700; /*grosor de la letra*/
+	line-height: 1.2; /*este es el espaciado se podria decir*/
+	flex-wrap: wrap;
+	align-items: center;    /*esto alinea a los hijos verticalmente*/
+	justify-content: center;  /*esto alinea a los hijos horizontalmente*/
+	text-align: center;   /*esto es para alinear el texto*/
+	cursor: pointer;		/*esto es para cambiar el cursor*/
+  	user-select: none;		/*esto es para que no se puede seleccionar el texto*/
+
+	flex: 1 1;	/*esto dice que si tenemos dos botones entonces que se expandan para que esten parejos del mismo tamaño y asi si hay 3 y 4 y 5 por eso 1 1 para que tengan el mismo espacio */
+}

@@ -1,0 +1,26 @@
+{
+    "nombre": "sebas",
+    "edad": 22,
+    "trabajo": true,
+    "animes": {
+        "nombre": "One Piece",
+        "genero": "Shonen",
+        "personajes": [
+            {
+                "nombre": "Liffy",
+                "edad": 19,
+                "fruta": true
+            },
+            {
+                "nombre": "Boa",
+                "edad": 31,
+                "fruta": true
+            },
+            {
+                "nombre": "Zoro",
+                "edad": "21",
+                "fruta": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,105 @@
+react es una biblioteca de javaScript o libreria 
+una biblioteca o libreria es un conjunto de implementaciones o subprogramas
+son como herramientas en las cuales podemos trabajar
+se pueden crear componentes reautilizables 
+
+
+conceptos basicos de react 
+COMPONENTES 
+parte de la interfaz del usuario que es independiente y reutilizable, son como en programacion estructurada
+se pueden divir en dos categorias principales
+funcionales y de clase
+un componente funcional es como una funcion de javaScript pero retorna un elemento de react ejemplo
+function Saludo(props) {        el nombre del componente de JSX debe de iniciar con letra mayuscula
+    return <h1>Hola, {props.nombre}</h1>;      esta tipo de mezcla de html y js se le llama JSX
+                                en este ejemplo el props es como un objeto entonces por eso podemos usar el punto y poder acceder a las propiedades
+                        props = propediades = properties
+                        los props solo pueden ser enviados de padre a hijo
+}       
+
+un componente de clase es como una clase pero retorna un elemento JSX ejemplo
+de clase se debe extender React.Component
+tambien debe de tener el metodo render para retornar un elemento JSX
+class Saludo extends React.Component {  le ponemos esto para tener todos los componenetes de react
+    render() {      definimos este metodo   
+        return <h1>hola, {this.props.nombre}</h1>;
+    }
+}
+
+HOOK
+es una funcion especial que te permite trabajar con estados en componentes funcionales
+
+ESTADOS
+son los estados que pueden tener los componentes de las paginas web
+
+conceptos importantes
+commponentes
+props
+estados
+hooks
+eventListener
+
+JSX JavaScriptXML
+extencion de react para la sintaxis de js ejemplo
+const elemento = <h1>Hola</h1>;     para hacer esto nos ayuda jsx aunque es opcional si lo quisieramos hacer
+en pocas palabras JSX es una combinacion de js y html
+
+los elementos son como los div h1 y asi las cosas pequeñas entonces un componente esta hecho de elementos
+con JSX podemos crear cualquier elemento de html 
+los elementos de html se representan con letras minusculas h1 
+pero los componentes siempre inician con una letra mayuscula Boton
+Tambien se le pueden ingresar atributos a los elementos, pero algunos se escriben de forma distinta
+ejemplo seria una clase en html class en jsx className
+
+es importante el camelCase      cuando la primera es minuscula y las demas palabras son mayusculas
+css acepta pero con camelCase ejemplo
+background-image css
+backgroundImage jsx
+ejmplo practico
+const estiloDiv = {
+    color: "red",
+    backgroundColor: "black"
+};
+y ya este estilo lo podriamos implementar asi
+<div style={estiloDiv}>Hola</div>       las llaves nos ayuda a decir que lo que esta adentro de las llaves es js como las variables por eso se ponen las llaves
+
+<div style={{color: "green"}}>Hola</div>   asi se puede asignar en linea
+dobles llaves una significa las primeras llaves nos dice que estamos insertando js y los que estan adentro nos permiten definir un objeto directamente como que se crearamos el objeto
+
+elementos y componentes
+se crea un html un div con un id root 
+ahi sera nuestra raiz de todo lo que se creara
+entonces un ejemplo para insertar un elemento seria el siguiente
+const = elemento <h1>Hello world</h1>;
+
+import ReactDOM from "react-dom";       el import ReactDOM es como una variable donde guardaremos el paguete
+ReactDOM.render(        //el reactDom lo tenemos que importar antes
+    elemento,             //el primer argumento es el elemento que queremos insertar   //estos simplemente son atributos de una funcion pero para ver mejor los separe asi
+    document.getElementById("root")     //el segundo es donde lo queremos insertar
+)
+
+en react si o si debemos incluir la barra al final cuando no tienen etiquete de cierre ejemplo
+<img /> asi
+tambien se puede incluir js en JSX 
+{}  la señal seria estas llaves siempre lleva js ejemplo
+let palabra = "HOLA";
+<p>{palabra} como estas</p>         entonces le estamos diciendo que lleva codigo js    no solo variables si no todo el codigo de js
+
+npx create-react-app "nombre de la carpeta donde se creara"         asi se crea un archivo de react desde la terminal
+esto descarga y crea todo lo necesario para crear archivos de react y asi despues la misma terminal te dice que entres a la carpeta y le des npm start
+si no queremos crear una carpeta nueva remplazamos el nombre de la carpeta por un . 
+
+en todas las carpetas creadas la mas importante es la de src 
+donde estan todos los archivos que contengan codigo fuente  
+
+recordar que los componentes son piezas de codigos como en POO seria como una clase 
+
+para inciar una aplicacion de react desde la terminal en la carpeta se pone npm start
+
+es comun agregar una carpeta para los componentes dentro de src 
+las extenciones pueden ser js o jsx
+
+el estandar para js de identacion es 2
+se puede ir eliminando todos los archivos que no usamos en la carpeta que react nos creo
+
+normalmente se pone una hoja de estilos para cada componente

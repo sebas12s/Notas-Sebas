@@ -1,0 +1,13 @@
+this is an airport 
+this is a pharmacy
+this is pet store
+this is a bookstore (libreria)
+this is a library (biblioteca)
+this is a hospital
+this is a restaurant
+this is a bank
+this is a school
+this is a bakery (panaderia)
+this is a post office  (oficina de correo)
+this is a movie theater (cine)
+this is a train station 

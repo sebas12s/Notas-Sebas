@@ -1,0 +1,111 @@
+https o http        son lo que conectan los servidores con el navegador
+
+postman es como un revisor de datos de los que entran a nuestro navegador
+
+herramienta que permite realizar peticiones http a cualquier API
+me deja hacer peticiones http de cualquier API
+
+API     application programming interface
+
+El servidor hace la consulta a la base de datos y atravez del API los datos llegaran a la aplicacion
+
+El API no deja que vean las cosas complejas con el api solo se ejecutan acciones no tan complejas
+API comunicacion de un servidor y un cliente
+API de servicios web        la comunicacion se hace usando el protocolo http
+
+la informacion se transporta en un formato json
+
+API basadas en bibliotecas          como angular a modo de libreria
+API en clases 
+
+API sistemas operativos
+
+
+
+API es la forma que de una aplicacion conectarnos a otras aplicaciones
+
+Rest api es una arquitectura 
+web services es un tipo de api que trabaja por alguna red
+
+
+
+
+
+API rest (representational state transfer)
+su significado puede ser que no tiene ningun estado entonces necesita informacion del cliente para poder mostrar algo 
+api rest por lo que veo solo se usa en paginas web por que su camino es el siguiente
+entonces el api es la conexion del cliente con el servidor y poder obtener los datos 
+esto se hace con el protocolo http o https 
+si estoy usando js para el frontend y java para el api para eso usamos un lenguaje estandar que este caso es un json
+hay APIs publicas y privada
+
+metodo get pedir algo 
+metodo post enviar algo
+backend busca todo los datos que pidieron en la base de datos y el frontend toma esos y los pone bonitos
+
+
+
+
+
+
+
+json
+Java
+Scrip
+Object 
+Notation
+
+json es un lenguaje intermediario
+json es un intercambio de datos no solo para js si no para muchas otras cosas
+{
+    clave:valor     //asi es la estructura 
+    //cada llave es un objeto
+    "nombre":"Sebastian",     //esta es la estructura
+    "apellido":"Perez",
+    "edad":16
+    "waifus": ["Hinata", "Boa", "Nejire", "Mikasa"]  //esto es como un array o en json un conjunto de valores relacionados a una clave
+    //recordar que en un valor de array puede contener cualquier cosa incluso otro json
+    //no pueden ir funciones en un objeto json
+}
+
+
+[       //con estos corchetes decimos que pueden haber mas de un obejeto json del mismo tipo
+    {
+        "nombre":"Sebastian",     
+        "apellido":"Perez", 
+        "genero": null      //se puede poner un dato null
+    },      //se divide por una coma
+    {
+        "nombre":"Xiao",     
+        "apellido":"Perez"
+    }
+]
+
+
+//ejemplo de un json no complicado recordar que siempre se divide con una coma
+{
+    "nombre": "sebas",
+    "edad": 22,
+    "trabajo": true,
+    "animes": {
+        "nombre": "One Piece",
+        "genero": "Shonen",
+        "personajes": [
+            {
+                "nombre": "Liffy",
+                "edad": 19,
+                "fruta": true
+            },
+            {
+                "nombre": "Boa",
+                "edad": 31,
+                "fruta": true
+            },
+            {
+                "nombre": "Zoro",
+                "edad": "21",
+                "fruta": false
+            }
+        ]
+    }
+}

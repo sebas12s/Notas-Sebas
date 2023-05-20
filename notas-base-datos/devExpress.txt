@@ -1,0 +1,59 @@
+la primera opcion son las columnas
+las segundas son los indices 
+
+
+DevExpress.Persistent.Base.DefaultClassOptionsAttribute         esto lo pongo en atributes en la tabla para que aparezca
+se pueden agregar datos desde la web donde se configura 
+
+se entra en las 3 opciones en la de abajo dandole doble click en set as startup
+
+para que aparezca ademas del oid aparezca el nombre ponemos en el mismo lugar de la tabla el siguiente comando
+ystem.ComponentModel.DefaultPropertyAttribute("Name")       en name ponemos el nombre de la columa que queremos que se muestre
+estos son los atributos por si vuelve hablar wili de los atributos
+
+
+el xpo se habre en la primera opcion en bussines objects ahi esta el archivo .xpo
+
+rebuild compilar 
+
+los objetos son los que tienen .cs los que estan al lado derecho
+
+
+namespace DevExpress.Persistent.BaseImpl
+{
+    [DefaultProperty("DisplayName")]
+    [MapInheritance(MapInheritanceType.OwnTable)]
+    public abstract class Party : BaseObject
+    {
+        protected Party(Session session);
+
+        [Delayed(true)]
+        [ImageEditor]
+        [Size(-1)]
+        public byte[] Photo { get; set; }
+        [Aggregated]
+        [ExpandObjectMembers(ExpandObjectMembers.Never)]
+        public Address Address1 { get; set; }
+        [Aggregated]
+        [ExpandObjectMembers(ExpandObjectMembers.Never)]
+        public Address Address2 { get; set; }
+        [ObjectValidatorIgnoreIssue(new[] { typeof(ObjectValidatorDefaultPropertyIsVirtual), typeof(ObjectValidatorDefaultPropertyIsNonPersistentNorAliased) })]
+        public abstract string DisplayName { get; }
+        [Aggregated]
+        [Association("Party-PhoneNumbers")]
+        public XPCollection<PhoneNumber> PhoneNumbers { get; }
+
+        public override string ToString();
+    }
+
+
+
+    [Aggregated]
+        [ExpandObjectMembers(ExpandObjectMembers.Never)]
+        public Address Address1 { get; set; }   esto es lo que hace para que salga el lapiz
+
+
+
+
+segunda opcion en el lado derecho ahi se concatena
+

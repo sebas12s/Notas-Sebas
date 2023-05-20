@@ -1,0 +1,15 @@
+anatomia de una pagina web
+
+contenedor lo que contiene todo
+header adentro del header esta el logo y el navigation
+abajo el main content al lado sidebar
+y abajo el footer
+
+un asaid es como un contendor lateral con cierta informacion o simplemente la informacion principal que se puede comenzar a dividir por secciones todas las secciones se pueden encontrar ahi
+
+para la web existen dos tipos de imagen lossy y lossless
+lossy pierde la calidad pero la velocidad de la pagina puede ser mas rapida
+lossless no pierde la calidad por eso pesan mas y asi 
+lo maximo que puede pesar una imagen en la web es 70 KB
+https://tinypng.com/        esta es una pagina para bajar el peso
+https://www.verexif.com/        esta es para cuando tienen metadatos como la fecha y eso se los pueda quitar

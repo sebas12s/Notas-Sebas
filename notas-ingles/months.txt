@@ -1,0 +1,12 @@
+enero = january
+febrero = february
+marzo = march
+abril = April
+mayo = may
+junio = june
+julio = july
+agosto = augost
+septiembre = september
+octubre = october
+noviembre = november 
+diciembre = december

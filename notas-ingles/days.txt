@@ -1,0 +1,40 @@
+
+days and the week
+mondey = lunes
+tuesday = martes
+wednesday = miercoles
+thursday = jueves
+friday = viernes
+saturday = sabado
+sunday = domingo
+today = hoy 
+tomorrow = mañana
+yesterday = ayer
+weekend = fin de semana
+week = semana
+ejemplos 
+it's on sunday = es el domingo 
+
+on digamos ahora que es solo un "en"
+at "a" | "a las"
+TIMES OF THE DAY
+
+In the morning //dia
+
+In the afternoon //tarde
+
+In the evening //puesta del sol
+
+At night //noche
+
+PREPOSITIONS OF TIME
+in, on & at
+usamos on para indicar que un objeto está sobre otro, 
+in para decir que uno está dentro de otro y at  para sólo hablar de la ubicación en general.
+
+https://www.estudiaringles.online/in-on-at/
+
+“I go to the park on Saturday at ten in the morning”
+“I go to school on Monday at nine in the morning”
+“I go to the gym on Wednesday at two in the afternoon”
+“I go to the restaurant on Friday at eight thirty at night”

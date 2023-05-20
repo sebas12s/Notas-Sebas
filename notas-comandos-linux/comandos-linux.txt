@@ -1,0 +1,386 @@
+Comandos básicos
+
+para entrar a tus archivos de windows ejecuta cd / y despues cd mnt
+
+cal     este comando abre un calendario
+pwd (print working directory) es para ver en la carpeta que estamos actualmente
+cd (change directory) para poder navegar en una carpeta, ponemos cd espacio y el nombre de la carpeta a la que queremos ir
+Si queremos ir al home colocamos /, si hay un / es que estamos en el home, si muestra el signo ~ es que estamos en el hogar de mis documentos
+ls (list) listar los archivos que tenemos en ese momento
+ls -al, es un argumento, el espacio significa que el comando principal es ls, el guion que estamos trayendo argumentos especiales al comando, la a de que nos muestre todos los archivos incluso los ocultos y la l que sea en forma de lista
+la flecha para arriba nos muestra el ultimo comando que escribimos
+Para limpiar la consola puede ser con ctrl l o escribir clear
+Para volver a la carpeta anterior usamos cd . .
+mkdir (make directory ) para crear carpetas, ponemos mkdir espaacio y el nombre de la carpeta
+touch, para crear un archivo vació usamos el comando touch, permite crear archivos que no tienen nada por dentro
+cat (concatenate), nos muestra el contenido de un archivo
+history, para ver el historial de nuestros comandos. Si queremos repetir un comando ponemos el numero del comando, ponemos !#
+rem (remove), es para borrar un archivo, MUCHO CUIDADO, si se usa mal este comando puede borrar tu disco duro. Hay otra opciones para borrar como rm -rf
+- - help, ponemos cualquier comando y ponemos - - help, funciona para ver como funciona cada uno de los comandos.
+sudo cuando queremos ejecutar algo con permisos de Administrador
+apt-get update este es como para buscar una actualizacion de las cosas que tenemos
+apt-get upgrade esto es para actualizarlo o algo asi
+sudo apt install nodejs esto es para instalar algo en este ejemplo nodejs
+whoami, me dice quien soy yo o el usuario en el que estas
+id, este comando te muestra muchas cosas en esas esta el uid
+printenv este conmando muestra todas las variables de entorno
+history      esto muestra el historial de comandos      para poner un comando que esten ahi solo ponemos el sigo ! y el numero que esta en el history
+
+$(cualquiercomando) con esto podemos ejecutar un comando dentro de un comando
+cat $(cualquiercomando) asi
+
+npm te permite intalar paquetes de forma permanente 
+npx te permite ejecutar paquetes del internet sin necesidad de instalarlos
+
+rm nombrearchivo.extension
+Comando para borrar un sólo archivo.    
+rm -d nombredelacarpetavacia
+Comando que borra una carpeta vacía.
+rm -rf test
+Comando que borra un directorio con un contenido adentro.
+head muestra el principio de un archivo -n 3 con esto muestra solo las primeras 3 lineas
+
+wslview ejemplo.tipoArchivo ( abrir un archivo )
+wslview nombreDirectorio ( abrir un directorio )
+nautilus te abre el navegador de archivos de toda la vida
+
+alias, podemos crear como comandos se podria decir 
+un alias se puede crear de la siguiente manera 
+alias (nombre)="(lo que queremos que haga)"         los parentesis no van y las alias ya no sirven cuando cerramos amenos que las guardemos aparte
+
+cuando ponemos -- normalmente se pone una palabra despues o - solo para letras o algo asi
+
+ls wildcars algo asi se llaman es una forma de listar algunos archivos y que salgan solo los que pongamos
+ls *.txt        aqui le dijimos que todos los archivos que tengan .txt      tambien podemos poner cualquier extension no solo txt
+ls datos*       aqui le dijimos que listara los que tuvieran nombre de datos y no importa lo que tenga despues
+ls datos?       aqui le dijimos que listara los que tuvieran datos y solo un caracter despues ese signo dice que solo un caracter despues del nombre
+ls ?            si solo ponemos eso solo un caracter buscara
+ls ???          aqui busca los que tengan 3 caracteres y asi le podemos agregar mas 
+ls [[:upper:]]*     con esto le dijimos que filtrara los que comenzaran con mayuscula y le siguiera cualquier caracter
+ls -d [[:upper:]]*      el teacher puso esto y solo busco los directorios pero a mi no me funciono me imagino que solo para linux o algo asi
+ls [[:lower:]]*     con esto solo minusculas
+ls [i]*         con esto hacemos un filtrado de que busque lo que comience con esa letra no solo la i podemos poner, tambien mas letras
+esto wildcars tambien se puede usar para los demas comandos que realizan manipulacion de archivos  como mv cp y rm 
+
+hay algo que le dicen redirecciones 
+ls pictures > archivo.txt   con esto no entendi muy bien pero las imagenes y todo lo que tenia en pictures lo mando como texto a este archivo y si no esta creado el archivo la terminal lo crea
+cuando tenemos solo el signo mayor no concatena solo crea el nuevo archivo 
+ls downloads >> archivo.txt     ahora si el archivo tiene los pictures y los downloads 
+
+veamos aqui si pongo ls baoasfd       este archivo no existe entonces me da un error
+y sabemos que hay dos tipos de mensajes que nos devuelve la consola al ingresar un codigo, 1 es lo que esperamos la ejecucion normal y 2 es el mensaje error
+si queremos mandar ese mensaje error a un archio:
+less baoasfd > error.txt        esto no escribiria nada en el archivo 
+less baoasfd 2> error.txt       esto si escribiria el mensaje error por que le estamos diciendo que escriba el 2 que es el mensaje error
+less baoasfd > losdos.txt 2>&1      aqui redirigimos los dos si tiene algo adentro o el error
+sort < animals.txt      aqui digamos que tenemos en el archivo animals varios animales entonces con el signo menor que la informacion que antes le dabamos con el teclado que es el numero 0 ahora se la damos de algun archivo
+
+recordar que podemos redirigir la informacion de algo a un archivo si asi lo quisieramos
+find ./ -name *.txt > documentos.txt    aqui los nombres o las rutas de todos los documentos se redirige a ese archivo o lo crea si no esta creado
+
+echo esto hace como una salida de string 
+echo hola me gustan las waifus, entonces esscribe eso
+
+con cat podemos mostrar mas de un archivo
+
+standar input lo que entra normalmente del teclado su numero es         0
+standar uotput lo que sale o lo que ejecuta el comando su numero es     1
+
+el  pipe operator hace que el standar uotput se convierta en el standar input de otro comando como hacer la salida de un comando que sea la entrada de otro se podria decir
+ejemplos 
+ls -lh | less   less solo funciona con archivos pero con esto podemos hacer el ls de donde sea que estemos y mostrarlo con less
+|   eso es el pipe operator
+ls -lh | tee uotput.txt | less      tee crea un archivo como la haciamos con ">" y aqui le estamos diciendo que despues de crear un archivo de lo que estamos viendo con ls -lh lo miremos con less
+
+tambien se puede pasar por un filtro 
+ls -lh | sort | tee autput.txt | less       aqui le estamos diciendo que de lo que muestra con ls lo ordene con sort y despues cree un archivo y despues lo miremos con less reocrdar que esto solo se puede hacer cuando ingresamos desde el teclado que es el input pero aqui lo va tomando de otros comandos
+cowsay "hola" | lolcat          el lolcat le da color y el cowsay hace una vaquita
+
+ejecuciones de comandos de manera asincrona
+con ";"
+mkdir holis; ls     le dijimos que creara un directorio y despues hiciera ls esto se ejecuta una detras de otra
+tambien se puede hacer con & 
+ls & cal & touch hola.txt       aqui va creando pero tiene una diferencia 
+
+para ejecutar comandos de forma condicional si se ejecuta el primero se ejecutara el segundo
+mkdir hola && cd hola       si se crea el directorio me dirijo a el 
+lo mismo con "||" pero esto funciona como un o 
+cd ajsdfasjd || touch hola      no existe ese directorio entonces solo ejecuta el segundo  
+
+Cuando listamos con ls -l se muestran varias cosas. Los tipos de archivos:
+- archivo normal como un documento de texto.
+d directorio.
+l link simbólico.
+b archivo de bloque especial.
+Tipos de modos: rwx corresponde con read, write y execute. Se representan con 3 bits, y los podemos manejar a través de un modo octal, esto es, pasar de binario a número.
+rwx (1,1,1) dueño. En modo octal es 7.
+r-x (1,0,1) grupo. En modo octal es 5.
+r-x (1,0,1) world. Octal 5.
+Modo simbólico: Esto es para asignar los permisos a los diferentes posibles usuarios.
+u Solo para el usuario.
+g Solo para el grupo.
+o Solo para otros (world).
+a Aplica para todos.
+
+se crea un archivo con touch pero tambien se puede crear con el signo mayor que ">" 
+cat > elnombredelarchivo    deja sobre escribir el archivo
+
+diferencias de permisos entre archivos y directorios
+r   permite leer y abrir un archivo
+r   Permite listar el contenido de un directorio solo si el permiso de ejecución (x) también está activo.
+w   Permite escribir en un archivo; sin embargo, este atributo no permite cambiar el nombre de los archivos o eliminarlos. La capacidad de eliminar o cambiar el nombre de los archivos está determinado por los atributos del directorio
+w   Permite que los archivos dentro de un directorio sean creados, eliminados y renombrados si también se establece el atributo de ejecución
+x   Permite que un archivo sea tratado como un programa y pueda ser ejecutado
+x   Permite entrar al directorio.
+
+los permisos se pueden cambiar con el comando "chmod" y el codigo octagonal y el nombre del archivo ejemplo
+chmod 755 mitexto.txt   esto tendra permiso rwxr-xr-x      
+se le puede quitar permisos con el modo simbolico si le quiero quitar la lectura al usuario le puedo poner asi
+chmod u-r       dije que al usuario se le quitara la lectura
+chmod u+r       ya si se lo quiero dar solo pongo asi
+chmod u=r       aqui dice que solo tenga esto solo 
+chmod u-x,go=w      con una coma se puede editar mas de uno     
+y pusimos que grupo y todo el mundo tuviera esos permisos 
+
+para ingresar al usuario rut (mucho cuidado que este usuario te deja hacer de todo)
+en linux se usa "su root"   por que todavia no se ha creado una contrasena para el root pero la crearemos
+pero en ubuntu se usa "sudo su"     el home del root es muy diferente del home de ususario
+para volver es sudo su "nombre de usuario"
+
+para crear una contrasena para el root ejecutamos adentro del root este comando
+passwd      y ya creamos la contrasena      este comando tambien sirve para cambiar la contrasena 
+
+un ejemplo si queremos borrar un archivo de root estando en otro usuario ponemos el comando sudo que esto nos da los permisos para borrar 
+
+links simbolicos cuando aparece la l en la informacion de los permisos se hace asi
+ln -s "la direccion a donde nos queremos ir" "el nombre del link simbolico"
+
+Variables de entorno, una de muchas
+$HOME 
+$PATH   esta variable es muy importante pero no se mucho
+para configurar las variables de entorno nos vamos al archivo que esta en el home que se llama .bashrc pero es aqui por que estamos usando bash 
+si fuera otro entonces se busca en otro lugar
+y abrimos el archivo con el editor de texto 
+normalmente para crear variables de entorno como path van en mayusculas y ya se le da su valor en el archivo
+para editar una ya existente:
+PATH=$PATH:/home/sebas12/bin        
+qui dijimos que a lo que tenga ya path se le agregara eso nuevo eso se hace con los dos puntos decir commo agregar
+
+comandos de busqueda 
+which nos muestra la ruta de lo que queremos buscar o algo asi
+otro comando que funciona como which es whereis pero un poco mejor se podria decir
+find ./ -name file          primero ponemos el comando find despues la ruta donde queremos que comience a buscaar despues name y ponemos ahi el filtro podemos usar lo que aprendimos antes
+find ./ -name *.txt         importante le decimos que por el nombre busque pero tambien se puede poner por tipo
+find ./ -type d -name plashaba      aqui le dijimos que buscara por el tipo de directorios y pusimos el nombre de que queremos buscar
+find ./ -type f -name *.log          con la f pusimos que fuera de tipo archivo y de nombre la whilecard .log 
+tambien se puede buscar por el tamano 
+find ./ -size 20M           aqui le dijimos que todos los archivos que fueran mayor a 20M 
+
+comando grep 
+grep the movies.csv     el primer parametro que se le da a esto es la palabra que queremos que encuentre las coincidencias despues el archivo donde queremos que busque 
+grep -i the movies.csv          normalmente solo busca en si la palabra entonces busca solo con que tenga las palabras en minusculas pero si le agregamos la i eso se cancela y puede buscar minusculas y mayusculas 
+grep -c the movies.csv         esto lo que hace es que te muestra cuantas veces aparece en el documento
+grep -ci the movies.csv        lo mismo con la i ignora si es mayuscula o minuscula
+grep -vi towers movies.csv      aqui busca los que no coicidan con esa palabra o no la tengan 
+grep -vc the movies.csv         lo mismo pero solo cuenta
+grep -vic the movies.csv       
+grep -m 10 Fan movies.csv       aqui decimos que solo en las primeras 10 lineas queremos que haga la busqueda
+
+wc "el nombre del archivo" esto permite contar cuantas lineas tiene un archivo
+el primer parametro cuantas lineas tiene || wc -l
+el segundo cuantos caracteres tiene o letras || wc -w
+el tercer el numero de bits || wc -c y por ultimo el nombre del archivo
+
+
+comandos de redes
+ifconfig    esto muestra informacion de nuetra red pero si no sale tenemos que instalarlo con sudo apt install net-tools
+ip a        es una forma de ver nuestra ip
+ping www.google.com         esto nos dice si una pagina esta activa o no
+curl www.google.com         esto lo que trae es un archivo de texto por la red en este ejemplo trae el html
+wget www.google.com         esto es casi igual a curl pero esto crea de una vez el archivo
+traceroute www.google.com           esto nos muetra en que puertos paso para llegar a esa direccion o en que computadoras paso
+netstat     muestra de forma mas amigable lo de ifconfig algo de las redes
+
+
+comprimir archivos
+tar -cvf tocompress.tar tocompress    primero la c es de comprimir la v es para ver como se esta comprimiendo y la f que sera archivos el nombre del archivo que le daremos para comprimir y despues la carpeta que queremos comprimir
+tar -cvzf tocompress.tar.gz tocompress      lo mismo pero en otro formato que se recomienda para archivos de texto plano
+para descomprimir se hace de una manera un poco parecida
+tar -xzvf tocompress.tar.gz         y solo asi y descomprime
+otra manera es con zip 
+zip -r tocompressinzip.zip tocompress       la r dice que es de manera recursiva el nombre del archivo para comprimir y la carpeta donde tenemos lo que queremos comprimir
+unzip tocompressinzip.zip       y asi se descomprime 
+hay uno que no explicaron pero es rar   es igual que con zip
+
+manejo de procesos
+ps      este te dice que procesos se estan ejecutando 
+para detener un procesos usamos kill y ponemos el PID que aparece con ps    pero no lo mata por que esta en el background corriendo  a?
+tambien esta pkill "y el nombre del proceso"
+top     nos muestra los procesos de la computadora con h abrimos las opciones que podemos usar
+aunnque htop es mejor
+cuando un proceso se esta ejecutando y no se mira se dice que esta ejecutando en el background pero si si se muestra se dice en el foreground
+
+un ejemplo es cuando ejecutamos el comando cat >  texto.txt         con esto podemos escribir, como hemos visto con ctrl + c terminamos un proceso pero con ctrl + z lo posponemos en otras palabras lo mandamos al background y no se mira en la pantalla pero esta todavia
+para  poder ver cuantos tenemos en pendientes o pospuestos se usa el comando jobs
+para volver a traer ese proceso al foreground se usa el comando fg "el numero del comando"  y ya cuando queramos termianr el input ctrl + d
+otra manera de enviarlo al back.. es usando "&" al final del comando esto no lo ejecuta y de una vez lo envia al back..
+cat > mitexto.txt &
+otra manera es con el comando bg esto funciona igual que el fg pero lo lleva al back..
+
+editores de texto en la terminal 
+vim         para salir      :q
+vim index.html      asi se crea un archivo
+bueno presiona i para comenzar escribir y esc para dejar de escribir
+si ponemos / podemos buscar 
+para guardar usamos     :w 
+y para guardar y salir      :wq 
+
+
+
+
+3. comando ls
+El comando ls se usa para ver el contenido de un directorio. Por defecto, este comando mostrará el contenido de tu directorio de trabajo actual.
+
+Si deseas ver el contenido de otros directorios, escribe ls y luego la ruta del directorio. Por ejemplo, ingresa ls/home/nombredeusuario/Documentos para ver el contenido de Documentos.
+
+Hay variaciones que puedes usar con el comando ls:
+
+ls -R también listará todos los archivos en los subdirectorios
+ls -a mostrará los archivos ocultos
+ls -al listará los archivos y directorios con información detallada como los permisos, el tamaño, el propietario, etc.
+
+4. comando cat
+cat (abreviatura de concatenate, en inglés) es uno de los comandos más utilizados en Linux. Se utiliza para listar el contenido de un archivo en la salida estándar (sdout). Para ejecutar este comando, escribe cat seguido del nombre del archivo y su extensión. Por ejemplo: cat archivo.txt.
+
+Aquí hay otras formas de usar el comando cat:
+
+cat > nombredearchivo crea un nuevo archivo.
+cat nombredearchivo1 nombredearchivo2>nombredearchivo3 une dos archivos (1 y 2) y almacena la salida de ellos en un nuevo archivo (3)
+convertir un archivo a mayúsculas o minúsculas, cat nombredearchivo | tr a-z A-Z> salida.txt
+
+5. comando cp
+Usa el comando cp para copiar archivos del directorio actual a un directorio diferente. Por ejemplo, el comando cp escenario.jpg /home/nombredeusuario/Imagenes crearía una copia de escenario.jpg (desde tu directorio actual) en el directorio de Imagenes.
+
+6. comando mv
+El uso principal del comando mv es mover archivos, aunque también se puede usar para cambiar el nombre de los archivos.
+
+Los argumentos en mv son similares al comando cp. Debes escribir mv, el nombre del archivo y el directorio destino. Por ejemplo: mv archivo.txt /home/nombredeusuario/Documentos.
+
+Para cambiar el nombre de los archivos, el comando de Linux es mv nombreviejo.ext nombrenuevo.ext
+
+7. comando mkdir
+Usa el comando mkdir para crear un nuevo directorio: si escribes mkdir Musica, creará un directorio llamado Musica.
+
+También hay comandos adicionales de mkdir:
+
+Para generar un nuevo directorio dentro de otro directorio, usa este comando básico de Linux mkdir Musica/Nuevoarchivo
+Usa la opción p (padres) para crear un directorio entre dos directorios existentes. Por ejemplo, mkdir -p Musica/2020/Nuevoarchivo creará el nuevo archivo «2020».
+
+8. comando rmdir
+Si necesitas eliminar un directorio, usa el comando rmdir. Sin embargo, rmdir solo te permite eliminar directorios vacíos.
+
+9. comando rm
+El comando rm se usa para eliminar directorios y el contenido dentro de ellos. Si solo deseas eliminar el directorio, como alternativa a rmdir, usa rm -r.
+
+Nota: Ten mucho cuidado con este comando y verifica en qué directorio te encuentras. Este comando elimina todo y no se puede deshacer.
+
+10. comando touch
+El comando touch te permite crear un nuevo archivo en blanco a través de la línea de comando de Linux. Como ejemplo, ingresa touch /home/nombredeusuario/Documentos/Web.html para crear un archivo HTML titulado Web en el directorio Documentos.
+
+11. comando locate
+Puedes usar este comando para localizar un archivo, al igual que el comando de búsqueda en Windows. Además, el uso del argumento -i junto con este comando hará que no distinga entre mayúsculas y minúsculas, por lo que puedes buscar un archivo incluso si no recuerdas su nombre exacto.
+
+Para buscar un archivo que contenga dos o más palabras, usa un asterisco (). Por ejemplo, el comando locate -i escuelanota buscará cualquier archivo que contenga la palabra «escuela» y «nota», ya sea en mayúsculas o minúsculas.
+
+12. comando find
+Similar al comando locate, usando find también buscas archivos y directorios. La diferencia es que usas el comando find para ubicar archivos dentro de un directorio dado.
+
+Como ejemplo, el comando find /home/ -name notas.txt buscará un archivo llamado notas.txt dentro del directorio de inicio y sus subdirectorios.
+
+Otras variaciones al usar find son:
+
+Para buscar archivos en el directorio actual, find . -name notas.txt
+Para buscar directorios, / -type d -name notes.txt
+13. comando grep
+Otro comando básico de Linux que sin duda es útil para el uso diario es grep. Te permite buscar a través de todo el texto en un archivo dado.
+
+Para ilustrar, grep azul notepad.txt buscará la palabra azul en el archivo del bloc de notas. Las líneas que contienen la palabra buscada se mostrarán.
+
+14. comando sudo
+Abreviatura de «SuperUser Do» (SuperUsuario hace), este comando te permite realizar tareas que requieren permisos administrativos o raíz. Sin embargo, no es aconsejable usar este comando para el uso diario, ya que podría ser fácil que ocurra un error si haces algo mal.
+
+15. comando df
+Usa el comando df para obtener un informe sobre el uso del espacio en disco del sistema, que se muestra en porcentaje y KB. Si deseas ver el informe en megabytes, escribe df -m.
+
+16. comando du
+Si deseas verificar cuánto espacio ocupa un archivo o un directorio, el comando du (Uso del disco, en inglés) es la respuesta. Sin embargo, el resumen de uso del disco mostrará números de bloque de disco en lugar del formato de tamaño habitual. Si deseas verlo en bytes, kilobytes y megabytes, agrega el argumento -h a la línea de comando.
+
+17. comando head
+El comando head se usa para ver las primeras líneas de cualquier archivo de texto. De manera predeterminada, mostrará las primeras diez líneas, pero puedes cambiar este número a tu gusto. Por ejemplo, si solo deseas mostrar las primeras cinco líneas, escribe head -n 5 nombredearchivo.ext.
+
+18. comando tail
+Este tiene una función similar al comando head, pero en lugar de mostrar las primeras líneas, el comando tail mostrará las últimas diez líneas de un archivo de texto. Por ejemplo, tail -n nombredearchivo.ext.
+
+19. comando diff
+Para abreviar diferencia, el comando diff compara el contenido de dos archivos línea por línea. Después de analizar los archivos, genera las líneas que no coinciden. Los programadores a menudo usan este comando cuando necesitan hacer modificaciones al programa en lugar de reescribir todo el código fuente.
+
+La forma más simple de usar este comando es diff archivo1.ext archivo2.ext
+
+20. comando tar
+El comando tar es el comando más utilizado para guardar múltiples archivos en un tarball, un formato de archivo de Linux común que es similar al formato zip, con compresión opcional.
+
+Este comando es bastante complejo con una larga lista de funciones, como agregar nuevos archivos a un archivo existente, enumerar el contenido de un archivo, extraer el contenido de un archivo y muchos más.
+
+21. comando chmod
+chmod es otro comando de Linux, utilizado para cambiar los permisos de lectura, escritura y ejecución de archivos y directorios. Como este comando es bastante complicado, puedes leer el tutorial completo (en inglés) para ejecutarlo correctamente.
+
+22. comando chown
+En Linux, todos los archivos son propiedad de un usuario específico. El comando chown te permite cambiar o transferir la propiedad de un archivo al nombre de usuario especificado. Por ejemplo, chown usuariolinux2 archivo.ext hará que usuariolinux2 sea el propietario del archivo.ext.
+
+23. comando jobs
+El comando jobs mostrará todos los trabajos actuales junto con sus estados. Un trabajo es básicamente un proceso iniciado por el shell.
+
+24. comando kill
+Si tienes un programa que no responde, puedes cerrarlo manualmente utilizando el comando kill. Enviará una cierta señal al programa que se está ejecutando mal y le indica a la aplicación que finalice.
+
+Hay un total de sesenta y cuatro señales que puedes usar, pero las personas generalmente solo usan dos señales:
+
+SIGTERM (15): solicita que un programa deje de ejecutarse y te da algo de tiempo para guardar todo tu progreso. Si no especificas la señal al ingresar el comando kill, se utilizará esta señal.
+SIGKILL (9): obliga a los programas a detenerse inmediatamente. El progreso no guardado se perderá.
+Además de conocer las señales, también debes conocer el número de identificación del proceso (PID) del programa que deseas detener (kill). Si no conoces el PID, simplemente ejecute el comando ps ux.
+
+Después de saber qué señal deseas usar y el PID del programa, ingresa la siguiente sintaxis:
+
+kill [opción de señal] PID.
+
+25. comando ping
+Usa el comando ping para verificar tu estado de conectividad a un servidor. Por ejemplo, simplemente ingresando ping localhost, el comando verificará si puedes conectarte a Google y también medirá el tiempo de respuesta.
+
+26. comando wget
+La línea de comandos de Linux es muy útil: incluso puedes descargar archivos de Internet con la ayuda del comando wget. Para hacerlo, simplemente escribe wget seguido del enlace de descarga.
+
+27. comando uname
+El comando uname, abreviatura de Nombre de Unix, imprimirá información detallada sobre tu sistema Linux, como el nombre de la máquina, el sistema operativo, el núcleo, etc.
+
+28. comando top
+Como un terminal equivalente al Administrador de tareas en Windows, el comando top mostrará una lista de los procesos en ejecución y la cantidad de CPU que utiliza cada proceso. Es muy útil monitorear el uso de los recursos del sistema, especialmente para saber qué proceso debe terminarse porque consume demasiados recursos.
+
+29. comando history
+Cuando hayas estado utilizando Linux durante un cierto período de tiempo, notarás rápidamente que puedes ejecutar cientos de comandos todos los días. Como tal, ejecutar el comando history es particularmente útil si deseas revisar los comandos que ingresaste anteriormente.
+
+30. comando man
+¿Confundido sobre la función de ciertos comandos de Linux? No te preocupes, puedes aprender fácilmente cómo usarlos directamente desde el shell de Linux mediante el comando man. Por ejemplo, al ingresar man tail se mostrarán las instrucciones manuales del comando tail.
+
+31. comando echo
+Este comando se usa para mover algunos datos a un archivo. Por ejemplo, si deseas agregar el texto «Hola, mi nombre es John» en un archivo llamado nombre.txt, debes escribir echo Hola, mi nombre es John >> nombre.txt
+
+32. comando zip, unzip
+Usa el comando zip para comprimir tus archivos en un archivo zip y use el comando unzip para extraer los archivos comprimidos de un archivo zip.
+
+33. comando hostname
+Si deseas conocer el nombre de tu host/red, simplemente escribe hostname. Agregar un -I al final mostrará la dirección IP de tu red.
+
+34. comando useradd, userdel
+Dado que Linux es un sistema multiusuario, esto significa que más de una persona puede interactuar con el mismo sistema al mismo tiempo. useradd se usa para crear un nuevo usuario, mientras que passwd agrega una contraseña a la cuenta de ese usuario. Para agregar una nueva persona llamada John, escribe useradd John y luego para agregar su contraseña, escribe passwd 123456789.
+
+https://blog.desdelinux.net/mas-de-400-comandos-para-gnulinux-que-deberias-conocer/

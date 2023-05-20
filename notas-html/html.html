@@ -1,0 +1,468 @@
+<!--esto es para cuando necesite algo pasare todas mis notas aqui en cada documento-->
+<!--es muy importante guardar los archivos de html como index.html para que nos tome en cuenta la pagina-->
+<!--recordar que siempre escribir buen codigo de manera que sea facil leerlot-->
+
+
+<!DOCTYPE html> <!--esta etiqueta es para decir que se trabajara con la ultima version de html-->
+<html lang="es"> <!--lang es le estamos diciendo al navegador que el contenido esta en español o english-->
+<!--primero con solo poner esto el sublime ya nos habre toda la sintaxis de html-->
+<!--aunque esta etiqueta quiere decir que aqui esta toda la pagina-->
+
+<head> <!--adentro de esta etiqueta esta todo lo que no se puede ver de la pagina-->
+	<meta charset="utf-8">
+	<!--con esta etiqueta asi tambien contando el atributo charset hacemos que la pagina nos acepte caracteres extranos como tildes signos y muchos mas, codificamos la pagina-->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--este meta nos ayuda que la pagina sea responsive-->
+
+
+	<title>Boa te amo</title> <!--esto es para ponerle el titulo en la pagina donde esta la ventana*/-->
+
+
+	<meta name="keywords" content="linda, alta, preciosa">
+	<!--esta etiqueta nos sirve para cuando busquen nuestra pagina tambien pueda aparecer con estas palabras claves-->
+	<meta name="description" content="esta pagina es dedicada a las waifus que tantas tiene el creador de esta cosa">
+	<!--con este atributo describimos la pagina-->
+	<!--el meta de arriba se muestra cuando buscas algo y para entrar a la pagina abajo del titulo hay una descripcion eso te muestra-->
+	<meta name="author" content="Sebastian"> <!--con esta indicamos quien es el creador de la pagina-->
+	<meta name="copyright" content="">
+	<!--con esta indicamos si tiene alguna empresa duena de los derechos de la pagina-->
+	<meta name="robots" content="index,follow" content="index,onfollow">
+	<!--con esta decimos si nuestra pagina esta indexada o no, es como decir que forma o no parte de ese index-->
+	<!--los content no van juntos, y en otras palabras si no es index no la mostrara-->
+
+
+	<link rel="icon" href="boa.ico">
+	<!--esto es para poner el icono que esta hasta arriba con el nombre de la pagina arriba en la pestana-->
+
+	<link rel="stylesheet" href="stylephone.css">
+	<link rel="stylesheet" href="styletablet.css" media="screen and (min-width: 768px)">
+	<!--esta es la mejor manera para que se pueda ver de la mejor manera en otros dispositivos-->
+
+	<style type="text/css">
+		/*esta es una forma de usar css en html pero va siempre en head*/
+		body {
+			/*con esto decimos que vamos a cambiar todo lo que esta en el body*/
+			background-color: #ffaaaa;
+			/*esto ya sabemos que es mejor desde un archivo de css propio*/
+		}
+
+		/*esto es un bloque de codigo por eso no terminan en punto y coma como las lineas de codigo*/
+	</style>
+</head>
+
+<body> <!--esta etiqueta es lo que si podemos ver en la pagina-->
+	<!--hay dos tipos de etiqueta las que se cierran y las que no-->
+
+
+	<br> <!--esto es para dejar un espacio en linea-->
+	<!--los h1 solo se tiene que usar 1 se pueden usar mas pero no es estetico o por la recomendacion de las paginas (SEO)-->
+
+
+	<h1> <!--esto es para poner titulos-->
+		Me gustan las waifus
+	</h1>
+	<h2> <!--los titulos van del h1 al h6-->
+		me re encantan
+	</h2>
+	<h3> <!--los h2 si pueden ir mas de una vez pero tampoco tanto ya desde el h4 si son limitadas-->
+		sawako tan linda
+	</h3>
+
+
+	<p> <!--este es para parrafo-->
+		sawako hinata boa fubuki reze y asi puedo seguir mencionando muchas waifus jajsjsajas cuando sea grande me dara
+		cringe estas notas
+	</p> <!--los h, p, son cajas en bloque-->
+	<!--elementos en bloque son los elementos que llenan la linea y los elementos en linea son los que solo tienen el espacio del texto o lo que hayamos puesto, se adaptan al contenido-->
+	<!--los elementos en bloque se ajustand al tamano de la caja que la contienen-->
+
+
+	<b>sawako</b> <!--para poner el texto en negrita-->
+	<i>hinata</i> <!--para poner el texto en cursiva-->
+	<strike>mikasa</strike> <!--para poner el texto tachado-->
+	<small>fubuki</small> <!--para poner el texto en chiquito-->
+
+
+	<a href="https://www.instagram.com/">click aqui</a>
+	<!--href es un atributo donde nos dice hacia donde ira por que a es una etiqueta que nos lleva a otra parte del programa-->
+	<!--tambien como puedes poner enlaces externos tambien puedes poner enlaces locales que tengas en la cumputadora-->
+
+
+	<a href=""></a>
+	<!--para acceder a un archivo que esta en una carpeta se pone / y el nombre del archivo cuando queremos que vaya para atras se pone ../ y el nombre del archivo y asi se navega en las direcciones-->
+
+
+	<br>
+	<!--esto lo que hace tambien es completar la linea digamos que tenemos un parrafo pero queremos que la tercera linea se tire para abajo ponemos br y completa o tira para abajo todo lo que viene despues-->
+
+
+	<a href="https://www.instagram.com" target="_blank">ig</a>
+	<!--con el atributo target le decimos donde queremos que nos habra a donde queremos ir y con _blank le decimos en otra pestana-->
+
+
+	<ul> <!--lista desordenada (vinetas)-->
+		<li>hinata</li> <!--los li son los elementos que lleva la lista ul-->
+		<!--un elemto por li-->
+	</ul>
+	<ol> <!--lista ordenada (numeros)-->
+		<li>sawako</li>
+	</ol>
+
+	<img src="https://www.geekmi.news/__export/1653418914929/sites/debate/img/2022/05/24/boa_y_luffy.jpg_976912859.jpg">
+	<!--esta etiqueta es para mostrar una imagen, el atributo src es para poner la ruta donde se encuentra el archivo-->
+
+	<img src="https://www.geekmi.news/__export/1653418914929/sites/debate/img/2022/05/24/boa_y_luffy.jpg_976912859.jpg"
+		alt="Boa Hancock">
+	<!--el atributo alt es muy importante ya que si no encuentra la imagen esto lo que hace es mostrar ese nombre que pongamos-->
+
+	<img src="https://www.geekmi.news/__export/1653418914929/sites/debate/img/2022/05/24/boa_y_luffy.jpg_976912859.jpg"
+		title="Boa Hancock">
+	<!--este atributo es para cuando pasemos el mause aparezca ese nombre que pongamos-->
+
+	<video src="C:\Users\Perez\OneDrive\Imágenes\Saved Pictures\luffy.mp4" controls></video>
+	<!--como imagen copiamos la ruta del video aunque probe con videos de youtube y no me funciono asi que tuve que poner uno local-->
+	<!--el atributo controls es para que el navegador nos muestre unos controles basicos para poder ver bien el video-->
+
+
+	<audio src="C:\Users\Perez\OneDrive\Imágenes\Saved Pictures\luffy.mp4" controls></audio>
+	<!--lo mismo pasa con audio-->
+
+	<div> <!--para trabajar bien se usa div y es bueno y ya se trabaja con div-->
+		<!--se usa para agrupar contenido o dividir separar o agrupar contenido-->
+		<p>me gusta el anime</p>
+		<!--es como un p un parrafo ya que p es para parrafo y div para separar-->
+	</div>
+	<form method="post"> <!--formulario-->
+		<!--esta es una propiedad desconocida-->
+		<input type="" name="">
+		<!--hay tres formas de separar de todo, input entrada de datos, el procesamiento, louput para salida-->
+		<!--el input es algo que nos da el usuario, una entrada de datos-->
+		<!--el name solo es cuando la cumputadora pide el input que lleve tal nombre-->
+		<!--hay muchos diferentes tipos de input-->
+		<input type="text" value="tan linda boa"> <!--es un espacio donde almacena texto-->
+		<!--con la propiedad value ponemos un texto definido o tambien eso lo que esta escrito por defecto adentro del input-->
+		<!--el atributo de este input tiene como valor lo que excriba adentro ahorit le escribi algo pero ese es el chiste que el usuario envie algo y lo que enviara es value-->
+		<input type="text" readonly> <!--este es solo lectura-->
+		<input type="text" disabled> <!--este desactiva el input-->
+		<input type="password" disavled> <!--espacio donde almacena para contrasena-->
+		<!--este atributo disavled es como para desactivarlo -->
+		<input type="number"> <!--almacena numeros-->
+		<input type="email"> <!--este no deja enviar si no es email o otro asi-->
+		<input type="color"> <!--este te deja seleccionar un color-->
+		<input type="range" min="1" max="10"> <!--este te deja escoger el rango-->
+		<!--con el min y max decimos de cuanto queremos que escoja el rango-->
+		<input type="date"> <!--es para poner una fecha-->
+		<input type="time"> <!--para poner una hora-->
+		<input type="time" max="24" min="1"> <!--esto es solo para ponerle un maximo o un final-->
+		<input type="button" value="click"> <!--este es un boton, siempre lleva value-->
+		<!--el value es como el nombre que lleva le boton pero hay mas que eso-->
+		<input type="submit"> <!--este input es para enviar algo el boton que nos ayuda a enviar-->
+		<!--a donde lo envia? lo envia a un servidor que ahorita no tengo conocimiento-->
+		<input type="text" required="">
+		<!--este atributo sirve para  que sea obligatorio completar este campo o no se envia o no se hace la accion que quiere-->
+		<input type="radio" /> <!--este permite poner algo para seleccionar-->
+		<input type="checkbox" /> <!--este permite poner algo para seleccionar pero en un cuadro-->
+		<input type="radio" name="boa" />
+		<input type="radio" name="boa" />
+		<input type="radio" name="boa" />
+		<!--para cuando hay mas y solo queremos seleccionar uno les damos un nombre en otras palabras decimos que pertenecen a ese grupo con el nombre que les damos-->
+
+		<textarea readonly="">boa te amo </textarea>
+		<!--este tambien es del form es un campo expandible donde se puede escribir-->
+		<!--con este atributo hace que ese cuadro expandible solo se pueda leer y no escribir-->
+	</form>
+
+
+	<!--es muy importante saber que tambien tiene una forma de ordenar cada cosa no va todo desordenao o donde queramos-->
+	<!--barra de navegacion es lo que esta arriba de la pagina donde generalmente aparece para buscar, tu perfil y el icono-->
+	<!--abajo puede estar el articulo que se puede dividir en secciones-->
+	<!--y por ultimo esta la barra de navegaciones secundarias donde hay mas opciones pero opciones no tan recurrentes-->
+	<!--el pie de pagina es donde estan los contactos las empresas y asi-->
+
+
+	<header> <!--esta etiqueta es el encabezado de la pagian-->
+		<nav> <!--y como dije en en el encabezado va la barra de navegacion que es el nav-->
+			<!--lo que hace el nav es enviarnos a distintas partes de la pagina-->
+			<ul> <!--con el nav lo que usamos es listas desordenadas-->
+				<li><a href="index.html">index</a></li>
+				<li><a href="micuental.html">mi cuenta</a></li>
+				<!--aqui pasaron cositas, primero los li nos ayudan a llevarnos a otras partes de nuestras cuentas pero en si es como que nos llevara a otra pagina donde esta la informacion que buscamos al llevarnos a otra pagina esta bien pero al trasladarnos tiene que estar tambien el header y el nav en si toda la lista para que con eso poder volver y tener en si el encabezado-->
+				<!--aqui no olvidar que tenemos que pooner un link donde nos lleve de nuevo al inicio de la pagina pero eso seria tenerlo que poner en todos los documentos asi que no lo hare-->
+			</ul>
+		</nav>
+	</header>
+
+
+	<article> <!--como dije lo correcto es separar bien la pagina con articulos tambien-->
+		<section> <!--tambien por secciones aunque tengamos sola una seccion se separa asi-->
+			<h1>me gusta boa</h1>
+			<h2>sinceramente espero que nadie lea esto que da pena</h2>
+			<p>miren one piece es hermoso</p>
+		</section>
+	</article>
+
+
+	<aside>
+		<!--aparte de las partes de una pagina web tenemos esta etiqueta que es una que va al costado o la barra de navegaciones secundaria-->
+		<h2>contenido extra de las wiafus</h2>
+		<p>las waifus son muchas pero ni una como sawako, hinata, boa, nobara y asi puedo seguir por anos la verdad</p>
+	</aside>
+
+
+	<footer> <!--esto es el pie de pagina enlaces el copy y cosas que queramos poner-->
+		<h4>cosas de que van abajo</h4>
+	</footer>
+	<!--asi es como se estructura una pagina bien-->
+
+	<table border="1px"> <!--esta etiqueta es para una tabla-->
+		<!--tambien le podemos dar propiedades como bordes-->
+		<!--aunque no es recomedable ya que se hace en css-->
+		<tr> <!--esto son las filas de la tabla-->
+			<td><b>waifus</b></td> <!--estas son las columnas -->
+			<td><b>anime</b></td>
+			<td><b>puntuacion</b></td>
+		</tr>
+		<tr> <!--y asi vamos creando las tablas-->
+			<td>Boa</td>
+			<td>one piece</td>
+			<td>10</td>
+		</tr>
+	</table>
+
+
+	<center> <!--lo que hace esta etiqueta es que centra lo que esta adentro, no es recomendable mejor con css-->
+		<h1>tan linda que es sawako</h1>
+	</center>
+
+
+	<a href="#boa">final</a>
+	<!--con esto estamos diciendo que nos dirija al id o selector boa, una parte de la pagina-->
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	<p id="boa"><b>hinata re hermosa</b></p> <!--el id es una forma de diferenciar o es un selector-->
+
+
+	<!--ya para acabar con html no se da estilo solo se estructura asi que center las propiedades para color, tamano los br eso no se usan -->
+	<!--usar div para todo en si eso es para dividir y no ocupa espacio pero si usar div para todas las etiquetas aunque unas vayan dentro de otras usar div, aunque se usan si le vamos a dar estilo-->
+
+	<strong>boa te amo</strong>
+	<!--esto es para poner negrita tambien, aunque este es para hacer enfasis en un texto o para destacar una busqueda-->
+
+
+	<script type="text/javascript"> 	//esta es una manera de implementar JS en html pero igual es mejor hacerlo en otro documento .js//
+		//esto solo es un ejemplo para saber como implementar js en html//
+		alert("yamato se unio a los mugisssss");	//alert es una ventana que nos aparece al entrar donde nos tira el mensaje y solo le podemos dar aceptar//
+		document.write("hi");	//esta opcion nos permite mostrar texto pero en el documento//
+		var x = 1;	//asi se declara una variable en js y tambien se esta asignando un valor//
+		var y = 2;
+		var z = x + y;
+		document.write("el valor de z es " + z);
+	</script>
+	<!--el script es importante colocarlo al final de la pagina por que asi nos aparecera hasta al final de que haya leido todo, si importa donde coloquemos el mensaje-->
+
+	<p>hola ahorita estoy en un curso basico de js pero me mostro <span>1</span> nueva etiqueta que es el hr</p>
+	<hr>
+	<!--en la etiqueta spam solo la pusimos para que sea dinamica para que vaya cambiando con js-->
+	<!--esta etiqueta lo que hace es mostrar una linea que llena la pantalla-->
+
+	<canvas></canvas> <!--canvas funciona como una caja blanca pero con JS podriamos dibujar en ella, como?-->
+	<!--canvas funciona como una caja de cordenadas entonces si decimos que ponga un punto en (0,0) la pondra al comienzo del todo pero la instruccion se da en js-->
+	<!--el primer valor es en X y el segundo es el valor de Y-->
+	<!--el eje x es horizontal y el eje y es vertical-->
+	<!--las cordenadas las podemos saber poniendole nosotros el valor con height y width-->
+
+
+	<div>
+		<label for="boa">Boa</label> <!--este label lo podemos usar para decir que se selecciona como poner un numbre-->
+		<!--con el for podemos conectar el label y el input para seleccionar pero se pone el mismo id-->
+		<input type="radio" name="waifus" id="boa" />
+		<label>Hinata</label>
+		<input type="radio" name="waifus" id="hinata" />
+		<label>Sawako</label>
+		<input type="radio" name="waifus" id="sawako" />
+	</div>
+
+	<button onclick="moverCharmander()">Mover</button>
+	<!--asi se puede poner una accion de click sin tener que ir al js aqui le decimos que al darle click ejecute esa funcion-->
+	<button onmouseup="deterMovimiento()" onmousedown="moverDerecha()">Mover Derecha</button>
+	<!--este onmousedown es para dejar precionado-->
+	<!--aqui como decirle que cucadno precione moverse y cuando deje de precionar detenga el movimiento-->
+</body>
+
+</html> <!--y asi se cierran las etiquetas-->
+
+
+
+
+<!-- platzi curso definitivo de html y css -->
+
+<header> <!--esta es la etiqueta pader-->
+	<nav></nav>
+	<!--su propocito es proporcionar enlaces de navegacion ya sea dentro del documento acual o a otros documentos-->
+</header>
+<main> <!--esta es la parte principal de la pagina -->
+	<section> <!--esto puede tener secciones-->
+		<article></article> <!--y adentro de esto pueden ir articulos-->
+	</section>
+	<ul>
+		<li></li> <!--list item los elementos de la lista-->
+	</ul>
+	<ol></ol> <!--estas son listas	-->
+</main>
+<footer> <!--la parte de abajo el pie de pagina-->
+
+</footer>
+
+<figure> <!--las imagenes se tienen que poner en esta etiqueta-->
+	<img src="https://imgs.search.brave.com/OXjdcYxjBaTk2u5X1r8TIGozv_OtYoMOrbAL0lt4FPc/rs:fit:713:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5o/UmtvMHlaS1lTQjl6/M3BfdDgtb1J3SGFF/NyZwaWQ9QXBp"
+		alt="Es una imiagen de una pera" />
+	<figcaption>Es una imagen de un chocolate</figcaption>
+	<!--esta es como una descripcion que llevan las imagenes abajo-->
+</figure>
+
+<video src="./video.mp4#t=10,60" controls preload="auto"> <!--preload auto es para que se cargue mas rapido-->
+	<source src="./video.mp4#t=10,60"> <!--el "#t=10,60"		es cuando quiero que comience el video y cuando termine-->7
+	<source src="./video.mp4#t=10,60">
+	<!--esto es cuando tienes mas de un modelo de mp4 ya si el navegador escoge la que si puede leer-->
+</video>
+
+<form action=""> <!--esta es la forma correcta de crear formularios-->
+	<label for=""> <!--label form tiene que ser el mismo que le ponemos en form-->
+		<span></span> <!--lo podemos usar para poner que queremos que ingresn-->
+		<input type="text" name="" id="" placeholder="Your waifu">
+		<!--con el placeholder pones como un mnesaje en el input-->
+	</label>
+</form>
+
+<section>
+	<h2>Calendario</h2> <!--para crear un calendario-->
+	<form action="">
+		<label for="time">
+			<span>Hora</span>
+			<input type="time" name="time" id="time"> <!--el name es para enviar la informacion-->
+		</label>
+		<label for="day">
+			<span>Dia</span>
+			<input type="date" name="day" id="day">
+		</label>
+		<label for="week">
+			<span>Semana</span>
+			<input type="week" name="week" id="week">
+		</label>
+		<label for="month">
+			<span>Mes</span>
+			<input type="month" name="month" id="month">
+		</label>
+		<input type="submit">
+	</form>
+</section>
+
+<section> <!--otra forma mas facil de hacerlo-->
+	<form action="">
+		<label for="calendario">
+			<span>Calendario</span>
+			<input type="datetime-local">
+		</label>
+		<input type="submit"> <!--esto es para enviarlo	-->
+	</form>
+</section>
+<form action="">
+	<label for="name">
+		<span>What is your name?</span>
+		<input type="text" name="name" id="name" autocomplete="name" required>
+		<!--este autocomplete es para cuando ya habiamos escrito un nombre puede aparecer para autocompletar-->
+		<!--require es para hacerlo requerido-->
+	</label>
+</form>
+
+<h2>input list</h2> <!--esta es una forma de crear un input con cosas para estar en el-->
+<input list="waifus"> <!--el mismo list va en waifus-->
+<datalist id="waifus">
+	<option value="Reze"></option>
+	<option value="Hinata"></option>
+	<option value="Mikasa"></option>
+	<option value="Sawako"></option>
+</datalist>
+
+
+<!--esta es la forma para hacer una imagen bien responsive-->
+<picture> <!--esto se vuelve el contenedor de nuestra imagen-->
+	<source media="(min-width:1300px)" srcset="./img/large.jpg">
+	<!--la etiqueta que tenga el viuwport mas grande siempre tiene que ir arriba-->
+	<source media="(min-width:1000px)" srcset="./img/medium.jpg" />
+	<!--estos source son para poder cargar otras imagenes y la media es para ver hasta cuando se tienen que mostrar-->
+	<img src="./img/small (1).jpg" alt="es una imagen de ejemplo" />
+	<!--el width 100% es el mejor amigo asi no tenemos que estar viendo de que tamaño-->
+</picture>
+
+<!--semantica eso es muy importante muyy importante y eso es usar las etiquetas que ofrece html no usar puros div-->
+
+
+<form action="">
+	<label for="name"> <!--el label es una etiqueta que se utiliza con inputs-->
+		<span>¿Cual es tu nombre?</span> <!--el span solo es para texto se podria decir-->
+		<input id="name" type="text" />
+		<!--el mismo id y for es para cuando precione el label se podria decir me seleccione el input-->
+	</label>
+	<label for="staeted-studying">
+		<span>¿Qué día comenzaste con Platzi?</span>
+		<input id="staeted-studying" type="date" />
+	</label>
+	<label for="time-to-study">
+		<span>¿En que horario estudías?</span>
+		<input id="time-to-study" type="time" />
+	</label>
+</form>
+
+<img src="./white-and-black-short-coated-dog-4587987.jpg"
+	alt="Es un perrito muy lindo con antenas de alien, chiste de su dueño" title="Es una foto de un perrito" />
+	<!--el alt es una descripcion de la imagen                             y el title es cuando te paras en la imagen te sale lo que escribas en el -->

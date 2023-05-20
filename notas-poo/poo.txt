@@ -1,0 +1,107 @@
+La programación orientada a objetos tiene cuatro características principales:
+Encapsulamiento. Quiere decir que oculta datos mediante código.
+Abstracción. Es como se pueden representar los objetos en modo de código.
+Herencia. Es donde una clase nueva se crea a partir de una clase existente.
+Polimorfismo. Se refiere a la propiedad por la que es posible enviar mensajes sintácticamente iguales a objetos de tipos distintos.
+En este curso, los pasos a seguir será.
+Analisis
+Plasmar
+Programar
+
+
+que es un paradigma 
+teoria que suministra la base y modelo para resolver problemas 
+entonces la poo es un paradigma se compone de 4 elementos 
+clases
+propiedades
+metodos 
+objetos
+hay otros 4 pilares 
+encapsulamiento 
+abstraccion
+herencia
+Polimorfismo
+
+java es un lenguaje orientado a objetos se usa para el lado del servidor y tambien para desarrollo android su extencion es .java
+php es para web su extencion es .php    es un lenguaje interpretado no se tiene que compilar aparte
+python su extencion es .py es de muchos usos 
+javaScrip es orientado a objetos pero de una manera diferente
+
+IDE         vs code
+
+hay un paso importante es el plasmar 
+aprenderemos el UML unifed modeling language
+
+
+
+
+
+primero es observar nuestro problema y identificar los objetos
+los objetos son los que tienen propiedades y comportamientos, siempre seran sustantivos
+las propiedades tambien se pueden llamar atributos
+ejemplos de atributos
+nombre, color, estado
+los atributos no son el resultado, son los titulos se podria decir
+
+los comportamientos son las acciones que puede realizar el objeto
+ejemplos de comportamientos
+login(), logout()
+
+
+clases 
+una clase es el modelo por lo que los objetos estan construidos se podria decir 
+una clase puede ser los titulos, entonces lo que hacemos es analizar el objeto y crear la clase 
+
+a eso se le conoce como abstraccion cuando nosotros traemos los datos de un objeto para generar un molde
+
+
+
+diseño modular 
+es subdividir en partes mas pequeñas y estas partes se les llama modulos entonces estos modulos pueden funcionar de manera independiente pero nos pueden ayudar a componer un sistema compmleto 
+
+modularidad concepto programacion
+primero la programacion estructurada es un gran solo modulo 
+pero la modularidad nos ayudara a tener los elementos separados y puedan vivir independientemente
+nos ayuda a reutilizar codigo 
+
+
+herencia 
+nos permite crear nuevas clases a partir de otras 
+trabaja con una estructura de padre e hijo
+se le conoce como superClase a los padres
+a los hijos como subClases
+
+Cuando tenemos una superclase pero las subclases tienen mas elementos que no se repiten pues solo se los colocamos a la subclase pero ya no poneos los elementos que estan en la super clase
+
+don't repeat yourself       no repetir codigo 
+
+aunque no hereden algun atributo es buena practica hacer super clases en un ejemplo es en un metodo de pago tal vez hay tres metodos de pago pero ningun atributo en comun igual es bueno que vengan de una super clase por que todos son pagos entonces tienen eso en comun 
+asi tambien podemos ver si hacemo herencia
+
+un objeto es una instacia de una clase
+
+al crear un nuevo objeto ponemos unos parentesis en programacion siempre representan acciones 
+estos se llama metodos constructures para crear un objeto
+lo que hace es darle un estado inicial a cada objeto 
+le podemos añadir ciertos datos a ese objeto son como atributos que le pasamos a la clase
+Entonces al darle new person("aqui le ponemos el parametro")
+
+encapsulamiento
+esto se hace para que un dato permanezca inviolable, inalterable se le asigna un modificador de acceso tambien se puede decir esconder algo
+
+para eso hay que saber los niveles de accesos
+public = todas las clases
+protected = clase paquetes y subclases          este si deja ser accesido a nivel de herencia o subclases 
+default = clase y paquetes          aqui no deja ser accesido a nivel de herencia 
+private = clase             este solo deja en la clase
+
+
+
+en las clases, funciones y variables se puede poner static pero le estamos diciendo que es nivel de clase no de instancia
+la palabra void se pone cuando la funcion no retorna nada 
+
+el static es un valor que solo se puede acceder mediante a la clase no al objeto, el valor estara ligado a la clase no al objeto que se cree despues 
+recordar que el objeto es cuando ya hacemos una instancia de una clase entoces un static solo es de la clase
+para ingresar a un static se pone el nombre de la clase . y despues lo que se quiere ver
+tambien se puede poner static en los metodos entonces esto nos ayuda a que cuando queramos poner cosas que todos tengan y sin crear un objeto podamos ver lo que contiene el metodo
+y ahora en las clases static, no se pueden crear objetos entonces si tenemos una clase que todos los metodos sean staticos esa clase tiene que ser statica por que no es necesario crear un objeto

@@ -1,0 +1,76 @@
+https://www.mindmeister.com/es/1079684487/las-12-reglas-de-codd-del-modelo-relacional?fullscreen=1
+link de las doce reglas de las bases de datos relacionales
+entidad         cuadrado
+atributo        circulo
+relacion        rombo
+
+en los atributos si llegara el caso de poner un email no lo pongamos de id por que lo puede cambiar pero el id no puede cambiar
+
+cardinalidad 1 a 1
+persona         tiene           dato personale    
+esto dice que una persona solo tiene un dato personal por eso se pone 1 a 1
+y se hace para el otro lado     un dato personal solo pertenece a una persona entonces esto vuelve a ser un 1 a 1 para elegir el dato cardinal se toma el numero mayor 
+1:1
+en los diagramas se pone diferente las lineas
+
+cardinalidad 0 a 1      o 1 a 1 opcional (opcional por que no puede haber de un lado)
+secion_actual       tiene           usuario
+no sabemos si tiene una secion iniciada pero si esta el usuario 
+0:1
+
+cardinalidad 1 a N  (1 a muchos)
+persona         tiene           automovil
+una persona tiene muchos automoviles por eso se pone 1:N 
+pero muchos automoviles solo pueden tener un dueno por eso de regreso se pone 1:1 pero como dije se toma el mayor 
+1:N 
+
+cardinalidad 0 a N          o 1 a N opcional 
+hab_hospital        tiene           pasientes
+una habitacion tiene muchos pasientes o no hay habitaciones pero igual siguen habiendo muchos pasientes
+0:1     este ejemplo no esta tan bien pero se entiende
+
+cardinalidad N a N          o muchos a muchos
+alumno          pertenece           clase
+un alumno tiene muchas clases       1 a N 
+una clase tiene muchos alumnos      N a 1   y se toman los mayores entonces
+N a N 
+
+se utiliza para denotar una relación entre dos entidades es = Verbos
+
+
+tipos de datos
+de texto
+char = caracteres pero guarda de manera permamente el espacio 
+varchar = tambien puede guardar cadenas de texto pero puede cambiar el espacio maximo 250
+text = guarda cadenas de texto muy grandes
+numero
+integer = numero entero
+bigint = muchos numeros
+smallint = numeros de 99 o menos 
+decimal(n,s) = este resive dos parametros numero y decimales(las letras la puedes cambiar) asi la base de datos puede calcular los decimales de forma correcta
+numeric = lo mismo de arriba
+date = fecha
+time = hora
+datetime = fecha y hora
+timestamp = fecha y hora
+booleano = verdadero o falso 1 o 0 
+
+constraints (restricciones para la tabla)
+not null = se asegura que no tenga valores nulos
+unique = se asegura que no hayan repetidos
+primary key = es una combinacion de not null y unique
+foreing key = identifica de manera uncia una tupla en otra tabla
+check = se asegura que el valor en la columna cumpla una condicion dada
+default = coloca un valor por defecto cuando no hay un valor especifico
+index = se crea por culumna para permitir busquedas mas rapidas
+
+
+un truco para poder separar es que no esten ligados como alumnos y materias o maestrias no estan ligados en si por que una materia puede tener mas alumnos entonces se separa en distintas entidades
+normalizacion 
+1FN Primera forma normal: Atributos atómicos (Sin campos repetidos). Esto quiere decir que ningún campo puede tener el mismo tipo de valor como varios campos materia (materia1, materia2,…).
+
+2FN Segunda forma normal: Cumplir con 1FN y Cada campo de la tabla debe depender de una clave única. Es decir en las tablas no se puede repetir los campos primarios ya que los mismos son únicos por tanto si existe una relación uno a muchos se debe crear una tabla aparte donde cohabitaran la llave primaria de la primera tabla y la llave primaria de la segunda tabla de esta forma logramos relacionar de manera efectiva dos tablas respetando las llaves primarias.
+
+3FN Tercera forma normal: Cumple 1FN y 2FN y los campos que NO son clave NO deben tener dependencias. Esto nos indica que todos los campos de la tabla deben estar estrechamente relacionados con el campo primario y no serlo de manera transitiva, por ejemplo, en una tabla torneos tenemos el código del torneo el nombre el ganador y la fecha de nacimiento del ganador, como observamos no podemos tener la fecha de nacimiento del ganador en dicha tabla ya que no está relacionada para nada con el torneo y además existe la posibilidad que en varios registros el mismo ganador tenga diferentes fechas de nacimiento por lo cual no mantendría la consistencia de los datos.
+
+4FN Cuarta forma normal: Cumplir 1FN 2FN y 3FN. Los campos multivaluados se identifican por una clave única. Cuando relacionamos dos tablas totalmente independientes cada una de la otra debemos relacionarlas a través de una tabla aparte de las mismas donde solo colocaremos las llaves primarias de cada tabla ya que colocar cualquier otra información relacionada con las tablas implicaría repetir datos, además de hacer la tarea de actualización de registros primarias más compleja, ya que por ejemplo si deseo actualizar el nombre del curso no solo lo tendría que hacer en la tabla cursos sino también en cada tabla donde coloque el nombre lo cual no garantiza la integridad de la información, adiciona información innecesaria en los registros y hace más complejo el trabajo de administrar los datos.
