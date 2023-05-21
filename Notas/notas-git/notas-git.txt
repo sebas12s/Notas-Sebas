@@ -73,20 +73,6 @@ Bug: Error
 
 
 
-bueno comenzamos
-git init        esto se ejecuta para decir donde estan todos los archivos como la carpeta donde estaran todos 
-git status         nos muestra el estatus o si hay commits y asignar
-git add "el nombre del archivo"     esto como que agrega el archivo para que git pueda ver sus cambios y asi
-git rm --cached "nombre del archivo"        esto lo que hace es que borra de donde lo aviamos agregado entonces lo tenemos que volver a subir o algo asi
-
-git add . se agrega a una aerea separada y espera que lo envies al repositorio que se creo .git entonces si lo queremos enviar le damos un commit pero si no estando solo en esa area podemos ejecutar el siguiente comando
-git rm "nombre del archivo"     sin el --cashed
-el repositorio el nombre por defecto que tiene es master
-en nombres especificos es asi:
-cuando no le hemos dado git add el archivo esta sin rastrear o untracked
-cuando le damos git add se envia a la memoria ram o a esa area que se llama staging 
-ahi espera a enviarlo al repositorio que se llama master que se hace con git commit bla bla
-
 git commit -m "mensaje para saber que hiciste"      esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje
 si cambiamos algo pues solo hacemos otro commit con otro mensaje
 pero siempre lo tenemos que agregar antes de hacer el commit
