@@ -47,3 +47,56 @@ de la misma manera sobreescribe si es necesario o simplemente agrega si en uno n
 ### Link
 Cuando usamos la etiqueta 'a' se re carga la pagina entonces con la etiqueta link eso no pasa, es como que la cargara antes y ya solo hace el cambio instantaneo
 es un prerefresh o algo asi tambien se le puede desactivar esa funcionalidad pero por defecto esta activada
+
+Revisar la documentacion oficial ya que se le puede agregar muchos mas atributos a la etiqueta
+
+### Style
+El link no se puede estilizar poniendo el style en la misma etiqueta
+```jsx 
+<Link style={{ marginRight='100px' }} href="/">Home</Link>
+```
+Tampoco deja importar el estilo como lo hacia en react por cada componente, entonces se hace lo siguiente:
+```jsx
+import Style from './Navbar.module.css'
+```
+Asi se debe importar los estilos pero otra cosa que no deja es el llamado puro tiene que ser por id o por clases, entonces para poner un estilo se hace de la siguiente manera:
+```css
+.menu-container a {
+    margin-right: 10px;
+}
+```
+Aqui ya lleva la clase entonces si deja aunque despues pongamos una etiqueta directa
+```jsx
+<nav className={ Style['menu-container'] }>
+    <Link href="/">Home</Link>
+    <Link href="/about">About</Link>
+    <Link href="/contact">Contact</Link>
+</nav>
+``` 
+Recordemos que Style es la variable que pusimos arriba donde guardamos los estilos, y ahi no podemos poner `Style.menu-container` por que js no deja `Style.menu` si dejaria pero cuando lleva caracteres como el menos se debe poner asi como esta
+
+---
+## Hooks
+### useRouter
+Recuerden para desestructurar se usa los "{}"
+```jsx
+const { asPath } = useRouter();
+```
+Aqui estamos usando un hook especial de next y estamos desestrucuturando la variable
+```jsx
+<Link href={ href } legacyBehavior>
+    <a style={ asPath === href ? style : null }>{ text }</a>
+</Link>
+```
+aqui ya le estoy diciendo si asPath es igual al href que le aplique un estilo especial con un console.log puedomes ver todo lo que nos devuelve el hook useRouter
+entonces en asPath se guarda la direccion /
+
+---
+
+Algo importante en pages hay una forma de poner las nuevas paginas pero es en carpetas pero el archivo se debe llamar por index asi al entrar a la carpeta se lee el index
+
+---
+
+Adentro de pages no van los componentes ya que ahi solo estan las paginas o las pantallas o las apis se crea en la raiz
+
+Es importante que no se repita el codigo en muchas paginas si se repite lo tenemos que cambiar esto se le llama layouts
