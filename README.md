@@ -1,4 +1,10 @@
-# Notas de Sebastian 
-Aqui esta incluido todas mis notas que en mi vida voy crando. 
+# Notas de Sebastian Perez
+Aqui esta incluido todas mis notas de programacion y de ingles que voy creando 
 
-Donde mayormente son de programacion pero tambien tengo mis notas de ingles y biblia
+Poco a poco he adquirido conociemiento y en mis notas esta todo plasmado
+
+No prometo que sean las mas acertadas o las mas entendibles pero son todas mis notas
+
+---
+
+Sigueme :3 [@sebasu.u](https://www.instagram.com/sebassu.u/)
