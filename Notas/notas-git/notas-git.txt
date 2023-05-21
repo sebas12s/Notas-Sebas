@@ -72,30 +72,6 @@ Bug: Error
 -- significa que usaras una palabra
 
 
-
-git commit -m "mensaje para saber que hiciste"      esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje
-si cambiamos algo pues solo hacemos otro commit con otro mensaje
-pero siempre lo tenemos que agregar antes de hacer el commit
-git add .       esto agrega todos los archivos que tengamos en esa carpeta
-git log "nombre del archivo"        esto muestra todos los cambios 
-git log --stat          esto muestra mas detalladamente los cambios
-git log --all           te muestra mas cosas
-git log --all --graph       te muestra como unas flechitas como el git mejorado
-git log --all --graph --decorate --oneline      esto te muestra todo mas comprimido y mas bonito
-git log --oneline       esto muestra solo los commits
-ahi se muestra unos numeros donde dice commit: esos numeros son como el nombre de esa modificacion 
-tambien dice head y master es como decir es la version mas reciente
-git show "nombre del archivo"   esto te muestra los cambios que se hicieron
-para ver los cambios de una o de otra ejecutamos
-git diff y los dos numeros que aparece con git log asi podemos comparar diferentes versiones, pone al principio la version mas vieja
-git diff        nos mestra lo que se cambio
-
-
-alias 
-cuando son muy grandes podemos hacer alias como vimos en linux haremos uno con el que muestra todo bonito
-alias "el nombre del alias"="git log --all --graph --decorate --oneline"    entre parentesis el comando
-
-
 hablemos de las ramas
 primera rama sabemos que se llama master aunque vi un comentario que se llamaba main 
 la segunda rama es la experimental pero se le llama mas development
@@ -296,16 +272,6 @@ git branch -a       esto muestra todas
 
 git resotore .      vuelve a todo sin los cambios 
 
-
-
-para configuracion
-git config         esto muestra todas las configuraciones que se le puede dar 
-git config --list       este comando te muetra la configuracion por defecto de tu git
-git config --list --show-origin         esto te muestra donde esta guardado los cambios
-
-para cambiar el usuario y el email se usa lo siguiente
-git config --global user.name "tu usuario"
-git config --global user.email "tu email"
 
 
 comandos que sirven para trabajos muy grandesgit log --oneline:Te muestra el id commit y el título del commit.

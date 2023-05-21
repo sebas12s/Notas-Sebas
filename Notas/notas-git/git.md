@@ -11,6 +11,23 @@ En la terminal ejecutamos este primer comando
 
 `git commit -m "mensaje"` esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje
 
+---
+
+## Configuracion
+`git config` esto muestra todas las configuraciones que se le puede dar 
+
+`git config --list` este comando te muetra la configuracion por defecto de tu git
+
+`git config --list --show-origin` esto te muestra donde esta guardado los cambios
+
+para cambiar el usuario y el email se usa lo siguiente:
+
+`git config --global user.name "tu usuario"`
+
+`git config --global user.email "tu email"`
+
+---
+
 ## Git log
 `git log` esto muestra todos los cambios que se han hecho  
 
@@ -24,6 +41,21 @@ En la terminal ejecutamos este primer comando
 
 `git log --oneline` esto muestra solo los commits
 
+ahi se muestra unos numeros donde dice commit: esos numeros son como el nombre de esa modificacion como el ID
+
+---
+
+## Cambios
+`git show "nombre del archivo"` esto te muestra los cambios que se hicieron
+
+`git diff` nos mestra lo que se cambio
+
+para ver los cambios de una o de otra ejecutamos:
+
+`git diff` y los dos numeros que aparece con git log asi podemos comparar diferentes versiones, pone al principio la version mas vieja
+
+---
+
 ## Git add 
 `git add .` se agrega a una aerea separada y espera que lo envies al repositorio que se creo .git entonces si lo queremos enviar le damos un commit 
 
@@ -32,3 +64,7 @@ en nombres especificos es asi:
 cuando no le hemos dado git add el archivo esta sin rastrear o untracked
 cuando le damos git add se envia a la memoria ram o a esa area que se llama staging 
 ahi espera a enviarlo al repositorio que se llama master que se hace con git commit 
+
+---
+
+## Ramas
