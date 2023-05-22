@@ -14,6 +14,12 @@ Static generation y server-side rendering
 
 Lo del nombre en pages es obligatorio que sean minusculas por que va ser el path que se use en la urls
 
+Adentro de pages no van los componentes ya que ahi solo estan las paginas o las pantallas o las apis se crea en la raiz
+
+---
+
+Algo importante en pages hay una forma de poner las nuevas paginas pero es en carpetas pero el archivo se debe llamar por index asi al entrar a la carpeta se lee el index
+
 ---
 
 ## Como crear una aplicacion de next 
@@ -93,10 +99,68 @@ entonces en asPath se guarda la direccion /
 
 ---
 
-Algo importante en pages hay una forma de poner las nuevas paginas pero es en carpetas pero el archivo se debe llamar por index asi al entrar a la carpeta se lee el index
+## Layouts
+Es importante que no se repita el codigo en muchas paginas si se repite lo tenemos que cambiar esto se le llama layouts
+
+Aqui en next se le llama layouts pero simplemente es un componente 
+
+Creamos una carpeta adentro de componentes y ahi es donde ponemos los layouts
+
+Los layouts son como partes que se repetiran entonces las creamos para no repetir codigo
+
+```jsx
+className={'code'}
+className='code'
+```
+Ahorita en un problema en los layouts para poner el nombre de la clase se puede poner de las dos maneras
 
 ---
+## Ejemplo 
+veamos este ejemplo
+```jsx
+const menuItems = [
+  {
+      text: 'Home',
+      href: '/'
+  },
+  {
+    text: 'About',
+    href: '/about'
+  },
+  {
+      text: 'Contact',
+      href: '/contact'
+  },
+  {
+      text: 'Pricing',
+      href: '/pricing'
+  },
+];
 
-Adentro de pages no van los componentes ya que ahi solo estan las paginas o las pantallas o las apis se crea en la raiz
-
-Es importante que no se repita el codigo en muchas paginas si se repite lo tenemos que cambiar esto se le llama layouts
+export const NavBar = () => {
+  return (
+    <nav className={ Style['menu-container'] }>
+        {
+        menuItems.map( ({ text, href }) => (    //recordar que el map recorre un array y devuelve una funcion por cada array recorrido y es obligatorio que lleve el key tiene que ser unico 
+          <ActiveLink key={ href } text={ text } href={ href } />
+        ))
+        }   {/*se pone estos {} para poder trabajar js*/}
+    </nav>
+  )
+}
+```
+Tambien se puede hacer asi y creo que es una manera mas entendible
+```jsx
+export const NavBar = () => {
+  return (
+    <nav className={ Style['menu-container'] }>
+        {
+        menuItems.map( menuItems => (
+          <ActiveLink key={ menuItems.href } text={ menuItems.text } href={ menuItems.href } />
+        ))
+        }
+    </nav>
+  )
+}
+```
+Ya que lo que se crea es una funcion de flecha por cada iteracion del array pero arriba se hizo desestructuralizado
