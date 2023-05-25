@@ -164,3 +164,16 @@ export const NavBar = () => {
 }
 ```
 Ya que lo que se crea es una funcion de flecha por cada iteracion del array pero arriba se hizo desestructuralizado
+
+---
+
+## Recordatorio
+La pagina ya puede estar prebiamente generada eso se le llama **static generation** con esto solamente basta con que tengamos las paginas por pantallas todo estatico por que cuando uno hace el build no se cambia nada
+
+`λ  (Server)` esto dice que cuando el cliente haga una solicitud se ejecutara en el lado del servidor, estos simbolos aparecen al darle `npm run build`
+
+`○  (Static)` y esto dice que fue generado de manera estatica, entonces fue generado antes que una persona haga una solicitud, entonces cuando hagan una peticion para ver una pagina ya existen en el servidor 
+
+---
+
+## Migrar una aplicacion de JavaScripts a TypeScript
