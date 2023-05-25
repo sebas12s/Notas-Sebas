@@ -3,6 +3,10 @@
 ## Crear una app con TypeScript
 npx create-react-app "nombre" --template typescript
 
+---
+
+## Comencemos
+
 ```tsx
 const incrementar = ( numero: number = 1 ):void => {
         setCounter(counter + numero);
