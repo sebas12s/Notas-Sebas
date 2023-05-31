@@ -96,3 +96,6 @@ const tempUser: User = {
 }
 ```
 Con los dos puntos le pongo el tipado para que sepa que sera ese tipo de objetos
+
+---
+

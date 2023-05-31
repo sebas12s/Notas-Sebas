@@ -1,0 +1,131 @@
+propiedad distributiva 
+8x(4+15)=(8x4)+(8x15)
+8x 19 = 32 + 120
+152 = 152
+
+Sistema binario (0-1)
+false = 0
+true = 1
+veamos como sacar un numero binario
+28/2        el numero lo dividimos en dos y si no da reciduo solo ponemos 0 y seguimos dividiendo
+0   14/2        otra vez si no da residuo ponemos 0 
+    0   7/2         aqui si dio residuo entonces ponemos el reciduo 
+        1   3/2
+            1   1/2
+                1         ya cuando llegamos hasta el 1 o 0 termina el numero vinario y comenzamos a contar de abajo hacia arriba
+el numero binario es 28 = 11100
+se lee uno uno uno cerp cero 
+ahora pasaremos el bianrio a decimal
+se lee de derecha a izquierda y lo ponemsos para abajo
+y lo vamos elevando del 0 hasta el numero que se pueda
+0 x 2^0 = 0  
+0 x 2 ^1 = 0
+1 x 2 ^2 = 4
+1 x 2 ^3 = 8
+1 x 2 ^4 = 16
+           28   y asi conseguimos el numero
+
+sumas de binarios 
+0 + 0 = 0
+1 + 0 = 1
+0 + 1 = 1
+1 + 1 = 0 pero acarreas 1
+ejemplos
+110
+001 +
+111
+
+11 este es el que llevaba que lo multiplique con el 1 y me dio 0 y ese 0 con el 0 que me dio 0 y despues solo puse el 1 que llevaba
+ 110
+ 011 +      aqui en la suma se va acarreando el 1 cuando se suma 1 y 1 el acarreo se pone en la siguiente columna en la tercera columna esta el 1 del acarreo y el 1 que eso da 0 y acarreo otro el 0 que esta abajo no se cuentas
+1001
+
+resta de binarios 
+0 - 0 = 0
+1 - 0 = 1
+1 - 1 = 0
+0 - 1 = 1 pero acarreamos 1s
+ejemplos
+101
+011 -
+010     seguir las reglas e ir acarreando como en la suma
+
+multiplicacion binaria
+0 x 0 = 0
+1 x 0 = 0
+0 x 1 = 0
+1 x 1 = 1
+ejemplo
+        110             111
+       x 10             101
+        000             111
+       110             000      recordar llevar 1 y los 0 literal no se cuentan
+       1100           111
+                     100011
+
+division binaria
+esta si esta algo complicada 
+ejemplo 
+dividiendo
+10110
+divisor
+10
+   01011        y este es el resultado el 0 que esta antes del 1 no se toma ya que esta al principio
+10/10110        primero tomamos el primer numero que es 1 y miramos si el divisor es menor que ese numero como no es asi bajamos otro numero y subimos un 0
+   10           esta vez si es menor entonces se puede operear como se pudo operar subimos un 0 y hacemos la resta
+   0011         bajamos un 1 pero como no se puede operar subimos un 0 y bajamos otro numero
+     10         aqui se se puede operar entonces subimos un 1
+     010        bajamos el otro numero y pues lo operamos y subimos un 1
+      10
+      00
+
+
+
+    Operador “NO”, negación.
+    Operador “Y” , da verdadero si ambas expresiones son verdaderas.
+    Operador “O” , da verdadero si por lo menos una de las expresiones es verdadera(1).
+    Operador “Xor”, es positivo si se tiene unos de los dos resultados, pero no ambos.
+
+operadores aritmeticos 
++ suma 
+- resta
+/ division
+* multiplicacion
+% modulo
+
+Operador " < ", devuelve verdadero si el primer valor es menor que el segundo.
+Operador " <= ", devuelve verdadero si el primer valor es menor o igual al valor de la derecha.
+Operador " > ", devuelve verdadero cuando el valor de la izquierda sea mayor.
+Operador " >= ", devuelve verdadero si el valor de la izquierda es mayor o igual que el segundo.
+Operador " = ", compara de que ambos valores sean iguales, es True si los valores son iguales.
+Operador " <> ", valida que ambos valores sean diferentes, da verdadero cuando ambos valores son distintos
+
+
+
+algoritmo
+¿Cómo construir un algoritmo? 
+
+Tener claro el requerimiento: quiero encender la luz de la habitación donde estoy en este momento
+
+     Análisis 
+        ¿Cuál es el objetivo? -> Encender la luz
+        ¿Con qué recursos cuento? -> Habitación 
+        ¿Qué condiciones previas deben pasar para que sea posible? -> Que la luz esté apagada
+     Paso a paso 
+
+    ¿Qué tiene que pasar para que se cumpla el objetivo con los recursos que tengo?
+
+    a. Validar que la luz esté apagada (condición base)
+    b. Identificar dónde voy a encender la luz
+    c. Presionar el elemento que me permita encender la luz
+
+    ¿Si yo realizo estos pasos cumpliré con el objetivo?
+    Validar si el resultado que obtuve fue el que esperaba inicialmente
+
+     Optimizar 
+    a. Tomar el requerimiento
+    b. Identificar qué tenemos y lo que no
+    c. Qué condición hace falta para que suceda
+    d. Lo que necesitamos para que el objetivo se logre
+
+ Identificar las diferentes alternativas que puedo tomar para cumplir el objetivo
