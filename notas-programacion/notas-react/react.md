@@ -49,6 +49,48 @@ El React.Component le ponemos esto para tener todos los componenetes de react.
 ## Hooks
 Es una funcion especial que te permite trabajar con estados en componentes funcionales.
 
+### useState
+
+Esto sirve para crear estados para nuestros componentes
+```jsx
+const [contar, setContar] = useState(0);
+```
+el primer parametro es para guardar el valor, y la segunda es una funcion para cambiarle ese valor, en este ejemplo el valor por defecto es 0 pero puede ser texto, objeto, binarios, otro componente realmente puede ser muchas cosas y entonces para cambiarlo solo le ponemos algo como esto: `setContar(contar + 1)` asi le podemos cambiar 
+
+### useEffect
+
+Este componente se ejecuta cuando tu componente ya a sido montado no se puede ejecutar antes
+```jsx
+const [contar, setContar] = useState(0);
+
+useEffect(() => {
+
+}, []);
+```
+lo que el useEffect ejecutara es lo que se encuentra en la funcion flecha
+en los corchetes se pone la variable que queremos que cuando se cambie se vuelva a ejecutar esa funcion 
+
+Normalmente lo usan con useState para que cuando se cambie la variable se ejecute la funcion 
+
+### useRef
+recordemos que con useState renderiza la pagina pero a veces queremos cambiar algo sin que renderice o cargue la pagina para eso es useRef
+
+```jsx
+const nombre = useRef('Sebastian'); 
+```
+asi simplemente se crea pero useRef lo que crea es un objeto y este objeto obtiene la propiedad current y ese es el valor actual para acceder a el seria asi `nombre.current` ese valor sera persistente no cambiara no se perdera entre cambios de estado 
+
+Si cambiamos el valor como decia no se volvera a renderizar 
+
+Otra manera de usar este hook, es para acceder a elementos del DOM:
+```jsx
+const divDOM = useRef();
+<div ref={ divDOM }></div>
+```
+dentro de divDOM estoy guardando la ubicacion del div es como hacer un `document.getElementById('')` y ya ahi le podria agregar muchas cosas que quiera
+
+---
+
 ### Estados
 son los estados que pueden tener los componentes de las paginas web.
 
@@ -161,3 +203,6 @@ El estandar para js de identacion es 2
 se puede ir eliminando todos los archivos que no usamos en la carpeta que react nos creo
 
 Normalmente se pone una hoja de estilos para cada componente
+
+---
+
