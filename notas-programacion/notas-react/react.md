@@ -89,6 +89,144 @@ const divDOM = useRef();
 ```
 dentro de divDOM estoy guardando la ubicacion del div es como hacer un `document.getElementById('')` y ya ahi le podria agregar muchas cosas que quiera
 
+### useReducer
+Este hook se recomienda que se haga cuando ya se esta poniendo complejo tu estado, es una alternativa al hook de useState
+
+Esta es una funcion pura, asi que esta devuelve un valor y este valor se considerara el estado de la aplicacion, no podemos crear useEffect adentro de esta funcion y tampoco podemos hacer peticion a una API
+
+Un recordatorio las funciones se pueden poner de la siguiente manera:
+```jsx
+const sumar = () => setContador(contador + 1);
+const restar = () => {
+    setContador(contador - 1);
+}
+```
+
+useReducer su sintaxis basica es la siguiente
+```jsx
+const [state, dispatch] = useReducer(reducer, initialState, init); 
+```
+el estate tiene que ser un objeto, la funcion que usaremos para cambiar el estado
+
+despues esta la funcion useReducer resive 3 parametros:
+* reducer: es una funcion normal afuera del componente
+
+Aqui se pone la logica de las opciones 
+
+```jsx
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { contador: state.contador + 1 }
+        case 'DECREMENT':
+            return { contador: state.contador - 1 }
+        default:
+            return state;
+    }
+}
+```
+esta resive dos parametros el estado anterior y un objeto que se llama action y esta funcion si o si retorna el estado
+
+action tiene principalmente dos propiedades que son: el type y payloads 
+
+normalmente se usa un swith
+
+se recomienda que tengamos un objeto con todos los tipos que vamos a tener de la siguiente manera:
+```jsx
+const TYPES = {
+    INCREMENT: 'INCREMENT',
+    INCREMENT_5: 'INCREMENT_5',
+    DECREMENT: 'DECREMENT',
+    DECREMENT_5: 'DECREMENT_5',
+    RESET: 'RESET'
+}
+```
+
+* initialState: esto solo es el valor inicial pero tienen que retornar un objeto
+```jsx
+const initialState = { contador: 0 }
+```
+* init: se usa cuando queremos cambiarle el valor inicial al incio o cuando carga el componente se crea una funcion y se le cambia el valor:
+```jsx
+const init = (initialState) => {
+    return {
+        contador: initialState.contador + 100
+    }
+}
+```
+Recordermos que es un objeto asi que tiene que devolver un objeto y asi le cambie el valor inicial gracias a ese tercer parametro
+
+ya en este ejemplo para cambiar el valor seria de la siguiente manera:
+```jsx
+const sumar = () => dispatch({ type:'INCREMENT' });
+```
+Donde se crea el `contador` es initialState ahi es donde creo el objeto que uso en todos los demas lugares, como en el state
+
+Veamos este ejemplo mas completo:
+```jsx
+const initialState = { contador: 0 }
+
+const TYPES = {
+    INCREMENT: 'INCREMENT',
+    INCREMENT_5: 'INCREMENT_5',
+    DECREMENT: 'DECREMENT',
+    DECREMENT_5: 'DECREMENT_5',
+    RESET: 'RESET'
+}
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case TYPES.INCREMENT:
+            return { contador: state.contador + 1 }
+        case TYPES.DECREMENT:
+            return { contador: state.contador - 1 }
+        case TYPES.INCREMENT_5:
+            return { contador: state.contador + action.payload }
+        case TYPES.DECREMENT_5:
+            return { contador: state.contador - action.payload }
+        case TYPES.RESET:
+            return initialState;
+        default:
+            return state;
+    }
+}
+
+export const Contador = () => {
+    
+    const [state, dispatch] = useReducer(reducer, initialState)
+
+    const sumar = () => dispatch({ type: TYPES.INCREMENT });
+    const restar = () => dispatch({ type: TYPES.DECREMENT });
+    const sumar_5 = () => dispatch({ type: TYPES.INCREMENT_5, payload: 5 });
+    const restar_5 = () => dispatch({ type: TYPES.DECREMENT_5, payload: 5 });
+    const reset = () => dispatch({ type: TYPES.RESET });
+
+  return (
+    <div style={{textAlign:'center'}}>
+        <h2>Contador</h2>
+        <nav>
+            <button onClick={sumar}>+</button> 
+            <button onClick={restar}>-</button>
+            <button onClick={sumar_5}> +5</button> 
+            <button onClick={restar_5}> -5</button>
+            <button onClick={reset}>RESET</button>
+        </nav>
+        <h3>{ state.contador }</h3>
+
+    </div>
+  )
+}
+```
+Aqui ya use el payload y esto es como el valor por defecto o cuando tenemos un valor por mandar se lo mandamos por el payload cuando queremos resivir un valor por ahi se lo mandamos   
+
+#### Ya por ultimo la estrucuctura
+Al nivel de components se crean dos carpetas los Reducers y las actions
+En el action se ponen las types solamente 
+
+En el archivo reducer, se pone las tres funciones el `initialState`, `init` y el `reducer` solamente ademas de solo poner reducer se pone en este caso `contadorReducer` como el nombre del archivo jsx `contadorinInitialState` yo sugiero usar camelCase y ya solo exportas pero no por defecto si no antes de la funciono y ya exportas lo que necesites
+
+y ya en el archivo donde estan los dispatch solo se importan y se hacen cambio los nombres de las funciones
+
 ---
 
 ### Estados
