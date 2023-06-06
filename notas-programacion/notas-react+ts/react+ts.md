@@ -180,3 +180,81 @@ es decir que si existe se limpie el intervalo
 
 ---
 
+## useReducer
+
+como sabemos que useReducer se tienen que hacer algunas cosas:
+
+```tsx
+const initialState = {
+    contador: 0
+}
+```
+Como el initialState y las acciones
+
+```tsx
+type ActionType = 
+    | { type: 'incrementar' }
+    | { type: 'decrementar' }
+    | { type: 'custom', payload: number };
+```
+Esta es una manera wapa de hacerlo le estoy diciendo que el tipo puede ser eso o el otro o el otro y asi 
+
+Despues sigue la constante donde se cambiara el state, aunque no se cambia no se sobreescribe simplemente se crea un nuevo
+```tsx
+const contadorReducer = ( state: typeof initialState, action: ActionType ) => {
+    switch ( action.type ) {
+        case 'incrementar':
+            return {
+                ...state,
+                contador: state.contador + 1
+            }
+        case 'decrementar':
+            return {
+                ...state,   
+                contador: state.contador - 1
+            }
+        case 'custom':
+            return {
+                ...state,
+                contador: action.payload
+            }
+        default:
+            return state;
+    }
+}
+```
+Con el typeof simplemente le estoy diciendo que sera del tipo de y como initialState es de tipo number de ese sera y action del tipo actionTypes
+
+Tambien nunca se debe mutar el contador decir algo como `state.contador = state.contador + 1` "NO" por eso se ponen los 3 puntos crea una misma variable con el mismo valor pero no en el mismo lugar de memoria y ya solo le damos el nuevo valor de contador, siempre tiene que retornar el estado por eso en default si no llega ni uno de eso retorna el viejo estado
+
+```tsx
+export const ContadorRed = () => {
+
+    const [ contadorState, dispatch] = useReducer(contadorReducer, initialState);
+
+    return (
+        <>
+            <h2>Contador: { contadorState.contador }</h2> 
+            <button className="btn btn-outline-primary"
+                    onClick={ () => dispatch({ type: 'incrementar' }) }>
+                +1
+            </button>
+            <button className="btn btn-outline-primary"
+                    onClick={ () => dispatch({ type: 'decrementar' }) }>
+                -1
+            </button>
+
+            <button className="btn btn-outline-danger"
+                    onClick={ () => dispatch({ type: 'custom', payload: 100 }) }>
+                100
+            </button>
+        </>
+    ) 
+}
+```
+
+Explico primero el useReducer, tambien tiene dos variables en el array, donde se guardara el nuevo estado y tambien la funcion que lo cambiara o en este caso la funcion que hara si hace algo o otra cosa, la accion
+
+En la funcion useReducer esta el reducer donde esta la logica de que puede retornar el estado y en la otra esta el valor inicial ese valor nunca cambiara
+
+Y por ultimo el payload es un valor que queremos que nos de o nosotros poner antes cuando creamos el componente este payload lo tenemos en la accion
