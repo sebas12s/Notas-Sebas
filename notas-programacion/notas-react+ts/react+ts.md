@@ -258,3 +258,136 @@ Explico primero el useReducer, tambien tiene dos variables en el array, donde se
 En la funcion useReducer esta el reducer donde esta la logica de que puede retornar el estado y en la otra esta el valor inicial ese valor nunca cambiara
 
 Y por ultimo el payload es un valor que queremos que nos de o nosotros poner antes cuando creamos el componente este payload lo tenemos en la accion
+
+
+## CustomHooks
+Haremos un ejemplo con un formulario:
+```tsx
+const [formulario, setFormulario] = useState({
+        email: '',
+        nombre: ''
+    });
+```
+Tenemos un useState que ayuda para que se actualice el formulario, como vemos aqui tambien se puede poner un objeto 
+
+Esto es lo que retorna: 
+```tsx
+<form autoComplete='off'>
+        <div className='mb-3'>
+            <label className='form-label'>Email:</label>
+            <input type='email' 
+                    className='form-control'
+                    name='email'
+                    onChange={ (ev) => handleChange(ev) }/>
+        </div>
+        <div className='mb-3'>
+            <label className='form-label'>Nombre:</label>
+            <input type='text' 
+                    className='form-control'
+                    name='nombre'
+                    onChange={ handleChange }/>
+        </div>
+        <pre>{ JSON.stringify(formulario) }</pre>
+    </form>
+```
+Recordemos que no puede resivir un objeto como children entonces por eso se usa el `JSON.stringify`
+
+El ev es un gran evento que se envia a la funcion 
+
+en el onChange le ponemos una funcion, `(ev) => handleChange(ev)` y cuando resive algo esa funcion en este caso resive todo el evento y esa misma propiedad se tiene que enviar tambien se puede dejar solamente como esta en el segundo input: `onChange={ handleChange }` pero cual es esa funcion?? ->
+
+```tsx
+const handleChange = ( ev: ChangeEvent<HTMLInputElement> ) => {
+    console.log(ev.target.name)
+    console.log(ev.target.value)
+}
+```
+este es el evento o lo que se resive en el hay que especificar de que tipo es primero como es un `onChange` donde lo llamamos se pone `ChangeEvent` pero solamente esto no deja ya que es del tipo generico se puede ver dejando el cursor y si aparece `<T>` es generico, ya que puede ser no solo un input tambien otras cosas por eso se pone la otra parte `<HTMLInputElement>` para especificar que es un input y ya poder agarrar el name y el valor
+
+Tambien se puede hacer de la siguiente manera para desestructuralizar el evento:
+
+```tsx
+const handleChange = ( { target }: ChangeEvent<HTMLInputElement> ) => {
+    const { name, value } = target;
+}
+```
+asi desestructuro el evento y traigo el target y del target despues desestructuro tambien y guardo en esas variables los mismos valores con el mismo nombre del evento y ahi ya guarde el name y el valor que tienen en ese momento 
+
+```tsx
+setFormulario({
+    ...formulario,
+    [ name ]: value
+})
+```
+Esta funcion lo que hace es que se cambie el valor del formulario
+
+Se recomienda que se desestructure el valor actual del formulario y cambiamos el unicamente el valor que estamos cambiando que seria email y nombre que eso esta en la propiedad de target.name entonces por eso ponemos name que sera igual a el value
+
+Okey pero esto no es custom hook esto es un ejemplo para hacer un custom cuando tenemos que estare repitiendo todo eso 
+
+Para crear se crea una carpeta hook y para el archivo useForm o como queramos pero siempre use, y no son mas que una funcion que puede llevar otros hooks o lo que queramos
+
+```tsx
+export const useForm = ( initState: any ) => {
+  const [formulario, setFormulario] = useState(initState);
+
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement> ) => {
+    const { name, value } = target;
+
+    setFormulario({
+        ...formulario,
+        [ name ]: value
+    })
+  }
+
+  return {
+    formulario, 
+    handleChange
+  }
+}
+```
+este seria el hook que creo como podemos ver resivimos el initState que en este caso seria el objeto que teniamos al comienzo por eso lo ponemos ahi en useState y muy importante estamos exportando el formulario y la funcion que nos hace cambiar el formulario
+
+```tsx
+const { formulario, handleChange } = useForm({
+        email: '',
+        nombre: ''
+    })
+```
+Como regresamos un objeto lo ponemos asi y ya solo ponemos las mismas variables que regresamos en el hook
+
+Quitemos ese any del hook eso no debe de ser asi, un ejemplo en el useState toma el dato que se le pone, si ponemos un numero se pone en tipo number si texto en string entonces lo mismo queremos hacer en nuestro hook para que sea el dato que le pongamos
+```tsx
+interface FormData {
+    email: string;
+    nombre: string;
+    edad: number
+}
+```
+hacemos una interface en el codigo para decirle de que tipo seran los datos que ingresaremos en el objeto
+```tsx
+const { formulario, handleChange } = useForm<FormData>({
+    email: '',
+    nombre: '',
+    edad: 0
+})
+```
+Y sabemos que para poner una interface la ponemos a la par
+
+Para poner eso en nuestro hook se entiende mejor con una funcion normal
+```tsx
+export function useForm( initState: any )
+```
+Asi se veria
+```tsx
+export function useForm<T>( initState:T ) {
+```
+solo con poner la T asi le estoy diciendo que sera del tipo que especifique en mi codigo
+
+y con las funciones flecha se pone asi
+```tsx
+export const useForm = <T extends Object>( initState: T ) => {
+```
+solamente que debemos de extenderlo a este caso un objeto por que resive un objeto 
+
+## useContext

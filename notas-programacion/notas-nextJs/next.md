@@ -22,7 +22,7 @@ Algo importante en pages hay una forma de poner las nuevas paginas pero es en ca
 
 ---
 
-## Como crear una aplicacion de next 
+## Como crear una aplicacion de next  
 ejecutamos el siguiente comando:
 npx create-next-app@latest
 ### Para correrlo es:
