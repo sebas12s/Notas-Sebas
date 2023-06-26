@@ -229,6 +229,74 @@ y ya en el archivo donde estan los dispatch solo se importan y se hacen cambio l
 
 ---
 
+### useContext
+
+Veamos, este hook te ayuda a compartir informacion sin tener que poner tantos props simplemente si envuelves tu aplicacion en tu contexto y le das un valor ya todos los hijos pueden obtener ese valor sin tener que estar enviandolo por props
+
+Ejemplo practico, se pone en una carpeta de context
+
+creamos nuestro contexto:
+```jsx
+import { createContext } from "react"
+
+export const UserContext = createContext({
+    name: null,
+    year: null
+})
+```
+En este ejemplo creamos uno y le estamos diciendo que tendra esa estructura, un objeto,
+
+Despues creamos un hook que nos ayude a sacar toda la informacion de ese contexto, para poder acceder a ella desde cualquier componente
+
+```jsx
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+
+export const useUser = () => {
+  return useContext(UserContext)
+}
+```
+importamos useContext el hook y nuestro context, y simplemente retornamos el hook con nuestro contexto
+
+```jsx
+import { MoreInfo } from './components/MoreInfo';
+import { UserContext } from './context/userContext';
+function App() {
+  const userData = {
+    name: 'Sebastian',
+    year: 17
+  }
+  return (
+    <UserContext.Provider value={userData}>
+      <div className="App">
+        <h1>useContext</h1>
+
+        <MoreInfo />
+      </div>
+    </UserContext.Provider>
+    
+  );
+}
+```
+ya en app.js importamos nuestro contexto y envolvemos toda nuestra app o lo que devolveremos siempre tiene que llevar el provider y el value es el valor que queremos que tengan todos los hijos como props aqui le dimos un valor y ya pero para verlo en ejemplo vamos al componente `<MoreInfo />`
+
+```jsx
+import { useUser } from "../hooks/useUser"
+export const MoreInfo = () => {
+    const { name, year } = useUser();
+  return (
+    <div>
+        <h1>Informacion del usuario</h1>
+        <p>Nombre: {name}</p>
+        <p>Edad: {year}</p>
+    </div>
+  )
+}
+```
+importamos nuestro hook y despues ya podemos sacar la informacion que en este caso es un objeto y sacamos la informacion en un hijo que establecimos desde el padre con el value, y esto funciona cuando resivimos un valor desde HTTP entonces ya tenemos ese valor a todos los hijos
+
+---
+
 ### Estados
 son los estados que pueden tener los componentes de las paginas web.
 
