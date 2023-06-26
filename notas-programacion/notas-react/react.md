@@ -4,7 +4,41 @@ React es una biblioteca de javaScript o libreria,
 una biblioteca o libreria es un conjunto de implementaciones o subprogramas ,son como herramientas en las cuales podemos trabajar. 
 Se pueden crear componentes reautilizables 
 
+## Desestructuracion y spread operator
+Estos son conceptos de js pero se usan mucho en react asi que lo recordare aqui 
 
+### Desestructuracion 
+```jsx
+const numeros = [1, 2, 3]
+const num1 = numeros[0]
+const num2 = numeros[1]
+const num3 = numeros[2]
+```
+Asi normalmente se le asigna un valor pero podemos hacer lo siguiente
+
+```jsx
+const [num1, num2, num3] = numeros;
+```
+y asi le asigno a cada uno un valor del array numeros
+
+con objeto es igual
+
+```jsx 
+const person = {
+    name: 'Marcela',
+    love: true
+}
+```
+tengo este objeto y para obtener su valor hago lo siguiente
+```jsx
+const { name, love } = person
+```
+muy importante que tengan el mismo nombre que las porpiedades
+
+### spreed operator
+Son los tres puntos y lo que hace es que si tenemos un objeto o un array `...persona` divide todos los datos o numeros que tenga uno por uno asi podemos dar valores a variables y muchas cosass
+
+Tambien podemos unir dos arreglos al poner `...persona1, ...persona2` y estos son dos objetos o arreglos se unen, se crean una copia 
 
 # Conceptos basicos de React
 
