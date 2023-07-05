@@ -392,3 +392,124 @@ solamente que debemos de extenderlo a este caso un objeto por que resive un obje
 
 ## useContext
 
+Primero creamos nuestro context
+```tsx
+import { createContext } from "react";
+export const TodoContext = createContext({});
+```
+despues el provider
+```tsx  
+import { TodoContext } from "./TodoContext"
+
+interface props {
+    children: JSX.Element | JSX.Element[]
+}
+
+export const TodoProvider = ({ children }: props) => {
+    return (
+        <TodoContext.Provider value={{}}>
+            { children }
+        </TodoContext.Provider>
+    ) 
+}
+```
+children sera todo el jsx que vamos a devolver por eso creamos esa interface y le estamos diciendo que children sera un elemento jsx o muchos para eso el arreglo
+
+despues aqui simplimente retornamos el nuestro context anterior con el provider y con nuestro children definido
+
+Creamos una interface en la carpeta interface 
+```tsx
+export interface Todo {
+    id: string;
+    desc: string;
+    completed: boolean;
+}
+export interface TodoState {
+    todoCount: number;
+    todos: Todo[],
+    completed: number;
+    pending: number;
+}
+```
+Y en el provider creamos un initialState y le ponemos de que tipo gracias a esta interface
+```tsx
+const INITIAL_STATE: TodoState = {
+    todoCount: 2,
+    todos: [
+        {
+            id: '1',
+            desc: 'Recolectar las piedras del infinito',
+            completed: false
+        },
+        {
+            id: '2',
+            desc: 'Marcela I Like you',
+            completed: false
+        }
+    ],
+    completed: 0,
+    pending: 2
+}
+```
+
+y ahora trabajaremos con un reducer en el mismo provider pero creamos en otro documento el reducer
+
+```tsx
+type TodoAction = 
+    | { type: 'addTodo', payload: Todo }
+    | { type: 'toggleTodo', payload: { id: string } }
+
+export const todoReducer = ( state: TodoState, action: TodoAction ): TodoState => {
+    switch ( action.type ) {
+        case 'addTodo':
+            return {
+                ...state, 
+                todos: [...state.todos, action.payload]
+            }
+        default:
+            return state
+    }    
+}
+```
+De momento asi esta mis casos del reducer, retorno todo el estado o una copia podria ser y en todos envia uno nuevo todos ya que siempre en los reducer se envia un nuevo state por eso mandamos todos los todos anteriores con `...state.todos` y añado el nuevo todo con `action.payload` ya que supuestamente es para eso el addTodo
+
+```tsx
+export const TodoProvider = ({ children }: props) => {
+
+    const [todoState, dispatch] = useReducer(todoReducer, INITIAL_STATE)
+
+    return (
+        <TodoContext.Provider value={{
+            todoState
+        }}>
+            { children }
+        </TodoContext.Provider>
+    ) 
+}
+```
+Asi se veria nuestro provider y como valor le estamos dando todo nuestro estado, todo los datos por eso valor inicial le damos el que creamos anteriormente y el todoReducer la funcion donde estan los cambios
+
+Ahora todos los hijos tendran acceso a los datos que tengo en estado
+
+```tsx
+export type TodoContextProps = {
+    todoState: TodoState
+}   
+export const TodoContext = createContext<TodoContextProps>({} as TodoContextProps);
+```
+Recordemos que TodoContext es nuestro contexto por eso lo creamos asi y aqui le estamos dando que sera del tipo `TodoContextProps` y que adentro tendra el estado que estamos enviando en el provider
+
+```tsx
+export const TodoList = () => {
+    const { todoState } = useContext( TodoContext );
+    const { todos } = todoState;
+    return (
+        <ul>
+            { todos.map( todo => todo.desc ) }
+        </ul>
+    )
+}
+```
+ya este es un componente donde usamos la informacion de nuestro estado desestructuramos todoState del contexto y despues del todoState desestructuramos todos y ya lo usamos abajo
+
+La siguiente explicacion esta en la aplicacion y con la ayuda del video de youtube
