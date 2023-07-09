@@ -177,3 +177,67 @@ La pagina ya puede estar prebiamente generada eso se le llama **static generatio
 ---
 
 ## Migrar una aplicacion de JavaScripts a TypeScript
+
+Se crea un archivo `tsconfig.json` y esto crea ya todo y ya cambiamos las extenciones de los archivos
+
+entonces todo aqui comienza a funcionar con Ts
+
+```tsx
+export const MainLayout: FC = ({ children }: any) => 
+```
+con el FC le estoy diciendo que sera un funcional component
+
+```tsx
+interface Props {
+    text: string;
+    href: string;
+}
+export const ActiveLink: FC<Props> = ({ text, href }) =>
+```
+para los argumentos le creamos una interface para que sepan de que tipos de datos seran
+
+```tsx
+<a style={ asPath === href ? style : null }>{ text }</a>
+```
+Aqui nos dice que tiene que ser 'CSSProperties | undefined' entonces cambiamos el null por undefined, pero como style es un objeto con nuestro css arriba para que no hayan problemas le ponemos a ese objeto que es de tipo CSSProperties
+```tsx
+const style: CSSProperties = {
+    color: '#0070f3',
+    textDecoration: 'underline'
+}
+```
+y listo
+
+En el archivo api tambien se cambian las cosas
+```ts
+import { NextApiRequest, NextApiResponse } from "next";
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.status(200).json({ name: 'John Doe' })
+}
+```
+se le pone el tipo de dato NextApiRequest y NextApiResponse, tambien si queremos que el res tenga un tipo podemos crear un type o una interface para decir que resivira 
+```ts
+type Data = {
+  name: string;
+}
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  res.status(200).json({ name: 'Marcela Cruz' })
+}
+```
+
+Aqui tenia un error 
+```tsx
+interface Mar {
+    children: JSX.Element[]
+}
+export const MainLayout: FC<Mar> = ({ children }) =>
+```
+Entonces le puse que resiviria en el children un arreglo de jsx y me logro pasar
+
+## Desplegando nuestra aplicacion 
+Hay diferentes maneras una es tan simpli que ejecutar `npm run build` y despues darle npm start mientras este en start esto puede funcionar en internet
+
+Tambien hay otro que es versel que es para subir tus aplicaciones de next pero antes la tienes que subir a github y despues solo se escoge nuestro repositorio y ya la podemos subir
+
+### Imagen de Docker
+Tambien es muy importante generar una imagen de docker
