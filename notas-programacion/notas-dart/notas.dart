@@ -277,3 +277,80 @@ fun(){
   saludar4(nombre: 'Sebastian', edad: 12);    //y asi se llaman los de nombre no por orden
   //tambien se puede poner argumentos por orden obligatorios y por nombre combinarlos
 }
+
+
+
+String capitalizar( String texto ) {  //esta funcion simplemente agarra un texto y lo pasa a mayusaculas
+  texto = texto.toUpperCase();
+  return texto; //tambien estas dos lineas pueden ser return texto.toUpperCase();
+}
+smcg() {
+  String nombre  = 'sebas';
+  String nombre2 = capitalizar(nombre);
+
+  print( nombre );     //este es el nombre en minuscula
+  print( nombre2 );    //este en mayuscula pero con variables obtiene un nuevo espacio en memoria asi que todavia esta en otro espacio en memoria en minusculas
+}
+
+
+Map<String, String> capitalizarMapa( Map<String, String> mapa ) { //le estamos diciendo que retornara un mapa y su argumento sera tambien un mapa
+
+  // Romprer la referencia
+  mapa = { ...mapa };   //con esto rompemos referencias quiere decir que creamos un nuevo espacio en memoria y le esparsimos los argumentos que tenia mapa
+  //por que???  por que con los mapas, listas, objetos, clases son mandadas como referencia, eso quiere decir que usan el mismo valor en memoria entonces si hacemos un cambio a algo cambia en todo
+
+  mapa['nombre'] = mapa['nombre']?.toUpperCase() ?? 'No hay nombre';  //el primer '?' es para decirle que puede o no haber valor y '??' si no tiene que sea ese valor por defecto
+
+  return mapa;
+}
+
+fmcg2() {
+  Map<String, String> persona = {   //este es el mapa que enviamos en la funcion
+    'nombre': 'Tony Stark'
+  };
+
+  Map<String, String> persona2 = capitalizarMapa( persona );
+
+
+  print( persona ); //en minuscula porque rompimos la referencia
+  print( persona2 );  //en mayusculas por nuestra funcion
+}
+
+
+//funciones flecha
+int sumarFlecha( int a, int b ) => a + b;   //cuando solo tiene un return se puede poner lo que se devolvera asi
+
+//otro ejemplo de las funciones flecha
+flecha() {
+  List<int> listado = [1,2,3,4,5,6,7,7,8,8,8,9,9,10,10];
+  //var nuevoListado = listado.where((element) => false);    //list tiene un metodo que es este where, son funciones pero cuando estan dentro de un objeto se llaman metodos
+  //si dejamos el cursor arriba del where podemos ver que retorna, hay que mandar una funcion que retorne un bool
+  //y que sera iterable...    esto quiere decir que puede tener mas funciones pero es un tipo de dato, mapa, string etc
+  var nuevoListado = listado.where((numero) {   //numero tendra uno por uno el valor del array, y le estoy diciendo que el nuevo listado sera la condicon que estoy devolviendo, numero mayor a 4
+    return numero > 5;      
+  }); //pero esto es una funcion normal ahora flecha
+  
+  var nuevoListado2 = listado.where((numero) => numero > 4 ); //lo mismo pero con flecha
+}
+
+//en el curso hay temas como
+//callbacks funciones dentro de otra funcion
+//Queue   funcion para recorrer un array
+
+//numeraciones
+main3() {
+  Audio volumen = Audio.bajo;//tipo de dato Audio y ya podemos dar un valor al Audio
+  
+  switch( volumen ) {
+    case Audio.bajo : print('Volumen bajo'); break; //una forma de hacerlo en una linea
+    case Audio.medio: print('Volumen medio'); break;
+    case Audio.alto : print('Volumen alto'); break;
+  }
+}
+//el enum se crea afuera de la funcion
+enum Audio { //las numeraciones se hacen asi para saber que tipo de datos puede ser una variable en este caso
+      //usa camelCase, 'AudioCarro' siempre en mayuscula la primera
+  bajo, 
+  medio,
+  alto
+}
