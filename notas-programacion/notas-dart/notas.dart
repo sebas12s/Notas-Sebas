@@ -381,3 +381,32 @@ future2() {
   String ff = texto.readAsStringSync(); //este Sync no resuelve un future si no un string por eso este si lo hace de manera ordenada, se ejecuta primero esto y despues lo de abajo
   f.then(print);
 }
+
+
+//Async y await
+main4() async { //por el await se pone el async
+  String path = Directory.current.path + '/04_tipos_nocomunes/assets/personas.txt';
+  String texto = await leerArchivo(path);   //si queremos que se resuelva el future y que pare hasta que se complete ponemos el await pero es necesario que en la funcion que estemos le pongamos el Async
+  print(texto);
+  print('Fin del main');
+}
+
+Future<String> leerArchivo( String path) async { //esta es una funcion que retorna un future, 
+  //el async lo que dice es que una funcion regresara un future si o si retornara eso, aunque pongamos que retorne un simple texto
+  File file = new File( path );
+  return file.readAsString();
+} 
+
+//cath error
+
+main5() {
+  Future<String> timeout = Future.delayed( Duration(seconds: 3), () {
+    if ( 1 == 1 ) {
+      throw 'Auxilio!, explotó esta cosa';    //con throw hacemos que haya un error
+    }
+    return 'Retorno del future';
+  });
+
+  timeout.then( print )
+         .catchError( (error) => print(error) );  //simplemente le decimos que si hay un error, que haga algo en este caso una funcion pero este solo es el print pero pueden ser muchas cosas, como cancelar usuario y asi
+}
