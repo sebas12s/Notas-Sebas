@@ -354,3 +354,30 @@ enum Audio { //las numeraciones se hacen asi para saber que tipo de datos puede 
   medio,
   alto
 }
+
+
+//tema importante future
+future(){
+  Future timeout; //si dejamos el cursor nos aparece, puede resolver cualquier tipo de dato entonces cuando se resuelve puede retornar un entero un objeto un mapa etc por eso hay una <T>
+  Future timeout2 = Future.delayed( Duration(seconds: 3), () {  //hice una funcion anonima, tambien puedo poner otra funcion pero lo que le dije aqui es que despues de 3 segundo se ejecutara la funcion
+    print('3 segundos despues');
+  });
+
+  Future<String> timeout3 = Future.delayed( Duration(seconds: 3), () {  
+    print('3 segundos despues');
+    return 'retorno'; //porque retorno un String tambien se lo ponemos arriba, pero se dice, resuelve un string
+  });
+
+  timeout3.then((texto) => print(texto)); //then es despues que se resuelve el future, texto es el valor que se resolvio o retorno y hasta que se resulva se hace el then
+  timeout3.then(print); //asi tambien se puede hacer en las funciones, el primer argumento (esta vez el unico) que se envia sera el primer argumento de la otra funcion que ponemos en este caso el print
+}
+
+future2() {
+  File texto = new File( Directory.current.path + '' ); 
+  //el Directory... es una clase de Dart.io tambien File, pero ese es para saber el path de donde se esta ejecutnado el archivo
+  //File es para leer un archivo y adentro ponemos la direccion Path si falta para llegar al archivo puedo concatenar 
+
+  Future<String> f = texto.readAsString();  //este readAsString resuelve un future, por eso sera mas lento o se puede ejecutar despues de cosas que tengamos abajo
+  String ff = texto.readAsStringSync(); //este Sync no resuelve un future si no un string por eso este si lo hace de manera ordenada, se ejecuta primero esto y despues lo de abajo
+  f.then(print);
+}
