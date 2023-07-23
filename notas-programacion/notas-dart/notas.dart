@@ -1,11 +1,9 @@
 
-
-//primer hola mundo 
 import 'dart:async';
-import 'dart:web_audio';
 import 'dart:io'; //asi se importan paquetes de dart
 import 'dart:math';
 
+//primer hola mundo 
 main() {  //siempre tiene que tener un metodo main
   print('Hola mi vida');
 }
@@ -267,13 +265,14 @@ void saludar3( String mensaje, [ String nombre = 'Insertar nombre', int? edad ] 
 
 //por nombre, son los que estan dentro de un corchete
 
-void saludar4({ 
+void saludar4({    
   String? mensaje, 
   required String nombre, //required es para hacerlo requerido
   int? edad }) {    //normalmente se posicionan asi los de nombre
-  print('$mensaje $nombre');
+  print('$mensaje $nombre');    
 }
 //lo que paso aqui es, que si estan dentro de llaves eso se combierte por nombre
+//por nombre, normalmente no son obligatorios y no se pueden poner obligatorios asi que lo minimo que podemos hacer es ponerles valores por defecto
 fun(){
   saludar4(nombre: 'Sebastian', edad: 12);    //y asi se llaman los de nombre no por orden
   //tambien se puede poner argumentos por orden obligatorios y por nombre combinarlos
@@ -448,3 +447,75 @@ strms() {
   //ya no se puede enviar otro apollo en este ejemplo
 
 }
+
+
+//se ponen las clases en otro archivo y solamente se importan 
+//import 'clases/persona.dart';
+class Persona {   //asi seria su estructura de la clase
+
+  // Campos o propiedades
+
+  //propiedades privadas y publicas, por defecto todas son publicas
+  String? nombre; //lo ponemos si es nulleable
+  int? edad;
+  String _amor = 'Sofia Marcela Cruz Galindo';    //asi se pone privada, en si solo se puede usar en esta clase afuera no
+
+  //Get y sets
+  //podemos tener muchos get y set
+  //veamos esto, son metodos que sirven para simular que tenemos una propiedad
+  String get amor {   // al llamar este get solamente se pondria asi, persona.amor y ya retornaria nuestra propiedad
+    return _amor.toUpperCase();   //no solamente se tienen que retornar una propiedad pueden hacer muchas cosas
+  }
+  //tambien se puede hacer una funcion de flecha
+  String get amor2 => _amor.toLowerCase();
+
+  set amor( String texto ) {  //esto solamente sirve para cambiar algo no para retornar algo
+    _amor = texto;
+  }
+  set amor2( String texto ) => _amor = texto; //funcio flecha
+
+  //Construsctores
+  //son los metodos que se crean cuando creamos una nueva instancia de la clase
+  //un constructor valido seria el siguiente
+  Personas( String nombre, int edad ) {   //colocamos los valores que le queremos dar como propiedades
+    //aqui adentro le daria las instrucciones que quiero que se ejecuten cuando creo una instancia
+    //normalmente queremos inicializar los valores, no como lo hicimos abajo uno por uno
+
+    this.nombre = nombre;   //con el this le digo que la propiedad de esta clase sera igual al nombre que resivo en los argumentos
+    this.edad = edad;
+
+  }
+  //aunque podemos hacer tambien de la siguiente manera mas rapido
+  Persona(this.nombre, {this.edad = 17}); //se pueden usar los corchetes y las llaves tambien aqui
+
+  //constructores con nombre
+  Persona.nombre() {
+
+  }
+
+  //metodos
+
+}
+
+
+//clases en Dart
+//cuando tenemos objetos es bueno usar clases
+clasess() {
+  //hay que crear una instancia de la clase, asi se conoce para cuando creamos una variable de una clase
+  Persona persona = new Persona('Sebastian', edad: 18);  //aqui ya le pasamos el valor que definimos en el constructor
+  //Le decimos que es de tipo persona la variable y una nueva persona
+  // persona.nombre = 'Sebastian'; //asi se le colocan los campos
+  // persona.edad = 17;
+  // persona.amor = 'Marcela'; //esto es muy largo se puede hacer tambien asi
+
+  //por el constructor ya no se envia asi
+  // persona..nombre = 'Sebastian'
+  //       ..edad = 17; //operador en cascada asi tambien lo podeoms poner mucho mas facil
+        //..amor = 'Marcela';   //la puse privada asi que no se puede llamar
+
+  print(persona.toString());  //tambien podemos cambiar los metodos que ya traen, como en persona al llamar este metodo lo puedo editar en mi clase
+
+  print(persona.amor);  //asi llamamos el get
+  persona.amor = 'Marcela'; //aqui tambien estoy haciendo el set no importa que tengan el mismo valor
+}
+
