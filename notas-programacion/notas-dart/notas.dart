@@ -1,6 +1,7 @@
 
 
 //primer hola mundo 
+import 'dart:async';
 import 'dart:web_audio';
 import 'dart:io'; //asi se importan paquetes de dart
 import 'dart:math';
@@ -409,4 +410,41 @@ main5() {
 
   timeout.then( print )
          .catchError( (error) => print(error) );  //simplemente le decimos que si hay un error, que haga algo en este caso una funcion pero este solo es el print pero pueden ser muchas cosas, como cancelar usuario y asi
+}
+
+
+
+//Streams
+strms() {
+  // final streamController = StreamController();  //asi se crea, es tipo StreamController por eso le puse solo final para que se ponga por defecto el tipo
+  // streamController.stream.listen((dato) { //el listen obligatorio necesita una funcion para ejecutar cuando se resiva un valor, entonces solo se ejecutara cuando resiva informacion
+  //   print('Despegando! $dato'); //solo le decimos como reaccionara cuando resiva informacion 
+  // });
+
+  //comente porque lo usare de otra manera
+
+  //el typado puede ser como es ahorita dynamic o le podemos dar typados
+  //final streamController = StreamController();
+  //StreamController<String> streamController = StreamController(); se puede hacer asi o 
+  final streamController = new StreamController<String>();
+  streamController.stream.listen(
+    (dato) => print('Despegando! $dato'),     //este es el primer argumento la funcion obligatoria
+    onError: (error) => print('El error es: $error'),
+    cancelOnError: false,      //si tenemos en false no se cancel asi hay un error si no que en la siguiente se tira apollo 13, pero si esta en true si se cancel y no llega a apollo 13
+    onDone: () => print('') //sabemos que no solo un print se puede enviar si no otras cosas y esto es para cuando se cierre se enviara esto
+  );
+  //que pasa cuando tenemos dos listen, ya que asi normalmente solo es de una suscripcion solo uno lo puede escuchar
+  //lo que hay que hacer es: final streamController = new StreamController<String>.broadcast(); a esa linea
+
+  streamController.sink.add('Apollo 11'); //con esto agrego esto al inicio del stream
+  //ejemplo simple de stream
+  //codigo asincrono y secuencial, este ultimo es mas rapido que el codigo asincrono y un ejemplo de codigo asincrono son los futures y streams
+
+  streamController.sink.add('Apollo 12');
+  streamController.sink.addError('Tenemos un problema');//asi enviamos un error, entonces tenemos que poner un manejo de errores predefinido en el streamController
+  streamController.sink.add('Apollo 13');   
+
+  streamController.sink.close();    //normalmente cuando sabemos que ya no se enviara informacion lo cerramos, pero esto tambien un ejemplo es cuando se sale de la aplicacion o algo asi se cierra
+  //ya no se puede enviar otro apollo en este ejemplo
+
 }
