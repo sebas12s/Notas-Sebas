@@ -520,3 +520,136 @@ clasess() {
   persona.amor = 'Marcela'; //aqui tambien estoy haciendo el set no importa que tengan el mismo valor
 }
 
+
+//propiedades finales inmutables
+class Cuadrado {
+  final int lado;   //para hacer que no se muten despues podemos ponerlas asi
+  final int area;
+  // Error
+  // Cuadrado( int lado, int area ) {   //el constructor no me deja asi me marca error
+  //   this.lado = lado;
+  //   this.area = area;
+  // }
+
+  // Cuadrado( this.lado, this.area );    //de esta manera si me lo acepta pero no es la apropiada
+
+  Cuadrado( int lado ):   //despues de estos dos puntos podemos poner todo el codigo que queramos para el constructor, pero para mejor vista el damos enter
+    this.lado = lado,
+    this.area = lado * lado;    //asi pongo el area mediante el lado que me mandaron
+}
+
+main444(List<String> args) {
+  final cuadrado = new Cuadrado(10);    //con el lado simplemente ya calculamos el area
+  // cuadrado.lado = 20;    //no me deja hacer o cambiar mientras no sea el constructor porque es un final
+}
+
+
+//constructores constantes
+class Location {
+  final double lat;
+  final double lng;
+  const Location( this.lat, this.lng );//este es el constructor
+}
+main422() {
+  final sanFrancisco1 = new Location(18.2323, 39.9000);
+  final sanFrancisco2 = new Location(18.2323, 39.9001);
+  final sanFrancisco3 = new Location(18.2323, 39.9001);
+
+  // print( sanFrancisco1 == sanFrancisco2 ); // False
+  // print( sanFrancisco2 == sanFrancisco3 ); // False  como apunta a diferentes espacios en memoria aunque tengan los mismos valores son diferentes esto es cuando no son const
+
+  const sanFrancisco4 = const Location(18.2323, 39.9000);
+  const sanFrancisco5 = const Location(18.2323, 39.9001);
+  const sanFrancisco6 = const Location(18.2323, 39.9001);
+  const berlin = const Location(18.2323, 39.9001);
+
+  // print( sanFrancisco4 == sanFrancisco5 ); // False
+  print( sanFrancisco5 == sanFrancisco6 ); // true    pero cuando son const y tienen el mismo valor apuntan al mismo valor en memoria por eso da true
+  print( berlin == sanFrancisco6 ); // true
+
+}
+
+
+//constructores Factory
+class Rectangulo {
+  int? base;
+  int? altura;
+  int? area;
+  String? tipo; // cuadrado base = altura, rectangulo base != altura
+
+  factory Rectangulo(int base, int altura) {  //un factory tiene que regresar una nueva instancia de la clase, o una ya creada
+    
+    if ( base == altura ) {     //si es igual sera un cuadrado, esto es lo que nos permite factory poder enviar el constructor que mejor se acomple
+      return Rectangulo.cuadrado(base);   //el factory nos dice que tenemos que retornar una nueva instancia 
+    } else {
+      return Rectangulo.rectangulo(base, altura);   //solo puede enviar una nueva instancia y los constructores con nombre la crean ya 
+    }
+  }
+  Rectangulo.cuadrado( int base  ) {    //creamos dos constructores con nombres
+    this.base   = base;
+    this.altura = base;
+    this.area   = base * base;
+    this.tipo   = 'Cuadrado';
+  }
+  Rectangulo.rectangulo( int base, int altura ) {
+    this.base   = base;
+    this.altura = altura;
+    this.area   = base * altura;
+    this.tipo   = 'Rectángulo';
+  }
+}
+maisn(List<String> args) {
+  final figura = new Rectangulo(10, 15);  //aqui lo envio y ya gracias al factory ve que el cosntructor que se acopla mejor es el del rectangulo
+}
+
+
+//propiedade y metodos 'static'
+class Herramientas {
+  static const List<String> listado = ['Martillo', 'Llave Inglesa', 'Desarmador'];    //en las clases tambien se pueden poner propiedades como listas
+  //lo ponemos const para que no podamos modificar la propiedad
+  //final puede funcionar con las propiedades primitivas como int String Bool etc.
+  //cuando tienen static normalmente se usan para lectura, entonces no tenemos que crear una nueva instancia de la clase
+
+  static void imprimirListado() => listado.forEach(print);// lo mismo pasa con los metodos solo pueden ser llamados sin inicializar
+}
+mainss() {
+  
+  //final herr = new Herramientas();
+  //herr.  //no esta la propiedad por que las props static forman parte de la clase no de las instancias
+
+  // Herramientas.listado.add('Tenazas');   //no se puede modificar porque es const
+  //si fuera final no const si podemos usar sus metodos para anadir y todo eso
+  // Herramientas.listado.forEach(print);   //para imprimir el listado podemos hacer un forEach y asi pero como podemos ver podemos acceder a el sin crear una nueva instancia
+  Herramientas.imprimirListado();   //aqui solo llamamos un metodo
+}
+
+
+//patron Singleton
+//lo que hace el patron singleton es que aunque hagamos nuevas instancias regresen el mismo espacio en memoria, entonces si le cambiamos algo cambiara en todos
+
+class MiServicio {    //una clase normal
+
+//aqui comienza el Singleton
+  static final MiServicio _singleton = new MiServicio._internal();  //esto es una propiedad privada, recordemos que una propiedad static se queda el mismo espacio en memoria, entonces aqui ya todo lo que se guarde se guardar en el mismo espacio en memoria
+  //esta propiedad (la puedo llamar con un .) lo que hace es crear una nueva instancia de esta misma
+
+  factory MiServicio() {    //creamos el factory porque cuando creen esta instancia se enviara la nueva instancia pero como esta arriba en privada la envio aqui y esta misma tiene el mismo espacio en memoria
+    return _singleton;
+  }
+
+  MiServicio._internal();   //primero tenemos que crear un constructor privado
+  //MiServicio._();   //tambien se puede poner asi o con nombre
+
+  String url = 'https://abc';   //las propiedades normales
+  String key = 'ABC123';
+}
+
+maisdn() {
+  final spotifyService1 = new MiServicio();
+  spotifyService1.url = 'https://api.spotify.com';
+
+  final spotifyService2 = new MiServicio();
+  spotifyService2.url = 'https://api.spotify.com/v2';   //como apuntan al mismo espacio cambia tambien en el servicio 2
+
+  print( spotifyService1 == spotifyService2 ); // Falso?  //sin el singleton esto seria falso porque apuntan a diferentes espacios en memorias
+}
