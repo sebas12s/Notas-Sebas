@@ -489,8 +489,8 @@ class Persona {   //asi seria su estructura de la clase
   Persona(this.nombre, {this.edad = 17}); //se pueden usar los corchetes y las llaves tambien aqui
 
   //constructores con nombre
-  Persona.nombre() {
-
+  Persona.nombre(String nombre) {  //puede resivir argumetos normalmente
+    this.nombre = nombre;   //y aqui las acciones
   }
 
   //metodos
@@ -507,6 +507,7 @@ clasess() {
   // persona.nombre = 'Sebastian'; //asi se le colocan los campos
   // persona.edad = 17;
   // persona.amor = 'Marcela'; //esto es muy largo se puede hacer tambien asi
+  Persona persona2 = new Persona.nombre('Marcela');   //asi se llama un constructor con nombre
 
   //por el constructor ya no se envia asi
   // persona..nombre = 'Sebastian'
