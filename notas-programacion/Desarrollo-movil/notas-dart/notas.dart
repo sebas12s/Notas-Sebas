@@ -653,3 +653,127 @@ maisdn() {
 
   print( spotifyService1 == spotifyService2 ); // Falso?  //sin el singleton esto seria falso porque apuntan a diferentes espacios en memorias
 }
+
+
+//extends
+class Vehiculo {    //creamos una clase con una propiedad y dos metodos 
+  bool encedido = false;
+
+  void encender() {   //como no regresa nada es un void este metodo
+    encedido = true;
+    print('Vehículo encendido');
+  }
+
+  void apagar() {
+    encedido = false;
+    print('Vehículo apagado');
+  }
+}
+
+class Carro extends Vehiculo {    //para darle todas las propiedades y metodos y todo lo que tenga ponemos un extends y la otra clase
+    int kilometraje = 0;    //solo ponemos lo que queramoms que tenga y no tiene la clase extendida
+}
+
+
+//clases abastractas
+//usamos el mismo ejemplo de arriba
+//cuando son abastractas no es posible crear instancias simplemente son como el cascaron para darles todas las propiedades o metodos a los hijos que la extiendan
+
+abstract class Vehiculo2 {
+  bool encedido = false;
+
+  void encender() {
+    encedido = true;
+    print('Vehículo encendido');
+  }
+
+  void apagar() {
+    encedido = false;
+    print('Vehículo apagado');
+  }
+
+  bool revisarMotor();    //cuando son abstractas simplemenet se puede generar el metodo asi aunque no lo definamos por completo aunque hay que definirlo despues con el hijo
+}
+
+class Carro2 extends Vehiculo2 {
+    int kilometraje = 0;
+
+    @override     //override sirve para decir que cambiaremos un metodo del padre, en este caso Vehiculo2
+    bool revisarMotor() {   //y ya aqui definimos como seria el metodo
+      print('Motor OK!');
+      return true;
+    }
+}
+
+
+//super constructor
+class Persona3 {
+
+  String nombre;
+  int edad;
+
+  Persona3(this.nombre, this.edad);   //recordemos que al poner asi el this decimos que seran tambien las propiedades esas que envian en la clase
+
+  void imprimirNombre() => print('Nombre: $nombre, Edad: $edad');
+}
+
+class Cliente extends Persona3 {
+
+  String? direccion;
+  List ordenes = [];
+
+  Cliente(int edadActual, String nombreActual):   //como nuestra clase que extendimos necesita argumentos entonces, hacemos un constructor donde resiva esos argumentos
+    super(nombreActual, edadActual);  // y con la palabra super se la enviamos al padre o lo que nos pedia
+
+  @override //esta palabra como dijimos se usa cuando cambiemos el metodo del padre
+  void imprimirNombre() {
+    super.imprimirNombre(); //si queremos llamar algo del padre podemos poner la palabra super, y esta llama el imprimir nombre del padre
+      print('Cliente: $nombre ($edad)'); 
+    }
+}
+mainssd(List<String> args) {
+
+  final pedro = new Cliente(33, 'Pedro');   //aqui se los enviamos 
+
+  pedro.imprimirNombre(); //y sigue teniendo el metodo
+}
+
+
+//mixins
+mixin Logger {    //cualquier clase que hagamos pueden ser un mixin
+//los mixin no pueden ser instanciados son como las clases abstractas pero tienen otras cualidades
+//estos mixin no pueden crear constructores
+//solo estan para transferir metodos o propiedades a otras clases
+
+  void imprimir( String texto ) {
+    final hoy = DateTime.now();   //con esto obtengo la fecha exacta de hoy 
+    print('$hoy :::: $texto');
+  }
+}
+
+
+abstract class Astro with Logger {    //para dar sus propiedades y metodos es con with no con extends
+
+  String? nombre;
+
+  Astro() {
+    imprimir('-- Init del Astro --');   //podemos ver que este si tiene un constructor
+  }
+
+  void existo() {
+    imprimir('-- Soy un ser celestial y existo --');
+  }
+}
+class Asteroide extends Astro with Logger {   //se le pueden extender los dos primero las clases y despues los mixis
+//creo que este with esta de mas ya que astro ya lo tiene
+
+  String? nombre;
+  Asteroide( this.nombre ) {
+    imprimir('Soy $nombre');
+  }
+}
+mainsdsf() {
+  
+  final ceres = new Asteroide('Ceres');
+
+}
