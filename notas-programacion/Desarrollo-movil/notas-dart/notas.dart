@@ -773,7 +773,148 @@ class Asteroide extends Astro with Logger {   //se le pueden extender los dos pr
   }
 }
 mainsdsf() {
-  
   final ceres = new Asteroide('Ceres');
+}
 
+
+//documentacion
+doubledoc(){
+  double numero = 3.1416;   //cuando creamos asi podemos decir que estamos creando una instancia de la clase double, entonces la variable tiene todos los metodos y propiedades de la clase double
+  double infinito = double.infinity; // aqui mismo usamos las mismas propiedades del double sin inicializarlo
+  print('$numero.sign');    //esto puede funcionar ya que sign es una propiedad del double y en la documentacion podemos ver eso
+  //podemos encontrar mucho mas de sus metodos en su documentacion https://api.dart.dev/stable/2.4.1/dart-core/double-class.html
+
+   print('isFinite: ${ numero.isFinite } :: $numero');    //si es finito  true
+  print('isFinite: ${ infinito.isFinite } :: $infinito');   //false
+
+  print('abs: ${ numero.abs() } :: $numero');   //valor absoluto :: 3.1416
+  print('ceil: ${ numero.ceil() } :: $numero');   //retorna el numero entero mayor que este :: 4
+  
+  // print('ceil: ${ infinito.ceil() } :: $numero');  //este es infinito entonces un numero despues da error
+
+  print('ceilToDouble: ${ numero.ceilToDouble() } :: $numero'); //asi lo mismo que el ceil pero devuelve un double
+  
+  print('round: ${ numero.round() } :: $numero');   //este lo redondea y redondea con el punto de decimal 
+  print('round: ${ numero.roundToDouble() } :: $numero');   //lo mismo pero devuelve un double
+  
+  print('clamp: ${ numero.clamp(1, 3) } :: $numero');  //este devuelve un numero que este en el limite, y el que tienes entonces si tengo 5 dara 3 si tenemos 2.32 dara ese mismo valor porque esta entre el menor y el mayor
+}
+
+stringdoc() {
+  String nombre = 'Sebastian';
+  String apellido = 'Perez';
+  String nombreCompleto = '$nombre $apellido';
+
+  print('Length: ${ nombreCompleto.length } ');   //nos dice cuantos caracteres tiene
+  print('Contains F: ${ nombreCompleto.contains('S', 0) } '); //la primera le decimos si contiene esa letra y el 0 le estoy diciendo que comience a buscar de la posicion 0, devuelve true
+  print('EndsWith a: ${ nombreCompleto.endsWith('a') } ');  //le estoy diciendo si termina en. False
+
+  print('PadLeft: ${ nombreCompleto.padLeft(20,'.') }');    //si nuestro nombre es de 16 y le decimos que tiene que ser de 20 pone el punto 4 veces si tenemos dos puntos los pone 4 veces y si tenemos 4 puntos los pone 4 veces tambien
+  print('PadRight: ${ nombreCompleto.padRight(20,'.') }');  //lo mismo pero del otro lado
+
+  print('Operador []: ${ nombreCompleto[10] }');    //extraemos la letra por la posicion
+  print('Operador *: ${ nombreCompleto * 2 }');   //duplica el valor del string
+  print('Operador *: ${ '*' * 10 }');   //tambien se puede multiplicar asi, se multiplico el arterisco
+
+  print('ReplaceAll: ${ nombreCompleto.replaceAll(RegExp(r'e'), 'a') }'); // remplaza todas las e por a
+  print('SubString: ${ nombreCompleto.substring(0, 5) }');    //acorta el string
+  print('indexOf F: ${ nombreCompleto.indexOf('b') }'); // nos dice en que posicion esta 
+
+  print('Split: ${ nombreCompleto.split(' ') }'); // Le estoy diciendo que corte la palabra donde encuentre el espacio, o puede ser cualquier otra cosa, pero se elimina ese espacio
+ 
+  print('Capitalizar: ${ nombreCompleto[ nombreCompleto.length - 1].toUpperCase() }');  //aqui capitalice la ultima letra del nombre  
+}
+
+listdoc() {
+  List<int> lista = [1,2,3,4,5];
+  List<int>? lista2; 
+  List<int> lista3 = [3,1,2,15,-10];
+  List<String> nombres = ['Tony', 'Peter'];
+
+  print('Length: ${ lista.length }');   //la cantidad de elementos
+  print('First: ${ lista[0] }');  //el elemento
+  print('First: ${ lista.first }'); //el primer elementos
+  print('Last: ${ lista.last }'); //el ultimo
+
+  print('is empty: ${ lista.isEmpty }');    //preguntamos si esta vacia
+  print('is empty?: ${ lista2 == null }'); // true  para ver si esta vacia
+
+
+  print('asMap:  ${ lista.asMap() }');  //para convertirlo en mapa
+
+  Map listaMapa = lista.asMap();  //asi tambien se puede usar lo que tenga lista la almacena en esa variable
+  print('ListaMapa: ${ listaMapa[4] }');  //los mapas no tienen last 
+
+  print('indexOf: ${ nombres.indexOf('Peter') }'); // regresa -1 si no encontro pero ahorita si encontro en la posicion 1 Peter
+
+  // int mayor3 = lista.indexWhere( (numero) {    //necesita una funcion para devolver true o false y una condicion y nos regresa la posicion que cumple con la condicion que le pusimos
+
+  //   if ( numero > 3 ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+
+  // });
+  int mayor3 = lista.indexWhere( (numero) => (numero > 3) ? true : false ); //este es el mismo codigo de arriba pero resumido
+
+  print( 'indexWhere mayor 3: $mayor3' ); //nos devuelve el indice que cumple la condicion
+
+  print('Remove: ${ nombres.remove('Tony') }');   //si lo elimina devuelve true, tener cuidado que si elimina el listado original
+
+  lista.shuffle();//para revolver los elementos
+
+  lista3.sort();  //ordena la lista
+  print('Sort: $lista3');
+  print('Reverse: ${ lista3.reversed.toList() }');//en reversa ordenado, pero lo paso por toList porque esto regresa un iterable no una lista
+
+  nombres.forEach( (nombre) {   //el argumento seran todas las posiciones una por una del listado
+    nombre = nombre.toUpperCase();  //aqui solo le damos algo que hacer por cada iteracion
+    print(nombre);  //pero no cambia la lista original porque no son por referencia, este solo hace una accion por cada elemento
+  });
+
+  final newList = nombres.map( (nombre) => nombre.toUpperCase() ).toList(); //map es como un forEach pero devuelve un iterable por eso el toList pero nombres no cambia solo se almacena un nuevo listado
+  print('newList: $newList');
+}
+
+mapasdoc() {
+  final persona = {
+    'nombre'   : 'Marcela',
+    'apellido' : 'Cruz',
+    'edad'     : 18,
+  };
+
+  final direccion = {
+    'ciudad': 'Ottawa',
+    'pais'  : 'Canadá'
+  };
+
+  print('Length: ${ persona.length }');   //nos devuelve cual es el numero de pares de valores
+  print('keys: ${ persona.keys }');   //esto devuelve un iterable y asume que es un string por el objeto, nos manda los primeros nombres
+  print('values: ${ persona.values }'); //lo mismo para los valores
+
+
+  persona.addAll( direccion );    //esto hace que a la persona se le agreguen todos los elementos que tiene direccion
+
+  persona.remove('pais');   // para eliminar elimina el par de valores
+
+  // persona.removeWhere( (key, value) {    //para eliminar algo que cumpla alguna condicion, tiene estas dos propiedades
+  //   if ( key != 'nombre' ) {   //le estoy diciendo que si es diferente de nombre, eliminada
+  //     return true; //si se tiene que eliminar 
+  //   } else {
+  //     return false;    //si se tiene que mantener
+  //   }
+  // });
+
+  // persona.removeWhere( (key, value) => (key == 'nombre') ? false : true ); //asi tambien se puede hacer mas pequeña
+
+  persona.forEach( (key, value) {   //dos argumentos key y value, lo mismo por cada par de valores hace algo
+    print('key: $key   value: $value'); //este no retorna nada solo hace una accion
+  });
+
+  final nuevoMapa = persona.map( (key, value) {   //este si retorna un nuevo mapa, los dos argumentos necesarios
+    return MapEntry(key, value.toString().toUpperCase() );    //tiene que retornar un MapEntry    y transformo cada uno de los valores que tenga valor de persona
+  }); //pero para modificar se necesita enviar a una nueva instancia o variable
+
+  print('persona map: $nuevoMapa');
 }
