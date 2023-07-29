@@ -93,4 +93,111 @@ String hola() {
   return 'Hola Mundo';
 }
 
-String hola2() => 'Hola mundo';   //asi son las funciones de flecha, pero no se le puede poner cuerpo solamente el retorno
+String hola2() =>
+    'Hola mundo'; //asi son las funciones de flecha, pero no se le puede poner cuerpo solamente el retorno
+
+int suma(int a, int b) => a + b;
+int resta(int a, [int? b]) {
+  //como es opcional le decimos que puede ser null con '?'
+  b = b ?? 0; //aqui le estoy diciendo que si b es null se le asigne ese valor
+  // b ??= 3;  //es la misma linea de arriba
+  return a - b;
+}
+
+int multiplicacion(int a, [int b = 0]) =>
+    a *
+    b; //los parametros entre corchetes son opcionales pero no puede ser null entonces le damos un valor por defecto
+
+//cuando hacemos las funciones como la suma, le estamos diciendo que son obligatorios y posicionales, en ese orden tienen que ir
+//existen parametros por nombre que no importa el orden
+
+String amor({required String hombre, String? mujer}) {
+  //hacerlo con llaves los hacemos opcionales y los hacemos para llamarlos por nombre, pero para serlo requerido ponemos la palabra required
+  return 'Amor: $hombre y $mujer';
+}
+
+void funciones() {
+  print(hola());
+  print(hola2());
+  print(suma(12, 14)); //asi llamariamos la funcion
+
+  amor(
+      mujer: 'Marcela',
+      hombre: 'Sebastian'); //asi se llama por nombre, no importa el orden
+}
+
+// Clases
+// moldes para crear objetos
+
+class Pokemon {
+  //mayusculas, camelCase
+
+  String name;
+  String type;
+
+  //constructor, la funcion que se llamara cuando creo un objeto
+  // Pokemon(String name, String type) {  //hacerlo asi me da error ya que no se esta inicializando al momento de crearlo
+  //   this.name = name;
+  //   this.type = type;
+  // }
+
+  // Pokemon(String name, String type)
+  //     : this.name = name,     //para que no nos de el error de antes ponemos dos puntos y ahi asignamos
+  //       this.type = type;
+
+  // Pokemon(this.name, this.type);    //asi tambien de una vez le asigna los valores
+
+  Pokemon(
+      { //asi tambien podemos hacerlo por nombre
+      required this.name,
+      required this.type});
+
+  //nosotros podemos sobreescribir cualquier metodo, como el toString()
+  // pero al modificar algun metodo del padre o ya creados tenemos que poner la palabra reservada override
+  @override
+  String toString() {
+    return '$name, $type';
+  }
+}
+
+void clasess() {
+  final Pokemon pikachu = new Pokemon(
+      name: 'Pikachu',
+      type: 'Electro'); //podemos poner que la variable es del tipo Pokemon
+  print(pikachu.name);
+  print(pikachu.type);
+
+  print(pikachu); //al dejarlo solo asi es lo mismo que invocar el .toString()
+}
+
+// name constructors
+
+class Waifus {
+  String name;
+  String anime;
+  bool top10;
+
+  Waifus({
+    required this.name, 
+    required this.anime, 
+    required this.top10
+  });   //un constructor normal
+
+
+  @override
+  String toString() {
+    return 'name: $name, anime: $anime, top10: ${top10 ? 'SI' : 'no:('}'; //condicion ternaria
+  }
+}
+
+void main() {
+  final Map<String, dynamic> formJson = {
+    'name': 'Hinata',
+    'anime': 'Naruto',
+    'top10': true
+  };
+
+  final hinata = new Waifus(name: 'Hinata', anime: 'Naruto', top10: true);
+
+  print(hinata);
+}
