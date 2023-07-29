@@ -3,6 +3,8 @@ import 'dart:async';
 import 'dart:io'; //asi se importan paquetes de dart
 import 'dart:math';
 
+// import 'package:http/http.dart' as http;   el as es un alias ahi se almacena todo lo que tendra para usar sus cosas
+
 //primer hola mundo 
 main() {  //siempre tiene que tener un metodo main
   print('Hola mi vida');
@@ -918,3 +920,5 @@ mapasdoc() {
 
   print('persona map: $nuevoMapa');
 }
+
+
