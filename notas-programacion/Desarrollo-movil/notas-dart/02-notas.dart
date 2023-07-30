@@ -177,12 +177,18 @@ class Waifus {
   String anime;
   bool top10;
 
-  Waifus({
-    required this.name, 
-    required this.anime, 
-    required this.top10
-  });   //un constructor normal
+  Waifus(
+      {required this.name,
+      required this.anime,
+      required this.top10}); //un constructor normal   indica por el mismo nombre de la clase
 
+  Waifus.fromJson(
+      Map<String, dynamic>
+          json) //con el punto y el nombre creo otro constructor
+      : this.name = json['name'] ??
+            'no name found', //aqui le estoy diciendo que del mapa resivire el nombre y eso y si vivene null pongo lo que esta del otro lado
+        this.anime = json['anime'] ?? 'no anime found', //eso se refiere el '??'
+        this.top10 = json['top10'] ?? 'no found';
 
   @override
   String toString() {
@@ -190,14 +196,117 @@ class Waifus {
   }
 }
 
-void main() {
+void constructores() {
   final Map<String, dynamic> formJson = {
     'name': 'Hinata',
     'anime': 'Naruto',
     'top10': true
   };
 
-  final hinata = new Waifus(name: 'Hinata', anime: 'Naruto', top10: true);
+  final boa = new Waifus(
+      name: 'Boa',
+      anime: 'One Piece',
+      top10: true); //crea una instancia de la clase waifus, asi se dice
+  final hinata = new Waifus.fromJson(
+      formJson); //esto es un constructor con nombre, asi tengo dos maneras de construir un objeto
 
-  print(hinata);
+  print('Waifus: $boa, $hinata');
 }
+
+class Area {
+  double
+      _lado; //al poner el '_' decimos que es privado, solo sera visible en esta clase
+
+  Area({required double lado})
+      : assert(lado >= 0,
+            'tiene que ser mayor a 0'), //estos asserts son condiciones que le ponemos a nuestros constructores si se cumple sigue ejecutando si no tira error
+        //el segundo argumento es el mensaje de error, pueden haber muchos assert
+        _lado =
+            lado; //el constructor resive un valor y se lo asignamos a la variable privada
+
+  double get cArea =>
+      _lado *
+      _lado; //un get es para simular una propiedad y devuelve algo, al llamarse no se ponen los parentesis ya que es una propiedad
+
+  calcular() =>
+      _lado * _lado; //este es un metodo, una funcion interna de las clases
+
+  set lado(double value) {
+    //set es para cambiar algo, en este caso cambiamos el lado esto no devuelve ningun valor
+    print('cambio del value: $value');
+    if (value < 0)
+      throw 'value > 0'; //aqui throw si se cumple tira el error y termian la ejecucion
+    _lado = value;
+  }
+}
+
+void constructoresNombre() {
+  final cuadrado = new Area(lado: -10);
+  // cuadrado.lado = 5;   //asi se llamaria el set
+
+  print('Area: ${cuadrado.cArea}');
+}
+
+enum PlantType {
+  nuclear,
+  wind,
+  water
+} //para hacer un tipo de dato ahora abajo type puede tener estas tres opciones
+
+abstract class EnergyPlant {
+  //las clases abstractas no se pueden instanciar solo sirven para crear otras clases
+  double energy;
+  final PlantType type;
+
+  EnergyPlant({required this.energy, required this.type});
+
+  void consumeEnergy(
+      double
+          amount); //no le estoy diciendo que hacer con el dato en este metodo eso lo haria con la otra clase
+}
+
+//extends
+class WindPlant extends EnergyPlant {
+  //un ejemplo en una funciono pedimos de argumento una clase y podemos poner la clase abstracta entonces aceptaria todas las clases que se extenderian
+  //extendemos traemos todas sus funcionalidades
+  WindPlant({required double initialEnergy}) //aqui creamos un constructor
+      : super(
+            energy: initialEnergy,
+            type: PlantType
+                .wind); //y llamamos el constructor del padre y le enviamos al informacion que necesita ese constructor
+
+  @override //el override porque estamos cambiando el metodo del padre
+  void consumeEnergy(double amount) {
+    //tiene que llamarse igual como en el padre ya solo le ponemos lo que queremos hacer con ese metodo
+    //en el padre solo decimos que propiedades tendra y como se llamara aqui ya le ponemos las funcionalidades
+    energy -= amount;
+  }
+}
+
+//implements
+//este hace lo mismo pero es para hacerlo mas especifico, si no el extens extiende todo pero este mas especifico con lo que queremos extender
+class NuclearPlant implements EnergyPlant {
+  @override
+  double energy;
+
+  @override
+  final PlantType type = PlantType.nuclear;
+
+  NuclearPlant({required this.energy});
+
+  @override
+  void consumeEnergy(double amount) {
+    energy -= (amount * 0.5); //el 50% de amount
+  }
+}
+
+void abs() {
+  final windPlant =
+      new WindPlant(initialEnergy: 100); //y asi la podriamos usarr
+  windPlant.consumeEnergy(10);
+  print(windPlant);
+}
+
+
+//mixins 
+//es darles funcionalidades especiales a las clases que se extienden no todas si no algunas
