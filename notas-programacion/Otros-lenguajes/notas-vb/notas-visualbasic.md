@@ -1,5 +1,4 @@
 
-
 # Visual Basic
 ## Como crear variables
 asi se crea una variable con las palabras reservadas Dim y As y el tipo de dato
@@ -97,4 +96,55 @@ Private Sub UserForm_Initialize()
     ComboBox1.List = Worksheets("AREAS").Range("A1:A5").Value
 End Sub
 
+```
+
+Calculamos si es el usuario
+```vb
+Private Sub CommandButton1_Click()
+    Dim usuario, usuarioG, contrasena, contrasenaG As String
+    usuario = TextBox1.Value
+    contrasena = TextBox2.Value
+    usuarioG = Worksheets("Hoja1").Range("A2")
+    contrasenaG = Worksheets("Hoja1").Range("B2")
+    If usuario = usuarioG And contrasena = contrasenaG Then
+            UserForm1.Hide
+            UserForm2.Show
+    Else
+        MsgBox "Usuario o Contraseña incorrecta"
+    End If
+End Sub
+
+usuario = emty
+
+    ComboBox1.AddItem "Categoria 1", 0
+    ComboBox1.AddItem "Categoria 2", 1
+    ComboBox1.AddItem "Categoria 3", 2
+    ComboBox1.AddItem "Categoria 4", 3
+    ComboBox1.AddItem "Categoria 5", 4
+```
+Asi ponemos datos tambien a un combo box
+
+```vb
+Private Sub CommandButton1_Click()
+    Dim usuario, usuarioG, contrasena, contrasenaG, resultado As String
+    
+    usuario = TextBox1.Value
+    contrasena = TextBox2.Value
+    ' usuarioG = Worksheets("Usuarios").Range("A2")
+    ' contrasenaG = Worksheets("Usuarios").Range("B2")
+    usuarioss = Application.WorksheetFunction.VLookup(TextBox1, Worksheets("Usuarios").Range("A2:A100"), 1, False)
+    contrasenass = Application.WorksheetFunction.VLookup(TextBox2, Worksheets("Usuarios").Range("B2:AB100"), 1, False) ' un buscar v
+    
+    
+    MsgBox usuarioss
+    MsgBox contrasenass
+    If usuario = usuarioss And contrasena = contrasenass Then
+            UserForm2.Hide
+            UserForm1.Show
+    Else
+        MsgBox "Usuario o Contraseña incorrecta, si no tienes registrate"
+        TextBox1 = Empty
+        TextBox2 = Empty
+    End If
+End Sub
 ```

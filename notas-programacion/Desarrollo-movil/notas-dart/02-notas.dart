@@ -307,6 +307,135 @@ void abs() {
   print(windPlant);
 }
 
-
-//mixins 
+//mixins
 //es darles funcionalidades especiales a las clases que se extienden no todas si no algunas
+
+abstract class Animales {}
+
+abstract class Ave extends Animales {}
+
+abstract class Pez extends Animales {}
+
+abstract class Mamifero extends Animales {}
+
+mixin Volador {
+  void volar() => print('Estoy volando');
+}
+
+mixin Caminante {
+  void caminar() => print('Estoy caminando');
+}
+
+mixin Nadador {
+  void nadador() => print('Estoy nadando');
+}
+
+class Delfin extends Mamifero
+    with
+        Nadador {} //un mixin simplemente extiende con la palabra 'with' sus propiedades o metodos solamente no pueden tener constructores y funcinan como las clases abstractas que no se pueden instanciar
+
+class Murcielago extends Mamifero with Volador, Caminante {}
+
+class Gato extends Mamifero with Caminante {}
+
+class Dove extends Ave with Caminante, Volador {}
+
+class Pato extends Ave with Caminante, Volador, Nadador {}
+
+class Tiburon extends Pez with Nadador {}
+
+class PezVolador extends Pez with Nadador, Volador {}
+
+void mix() {
+  final pato = new Pato();
+  pato.nadador(); //tiene todos sus metodos
+  pato.caminar();
+  pato.volar();
+}
+
+//future
+// hacer una accion despues
+
+void catt() async {
+  //aqui tambien ponemos el async si estamos usando un future y acepta que sea voids, porque solo se puede usar await si estamos en una funcion asincrona
+  print('comienzo');
+
+  // httpGet(url: 'https/instagram/sebassu.u.com').then((value) {  //gracias al then obtenemos lo que retorna nuestro future
+  //   print(value);   //aqui solo imprimimos el value
+  // }).catchError((err) {   //el cathError sirve por si hay un error, gracias a la funcion obtenemos el error y lo imprimimos
+  //   print(err);
+  // });
+
+  //el codigo de arriba se puede reducir
+  try {
+    final value = await httpGet(
+        url:
+            'http/marcela'); //esto espera a que termine esta peticion, no ejecuta despues si no espera
+    print(value);
+  } on Exception catch (err) {
+    //el on sirve para poner otro tipo de error ya no se va con el catch si hay una exception si no aqui
+    print(
+        'Tenemos una exeption $err'); //si queremos el valor que enviamos en el throw ponemos el catch si no, no
+  } catch (err) {
+    //con esto le estoy diciendo que si sale mal lo de arriba que pase a esta parte
+    print(err);
+    //esto no tira la aplicacion por completo si no solo sale el catch y sigue con la ultima linea
+  } finally {
+    //el finally no importa que sea el try o catch ejecutara esto
+    print('fin del try catch');
+  }
+  print('final');
+}
+
+// Future<String> httpGet({required String url}) {   //como le decimos que retornara un Future por eso abajo lo retornamos
+//   return Future.delayed(const Duration(seconds: 2), () {    //delayed se construye de la duracion y de una funcion anonima que le diremos que retornar
+//     return 'Respuesta de la peticion http';
+//   });
+
+//otra manera de hacer lo de aqui arriba es usando async y await
+Future<String> httpGet({required String url}) async {
+  //cuando ponemos async estamos diciendo que devolvera un Future, esto en funcion o metodos
+  await Future.delayed(Duration(
+      seconds:
+          2)); //decimos que espere a que esto se cumpla y de ahi enviamos el return
+  throw new Exception(
+      'fallo'); //esto es para manejar otro tipo de error pero una exception
+  // throw 'error';   //el throw es para hacer un error controlado
+  // return 'Se logro gente';
+}
+
+//streams
+//como el flujo del agua de un chorro, como la barra del video de youtube
+
+void streamss() {
+  emitNumbers().listen((event) {
+    //las cualidades del stream es que solo se ejecutara cuando lo estemos escuchando o enviamos informacion y asi
+    //en event resivimos lo que retorna nuestro stream
+    print(event);
+  });
+}
+
+Stream<int> emitNumbers() {
+  return Stream.periodic(const Duration(seconds: 1), (value) {
+    //este stream ya es propio de dart dice que emitira numeros en uno en uno cada esos segundos, el sugundo argumento es simplemente la funcion de lo que queremos que de
+    return value;
+  }).take(6); // este take es cuantas veces queremos que se ejecute el stream
+}
+
+void main() {
+  emitNumbers2().listen((int event) {   //lo mismo que escuche el stream y resive el valor retornado
+    print(event);
+  });
+}
+
+Stream<int> emitNumbers2() async* {   //este async nos dice que sera un Stream
+  final List<int> values = [0, 1, 2, 3, 4, 5];
+
+  for (int i in values) {
+    //esta es otra forma de recorrer una lista
+    await Future.delayed(Duration(
+        seconds:
+            1)); //recordemos que el await esperara un segundo y ejecutara lo de abajo
+    yield i; //no se pone return se pone esta palabra que dice que este como que retornando muchos, como toma este, toma este y asi jajaj
+  }
+}
