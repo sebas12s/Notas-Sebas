@@ -281,7 +281,7 @@ parseInt(); 	//recordar que este lo que hacia es quitarle el decimal pero no apr
 Math.random();	//este no lleva ningun numero, y este es el que nos devuelve un numero aleatorio pero en 0. nunca en un entero
 
 
-function aleatorio (min, maxi); {
+function aleatoriosasdf(min, maxi) {
 	var resultado;
 	resultado = math.floor(math.random() * (mixi - min + 1)) + min;		//esta es una operacion para que me devuelva en numeros enteros el numero random pero con el minimo y maximo de lo que declaremos en la funcion
 	return resultado;		//return es algo que nos devuelve un numero o algo que pongamos aqui nos lo devuelve al momento de ejecutar la funcion

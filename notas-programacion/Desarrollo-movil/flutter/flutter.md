@@ -40,6 +40,8 @@ Son como los componentes de React pero se llaman widgets aqui
 
 Un widget es cualquier cosa que sea un "Stateless Widget" son como las piezas de lego que se generar muy rapido, este no mantiene su estado por si mismo
 
+Hay widgets que solo resiven un hijo pero hay tambien bastantes que resiven mas de uno
+
 Todos los widgets se crean de un Stateless Widget o Stateful Widget
 
 * Stateless Widget: Es una pieza de lego que se construye muy rápido y 
@@ -48,12 +50,17 @@ cuando se de be de volver a dibujar, es recomendado
 que en lugar de crear funciones y métodos que 
 retornan Widget, es mejor crear Clases que extiendan 
 de estos StatelesWidgets. 
+* Stateless Widget no puede tener un estado, hay metodos pero no son como de Stateless
+ 
+---
+
 * Stateful Widget: Es similar al stateless en cuanto a que es un Widget, 
 pero este permite mantener un estado interno y ciclo 
 de vida como su inicialización y destrucción. Muchos 
 lo tachan de que jamás se deben de usar pero eso no 
 es cierto, los stateful básicamente son el corazón de 
 cualquier animación que suceda.
+* Estos si permiten que hayan estados cambiar estados y eso, se tiene que tratar de no usar por el peso pero si se pueden usar
 
 ### Scaffold
 Un diseño predeterminado basico 
