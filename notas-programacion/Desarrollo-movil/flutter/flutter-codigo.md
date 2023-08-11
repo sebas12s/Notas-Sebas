@@ -183,3 +183,43 @@ class _CounterScreenState extends State<CounterScreen> {
 }
 
 ```
+
+Construccion de una clase para nuestros botones
+```dart
+class CustomButton extends StatelessWidget {
+  //creamos una clase para los botones ya que se estaban repitiendo mucho
+  final IconData
+      icon; //dejando el cursor arriba podemos ver que es de tipo IconData
+  final VoidCallback onPressed;   //ctrl + click pude llegar hasta donde esta definido este argumento y pude ver de que tipo era
+
+  const CustomButton({    //el constructor simplemente le estamos diciendo que seran por nombre y resivira eso
+    super.key,    // esto como lo habia dicho es para identificar nuestros widgets
+    required this.icon,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(    //porque cambiamos esto lo ponemos asi, quitamos desde este float el icono
+      // shape: const StadiumBorder(),   //para hacerlo redondo
+      // enableFeedback: true,   //hace como un sonidito al clickear
+      // elevation: 20,    //como la sombra
+      onPressed: onPressed,
+      // onPressed: () {},    //pero si le mandamos el onPressed tiene el efecto de click
+      // onPressed: null,    //si le mandamos null se desabilitan 
+      child: Icon(icon),
+    );
+  }
+}
+```
+Como la llamamos
+```dart
+CustomButton(   //aqui solamente mandamos a llamar a nuestra clase y ponemos los argumentos que pedia
+  icon: Icons.exposure_minus_1_outlined,
+  onPressed: () {
+    setState(() {
+      clickCounter <= 0 ? clickCounter = 0 : clickCounter--;
+    });
+  },
+),
+```

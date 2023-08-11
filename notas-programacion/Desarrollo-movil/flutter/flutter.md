@@ -32,6 +32,10 @@ Nota importante los print no deberian de ir a produccion
 
 ctrl + space = todos los metodos que tienen las clases
 
+Cuando ya miras que hay mucha identacion es mejor separar tu codigo
+
+Cuando no sepamos de que tipo es, vayamos al widget principal ctrl + click y eso nos llevara a la definicion y despues volvemos hacer lo mismo en el argumento que queremos saber
+
 ## file sistems
 Flutter acepta muchos
 
