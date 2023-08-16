@@ -7,14 +7,23 @@ la segunda opcion no tiene comentarios que ayudan al desarrollo
 ## Terminos 
 * Screen: en desarrollo web si tenemos algo que cubre toda la pantalla se la llama pagina pero en movil se le llama screen
 
-## Carpetas
+## snepets
+
+* importm = material de dart
+* stls = un widget StatelessWidget 
+
+
+## Carpet   
 * .dart_tool: paquetes y configuraciones de dar
 * .idea: para otro editor de codigo
 * Android: codigo para android, si queremos una configuracion y trabajaremos en android ahi iremos
 * ios: lo mismo 
 * lib: todo el codigo fuente personalizado por nosotros
-    * presentation o src: aqui ira todos nuestro witgets todo lo visual que hemos creado
+    * presentation o src: aqui ira todos nuestro witgets todo lo visual que hemos creado, todo lo que el usuario ve
         * screens: las pantallas 
+        * widgets: pequeños widgets personalizados
+    * config: aqui iran las configuraciones
+        * theme: pusimos los temas hasta aqui
 * linux: lo mismo 
 * macos: lo mismo
 * test: para hacer el testing de la app
@@ -74,3 +83,6 @@ menú lateral, snack-bars, appbars,
 bottom sheets y más elementos.
 
 los screens en los archivos llevaran sus scaffold
+
+## theme 
+es como queremos que se vea todo por defecto, color estilo y todo eso

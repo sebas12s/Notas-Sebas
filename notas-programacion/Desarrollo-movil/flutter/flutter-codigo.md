@@ -57,7 +57,7 @@ Widget build(Object context) {
 
 
 
-Counter app
+## Counter app
 
 lib/main.dart
 ```dart
@@ -223,3 +223,129 @@ CustomButton(   //aqui solamente mandamos a llamar a nuestra clase y ponemos los
   },
 ),
 ```
+
+
+## App mensage
+
+lib/main.dart
+```dart
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Me gusta mucho Marcela',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme(selectedColor: 6).themeMarce(),    //esto esperea un dato de themeData, nuestra clase, para obtener el tema ponemos nuestro metodo
+      //resivimos un numero para seleccionar nuestro tema
+      home: const ChatScreen(), 
+    );
+  }
+}
+```
+
+
+lib/presentation/screens/chat/chat_screen.dart
+```dart
+class ChatScreen extends StatelessWidget {
+  const ChatScreen(
+      {super.key}); //cuando ponemos screen normalmente pondre un Scaffold
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        //el appBar que ya conocemos
+        leading: const Padding(
+          //el leading es un espacio que esta antes del titulo, este lo encerramos en un padding, que es el espacio de la imagen con la caja por adentro
+          padding: EdgeInsets.all(
+              4.0), //aqui le damos el padding, resive un tipo de dato EdgeInsets con el .all decimos que de los cuatro lados
+          // padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),   //asi tambien de diferentes lados
+          child: CircleAvatar(
+            //de hijo le pusimos este avatar circular como para la imagen
+            backgroundImage: NetworkImage(
+                'https://imgs.search.brave.com/X2E2TVHbeOkONY8cZRaoTrztPSy-hGNB7aRUhLzS53g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzE1LzI3/LzUwLzE1Mjc1MDA3/ODdjZTI2NzRkZWM4/NDI1N2ViODZmNTQx/LmpwZw'), //un backgoundimage por internet
+          ),
+        ),
+        title: const Text('Mi amor Marcela'),
+        centerTitle: false, //este argumento es para centrar el titulo
+      ),
+      // body:
+      //     Container(), //el boddy es todo lo que podemos ver en la pagina y si no tuvieramos appbar tambien ocuparia ese espacio
+      //el container es como un div en la web le podemos cambiar el tamaño el color y todo eso
+      body: _ChatView(),
+    );
+  }
+}
+
+class _ChatView extends StatelessWidget {
+  //esta como es una clase privada no necesitamos el key
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      //este widget sirve para guardar los espacios como de los botones de abajo y asi, entonces deja el espacio y no permite trabajar en ese espacio guardado
+      // left: false,    //asi con right y los demas por si no queremos guardar los espacios
+      child: Padding(
+        // lo envolvemos en un padding
+        padding: const EdgeInsets.symmetric(
+            horizontal:
+                12), 
+        child: Column(
+          //de hijo le dimos la columna para poder trabajar la parte de los mensajes y la parte para enviar los mensajes
+          children: [
+            Expanded(
+              //el expanded se expande a todo el espacio que tenga, en este ejemplo solo le dimos un color
+              // child: Container( 
+              //   color: Colors.green     //ya solo le dimos un color
+              // )
+              child: ListView.builder(
+                //un listview con un constructor con nombre, builder explico que podemos tener mil elementos pero solo lo que se mostran estaran
+                itemCount: 10,    //  pero con este item count me limita los elementos que me muestra abajo
+                itemBuilder: (context, index) {   //el index ahi guarda los numeros de 0 a infinito
+                  return Text('hoola $index');    //esto me retornaba muchoss elementos en si eran infinitos
+                },
+              ),
+            ),
+            const Text('hola')    //esta es la otra parte de la columna
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+
+lib/config/theme.dart
+```dart
+const Color _customColor =
+    Color(0xFF0A8B60); //se pone 0xFF antes de las letras para los colores
+const List<Color> _colorTheme = [   //nuestro arreglo de colores
+  _customColor,
+  Colors.blue,
+  Colors.teal,
+  Colors.green,
+  Colors.yellow,
+  Colors.orange,
+  Colors.pink,
+];
+
+class AppTheme {
+  final int selectedColor;    //inicialisamos un argumento
+  AppTheme({this.selectedColor = 0})  
+      : assert(selectedColor >= 0 && selectedColor <= _colorTheme.length - 1,   //las assert para ponerle una condicion al argumento
+            'El numero ingresado tiene que estar entre 0 y ${ _colorTheme.length }'); //despues de la coma va el mensaje que queremos poner
+  ThemeData themeMarce() {    //nuestro metodo para obtener nuestro tema ya que aqui lo retornamos
+    return ThemeData(
+      useMaterial3: true,   
+      colorSchemeSeed: _colorTheme[selectedColor],  //seleccionamos el color que tendra y ya los pusimos en nuestro arreglo
+      // brightness: Brightness.dark,    //esto pone el modo oscuro 
+    );
+  }
+}
+```
+
+### Segunda parte
