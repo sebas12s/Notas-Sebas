@@ -267,7 +267,7 @@ class ChatScreen extends StatelessWidget {
           child: CircleAvatar(
             //de hijo le pusimos este avatar circular como para la imagen
             backgroundImage: NetworkImage(
-                'https://imgs.search.brave.com/X2E2TVHbeOkONY8cZRaoTrztPSy-hGNB7aRUhLzS53g/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzE1LzI3/LzUwLzE1Mjc1MDA3/ODdjZTI2NzRkZWM4/NDI1N2ViODZmNTQx/LmpwZw'), //un backgoundimage por internet
+                'https://'), //un backgoundimage por internet
           ),
         ),
         title: const Text('Mi amor Marcela'),
