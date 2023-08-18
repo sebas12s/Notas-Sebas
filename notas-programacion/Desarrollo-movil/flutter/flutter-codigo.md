@@ -349,3 +349,210 @@ class AppTheme {
 ```
 
 ### Segunda parte
+
+lib/presentation/widgets/chat/my_menssage_bubble.dart
+```dart
+class MyMenssageBobble extends StatelessWidget {
+  const MyMenssageBobble({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorsM = Theme.of(context).colorScheme;    //esto significa, busca el tema dentro del contexto, y traemos el colorScheem
+    //entonces en esta variable estan todos los colores definidos en el tema basados en el seed que creamos
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,   //como estaran alineadas, a la derecha
+      children: [
+        Container(
+            // width: ,   //se pueden poner width y heihgt
+            // height: ,
+            decoration: BoxDecoration(    //la decoracicon de esta columna
+                color: colorsM.primary, borderRadius: BorderRadius.circular(20)),   //borderRadius, le puse un circular, 
+                //de colores ponemos nuestra variale y ahi estan todos los colores
+            child: const Padding(   
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text('Me gusta mucho mi Novia',
+                  style: TextStyle(color: Colors.white)),   //el estilo del texto, un color white
+            )),
+        const SizedBox(   
+          height: 10,   //para que tenga un espacio entre los mensajes
+        )
+      ],
+    );
+  }
+}
+```
+
+lib/presentation/widgets/chat/her_menssage_bubble.dart
+```dart
+class HerMenssageBobble extends StatelessWidget {
+  const HerMenssageBobble({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorsM = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            decoration: BoxDecoration(
+                color: colorsM.secondary,
+                borderRadius: BorderRadius.circular(20)),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text('Me gusta mucho mi novio',
+                  style: TextStyle(color: Colors.white)),
+            )),
+        const SizedBox(
+          height: 5,
+        ),
+        _ImageBobble(),     //lo unico nuevo es la imagen
+        const SizedBox(
+          height: 10,
+        ),
+      ],
+    );
+  }
+}
+
+class _ImageBobble extends StatelessWidget {
+  //recordar guion bajo solo en esta clase se puede usar
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context)
+        .size; //el mediaQuery nos da informacion del dispositivo que lo esta ejecutando, el contextex hace referencia al arbol de widgets, en ese arbol estan las diferentes caracteristicas como las dimenciones por eso pedimos el size
+
+    // return Placeholder();     //este placeholder muestra un cuadrado y cuales son las dimenciones que estan siendo asignadas por defecto
+    return ClipRRect(
+      //este widget nos permite hacer bordes redondeados
+      borderRadius:
+          BorderRadius.circular(20), //aqui les doy los bordes redondeados
+      child: Image.network(
+        // y de hijo retornamos una imagen.network   entonces de internet
+        'https://yesno.wtf/assets/no/13-755222c98795431aa2e7d453ab1e75a1.gif',
+        width: size.width *
+            0.6, //la imagen puede tener medida, aqui le estamos diciendo que la medida sera el width que tiene mi dispositivo pero solo el 60%
+        height: 150,
+        fit: BoxFit
+            .cover, //aqui le estoy diciendo que se expanda a las dimenciones que tenga la imagen, como que ocupe el espacio que le estoy dando
+        loadingBuilder: (context, child, loadingProgress) {
+          //el context el acceso al arbol de los widgets
+          //el child es basicamente la imagen que esta arriba
+          if (loadingProgress == null) return child;  //le estoy diciendo que si el loading es null entonces ya cargo que envie la imagen
+
+          return Container(   //si no ha cargado entonces retornara este container con las medidas de la imagne para que no hayan saltos
+            width: size.width * 0.6,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),   //las mismas medidas y con un texto
+            child: const Text('Mi amor esta enviando una imagen'),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+
+lib/presentation/screens/chat/chat_screen.dart
+```dart
+class _ChatView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 100,
+                itemBuilder: (context, index) {
+                  return (index % 2 == 0)   //le dije que si era par mostrara los mensajes de ella si no mostrara mis mensajes, con este operador ternario
+                      ? const HerMenssageBobble()
+                      : const MyMenssageBobble();
+                },
+              ),
+            ),
+            //caja de textos de mensajes
+            const MenssageFieldBox(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+lib\presentation\widgets\shared\menssage_field_box.dart
+```dart
+class MenssageFieldBox extends StatelessWidget {
+  const MenssageFieldBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final textController =
+        TextEditingController(); //esto nos funcionara para darles algunas funcionalidades
+
+    final focusNode = FocusNode(); //lo mismo para hacer funcionalidades abajo
+
+    final outlineInputBorder = UnderlineInputBorder(
+        //creamos esta variable para reutilizar este mismo codigo
+        borderSide: const BorderSide(color: Colors.transparent),
+        borderRadius: BorderRadius.circular(20));
+
+    final inputDecoration = InputDecoration(
+        //podemos crear variables con los widgets para ponerlo mas facil abajo
+        //le ponemos la decoracion
+        // enabledBorder:      //le estoy poniendo estilo al borde cuando este desactivado
+        // OutlineInputBorder(
+        //   borderSide: BorderSide(   //para poner borde normal
+        //     color: colors.primary
+        //   ),
+        //   borderRadius: BorderRadius.circular(20)   //para redondears
+        // ),
+        hintText:
+            'End your mensage with a "??"', //esto es como un texto que aparece antes de escribir
+        enabledBorder: outlineInputBorder, //ya solo le ponemos la variable
+        focusedBorder:
+            outlineInputBorder, //esto es cuando esta activado el texto
+
+        filled: true, //esto hace que tenga como un background clarito
+        suffixIcon: IconButton(
+          //este icono esta a la derecha de la pantalla y le puse un iconButton para poder ponerle una accion
+          icon: const Icon(Icons.send_outlined), //el icono
+          onPressed: () {
+            //y la accion
+            final textValue = textController.value
+                .text; //no puedo tomar como lo tome abajo entonces para obtener el texto hacemos esto
+            textController.clear(); //lo ponemos que se limpie
+          },
+        ));
+
+    return TextFormField(
+      //esto crea un espacio para escribir con el teclado
+
+      // keyboardType: ,      //tipos de teclado, para correos y asi
+      focusNode:
+          focusNode, //si tiene un focusNode le podemos colocar un elemento de focusNode
+      onTapOutside: (event) {   //esto es cuando preciono afuera de la caja de texto
+        focusNode.unfocus();  //aqui le estoy diciendo que me quite el foco o quite el teclado
+      },
+      controller: textController, //igualamos los controles que creamos arriba
+      decoration: inputDecoration,
+      onFieldSubmitted: (value) {
+        //esto es cuando se envia ejecuta esto, en value esta el valor que tenia la caja de texto
+        textController
+            .clear(); //al tener el valor lo limpiamos de la caja de texto
+        focusNode
+            .requestFocus(); //despues que se limpia mantendre el foco, en este caso el teclado se mantendra activo o seleccionado
+      },
+      // onChanged: (value) {
+      //   esto cuando se va tocando las teclas se va cambiando, en value esta el valor de la caja de texto
+      //   print('change: $value');
+      // },
+    );
+  }
+}
+```

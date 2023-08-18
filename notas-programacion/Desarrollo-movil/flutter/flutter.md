@@ -6,6 +6,7 @@ la segunda opcion no tiene comentarios que ayudan al desarrollo
 
 ## Terminos 
 * Screen: en desarrollo web si tenemos algo que cubre toda la pantalla se la llama pagina pero en movil se le llama screen
+* Builder: algo que se va a construir en tiempo de ejecucion
 
 ## snepets
 
