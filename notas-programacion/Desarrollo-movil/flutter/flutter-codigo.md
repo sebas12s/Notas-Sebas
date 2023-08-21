@@ -3,13 +3,13 @@
 ## Hola mundo  
 * lib/main.dart 
 ```dart
-mport 'package:flutter/material.dart'; //ctrl + . veremos todo lo que se imoporto
+import 'package:flutter/material.dart'; //ctrl + . veremos todo lo que se importo
 
 void main() {
   runApp(
       const MyApp()); //toda app de flutter en su main tiene una ejecucion de un widget principal, runApp espera resivir un widget
       //aqui tambien se pone const 
-}
+} 
 
 class MyApp extends StatelessWidget {
   //'StatelessWidgets ya esta en material.dart'
