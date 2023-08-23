@@ -152,6 +152,9 @@ async function loadPost() {
   const data = await res.json(); // de la respuesta lo convertimos en json y lo guardamos en otra variable
 
   // console.log(data)       //esto nos muestra en la terminal no en el navegador recuerden que esto es un componente del servidor
+  await new Promise((res) => setTimeout(res, 3000))   //esto ejecuta codigo asincrono por eso await
+  //con esto le dije que ejecutarala promemsa despues de 2 segundos entonces como que solo espero 2 segundos para que se lanzara el return
+  //esto lo hicimos simulando si una peticion se tarda, para que cargue el loading
   return data.results;
 }
 
@@ -190,6 +193,38 @@ function CardPok({post}) {      //aqui tenemos como argumento el post que me env
       >
         Amor
       </button>
+    </div>
+  );
+}
+```
+
+## Loading
+podemos crear cualquier pagina que queramos con el loading
+```jsx
+export default function LoadingPage() {
+  return <h1>LoadingPage...</h1>;
+}
+```
+
+
+## Parametros de la url
+hice un ejemplo de obtener un valor de la url y mostrar ese pokemon o por lo menos solo el nombre
+```jsx
+async function loadPost(pokemon) {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+  const data = await res.json(); 
+  console.log(data)
+  return data;
+}
+
+async function PostPage({params}) {   //la pagina en si ya tiene una propiedad por defecto
+  const pokemonObj = await loadPost(params.pokemon); 
+  const imagen = pokemonObj.sprites.other['official-artwork'].front_default    //aqui obtuve la imagen, recuerden que con corchetes tambien se puede recorrer un objeto, poniendo el nombre en corchetes
+  const pokemon = pokemonObj.forms[0].name
+  return (
+    <div>
+      <h2>{pokemon}</h2>
+      <img src={imagen} alt="pokemon" />
     </div>
   );
 }

@@ -27,6 +27,8 @@ En la carpeta app todo archivo que no sea page o layout sera ignorado
 
 afuera de app podemos crear una carpeta de components ahi podemos guardar como el navbar y eso
 
+es muy importante ver que las paginas en la carpeta app son en minusculas
+
 # Layout
 Se pueden tener mas layout en las rutas de carpetas
 
@@ -64,3 +66,11 @@ una comparacion por si queremos saber cuando es bueno usar componentes client [L
 
 ## FetchData
 con react usabamos un useState y un useReducer para poder llamar una api, pero podemos aprovechar que son componentes del lado del servidor para hacer nuestras peticiones 
+
+## Loading
+Como un page y un layout se puede poner un loading para cuando la pagina se esta cargando, por cada ruta igual
+
+## Parametros en las urls
+se crea la carpeta de la ruta de la url `[cualquierNombre]` ese nombre solo es para darle nombre al parametro que esta en la url, ya en la funcion podemos obtener ese parametro ya que es el parametro
+
+La funcion devuelve al crear un page ya devuelve dos props `{ params: { pokemon: '1' }, searchParams: {} }` esto devuelvo, entonces params ya tiene el valor que pusimos en la url, y como vemos el nombre es el que le pusimos a la carpeta, asi puedo obtener el valor de la url
