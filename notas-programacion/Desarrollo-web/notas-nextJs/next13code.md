@@ -229,3 +229,4 @@ async function PostPage({params}) {   //la pagina en si ya tiene una propiedad p
   );
 }
 ```
+
