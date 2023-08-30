@@ -74,3 +74,9 @@ Como un page y un layout se puede poner un loading para cuando la pagina se esta
 se crea la carpeta de la ruta de la url `[cualquierNombre]` ese nombre solo es para darle nombre al parametro que esta en la url, ya en la funcion podemos obtener ese parametro ya que es el parametro
 
 La funcion devuelve al crear un page ya devuelve dos props `{ params: { pokemon: '1' }, searchParams: {} }` esto devuelvo, entonces params ya tiene el valor que pusimos en la url, y como vemos el nombre es el que le pusimos a la carpeta, asi puedo obtener el valor de la url
+
+## Suspense 
+Se usa para cuando hay una carga pero necesitamos que algo no espere la otra carga, entonces encerramos el elemento que no nos importa que espere a que cargue y se muestra la pagina aunque no se haya cargado lo que este en ese suspense
+
+## Style
+Si vamos a añadir estilos globales los tenemos que añadir en el layout ya que eso contiene todas las paginas `globals.css` asi se llama al documento en los componentes ya se pueden poner normales con el nombre que queramos, normalmente se ponen como el nombre del componente

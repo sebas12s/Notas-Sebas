@@ -230,3 +230,23 @@ async function PostPage({params}) {   //la pagina en si ya tiene una propiedad p
 }
 ```
 
+## Suspense
+
+```jsx
+return (
+    <div>
+      <h2>{pokemon}</h2>
+      <img src={imagen} alt="pokemon" />
+      <hr />
+      <h3>Otros pokemones</h3>
+      <Suspense fallback={<div>Cargando pokemones...</div>}>  {/*el suspense es un componente de react y pone lo que este este fallback mientras se carga lo que esta adentro, esto funciona por si queremos mostrar la pagina aunque no cargue esta parte, entonces eso lo muestra y despues carga esto*/}
+        <PostPage />
+      </Suspense>
+    </div>
+  );
+```
+
+## Import Alias
+```jsx
+import CardPoke from "@/components/CardPoke"  // next usa el arroba para decir que es el root entonces ya no tenemos que seguir subiendo niveles como: '../../../' y asi 
+```
