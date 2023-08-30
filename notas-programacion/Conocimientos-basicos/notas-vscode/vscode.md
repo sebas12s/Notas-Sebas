@@ -27,6 +27,9 @@ creacion de carpetas y archivo
 * crear archivo     carpeta/archivo.sm      y asi se pueden poner muchas mas carpetas
 * solo directorios      crear directorio
 
+* ctrl + p => @     buscar entre funciones y eso
+* ctrl + p => :     busca la linea que pongamos
+
 ### Activity bar
 * ctrl + shift + e   explorer        
 * ctrl + shift + f   buscador   
@@ -52,3 +55,7 @@ creacion de carpetas y archivo
 
 * alt + shift + flechas   copia la linea completa 
 * ctrl + alt + flechas      crea mas cursores
+
+* ctrl + D      selecciona lo que se parece
+
+* alt + shift + i   crea muchos cursores si tienes muchas lineas seleccionadas 

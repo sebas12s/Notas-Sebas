@@ -79,4 +79,7 @@ La funcion devuelve al crear un page ya devuelve dos props `{ params: { pokemon:
 Se usa para cuando hay una carga pero necesitamos que algo no espere la otra carga, entonces encerramos el elemento que no nos importa que espere a que cargue y se muestra la pagina aunque no se haya cargado lo que este en ese suspense
 
 ## Style
-Si vamos a añadir estilos globales los tenemos que añadir en el layout ya que eso contiene todas las paginas `globals.css` asi se llama al documento en los componentes ya se pueden poner normales con el nombre que queramos, normalmente se ponen como el nombre del componente
+Si vamos a añadir estilos globales los tenemos que añadir en el layout ya que eso contiene todas las paginas `globals.css` asi se llama al documento en los componentes ya se pueden poner normales con el nombre que queramos, normalmente se ponen como el nombre del componente 
+
+## Src
+ayuda para que tengamos nuestras paginas y archivos solamente en src y en jsconfig podemos configurar la arroba que vaya a src `"@/*": ["./src/*"]` de la siguiente manera
