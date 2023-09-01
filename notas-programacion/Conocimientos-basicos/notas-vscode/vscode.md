@@ -30,6 +30,8 @@ creacion de carpetas y archivo
 * ctrl + p => @     buscar entre funciones y eso
 * ctrl + p => :     busca la linea que pongamos
 
+* ctrl + k + v      preview markdown
+
 ### Activity bar
 * ctrl + shift + e   explorer        
 * ctrl + shift + f   buscador   
@@ -59,3 +61,43 @@ creacion de carpetas y archivo
 * ctrl + D      selecciona lo que se parece
 
 * alt + shift + i   crea muchos cursores si tienes muchas lineas seleccionadas 
+
+* F2    remplaza digamos el nombre de una clase en todas las lineas donde se usa o se esta llamando 
+
+
+* User Shipset: ctrl + shift + p, para crear shipset
+```json
+"Console Mar": {
+    "prefix": "Mar",
+    "body": [
+      "console.log('${1:Marcela}');", //esto es para cuando queremos poner una palabra ya y para solo cambiarla, ya aparece toda seleccionada simplemente para cambiarla
+      "$2" //este es para cuando le demos tab aparezca ahi el cursor como la siguiente etapa
+    ],
+    "description": "Console"
+  }
+```
+
+Asi se pueden crear con multiples lineas, dato no se pueden poner taps
+```json
+"Class Hero": {
+    "prefix": "clhero",
+    "body": [
+      "class ${1:Hero} {",
+      "  constructor() {",
+      "     console.log('${1:Hero} initialized');",
+      "  }",
+      "  show${1:Hero}() {",
+      "     return this;",
+      "  }",
+      "} ",
+      "$2"
+    ],
+    "description": "Class Hero"
+  },
+```
+
+
+## Extenciones
+
+* ctrl + shift + p  Todo higlight: para encontrar los comentarios
+* ctrl + shift + p  CodeSnap: seleccionas el pedazo de codigo para tomarle, tocando la imagen se puede guardar la imagen o copiarla
