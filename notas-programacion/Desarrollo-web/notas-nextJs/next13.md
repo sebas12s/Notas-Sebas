@@ -108,4 +108,4 @@ se importa tambien de next/navigation y es lo mismo que sacar el argumento de pa
 
 En una carpeta adentro de app podemos crear api ya podemos crear nuestras rutas y el nombre del archivo en general es `route.js` no devuelve algo jsx
 
-Los nombres de las funciones tienen que llevar los POST, GET etc.
+Los nombres de las funciones tienen que llevar los metodos http, POST, GET etc.

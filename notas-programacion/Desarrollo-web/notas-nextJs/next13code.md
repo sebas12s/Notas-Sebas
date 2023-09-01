@@ -310,9 +310,72 @@ const router = useRouter(); //ya despues solo usamos funcionalidades del router
 ## useParams
 
 ```jsx
-const params = useParams();   //para obter el path podemos usar el hook y funciona igual que el params de los argumentos
+const params = useParams(); //para obter el path podemos usar el hook y funciona igual que el params de los argumentos
 console.log(params);
 const pokemonObj = await loadPost(params.pokemon);
 const imagen = pokemonObj.sprites.other["official-artwork"].front_default;
 const pokemon = pokemonObj.forms[0].name;
+```
+
+## API Route Handlers
+
+```js
+import { NextResponse } from "next/server";
+
+export function GET() {
+  //tienen que llevar estos nombres de las peticiones, siempre hay que exportarlo
+  // return new Response('Marcela hermosa')     //response es un objeto que ya viene por parte del navegador y next los soporta, response ya tiene metodos aunque tambien le podemos colocar solamente texto
+  // el response siempre lleva el new
+
+  // return NextResponse.json('Marcela hermosa')      //con nextResponse nos ahorra cositas con solamente el response, retornamos datos
+
+  return NextResponse.json({
+    //tambien podemos retornar objetos
+    message: "Obteniendo datos",
+  });
+
+  //algo importante que antes de retornar puedo, extraer parametros, obtener datos de una DB, o incluso comunicarme con otro backend
+}
+
+export function POST() {
+  //el navegador no permite llamar todos asi que lo hicimos con postman
+  return NextResponse.json({
+    message: "Creando datos",
+  });
+}
+
+export function PUT() {
+  return NextResponse.json({
+    message: "Actualizando datos",
+  });
+}
+
+export function DELETE() {
+  return NextResponse.json({
+    message: "Aliminando datos",
+  });
+}
+```
+
+```js
+export async function GET() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users"); //aqui tambien podemos pedir datos de otro backend,
+  const data = await res.json();
+
+  return NextResponse.json(data);
+}
+```
+
+### Params
+
+```js
+export async function GET(request, { params }) {
+  //request nos da informacion sobre la peticion que hemos hecho, y esta los parametros como en el front, un objeto con la clave del nombre de la carpeta y el valor de lo que hayamos puestos
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${params.id}`
+  );
+  const data = await res.json();
+
+  return NextResponse.json(data);
+}
 ```
