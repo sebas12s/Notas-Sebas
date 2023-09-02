@@ -379,3 +379,27 @@ export async function GET(request, { params }) {
   return NextResponse.json(data);
 }
 ```
+
+### Querys
+
+```jsx
+export async function GET(request, { params }) {
+  // new URL(request.url)    //con esto el string que esta en la url lo convierte en un objeto
+
+  // URL: http://localhost:3000/api/users/1?nombre=Marcela&apellido=Perez
+  // asi podemos pedir datos de una base de datos con la url
+  const { searchParams } = new URL(request.url); //y aqui descompongo el searchParams
+  console.log(searchParams); // URLSearchParams { 'nombre' => 'Marcela', 'apellido' => 'Perez' }
+
+  //con get podemos obtener el valor de las claves que pongamos aqui
+  console.log(searchParams.get("nombre")); //Marcela
+  console.log(searchParams.get("apellido")); //Perez
+
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${params.id}`
+  );
+  const data = await res.json();
+
+  return NextResponse.json(data);
+}
+```
