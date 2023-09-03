@@ -110,4 +110,5 @@ En una carpeta adentro de app podemos crear api ya podemos crear nuestras rutas 
 
 Los nombres de las funciones tienen que llevar los metodos http, POST, GET etc.
 
-## Querys
+## .env || .env.local
+.env son para guardar nuestras variables de entorno, como secretas por si queremos, es normal que en otros proyectos solamente se llame .env pero para next es .env.local recordar ignorarlo en .gitignore

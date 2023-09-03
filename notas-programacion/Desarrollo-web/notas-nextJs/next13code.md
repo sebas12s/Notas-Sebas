@@ -403,3 +403,28 @@ export async function GET(request, { params }) {
   return NextResponse.json(data);
 }
 ```
+
+### Post
+
+```jsx
+export async function POST(request) {
+  // request.body    //asi se ve en otros backend pero en next de una vez se convierte la informacion en json
+  // en request se almacena lo que el cliente envia al servidor, para eso es POST
+  // recordar que es asincrono, ya podemos pedir que nos envie un nombre o algo asi y ya guardarlo en una base de datos
+  const data = await request.json();
+
+  return NextResponse.json({
+    message: "Creando datos",
+  });
+}
+```
+
+## .env
+asi se ponen las variables de entorno
+```jsx
+TOKEN=12marcela    //asi se ponen las variables de entorno
+SECRET_KEY=sebasmarce
+```
+```jsx
+process.env.TOKEN   //y asi es para obtenerlo
+```
