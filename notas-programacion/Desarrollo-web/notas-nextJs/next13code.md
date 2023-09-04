@@ -702,3 +702,123 @@ import NewPage from "@/app/new/page";   // recordar que en new page tenemos para
 
 export default NewPage;     //entonces nosotros simplemente exportamos la interface de crear, ya solamente tenemos que cambiar 
 ```
+## Nuevo formulario create, update, delete
+
+```jsx
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+function NewPage({ params }) {
+  const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    //este useEffect es para cuando cargue la pagina ejecute algo
+    if (params.id) {
+      fetch(`/api/task/${params.id}`)
+        .then((res) => res.json()) //esto es lo mismo que ponerlos en constantes y usar await
+        .then((data) => {
+          //en la base de datos tenemos valores, entonces esos valores le damos a las variables
+          setTitle(data.title);
+          setDescription(data.description);
+        });
+    }
+  }, []);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // const title = e.target.title.value;   //ya no necesito obtenerlo al momento en que enviamos la funcion ya que en la variable title del useState ya estara
+    // const description = e.target.description.value;
+
+    if (params.id) {
+      // si existe un id en la url, eso pregunto con el if
+      const res = await fetch(`/api/task/${params.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ title, description }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+    } else {
+      //le digo si no tiene un id la url es porque no hay tarea para editar entonces se crea
+      const res = await fetch("/api/task", {
+        method: "POST",
+        body: JSON.stringify({ title, description }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+    }
+
+    router.refresh(); //para que se vean los datos se tiene que refrescar entonces con router lo podemos hacer
+    router.push("/");
+  };
+
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <form className="bg-slate-800 p-10 w-2/5" onSubmit={onSubmit}>
+        <label htmlFor="title" className="font-bold text-sm">
+          Titulo de la tarea
+        </label>
+        <input
+          type="text"
+          id="title"
+          className="border border-gray-400 p-2 mb-4 w-full text-black"
+          placeholder="Titulo"
+          onChange={(e) => setTitle(e.target.value)} //aqui le estoy diciendo que cuando haga cambios este input el valor le envie a la variable o se lo cambie gracias al useState, lo mismo con el description
+          value={title}
+        />
+
+        <label htmlFor="description" className="font-bold text-sm">
+          Descripcion de la tarea
+        </label>
+        <textarea
+          rows="3"
+          id="description"
+          className="border border-gray-400 p-2 mb-4 w-full text-black"
+          placeholder="Descripcion"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+        ></textarea>
+
+        <div className="flex justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
+            type="submit" //y este le estamos diciendo que este boton es el que envia
+          >
+            {params.id ? "Actualizar" : "Crear"}{" "}
+            {/*detallito para cuando exista el params.id es porque actualizara */}
+          </button>
+
+          {/* {params.id ? <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded ml-4">Delete</button> : <></>} */}
+          {params.id && ( //asi tambien podemos hacer una condicion o como esta arriba
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded"
+              type="button" //es importante que este tenga este type, ya que asi le decimos que hara otra accion no la de enviar
+              onClick={async () => {
+                const res = await fetch(`/api/task/${params.id}`, {
+                  method: "DELETE",
+                });
+
+                const data = await res.json()
+                console.log(data)
+
+                router.refresh();
+                router.push("/");
+              }}
+            >
+              Delete
+            </button>
+          )}
+        </div>
+      </form>
+    </div>
+  );
+}
+```
