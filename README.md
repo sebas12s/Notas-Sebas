@@ -1,5 +1,5 @@
 # Notas de Sebastian Perez
-Aqui esta incluido todas mis notas de programacion y de ingles que voy creando 
+Aqui esta incluido todas mis notas de programacion y de ingles que voy creando y las de mi novia Marcela    
 
 Poco a poco he adquirido conociemiento y en mis notas esta todo plasmado
 
