@@ -420,11 +420,103 @@ export async function POST(request) {
 ```
 
 ## .env
+
 asi se ponen las variables de entorno
+
 ```jsx
 TOKEN=12marcela    //asi se ponen las variables de entorno
 SECRET_KEY=sebasmarce
 ```
+
 ```jsx
-process.env.TOKEN   //y asi es para obtenerlo
+process.env.TOKEN; //y asi es para obtenerlo
+```
+
+# App CRUD Prisma
+
+Conexion a la base de datos despues de ya configurar nuestro prisma
+
+```js
+import { PrismaClient } from "@prisma/client"; //esto nos da una clase
+
+export const prisma = new PrismaClient();
+
+//simplemente con esto ya estamos conectados a la base de datos, ya que en env ahi esta nuestra variable ya esta la base de datos y por eso ya es tan facil conectarla
+```
+
+En api haremos uso de las variables `[id]` con esta carpeta y usaremos GET, POST etc.
+
+---
+
+Estas son como funcionan
+
+api/task
+
+```js
+import { prisma } from "@/libs/prisma";
+import { NextResponse } from "next/server";
+
+//asi podemos obtener datos de nuestra base de datos
+
+export async function GET() {
+  const task = await prisma.task.findMany(); //lo que exportamos, nuestra base de datos y ponemos nuestra tabla y ahi ya podemos crear eliminar y en este caso traer, findMany busca todos los datos
+  /*        esto es lo que devuelve en task, nuestro dato que ingresamos en la base de datos
+    [
+        {
+            id: 1,
+            title: 'Amor',
+            description: 'Le tengo que decir a mi novia que la amo mucho',
+            createAt: 2023-09-04T00:03:50.132Z
+        }
+    ]
+    */
+
+  return NextResponse.json(task);
+}
+```
+
+```js
+export async function POST(request) {
+  //con postman para esta prueba envie el siguiente json
+  /*
+    {
+        "title": "Amor 2 post",
+        "description": "Decirle que la amo mas a mi novia"
+    }
+    */
+  //entonces estos datos obtuve aqui
+
+  //   const data = await request.json(); //post es para obtener datos, entonces en request obtnemos esos datos que nos envia el cliente, y ya lo convertimos en json
+  const { title, description } = await request.json(); //asi tambien se pueden extraer
+  const newTask = await prisma.task.create({
+    data: {
+      //data son las columnas que buscamos guardar, solo son dos ya que id y date se crean por si mismas
+      // title: data.title
+      // title: title,
+      // description: description        //pero como son el mismo nombre solamente se pueden una vez
+      title,
+      description,
+    },
+  });
+
+  return NextResponse.json(newTask); //newTask ya se encuentra la nueva tarea y ya se crea en la base de datos*
+}
+```
+
+
+api/task/\[id\]
+```js
+export async function GET(request, { params }) {
+  //obtener
+
+  const task = await prisma.task.findUnique({   
+    //findUnique, solo uno nos traera
+    where: {
+      //donde id sea igual al parametro en este caso, ya que la url es string lo convertimos en number
+      id: Number(params.id),
+    },
+  });
+
+  return NextResponse.json(task);
+}
 ```
