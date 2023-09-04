@@ -503,13 +503,13 @@ export async function POST(request) {
 }
 ```
 
-
 api/task/\[id\]
+
 ```js
 export async function GET(request, { params }) {
   //obtener
 
-  const task = await prisma.task.findUnique({   
+  const task = await prisma.task.findUnique({
     //findUnique, solo uno nos traera
     where: {
       //donde id sea igual al parametro en este caso, ya que la url es string lo convertimos en number
@@ -519,4 +519,186 @@ export async function GET(request, { params }) {
 
   return NextResponse.json(task);
 }
+```
+
+```js
+export async function DELETE(request, { params }) {
+  //Eliminar
+  try {
+    //un try catch porque al no encontrar un dato para eliminar nos da error
+    const taskRemoved = await prisma.task.delete({
+      //esto devuelve a la variable la tarea borrada
+      where: {
+        //pero ya esta eliminada en la base de datos
+        id: Number(params.id),
+      },
+    });
+    return NextResponse.json(taskRemoved);
+  } catch (error) {
+    return NextResponse.json(error.menssage); //si nos da un erro devolvemos este mensaje del error
+  }
+}
+```
+
+```js
+export async function PUT(request, { params }) {
+  //Actualizar
+  const data = await request.json();
+  // {    //esto nos devuelve
+  //   title: 'Tarea 2',
+  //   description: 'Decirle preciosa a mi novia Marcela y que es muy inteligente'
+  // }
+
+  const taskUpdated = await prisma.task.update({
+    where: {
+      id: Number(params.id),
+    },
+    // data: {   //estos son los datos que actualizaran
+    //   title: data.title,
+    //   description: data.description
+    // }
+    data: data, //ya que nos envian tal y como lo queremos cambiar podemos poner solamente asi
+    //tambien que pasemos asi nos ayuda a actualizar solamente lo que enviemos porque puede que solo quiera actualizar el title y asi
+  });
+
+  return NextResponse.json(taskUpdated);
+}
+```
+
+## Formulario POST
+
+```jsx
+"use client";
+
+import { useRouter } from "next/navigation";
+import React from "react";
+
+function NewPage() {
+  const router = useRouter(); //aqui simplemente inicializo el useRouter
+
+  //le ponemos un onsubmit para que haga algo al enviar el formulario, en este caso le mandamos una funcion que esta funcion resivira todas las acciones
+
+  //el form envia este evento y en target esta el valor de lo que tiene, entonces buscandolo encontramos el title y la description
+  const onSubmit = async (e) => {
+    //tiene que ser async
+    e.preventDefault(); //esto es para que no se actualice
+    const title = e.target.title.value; //guardamos los valores de los inputs en constantes
+    const description = e.target.description.value;
+
+    const res = await fetch("/api/task", {
+      //no tenemos que colocar http//localhost:3000 porque al estar en la misma ruta como que lo autocompleta entonces solamente ponemos lo que esta despues de eso
+      //hacemos el llamado de nuestra api y el segundo argumento hacemos esto
+      method: "POST", //decimos que sera un post que es para crear una nueva tarea
+      body: JSON.stringify({ title, description }), //del cuerpo le enviamos los valores en formato json string
+      headers: {
+        //y esto es para que pueda ser entendido como un json
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    router.push("/"); //aqui no podemos hacer un link ya que necesitamos hacer logica y despues redirigir
+  };
+
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <form className="bg-slate-800 p-10 w-2/5" onSubmit={onSubmit}>
+        <label htmlFor="title" className="font-bold text-sm">
+          Titulo de la tarea
+        </label>
+        <input
+          type="text"
+          id="title"
+          className="border border-gray-400 p-2 mb-4 w-full text-black"
+          placeholder="Titulo"
+        />
+
+        <label htmlFor="description" className="font-bold text-sm">
+          Descripcion de la tarea
+        </label>
+        <textarea
+          rows="3"
+          id="description"
+          className="border border-gray-400 p-2 mb-4 w-full text-black"
+          placeholder="Descripcion"
+        ></textarea>
+
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+          Crear
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default NewPage;
+```
+
+## Listar las tareas
+
+```jsx
+import { prisma } from "@/libs/prisma";
+
+async function loadTask() {
+  // const res = await fetch('http//localhost:3000/api/task')    //esto si es en el servidor entonces por eso si se pone la ruta completa
+  // const data = await res.json()
+  //se recomienda que si separaras tu backend mejor usar esta manera de aqui arriba
+
+  // const task = await prisma.task.findMany()    //esto es lo mismo, solamente que arriba hicimos la peticion a la api y aqui solamente a la base de datos
+
+  return await prisma.task.findMany(); //asi tambien nos podemos ahorrar la constante
+}
+
+export default async function HomePage() {
+  const task = await loadTask(); //aqui guardo las tareas
+
+  return (
+    <section className="container mx-auto">
+      <div className="grid grid-cols-3 gap-3 mt-10">
+        {" "}
+        {/*este componente lo separamos en task*/}
+        {task.map((task) => (
+          <div
+            key={task.id}
+            className="bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer"
+          >
+            <h3 className="font-bold text-2xl mb-2">{task.title}</h3>
+            <p>{task.description}</p>
+            <p>{new Date(task.createAt).toLocaleDateString()}</p>{" "}
+            {/* esto es para que la fecha de la base de datos se convierta en string visible */}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+```jsx
+"use client";
+
+import { useRouter } from "next/navigation";
+
+function TaskCard({ task }) {
+  const router = useRouter();
+
+  return (
+    <div
+      className="bg-slate-900 p-3 hover:bg-slate-800 hover:cursor-pointer"
+      onClick={() => {
+        router.push(`/task/edit/${task.id}`);
+      }}
+    >
+      <h3 className="font-bold text-2xl mb-2">{task.title}</h3>
+      <p>{task.description}</p>
+      <p>{new Date(task.createAt).toLocaleDateString()}</p>
+    </div>
+  );
+}
+```
+```jsx
+import NewPage from "@/app/new/page";   // recordar que en new page tenemos para agregar una nueva tarea
+
+export default NewPage;     //entonces nosotros simplemente exportamos la interface de crear, ya solamente tenemos que cambiar 
 ```
