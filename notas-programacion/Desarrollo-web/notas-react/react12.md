@@ -135,3 +135,91 @@ const Counter = ({ value }) => {
   );
 };
 ```
+
+## App Gif
+Creamos primero la funcionalidad de agregar con un input nuevos objetos a un arreglo el codigo es el siguiente: 
+
+contenedor padre:
+```jsx
+const GifExpertApp = () => {
+  const [categorias, setCategorias] = useState(["One Piece", "Dragon Ball"]);
+
+  // const addCategory = () => {    ya no usaremos esto
+    // setCategorias([...categorias, 'Naruto'])   //asi puedo agregar un nuevo elemento a un arreglo con useState
+    // setCategorias(cat => [...cat, 'Naruto'])   //es lo mismo que arriba pero aqui en cat se almacena todo lo que tenga la variable anteriormente y entonces creo una copia con `...cat` y le agrego uno nuevo, con un callback
+  // }
+
+  return (
+    <>
+      <h1>Marcela Gif</h1>
+      <AddCategory setCategorias={ setCategorias }/>  {/*Aqui estoy enviando la funcion, tambien se puede enviar funciones */}
+      {/* <button onClick={addCategory}>    ya no usaremos esta funcions
+        Click
+      </button> */}
+      <ol>
+        {categorias.map((categoria, index) => {           //el segundo argumento es el numero de lo ingresado 0 1 2 y asi
+          return <li key={index}>{categoria}</li>;
+        })}
+      </ol>
+    </>
+  );
+};
+```
+
+AddCategory:
+```jsx
+export const AddCategory = ({setCategorias}) => {
+  const [inputValue, setInputValue] = useState("Marcela");
+  const onChangesEvent = ({ target }) => {
+    //aqui de una vez desestrocturo el target
+    setInputValue(target.value);
+  };
+
+  const onSubmitEvent = (event) => {
+    event.preventDefault();     //esto evita que se haga un refresh en el navegador
+
+    if (inputValue.trim().length <= 1) return   
+    //recordar un par de cosas, trim nos ayuda a eliminar los espacio de enfrente y de al final
+    //.length nos dice cuantas letras tiene y si son pocas o no hay retorna la funcion, entonces no actualiza el arreglo
+
+    setCategorias(cat => [ inputValue.trim(), ...cat])
+    setInputValue('') //esto para que el input value se limpie, ya que ese valor tenemos en el input
+  };
+
+  return (
+    <form onSubmit={onSubmitEvent}>   {/*Gracias al form al simplemente darle enter ya envia el formulario, sin necesidad de de un boton */}
+      <input
+        // onChange={event => onChangesEvent(event)}
+        onChange={onChangesEvent} //es lo mismo que lo de arriba
+        type="text"
+        placeholder="Buscar Gifs"
+        value={inputValue}
+      />
+    </form>
+  );
+};
+```
+
+
+
+
+## Pruebas
+
+Se tienen que hacer antes de pasar a produccion, si no hay tiempo tampoco hay que matarse para probar todo, si no hay tiempo prueben la ruta critica o principal de la aplicacion y asi con lo mas importante
+
+* AAA
+  * Arrenge - Arreglar
+    * Preparamos el estado inicial
+    * Inicializamos variables
+    * Importaciones necesarias
+  * Act - Actuar
+    * Aplicamos acciones o estimulos
+    * Llamar metodos
+    * Simular clicks
+  * Assert - Afirmar
+    * Observar el comportamiento resultante
+    * Son los resultados esperados
+
+Se dividen en dos: 
+* Unitarias: enfocadas en pequeñas funcionalidades
+* Integracion: enfocadas en como reaccionan varias piezas en conjunto

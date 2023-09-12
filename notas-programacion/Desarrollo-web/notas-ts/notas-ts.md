@@ -16,8 +16,6 @@ Algo importante es que en nuestra carpeta de archivos (asumiendo que no estemos 
 
 ---
 
----
-
 Funcion anonima para encapsular el codigo, dentro de parentesis la funcion de flecha y despues la llamamos
 
 Funcion anonima autoinvocada
@@ -133,3 +131,8 @@ const error2 = (): never | number => {
 ```
 
 ### Null y Undefined
+null no es lo mismo que undefined
+```ts
+let si: undefined = undefined;
+let si: (number | undefined) = undefined;
+```
