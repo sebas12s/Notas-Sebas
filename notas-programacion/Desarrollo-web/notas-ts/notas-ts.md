@@ -28,6 +28,27 @@ Funcion anonima autoinvocada
 
 Ts tiene un modo observador que este nos ayuda al estar activado en la terminal compila al isntante el comando es el siguiente: `tsc --watch` o `tsc -w`
 
+## Configuracion tsconfig.json
+
+- `"sourceMap": true` esta opcion crea un nuevo archivo pero nos ayuda que en los `console.log` por poner un ejemplo nos aparezca en que linea fue creado o se afecto pero con referencia en ts no como normalmente lo hace con js y no importa que estemos importando el archivo js
+  - Algo importante es que esta opcion solo es para modo desarrollo no al subir a produccion
+- `"removeComments": true,` esta opcion nos ayuda que cuando se pase el codigo a js no se pasen los comentarios, ya que cuando ts se compila a js se pasan tambien los comentarios
+- Abajo de todo podemos excluir documentos para que no se traspile y esas cosas, de la siguiente manera
+
+```json
+  "exclude": [
+    "object/*.ts",  //aqui estoy ignorando todos los archivos ts que esten adentro de object
+    "node_modules"  //la carpeta node_modules y asi
+  ],
+  "include": [    //tambien podemos incluirlo
+    "node_modules"
+  ]
+```
+
+- `"outFile": "./main.js"` esto nos ayuda a crear todos los archivos de ts a compilarlos a un solo archivo de js, en este caso estara en la raiz y sera main, todos los archivos de ts se transpilan a js en este archivo, para evitar muchos archivos, aunque tuvimos que cambiar un par de cosas
+  - `"module": "amd"` cambiamos esto a 'amd'
+  - Y tambien hay que tener cuidado con el `include` ya que include solo compilara los archivos que esten especificados ahi y esto lo enviara todo a `main.js`
+
 ## Tipos de datos
 
 [Documentacion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
@@ -131,8 +152,254 @@ const error2 = (): never | number => {
 ```
 
 ### Null y Undefined
+
 null no es lo mismo que undefined
+
 ```ts
 let si: undefined = undefined;
-let si: (number | undefined) = undefined;
+let si: number | undefined = undefined;
 ```
+
+## Funciones
+
+```ts
+function returnName(): string {
+  return "Marcela";
+}
+
+//esto devuelve una funcion que regresa un string
+const activateBati = (): string => {
+  return "Bati señal";
+};
+
+const fullName = (
+  firstName: string,
+  lastName?: string,
+  upper: boolean = false
+): string => {
+  //asi los hago obligatorio y les especifico el tipo de dato y el dato de retorno
+  //con el simbolo de interrogacion se ponen opcionales
+  //upper asi se pueden poner valores por defecto simplemente despues del tipo
+  return `${firstName} ${lastName}`;
+};
+//ya al llamarla se tienen que enviar obligatoriamente los dos tipos
+```
+
+```ts
+const fullName = (firstName: string, ...restArgs: string[]): string => {
+  // esto ayuda para que cuando manden mas argumentos todos se almacenen en restArgs como un arreglo
+  return `${firstName} ${restArgs.join(" ")}`; //join sirve para convertir todo en un  string y lo que este adentro de los parentesis es para separador del mismo
+};
+const variable = fullName("Sebastian", "Cristopher", "Hola");
+```
+
+```ts
+const addNumbers = (a: number, b: number): number => a + b;
+
+// let myFunction;   //any no se tendria que poner asi
+// let myFunction: Function;   //le digo que sera de tipo function
+let myFunction: (m: number, x: number) => number; //si quiero ser mas especifico le puedo decir que es de tipo funcion que retorna un number, tambien le estoy poniendo que argumentos tendra del tipo
+
+myFunction = addNumbers; //le asigne la funciono no le pongo los parentesis para no llamarla solo asignarla y no se crea una copia entonces se asigna el mismo espacio en memoria, entonces es por referencia
+```
+
+## Objetos
+
+```ts
+let flash = {
+  name: "Sebas",
+  age: 17,
+  amor: ["Dios", "Marcela"],
+
+  /**
+ * al crear un objeto asi simple crea un type
+ * asi
+ * let flash: {
+    name: string;
+    age: number;
+    amor: string[];
+  }
+ */
+};
+
+flash = {
+  //ya al asignar obligatorio nos pone cosas asi
+  name: "Marcela",
+  age: 18,
+  amor: ["Dios", "Sebastian"],
+};
+//para ponerle el tipo podemos hacerlo asi
+let flash: {
+  name: string;
+  age?: number; //asi tambien lo pongo opcional
+  amor: string[];
+  getName?: () => string; //asi tambien se pueden poner para harcer funciones dentro de un objeto y su tipado
+} = {
+  name: "Sebas",
+  age: 17,
+  amor: ["Dios", "Marcela"],
+};
+flash = {
+  name: "Marcela",
+  age: 18,
+  amor: ["Dios", "Sebastian"],
+  getName() {
+    return this.name; //simplemente le digo que retornare el name de aqui por eso this
+  },
+};
+```
+
+```ts
+type Hero = {
+  //asi podemos crear los tipos para las clases asi le podemos agregar este mismo tipo a muchas clases
+  name: string; //se puede hacer con coma o con punto y coma
+  age?: number;
+  amor: string[];
+  getName?: () => string;
+};
+let flash: Hero = {
+  name: "Sebas",
+  age: 17,
+  amor: ["Dios", "Marcela"],
+};
+
+// let superLet: (number | string | Hero)
+let superLet: number | string | Hero = "Sebas"; //asi le podemos poner diferentes tipos como string, number o incluso un type de la misma manera le podemos dar un valor por defecto
+
+console.log(typeof superLet); //asi podemos saber de que tipo es lo que esta ahi
+```
+
+```ts
+type Villan = {
+  nombre: string;
+  edad?: number;
+  mutante: boolean;
+};
+//un arreglo de objeto Villan
+const villanos: Villan[] = [
+  {
+    nombre: "Lex Luthor",
+    edad: 54,
+    mutante: false,
+  },
+  {
+    nombre: "Erik Magnus Lehnsherr",
+    edad: 49,
+    mutante: true,
+  },
+  {
+    nombre: "James Logan",
+    edad: undefined,
+    mutante: true,
+  },
+];
+```
+
+## ES6
+
+Ya no se utiliza var
+
+```ts
+const hero = {
+  a: 1,
+  b: 3,
+};
+hero = {}; //no deja inicializar un objeto ya que es una constante pero si nos deja cambiar sus hijos
+hero.a = 5;
+
+const nombre = () => {}; //tambien funciona con las funciones,
+nombre = () => {}; //esto tirara error ya que no se le puede asignar una nueva variable
+```
+
+### Desestructuracion
+
+#### Objetos
+
+```ts
+type Animes = {
+  primero: string;
+  segundo: string;
+  tercero: string;
+  cuarto: string;
+};
+
+const animes = {
+  primero: "One Piece",
+  segundo: "Naruto",
+  tercero: "Demon",
+  cuarto: "Dragon Ball",
+};
+const { primero, tercero } = animes; //asi puedo desestructurar un objeto en esas nuevas variables tengo los valores de esas claves
+
+const printAnime = ({ tercero, ...resto }: Animes) => {
+  //al resivir una objeto tambien puedo desestructurar de una vezs, y en '...resto' esta todo lo demas que manden
+  console.log(tercero);
+  console.log(resto.segundo);
+};
+```
+
+#### Arreglos
+
+```ts
+const animes: string[] = ["One Piece", "Naruto", "Dragon Ball"];
+
+const [anime1, anime2, anime3] = animes; //asi podemos extreer, el nombre puede ser cualquiera
+const [anime1, , anime3] = animes; //si queremos solo el uno y tres
+const [, , anime3] = animes; //asi solamente obtenemos el tercero
+```
+
+#### For of
+
+```ts
+type Avenger = {
+  name: string;
+  weapon: string;
+};
+
+const ironman: Avenger = {
+  name: "Ironman",
+  weapon: "Armorsuit",
+};
+
+const captainAmerica: Avenger = {
+  name: "Capitán América",
+  weapon: "Escudo",
+};
+
+const thor: Avenger = {
+  name: "Thor",
+  weapon: "Mjolnir",
+};
+
+const avengers: Avenger[] = [ironman, captainAmerica, thor]; //como todos son del tipo Avenger entonces por eso es un arreglo de Avengers
+
+for (const variable of avengers) {
+  //el for of recorre un arreglo en este caso 'avengers' y almacena el primer cada valor en la variable y hace algo por cada uno
+  console.log(variable);
+}
+```
+
+#### Clases en JavaScript
+```js
+class Avenger {   //una clase en js 
+  name, 
+  power,
+  constructor(name = "No name", power = 0) {    //recordar que el constructor es cuando llamamos un nuevo objeto, y lo que le enviamos es lo de los parentesis
+    this.name = name;
+    this.power = power;
+  }
+}
+
+class FlyingAvenger extends Avenger {   //al extenderlo tenemos todas sus propiedades y constructores y eso
+  flying,   //y ya le podemos agregar mas propiedades
+  constructor(name, power) {
+    super(name, power);   //al darle super estoy llamando al constructor padre del que estoy extendiendo
+    this.flying = true;
+  }
+}
+
+const hulk = new Avenger("Hulk", 9001);
+const falcon = new FlyingAvenger("Falcon", 50);
+```
+
+## Clases en TypeScript
