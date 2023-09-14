@@ -2,6 +2,10 @@
 
 ## Atajos
 
+## Chrome
+* ctrl + shift + l    inspect
+
+
 ### VSCode
 * ctrl + ,    configuraciones
 
@@ -42,6 +46,7 @@ creacion de carpetas y archivo
 * ctrl + shift + x   extenciones
 
 ### Codigo
+* ctrl + space      para las sugerencias de autocompletado
 * tab       tabulacion
 * shift + tab       tabulacion contraria
 * ctrl + flecha     curso navega entre palabras
