@@ -3,6 +3,8 @@
 ## Atajos
 
 ### VSCode
+* ctrl + ,    configuraciones
+
 * ctrl + shift + p    comand palette
 * ctrl + /    comentar
 * ctrl + alt +      comentar una parte de una linea
