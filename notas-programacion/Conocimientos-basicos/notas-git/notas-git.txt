@@ -1,38 +1,11 @@
-    git init: Permite iniciar el repositorio (lugar donde se almacenarán los cambios).
+---
 
-git add <nombre_archivo>: Git comienza a “trackear”, comienza a hacerle un seguimiento archivo en cuestión.
+git diff
+---
 
-git commit: Envía los últimos cambios del archivo a la base de datos del sistema de control de versiones. Una buena práctica al usar este comando es añadir -m; al hacer esto, podemos escribir un mensaje que nos permita recordar los cambios que hicimos en ese momento.
-
-git add .: Es un comando que nos permite agregar al repositorio todos los archivos a los cuales se le haya hecho algún cambio.
-
-git status: Permite ver el estado de la base de datos. Por ejemplo, podemos ver si hay algunos cambios que no se han guardado en el repositorio, y si no hay nada nos dirá que todo esta bien.
-
-git show: Mostrara todos los cambios que hemos hecho, esto incluye las líneas que hemos cambiado, cuando y quien hizo dicho cambios.
-
-git log <nombre_archivo>: Muestra todo el historial del archivo.
-
-git push: Permite enviar los cambios realizados a un servidor remoto.
-
-git push origin <nombre_rama>: Sube la rama “nombre_rama” al servidor remoto.
-
-git fetch: Descarga los cambios realizados en el repositorio remoto.
-
-git merge <nombre_rama>: Impacta en la rama en la que te encuentras parado, los cambios realizados en la rama “nombre_rama”.
-
-git pull: Unifica los comandos fetch y merge en un único comando.
-
-git checkout -b <nombre_rama_nueva>: Crea una rama a partir de la que te encuentres parado con el nombre “nombre_rama_nueva”, y luego salta sobre la rama nueva, por lo que quedas parado en esta última.
 
 git checkout -t origin/<nombre_rama>: Si existe una rama remota de nombre “nombre_rama”, al ejecutar este comando se crea una rama local con el nombre “nombre_rama” para hacer un seguimiento de la rama remota con el mismo nombre.
 
-git branch: Lista todas las ramas locales.
-
-git branch -a:Lista todas las ramas locales y remotas.
-
-git branch -d <nombre_rama>: Elimina la rama local con el nombre “nombre_rama”.
-
-git push origin <nombre_rama>: Commitea los cambios desde el branch local origin al branch “nombre_rama”.
 
 git remote prune origin: Actualiza tu repositorio remoto en caso que algún otro desarrollador haya eliminado alguna rama remota.
 
@@ -40,55 +13,9 @@ git reset --hard HEAD: Elimina los cambios realizados que aún no se hayan hecho
 
 git revert <hash_commit>: Revierte el commit realizado, identificado por el “hash_commit”.
 
-**
-Repository: Donde se almacena todo el proyecto, el cual puede vivir tanto en local como en remoto. El repositorio guarda un historial de versiones y, más importante, de la relación de cada versión con la anterior para que pueda hacerse el árbol de versiones con las diferentes ramas.
-
-Fork: Si en algún momento queremos contribuir al proyecto de otra persona, o si queremos utilizar el proyecto de otro como el punto de partida del nuestro. Esto se conoce como “fork”.
-
-Clone: Una vez se decide hacer un fork , hasta ese momento sólo existe en GitHub. Para poder trabajar en el proyecto, toca clonar el repositorio elegido al computador personal.
-
-Branch: Es una bifurcación del proyecto que se está realizando para anexar una nueva funcionalidad o corregir un bug.
-
-Master: Rama donde se almacena la última versión estable del proyecto que se está realizando. La rama master es la que está en producción en cada momento (o casi) y debería estar libre de bugs. Así, si esta rama está en producción, sirve como referente para hacer nuevas funcionalidades y/o arreglar bugs de última hora.
-
-Commit: consiste en subir cosas a la versión local del repositorio. De esta manera se puede trabajar en la rama de forma local sin tener que modificar ninguna versión en remoto ni tener que tener la última versión remota, cosa muy útil en grandes desarrollos trabajados por varias personas.
-
-Push: Consiste en enviar todo lo que se ha confirmado con un commit al repositorio remoto. Aquí es donde se une nuestro trabajo con el de los demás.
-
-Checkout: Acción de descargarse una rama del repositorio GIT local (sí, GIT tiene su propio repositorio en local para poder ir haciendo commits) o remoto.
-
-Fetch: Actualiza el repositorio local bajando datos del repositorio remoto al repositorio local sin actualizarlo, es decir, se guarda una copia del repositorio remoto en el local.
-
-Merge: La acción de merge es la continuación natural del fetch. El merge permite unir la copia del repositorio remoto con tu repositorio local, mezclando los diferentes códigos.
-
-Pull: Consiste en la unión del fetch y del merge, esto es, recoge la información del repositorio remoto y luego mezcla el trabajo en local con esta.
-
-Diff: Se utiliza para mostrar los cambios entre dos versiones del mismo archivo.
-
-Bug: Error
 
 
-- solo uno significa que usaras una letra 
--- significa que usaras una palabra
-
-
-hablemos de las ramas
-primera rama sabemos que se llama master aunque vi un comentario que se llamaba main 
-la segunda rama es la experimental pero se le llama mas development
-si la rama actual la ultimma version muestra un bug un ejemplo, se le puede hacer otra rama eso le dicen hotfix
-despues lo arreglamos y lo enviamos a la ultima version eso se le conoce como un merge
-esa seria la version final la version head
-
-git reset "clave de la version" --hard      reset nos permite regresar, con hard todo!! vuelvo al estado que le estemos diciendo
-git reset "clave de la version" --soft      esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra 
-mucho cuidado por que es una forma de volver al pasado de una forma muy agresiva
-
-cuando tengamos cambios en el directorio y hayanmos guardado algo en staging podemos hacer
-git diff        y esto muestra lo que esta diferente y ya despues si queremos podemos hacer el git add .    
-pero recordad que si solo le damos al git add solo se guarda en staging para llevarlo al repositorio se hace el commit 
-
-git checkout "la clave de la version" "el archivo que queremos que nos devuelva"    esto nos muestra en el archivo como era podemos ver como era en la primera version
-git checkout master "el archivo que queremos que nos devuelva"      con solo poner master nos muestra la ultima version
+git checkout main "el archivo que queremos que nos devuelva"      con solo poner main nos muestra la ultima version
 git checkout        esta es una manera de volver a versiones anteriores, igual tener mucho cuidado
 si queremos cambiar algo solo cambiamos y le volvemos a dar git add y commit y ya pero arrancando de una version mas antigua
 
@@ -111,9 +38,7 @@ ramas en git
 master rama principal
 head cabecera la cabeza
 cuando creamos una rama agarra el ultimo commit y ya podemos cambiar y eso no lo ve la rama master hasta que lo volvamos a fucionar
-git commit -am "mensaje"     este tambien hace el git commit pero solo con archivos que antes se le habian hecho add antes 
-git commit -a           si solo lo dejamos asi nos manda a editor de texto para que podamos ahi escribir el texto
-esto como que no tienes que hacer el add antes
+
 git show        esto muestra los cambios y con esto podemos ver donde esta el head en este caso esta en el master
 las ramas se crean donde estan 
 git branch "el nombre"       con esto podemos crear una rama 
@@ -266,28 +191,8 @@ git config --global alias.stats "shortlog -sn --all --no-merges"        este es 
 git blame -c "el nombre del archivo que queremos ver"       esto nos ayuda para ver que y quien hizo cada cosa
 git blame "nombre del archivo o direccion" -L33,50 -c           los numeros son las lineas de cual a cual queremos ver los cambios y la c es para ordenar un poco
 
-git branch -r       esto muestra las ramas remotas
-git branch -a       esto muestra todas
-
 
 git resotore .      vuelve a todo sin los cambios 
 
 
 
-comandos que sirven para trabajos muy grandesgit log --oneline:Te muestra el id commit y el título del commit.
-git log --decorate: Te muestra donde se encuentra el head point en el log.
-git log --stat: Explica el número de líneas que se cambiaron brevemente.
-git log -p: Explica el número de líneas que se cambiaron y te muestra que se cambió en el contenido.
-git shortlog: Indica que commits ha realizado un usuario, mostrando el usuario y el título de sus commits.
-git log --graph --oneline --decorate y
-git log --pretty=format:"%cn hizo un commit %h el dia %cd": Muestra mensajes personalizados de los commits.
-git log -3: Limitamos el número de commits.
-git log --after=“2018-1-2”
-git log --after=“today” y
-git log --after=“2018-1-2” --before=“today”: Commits para localizar por fechas.
-git log --author=“Name Author”: Commits hechos por autor que cumplan exactamente con el nombre.
-git log --grep=“INVIE”: Busca los commits que cumplan tal cual está escrito entre las comillas.
-git log --grep=“INVIE” –i: Busca los commits que cumplan sin importar mayúsculas o minúsculas.
-git log – index.html: Busca los commits en un archivo en específico.
-git log -S “Por contenido”: Buscar los commits con el contenido dentro del archivo.
-git log > log.txt: guardar los logs en un archivo txt
