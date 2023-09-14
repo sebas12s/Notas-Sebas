@@ -78,10 +78,14 @@ Para ver los cambios de una o de otra ejecutamos:
 
 ## Checkout
 `git checkout "la clave de la version" "el archivo que queremos que nos devuelva"` esto nos muestra en el archivo como era con la clave de la version
+- `git checkout main "el archivo que queremos que nos devuelva"` con solo poner main nos muestra la ultima version
+- `git checkout` esta es una manera de volver a versiones anteriores, igual tener mucho cuidado
 
 ## Reset
 - `git reset "clave de la version" --hard` reset nos permite regresar, con hard todo!! vuelve al estado que le estemos diciendo
 - `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra 
+
+## Eliminar
 
 ## Ramas
 Primera rama sabemos que se llama main la segunda rama es la experimental pero se le llama mas development si la rama actual la ultimma version muestra un bug un ejemplo, se le puede hacer otra rama eso le dicen hotfix despues lo arreglamos y lo enviamos a la ultima version eso se le conoce como un merge

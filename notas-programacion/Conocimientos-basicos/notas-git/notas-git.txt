@@ -14,16 +14,9 @@ git reset --hard HEAD: Elimina los cambios realizados que aún no se hayan hecho
 git revert <hash_commit>: Revierte el commit realizado, identificado por el “hash_commit”.
 
 
-
-git checkout main "el archivo que queremos que nos devuelva"      con solo poner main nos muestra la ultima version
-git checkout        esta es una manera de volver a versiones anteriores, igual tener mucho cuidado
-si queremos cambiar algo solo cambiamos y le volvemos a dar git add y commit y ya pero arrancando de una version mas antigua
-
-entonces se puede usar el git reset de forma ruda o el checkout que todavia los guarda
-
-git rm --cached         este comando permite borrar archivos este borra del staging y del directorio local pero los deja en el disco duro
-git rm --force          borra en todos lados se puede recuperar pero se usan comandos mas avanzados
-git reset HEAD          este nos ayuda para sacar los archivos del staging para editarlos y asi y despues volverlos enviar pero no borra nada
+git rm --cached este comando permite borrar archivos este borra del staging y del directorio local pero los deja en el disco duro
+git rm --force borra en todos lados se puede recuperar pero se usan comandos mas avanzados
+git reset HEAD este nos ayuda para sacar los archivos del staging para editarlos y asi y despues volverlos enviar pero no borra nada
 
 trabajo remoto con git
 git clone url_del_servidor_remoto        nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
