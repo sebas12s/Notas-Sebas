@@ -380,9 +380,10 @@ for (const variable of avengers) {
 ```
 
 #### Clases en JavaScript
+
 ```js
-class Avenger {   //una clase en js 
-  name, 
+class Avenger {   //una clase en js
+  name,
   power,
   constructor(name = "No name", power = 0) {    //recordar que el constructor es cuando llamamos un nuevo objeto, y lo que le enviamos es lo de los parentesis
     this.name = name;
@@ -403,3 +404,269 @@ const falcon = new FlyingAvenger("Falcon", 50);
 ```
 
 ## Clases en TypeScript
+
+Una clase como normalmente se quiere crear
+
+```ts
+class Avenger {
+  private name: string; //private significa que solo tendre acceso a esta propiedad en esta clase, no afuera
+  private team: string;
+  public realName?: string; //los public pueden ser asi o sin la palabra public, estas si las podemos llamar al crear una nueva instancia
+  static avgAge: number = 35; //las estaticas son propiedades
+
+  constructor(name: string, team: string, realName?: string) {
+    this.name = name;
+    this.team = team;
+    this.realName = realName;
+  }
+}
+
+const atman: Avenger = new Avenger("Atman,", "Team");
+console.log(atman.realName); //solo esta propiedad puedo acceder ya que es publica, las static y private no
+console.log(Avenger.avgAge); //a lo estatico podemos acceder solamente al llamar a la clase, sin parentesis ya que no lo llamamos, pueden ser llamadas al llamar la clase no la instancia
+```
+
+Esta es otra manera para crear clases y una manera corta que se recomienda
+```ts
+class Avenger {
+  static avgAge: number = 35; //las estaticas si se pueden quedar aqui
+
+  static getAvgAge() {    //como dijimos esto solo puede ser llamado con el nombre de la clase
+    return this.name  //entonces this.name es el nombre de la clase
+  }
+
+  constructor(    //en el mismo contructor podemos poner asi
+    private name: string,   //es lo mismo que lo que esta arriba
+    private team: string,
+    public realName?: string
+  ) {}
+
+  public imprimir():string {    // metodos (funciondes dentro de una clase) publica, puedo acceder afuera de la clase de la misma manera privadas
+    return `${this.name}`
+  }
+}
+```
+### Protected Get Set
+```ts
+
+class Avenger {
+  constructor(
+    public name: string,
+    public realName: string,
+  ) {}
+
+  protected getFullname() {   //al poner protected le decimos que se puede acceder a el desde la clase y los que lo extiendan
+    return `${this.name} ${this.realName}`
+  }
+
+}
+
+class Xmen extends Avenger { //al extenderlo y crear un nuevo Xmen, trae todo el constructor por defecto del padre entonces le deberiamos de pasar las propiedades y eso
+  constructor(      //al crear un constructor ya funciona este no del padre
+    name: string,     
+    realName: string,
+    public isMutant: boolean
+  ) {
+    super(name, realName)   //el super tiene que ser llamado lo mas pronto posible por eso lo ponemos al comieno
+  }
+
+  get fullName() {    //get estos son metodos pero funcionan como propiedades ya que se llaman solamente asi 'clase.nombre' y ya se ejecuta mas no se pone los parentesis ya que funciona como una propiedad, el get no resive ningun argumemnto
+    //siempre se puede ejecutar logica antes de retornar
+    return `${this.name} - ${this.realName}`;
+  }
+
+  set fullName(name: string) {    //los set estos siempre resiven solamente un argumento y no retoran nada,
+    this.name = name;
+    //la idea de esto es que se resive un argumento y nosotros hacemos lo que queramos hacer con ese argumento
+    //se llaman asi: clase.fullName = 'Sebastian' entonces lo que este despues del igual es el argumento
+  }
+
+  getFullnameDesdeXmen() {
+    console.log(super.getFullname())    //ya podemos acceder al metodo del padre, gracias a super que hace referencia al padre
+  }
+}
+```
+
+### Abstract
+```ts
+abstract class Mutante {    //las clases abastract solo sirven como molde para extender a otras ya que no se pueden crear instancias de esas mismas
+  constructor(
+    public name: string,
+    public realName: string
+  ){}
+}
+class Xmen extends Mutante{}    //cada uno puede tener sus metodos y propiedades normalmente
+const wolverine = new Xmen('Wolverine', 'Logan')
+
+const printName = (character: Mutante) => {   //para esto tambien pueden servir las clases para darle como el tipo de que quiere el argumento
+  //esta clase solo aceptara que le envien algo que se extienda de mutante nada mas
+  console.log(character.name)
+}
+```
+
+## Interface
+```ts
+interface Hola {
+  title: string;
+}
+//como podemos ver las interfaces sepueden extender mas si le queremos poner mas propiedades, mas los type no se le puede extender de esta manera
+//en si funcionan igual pero esta seria la cosita que los diferencia
+interface Hola {
+  des: string;
+}
+
+const marcela: Hola  = {
+  title: 'Hola',
+  des: 'sebastian'
+} 
+```
+
+```ts
+interface Client {
+  name: string,
+  age?: number,
+  // address: {    //si tenemos un nivel mas se podria hacer asi pero si es muy grande no se recomienda, lo que se recomienda es crear otra interface para ese objeto
+  //   id: number,
+  //   zip: string,
+  //   city: string
+  // }
+  address: Address,   //y ya ponerlo asi
+  getFullAddress(id: string):string   //asi podriamos poner los metodos en las interfaces algo diferente a los type
+}
+//normalmente la interface principal va arriba y las anidadas como esta va abajo
+interface Address {
+  id: number,
+  zip: string,
+  city: string
+}
+```
+### En clases
+```ts
+interface Xmen {
+  name: string,
+  realName: string,
+  mutanPower(id: number): string
+}
+
+interface Human {
+  age: number
+}
+
+class Mutant implements Xmen, Human {   //asi podemos poner el tipado en nuestras clases, con la palabra implements y podemos poner muchas con la coma
+  constructor(
+    public age: number,
+    public name: string,
+    public realName: string,
+  ) { }
+
+  mutanPower(id: number): string {
+    return `${this.name}`
+  }
+}
+```
+
+### En funciones
+```ts
+interface AddNumbers {
+  (a: number, b: number): number
+}
+//asi podemos poner el tipado a una funcion
+const addNumbersFunction: AddNumbers = (a: number, b: number) => {
+  return a + b
+}
+```
+
+## NameSpace
+Es como un mini programa en el cual dentro podremos tener toda la logica, podemos tener funciones, variables y ya solo exponemos lo que necesitamos, es como un agrupador global, puede ser que creemos uno de carros y todo lo que tenga que ver de esa categoria iria en ese namespace
+```ts
+namespace Validations {
+  export const validateText = (text: string): boolean => {    //se tienen que exportar para poderlas llamar afuera del namespace
+    return (text.length > 3) ? true : false;
+  }
+
+  export const validateDates = (myDate: Date): boolean => {
+    return (isNaN(myDate.valueOf())) ? true : false;
+  }
+}
+
+console.log(Validations.validateText('Sebas'))
+```
+
+## Export Import
+```ts
+import {Hero as SuperHero} from './//'    //con el as podemos llamarlo de otra manera en este caso a la clase que estamos importando ya no la llamamos como Hero, sino como SuperHero
+
+//tambien se puede hacer lo siguiente
+import * as HeroClasses from '..///';
+//ya todo lo que estemos exportando esta en HeroClasses y lo podemos llamar ya con un 'HeroClasses.algo'
+```
+
+## Generics
+Algo generico que recibe cualquir dato
+
+Una funcion generica es una funcion que recibe cualquier cosa
+
+```ts
+export function genericFunction<T> (argument: T): T {
+    //cuando ponemos esa T en ese menor y mayor, estoy diciendo que sera generico entonces el argumento que reciba sera el tipo de argumento del dato, y ese mismo tipo de dato sera el que retornara
+    return argument
+}
+
+console.log(genericFunction('hola').toUpperCase())    //ya aqui nos ayuda con el tipo de dato que estamos ingresando
+console.log(genericFunction(12).toString())
+```
+
+```ts
+interface Hero {
+    name: string,
+    realName: string
+}
+
+const deadpool = {
+    name: 'Deadpool',
+    realName: 'Wade Winston Wilson',
+    dangerLevel: 130,
+}
+console.log(genericFunction<Hero>(deadpool))      //como le mando un objeto de ese tipo sera el regreso pero si quiero otro tipo de regreso puedo poner antes la t
+//entonces con la t le digo que sera de ese tipo lo que esta adentro y como deadpool si cumple con Hero me acepta
+//asi le puedo decir el tipo de dato a una funcion que resive any 
+```
+
+## Exportaciones agrupadas
+En la carpeta de interfaces si queremos agrupar todas las interfaces en este ejemplo, se crea un `index.ts`
+
+En el archivo pongo como si estuviera importando pero lo exporto
+```ts
+export {Hero} from './Hero';    //asi exportamos todas en nuestro index 
+export {Villain} from './Villain';
+```
+y para importarlos ya solamente es asi
+```ts
+import {Villain, Hero} from './interfaces'; //hacemos referencia a la carpeta solamente
+```
+
+## HTTP Axios
+Para crear las interfaces de una gran peticion, gracias a su documentacion y la pagina de [QuickType](https://quicktype.io/) y esto convierte un json a interfaces
+
+```ts
+
+interface Pokemon {
+    //recodermos que la interface nos dice como luce un objeto no siempre tendra esas propiedades
+    //por eso en res como le estoy diciendo que la respuesta del get se vera como un Pokemon entonces por eso tengo esas opciones
+    name: string,
+    picture: string
+}
+
+const getPokemon = async(pokemonId: number): Promise<Pokemon> => {     //recordar que el async transforma nuestra funcion para que sea una promesa
+    // convierte todo a promesa por eso especifico que devolvera una promesa que devolvera un number    
+    const res = await axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+    return res.data;    //cuando  le dije que seria tipo Pokemon, un objeto que tendria esas dos propiedades no importa que tenga muchas mass
+}
+
+getPokemon(4)
+    .then(res => console.log(res.sprites))      //gracias a la gran interface que nos creo ya podemos obtener los datos mejor, claramente no la puse aqui 
+    //aunque hay una extension
+
+    //ctrl + shif + p = Paste Json as code y ponemos el nombre de la interface padre
+    // necesitamos tener el json copiado y en el archivo donde queremos poner las interfaces ahi lo pegamos
+```
