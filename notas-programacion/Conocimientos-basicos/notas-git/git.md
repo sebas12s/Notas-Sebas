@@ -30,9 +30,12 @@ Para salir del editor de codigo de git le da uno esc despues `:x!`
 
 - `git init` asi se comienzan a gestionar los archivos y crea la carpeta de git
 - `git status` nos muestra el estatus o si hay commits y asignar
+- `git status --short` version compacta de status
 - `git add "el nombre del archivo"` esto como que agrega el archivo para que git pueda ver sus cambios y asi para agregarlos a git, tambien se usa `git add .` para agregar todos los archivos
+- `git add -A` agrega todo los archivos 
 - `git commit -m "mensaje"` esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje, -m le estamos diciendo que le enviaremos un mensaje
 - `git commit -am "mensaje"` este tambien hace el git commit pero solo con archivos que antes se le habian hecho add antes
+- `git commit --amend` esto lo que hace es que todos los cambios que hice los pega al commit anterior despues ya solo nos pide si quermos cambiar el mensaje y ya esta hecho
 
 ## Comandos
 
@@ -40,6 +43,13 @@ Para salir del editor de codigo de git le da uno esc despues `:x!`
 - `git rm --cached "nombre del archivo"` con esto se le quita el add tambien
 - `git reset HEAD` esto le quita el add a los archivos
 - `git checkout -- .` esto nos devuelve los cambios al ultimo commit
+
+## Buscar palabras
+
+- `git grep "la palabra"` esto nos muestra donde aparece esa palabra
+- `git grep -n "la palabra"` nos aparece en que linea
+- `git grep -c "la palabra"` esto nos muestra la cantidad de veces en la que aparece
+- `git log -S "la palabra"` esto si va entre comillas y esto busca en todos los commits la palabra
 
 ## Git log
 
@@ -56,6 +66,9 @@ Para salir del editor de codigo de git le da uno esc despues `:x!`
 - `git log --stat` Explica el número de líneas que se cambiaron brevemente.
 - `git log -p` Explica el número de líneas que se cambiaron y te muestra que se cambió en el contenido.
 - `git shortlog` Indica que commits ha realizado un usuario, mostrando el usuario y el título de sus commits.
+- `git shortlog -sn` esto solo nos muestra cuantos han hecho la cantidad
+- `git shortlog -sn --all` esto incluso los borrados
+- `git shortlog -sn --all --no-merges` con esto le decimos que no nos incluya los merges asi solo miramos los commits
 - `git log --graph --oneline --decorate`
 - `git log --pretty=format:"%cn hizo un commit %h el dia %cd"` Muestra mensajes personalizados de los commits.
 - `git log -3` Limitamos el número de commits.
@@ -93,6 +106,11 @@ Para ver los cambios de una o de otra ejecutamos:
 - `git reset "clave de la version" --hard` reset nos permite regresar, con hard todo!! vuelve al estado que le estemos diciendo
 - `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra
 - `git reset --hard HEAD` elimina los cambios realizados que aún no se hayan hecho commit.
+
+## Revert
+- `git revert HEAD` esto devuelve al ultimo commit
+- `git revert HEAD~1` esto devuelve al ultimo penultimo commit y asi puedo poner mas numeros
+
 
 ## Eliminar
 
@@ -133,11 +151,15 @@ Recordar que marge es como un commit entonces tiene que llevar un mensaje git me
 
 Normalmente el repositorio remoto se llama `origin`
 
+- `git remote add origin url_del_servidor_remoto` para agregar un repositorio remoto
 - `git clone url_del_servidor_remoto` nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
+- `git clone url_del_servidor_remoto "carpeta` esto es si queremos ponerlo en una carpeta
 - `git push` ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto
 - `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
 - `git merge` como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
-- `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (pull, merge)
+- `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (fetch, merge)
+- `git remote prune origin` esto actualiza el repositorio local con el remoto, si en el remoto eliminaron ramas, etiquetas etc tambien las eliminan del local
+- `git remote rename origin "nuevo nombre` para cambiarle el nombre al remoto 
 
 ## Tag
 
@@ -151,14 +173,51 @@ Normalmente el repositorio remoto se llama `origin`
 - `git push origin :refs/tags/nombretag` asi se pueden borrar los tag del repositorio remoto
 
 ## Stashed
+
 Es como guardar unos cambios en alguna parte y volver al ultimo commit es como que esos cambios nunca hubieran pasado pero estan ahi guardados, nos ayuda si hicimos unos cambios pero queremos volver al ultimo commit sin perder los cambios
 
-- `git stash` esto me regresa al ultimo commit 
+- `git stash` esto me regresa al ultimo commit
 - `git stash list` esto nos muestra el stash hecho esto guarda los cambios en algun lado
 - `git stash pop` esto vuelve a lo que teniamos en el stash
 - `git stash branch "nombre de la rama"` y esto envia el stash a otra rama o la crea si no existe la rama, pero al volver a main igual tengo el stash
 - `git stash drop` con esto eliminamos el stash
 
+## Clean
+
+- `git clean` solo sirve para archivos que estan pendientes a darles add
+- `git clean --dry-run` este comando nos sirve para que nos muestre que archivos nos borrara sin borrarlos
+- `git clean -f` y ya este nos borra esos archivos pero solo archivos no carpetas tambien ignora todo lo que esta en gitignore
+- `git clean -q` nos muestra los errores que tuvo la ejecucion pero no los archivos que fueron borrados
+- `git clean -x` borra las copias incluso las que estan en gitignore
+- `git clean -X` borra archivos que fueron ignorados por git
+- `git clean -f -d` tambien borra directorios
+
+## Cherry-pick
+
+Nos ayuda a traer un commit de otra rama a nuestra rama sin tener que treaer todo el historial de los cambios de la rama si no solo ese commit
+
+- `git cherry-pick "el id del commit"` esto se hace desde la rama que queremos ingresarlo y ya nos trae el commit
+
+Ya despues podemos hacer el merge
+
+## Reflog
+
+- `git reflog` esto nos ayuda a ver todos los cambios que hemos hecho o cosas que eliminamos y ya con su clave podriamos recuperar y ya podemos hacer un reset para traer esos cambios
+
+## Crear Alias
+
+Para crear el alias se hace de la siguiente manera:
+
+- `git config --global alias."el nombre del alias" "el pedazo del comando"` este si va entre comillas
+- `git config --global alias.stats "shortlog -sn --all --no-merges"` este es un ejemplo ya solo se llama `git stats`
+- `git config --get-regexp alias` es para ver todas nuestras alias
+- `git config --global --unset alias.alias_name` para eliminar el alias
+
+
+## Blame
+
+- `git blame -c "el nombre del archivo que queremos ver"` esto nos ayuda para ver que y quien hizo cada cosa
+- `git blame "nombre del archivo o direccion" -L 33,50 -c` los numeros son las lineas de cual a cual queremos ver los cambios y la `-c` es para ordenar un poco
 
 ## Extras
 
