@@ -24,6 +24,7 @@ para cambiar el usuario y el email se usa lo siguiente:
 - `git config --global -e` esto es para mostrarme los cambios de user y email y nos ayuda a modificarlos tambien
 
 Para salir de esa interface se preciona Esc `:wq!` y listo
+Para salir del editor de codigo de git le da uno esc despues `:x!`
 
 ## Basico
 
@@ -123,8 +124,9 @@ head es un indicador de cual version estamos
 - `git push "repositorio remoto" --delete "el nombre de la rama"` eliminar una rama del repositorio remoto
 - `git branch -d "el nombre del branch"` asi se borra la branch del local
 
+Recordar que marge es como un commit entonces tiene que llevar un mensaje git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
 
-
+- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos
 
 ## Remote
 

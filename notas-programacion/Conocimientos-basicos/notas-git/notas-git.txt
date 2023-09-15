@@ -6,12 +6,6 @@ git remote prune origin: Actualiza tu repositorio remoto en caso que algún otro
 
 git revert <hash_commit>: Revierte el commit realizado, identificado por el “hash_commit”.
 
-para borrar una rama en el ropositorio remoto se hace de la siguiente manera
-git push origin --delete master     asi seria un ejemplo
-
-para unir una rama con el master se hace el marge pero si tiene que hacer en el master o si no el master o la rama principal se cambia 
-git merge "el nombre de la rama que quermos unir"         esto nos une la ultima version de la rama y la de master y nos crea una nueva version 
-git branch          esto te muestra las ramas 
 recordar que marge es como un commit entonces tiene que llevar un mensaje
 git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
 
