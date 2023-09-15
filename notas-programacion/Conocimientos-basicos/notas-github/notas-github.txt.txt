@@ -81,6 +81,13 @@ git push origin main        asi lo enviamos al repositorio remoto o al repositor
 
 
 Pull request:
+
+
+ pull request que es un estado intermedio antes de enviar el merge
+el pull request lo que hace es que otros puedan ver los cambios que ejecutastes y si les gusta hacen el merge
+pull request no es de git es de github por que github es el que me permite trabajar con otros git solo controla las versiones de mi trabajo
+
+
 Es una funcionalidad de github (en gitlab llamada merge request y en bitbucket push request), en la que un colaborador pide que revisen sus cambios antes de hacer merge a una rama, normalmente master.
 
 Al hacer un pull request se genera una conversación que pueden seguir los demás usuarios del repositorio, así como autorizar y rechazar los cambios
