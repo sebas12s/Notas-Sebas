@@ -6,64 +6,9 @@ git remote prune origin: Actualiza tu repositorio remoto en caso que algún otro
 
 git revert <hash_commit>: Revierte el commit realizado, identificado por el “hash_commit”.
 
-recordar que marge es como un commit entonces tiene que llevar un mensaje
-git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
-
-si te sale conflicto solo lo arreglas o decides con cual quedarte y despues ya haces el commit y ya quedan los cambios
-
-para salir del editor de codigo de git le da uno esc despues :x! y preciona enter 
-hay unos conflictos entre master y main le cambiaron el nombre a main
-
-
-trabajando con mas persona 
-cree un nuevo usuario entonces clone el repositorio donde lo queria copiar al copiarlo no me pidio contrasena por que es un repositorio publicoo 
-al intentar subir con push nos pide el usuario y la contrasena pero nos tirara error si no agregamos ese usuario en el repositorio remoto
-para agregarlo tenemos que ir a los settings del repositorio en collaborators ahi puedo agregar a otros colaboradores
-y ya en su github le aparece la invitacion
-a la rama main solo se envia lo que este seguro para trabajar solo eso
-los archivos binarios no se tienen que enviar al repositorio en este caso una imagen eso se trabaja por aparte 
-al trabajar con binarios se pueden tardar por no se que cosa xd
-
-
-normalmente la rama main no se puede tocar por que esa sera la version que se subira al servidor o esa es la version final a produccion
-para poder trabajar sin tener que tocar el main y poder hacer pruebas y todo eso a ese tipo de servidores se le conoce servidores de staging o de desarrollo
-esta branch justo esta antes que master pero ese servidor se le llama servidor de prubas
-entonces nosotros no lo enviamos al main lo enviamos al servidor de pruba pero no lo unimos con marge hacemos un pull request que es un estado intermedio antes de enviar el merge
+ pull request que es un estado intermedio antes de enviar el merge
 el pull request lo que hace es que otros puedan ver los cambios que ejecutastes y si les gusta hacen el merge
 pull request no es de git es de github por que github es el que me permite trabajar con otros git solo controla las versiones de mi trabajo
-tambien esta en bitbucket pero se llama push request
-y los que hacen todo esto son los lideres de equipo o un perfil muy especial que se les llama DevOps
-
-
-
-tag         
-son como cuando un juego tiene versiones como 1.18.1 1.18.20 y asi
-git tag -a v0.1     el nombre puede ser el que quieras  pero es normal ponerle ese nombre       el nombre va despues de la -a
-git tag -a v0.1 -m "" "el hash o el id de la rama pasada"      se le agrega un mensaje tambien      y ya ultimo el id de esa versio 
-git tag         si solo ponemos asi podemos ver los tags que tenemos
-git show-ref --tags         pero asi muestra donde esta ese tag 
-pero el que me muestra ese id me muestra otro diferente al que puse al comienzo
-los tags son utiles en github o en sitios abiertos para que los que entren puedan ver que version es y asi
-o pueden servir como un cometario para saber donde me quede o algo asi
-entonces enviamos o hacemos un push     me tira error cuando lo corro por ubuntu asi que mejor hacerlo en git bash
-despues del pull ponemos el siguiente codigo
-git push origin --tags      esto dice que vamos a enpujarle nuestros tags
-git tag -d "el nombre del tag"      asi se borra un tag 
-aunque lo borre en git no se borro en github 
-git push origin :refs/tags/dormido      esta es una forma de borrar los tags en ese repositorio donde no se borro
-
-
-
-rebase - mala practica es como agarrar una rama y pegarla a tu rama maestra y hacer que nunca se creo
-es como si nunca hubiera existido 
-em el ejemplo en una rama hicimos experimentos y queremos traer todo eso a la rama main 
-dentro de la rama de experimentos ejecutamos
-git rebase "la rama main"
-primero se le hace rebase a la rama que vamos a eliminar y despues a la rama principal
-como el primer rebase se lo hacemos a main esos commits aparecen primero despues aparecen los commits del segundo que le hagamos rebase
-primero a la rama que cambia y despues rebase a la rama principal
-git checkout -      cambia a la rama anterior en la que estabas
-git branch -D "rama"        esto lo eliminado
 
 stashed 
 es como guardar unos cambios en alguna parte y volver al ultimo commit es como que esos cambios nunca hubieran pasado pero estan ahi guardados

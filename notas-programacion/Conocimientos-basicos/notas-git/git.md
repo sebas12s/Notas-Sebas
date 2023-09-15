@@ -113,6 +113,8 @@ Al crear una rama toma nuestro ultimo commit y crea la rama
 - `git branch "el nombre"` con esto podemos crear una rama 
 - `git checkout "el nombre de la rama"` asi podemos cambiar a la otra rama para trabajar en ella con `git status` podemos ver en que cabecera es en la que estamos
 - `git checkout -b "nombre_rama"` es una union de branch y ckeckout, crea la rama y me cambia a ella
+- `git checkout -` cambia a la rama anterior en la que estabas
+
 
 head es un indicador de cual version estamos
 
@@ -137,6 +139,18 @@ Normalmente el repositorio remoto se llama `origin`
 - `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
 - `git merge` como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
 - `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (pull, merge)
+
+## Tag
+- `git tag -a "v0.1"` el nombre puede ser el que quieras pero es normal ponerle ese nombre
+- `git tag -a v0.1 -m ""` con la m es obligatorio que lleve un mensaje
+- `git tag -a v0.1 -m "" "la clave del commit"` asi le puedo poner tag a antiguos commits
+- `git tag` si solo ponemos asi podemos ver los tags que tenemos
+- `git show-ref --tags` pero asi muestra la clave de donde esta ese tag 
+- `git push origin --tags` asi podemos subir nuestro tags al repositorio remoto
+- `git tag -d "el nombre del tag"` asi se borra un tag 
+- `git push origin :refs/tags/nombretag` asi se pueden borrar los tag del repositorio remoto
+
+
 
 ## Extras
 
