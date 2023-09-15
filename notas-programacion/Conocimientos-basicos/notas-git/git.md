@@ -1,7 +1,5 @@
 # Notas de Git
 
-Probando
-
 '-' solo uno significa que usaras una letra
 
 '--' significa que usaras una palabra
