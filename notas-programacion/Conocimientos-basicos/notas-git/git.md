@@ -17,6 +17,7 @@ En la terminal ejecutamos este primer comando
 - `git config` esto muestra todas las configuraciones que se le puede dar
 - `git config --list` este comando te muetra la configuracion por defecto de tu git
 - `git config --list --show-origin` esto te muestra donde esta guardado los cambios
+- `git config --global init.defaultBranch main` esto es para poner por defecto nuestra rama principal sea main
 
 para cambiar el usuario y el email se usa lo siguiente:
 
@@ -26,18 +27,20 @@ para cambiar el usuario y el email se usa lo siguiente:
 
 Para salir de esa interface se preciona Esc `:wq!` y listo
 
-## Comandos
+## Basico
 
 - `git init` asi se comienzan a gestionar los archivos y crea la carpeta de git
-- `git config --global init.defaultBranch main` esto es para poner por defecto nuestra rama principal sea main
 - `git status` nos muestra el estatus o si hay commits y asignar
 - `git add "el nombre del archivo"` esto como que agrega el archivo para que git pueda ver sus cambios y asi para agregarlos a git, tambien se usa `git add .` para agregar todos los archivos
+- `git commit -m "mensaje"` esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje, -m le estamos diciendo que le enviaremos un mensaje
+- `git commit -am "mensaje"` este tambien hace el git commit pero solo con archivos que antes se le habian hecho add antes
+
+## Comandos
+
 - `git reset "nombre del archivo"` esto le quita el add al archivo
 - `git rm --cached "nombre del archivo"` con esto se le quita el add tambien
-- `git commit -m "mensaje"` esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje, -m le estamos diciendo que le enviaremos un mensaje
-- `git commit -am "mensaje"` este tambien hace el git commit pero solo con archivos que antes se le habian hecho add antes 
+- `git reset HEAD` esto le quita el add a los archivos 
 - `git checkout -- .` esto nos devuelve los cambios al ultimo commit
-- `git show` Mostrara todos los cambios que hemos hecho, esto incluye las líneas que hemos cambiado, cuando y quien hizo dicho cambios.
 
 ## Git log
 
@@ -71,6 +74,7 @@ ahi se muestra unos numeros donde dice commit: esos numeros son como el nombre d
 
 ## Cambios
 
+- `git show` Mostrara todos los cambios que hemos hecho, esto incluye las líneas que hemos cambiado, cuando y quien hizo dicho cambios.
 - `git show "nombre del archivo"` esto te muestra los cambios que se hicieron en el ultimo commit
 - `git diff` nos mestra lo que se cambio
 
@@ -79,22 +83,32 @@ Para ver los cambios de una o de otra ejecutamos:
 - `git diff "primera clave" "segunda clave"` asi podemos comparar diferentes versiones, pone al principio la version mas vieja
 
 ## Checkout
-`git checkout "la clave de la version" "el archivo que queremos que nos devuelva"` esto nos muestra en el archivo como era con la clave de la version
+
+- `git checkout "la clave de la version" "el archivo que queremos que nos devuelva"` esto nos muestra en el archivo como era con la clave de la version
+
 - `git checkout main "el archivo que queremos que nos devuelva"` con solo poner main nos muestra la ultima version
 - `git checkout` esta es una manera de volver a versiones anteriores, igual tener mucho cuidado
 
 ## Reset
+
 - `git reset "clave de la version" --hard` reset nos permite regresar, con hard todo!! vuelve al estado que le estemos diciendo
-- `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra 
+- `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra
+- `git reset --hard HEAD` elimina los cambios realizados que aún no se hayan hecho commit.
 
 ## Eliminar
 
+- `git rm --cached` este comando permite borrar archivos este borra del staging y del directorio local pero los deja en el disco duro
+- `git rm --force` borra en todos lados se puede recuperar pero se usan comandos mas avanzados
+
 ## Ramas
+
 Primera rama sabemos que se llama main la segunda rama es la experimental pero se le llama mas development si la rama actual la ultimma version muestra un bug un ejemplo, se le puede hacer otra rama eso le dicen hotfix despues lo arreglamos y lo enviamos a la ultima version eso se le conoce como un merge
 
 - `git branch` nos muestra todas las ramas locales
 - `git branch -a` lista todas las ramas locales y remotas.
 - `git branch -r` esto muestra las ramas remotas
+
+## Remote
 
 ## Extras
 
