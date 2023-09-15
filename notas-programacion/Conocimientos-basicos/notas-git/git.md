@@ -110,11 +110,10 @@ Al crear una rama toma nuestro ultimo commit y crea la rama
 - `git branch -a` lista todas las ramas locales y remotas.
 - `git branch -r` esto muestra las ramas remotas
 
-- `git branch "el nombre"` con esto podemos crear una rama 
+- `git branch "el nombre"` con esto podemos crear una rama
 - `git checkout "el nombre de la rama"` asi podemos cambiar a la otra rama para trabajar en ella con `git status` podemos ver en que cabecera es en la que estamos
 - `git checkout -b "nombre_rama"` es una union de branch y ckeckout, crea la rama y me cambia a ella
 - `git checkout -` cambia a la rama anterior en la que estabas
-
 
 head es un indicador de cual version estamos
 
@@ -132,7 +131,7 @@ Recordar que marge es como un commit entonces tiene que llevar un mensaje git me
 
 ## Remote
 
-Normalmente el repositorio remoto se llama `origin` 
+Normalmente el repositorio remoto se llama `origin`
 
 - `git clone url_del_servidor_remoto` nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
 - `git push` ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto
@@ -141,15 +140,24 @@ Normalmente el repositorio remoto se llama `origin`
 - `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (pull, merge)
 
 ## Tag
+
 - `git tag -a "v0.1"` el nombre puede ser el que quieras pero es normal ponerle ese nombre
 - `git tag -a v0.1 -m ""` con la m es obligatorio que lleve un mensaje
 - `git tag -a v0.1 -m "" "la clave del commit"` asi le puedo poner tag a antiguos commits
 - `git tag` si solo ponemos asi podemos ver los tags que tenemos
-- `git show-ref --tags` pero asi muestra la clave de donde esta ese tag 
+- `git show-ref --tags` pero asi muestra la clave de donde esta ese tag
 - `git push origin --tags` asi podemos subir nuestro tags al repositorio remoto
-- `git tag -d "el nombre del tag"` asi se borra un tag 
+- `git tag -d "el nombre del tag"` asi se borra un tag
 - `git push origin :refs/tags/nombretag` asi se pueden borrar los tag del repositorio remoto
 
+## Stashed
+Es como guardar unos cambios en alguna parte y volver al ultimo commit es como que esos cambios nunca hubieran pasado pero estan ahi guardados, nos ayuda si hicimos unos cambios pero queremos volver al ultimo commit sin perder los cambios
+
+- `git stash` esto me regresa al ultimo commit 
+- `git stash list` esto nos muestra el stash hecho esto guarda los cambios en algun lado
+- `git stash pop` esto vuelve a lo que teniamos en el stash
+- `git stash branch "nombre de la rama"` y esto envia el stash a otra rama o la crea si no existe la rama, pero al volver a main igual tengo el stash
+- `git stash drop` con esto eliminamos el stash
 
 
 ## Extras

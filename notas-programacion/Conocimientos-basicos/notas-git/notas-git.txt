@@ -10,15 +10,6 @@ git revert <hash_commit>: Revierte el commit realizado, identificado por el “h
 el pull request lo que hace es que otros puedan ver los cambios que ejecutastes y si les gusta hacen el merge
 pull request no es de git es de github por que github es el que me permite trabajar con otros git solo controla las versiones de mi trabajo
 
-stashed 
-es como guardar unos cambios en alguna parte y volver al ultimo commit es como que esos cambios nunca hubieran pasado pero estan ahi guardados
-hice unos cambios pero no les quiero dar commit y necesito regresar una commit anterior entonces le doy 
-git stash       esto me regresa al ultimo commit 
-git stash list      esto nos muestra el stash echo      el stach como que guarda esos cambios en algun lugar
-git stash pop       esto vuelve a lo que teniamos en el stash
-git stash branch "nombre de la rama"        y esto envia el stash a otra rama o la crea si no existe la rama
-git stash drop          con esto eliminamos el stash
-
 
 git clean
 git clean solo sirve para archivos que estan pendientes a darles add
