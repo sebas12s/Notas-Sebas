@@ -4,6 +4,8 @@
 
 '--' significa que usaras una palabra
 
+- `.gitkeep` este archivo se crea cuando no tenemos nada en la carpeta entonces para que git le de seguimiento creamos ese archivo
+
 En la terminal ejecutamos este primer comando
 
 - `git help` nos muestra la mayoria de comandos que podemos usar
@@ -36,6 +38,7 @@ Para salir del editor de codigo de git le da uno esc despues `:x!`
 - `git commit -m "mensaje"` esto envia los cambios solo con el commit es suficiente pero es una mala practica no dejarle un mensaje, -m le estamos diciendo que le enviaremos un mensaje
 - `git commit -am "mensaje"` este tambien hace el git commit pero solo con archivos que antes se le habian hecho add antes
 - `git commit --amend` esto lo que hace es que todos los cambios que hice los pega al commit anterior despues ya solo nos pide si quermos cambiar el mensaje y ya esta hecho
+- `git commit --amend -m "mensaje"` podemos colocar el mensaje de una vez del commit, esto nos funciona tambien para cambiarle el nombre al commit
 
 ## Comandos
 
@@ -89,6 +92,9 @@ ahi se muestra unos numeros donde dice commit: esos numeros son como el nombre d
 - `git show` Mostrara todos los cambios que hemos hecho, esto incluye las líneas que hemos cambiado, cuando y quien hizo dicho cambios.
 - `git show "nombre del archivo"` esto te muestra los cambios que se hicieron en el ultimo commit
 - `git diff` nos mestra lo que se cambio
+- `git diff --staged` nos mestra lo que se cambio en los archivos que le dimos add
+
+Pero usando VScode al presionar el archivo se puede ver mejor los cambios
 
 Para ver los cambios de una o de otra ejecutamos:
 
@@ -104,7 +110,8 @@ Para ver los cambios de una o de otra ejecutamos:
 ## Reset
 
 - `git reset "clave de la version" --hard` reset nos permite regresar, con hard todo!! vuelve al estado que le estemos diciendo
-- `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos en staging eso no se borra
+- `git reset "clave de la version" --soft` esto igual vuelve a la version anterior pero todavia guarda lo que tengamos 
+- `git reset --soft HEAD^1` el HEAD es el ultimo commit, o al que este apuntando y con el `^1` le decimos uno anterior y podemos poner mas numeros
 - `git reset --hard HEAD` elimina los cambios realizados que aún no se hayan hecho commit.
 
 ## Revert
@@ -114,8 +121,12 @@ Para ver los cambios de una o de otra ejecutamos:
 
 ## Eliminar
 
-- `git rm --cached` este comando permite borrar archivos este borra del staging y del directorio local pero los deja en el disco duro
-- `git rm --force` borra en todos lados se puede recuperar pero se usan comandos mas avanzados
+- `git rm --cached "archivo"` este comando permite borrar archivos este borra del staging y del directorio local pero los deja en el disco duro
+- `git rm --force "archivo"` borra en todos lados se puede recuperar pero se usan comandos mas avanzados
+- `git rm archivo` esto elimina el archivo o directorio pero todavia esta en el staged ya para eliminarlo hacemos otro commit o podemos volver a tenerlo con un reset
+
+## Renombrar
+- `git mv archivo archivo` si ponemos el mismo archivo lo renombra
 
 ## Ramas
 
@@ -127,6 +138,7 @@ Al crear una rama toma nuestro ultimo commit y crea la rama
 - `git branch --all` asi podemos ver las ramas del repostorio y el repositorio remoto
 - `git branch -a` lista todas las ramas locales y remotas.
 - `git branch -r` esto muestra las ramas remotas
+- `git branch -m 'nombre de rama' 'el nuevo nombre'` para cambiarle el nombre
 
 - `git branch "el nombre"` con esto podemos crear una rama
 - `git checkout "el nombre de la rama"` asi podemos cambiar a la otra rama para trabajar en ella con `git status` podemos ver en que cabecera es en la que estamos
@@ -204,6 +216,8 @@ Ya despues podemos hacer el merge
 
 - `git reflog` esto nos ayuda a ver todos los cambios que hemos hecho o cosas que eliminamos y ya con su clave podriamos recuperar y ya podemos hacer un reset para traer esos cambios
 
+Esto nos ayuda incluso si habiamos hecho un reset --hard poderlo recuperar porque ya solamente tomamos su hash y hacemos un `git reset --hard hash`
+
 ## Crear Alias
 
 Para crear el alias se hace de la siguiente manera:
@@ -213,15 +227,15 @@ Para crear el alias se hace de la siguiente manera:
 - `git config --get-regexp alias` es para ver todas nuestras alias
 - `git config --global --unset alias.alias_name` para eliminar el alias
 
+### Alias de log 
+- `git config --global alias.lg "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"`
 
 ## Blame
 
 - `git blame -c "el nombre del archivo que queremos ver"` esto nos ayuda para ver que y quien hizo cada cosa
 - `git blame "nombre del archivo o direccion" -L 33,50 -c` los numeros son las lineas de cual a cual queremos ver los cambios y la `-c` es para ordenar un poco
 
-## Extras
+## gitignore
+`.gitignore` es una archivo donde adentro de el podemos poner que archivos o carpetas queremos que no se le de seguimiento que git los ignore 
 
-- `git status --short` version compacta de status
-
-- `git pull` una combinacion de fetch y merge
-- `git fetch origin` trae los cambios de la rama
+Se pueden usar expresiones regulares ejemplo `*.log` todos los archivos .log seran ignorados
