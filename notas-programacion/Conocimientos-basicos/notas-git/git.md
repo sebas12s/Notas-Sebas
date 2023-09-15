@@ -37,7 +37,7 @@ Para salir de esa interface se preciona Esc `:wq!` y listo
 
 - `git reset "nombre del archivo"` esto le quita el add al archivo
 - `git rm --cached "nombre del archivo"` con esto se le quita el add tambien
-- `git reset HEAD` esto le quita el add a los archivos 
+- `git reset HEAD` esto le quita el add a los archivos
 - `git checkout -- .` esto nos devuelve los cambios al ultimo commit
 
 ## Git log
@@ -54,7 +54,7 @@ Para salir de esa interface se preciona Esc `:wq!` y listo
 - `git log --decorate` Te muestra donde se encuentra el head point en el log.
 - `git log --stat` Explica el número de líneas que se cambiaron brevemente.
 - `git log -p` Explica el número de líneas que se cambiaron y te muestra que se cambió en el contenido.
-- `git shortlog:` Indica que commits ha realizado un usuario, mostrando el usuario y el título de sus commits.
+- `git shortlog` Indica que commits ha realizado un usuario, mostrando el usuario y el título de sus commits.
 - `git log --graph --oneline --decorate`
 - `git log --pretty=format:"%cn hizo un commit %h el dia %cd"` Muestra mensajes personalizados de los commits.
 - `git log -3` Limitamos el número de commits.
@@ -102,11 +102,39 @@ Para ver los cambios de una o de otra ejecutamos:
 
 Primera rama sabemos que se llama main la segunda rama es la experimental pero se le llama mas development si la rama actual la ultimma version muestra un bug un ejemplo, se le puede hacer otra rama eso le dicen hotfix despues lo arreglamos y lo enviamos a la ultima version eso se le conoce como un merge
 
+Al crear una rama toma nuestro ultimo commit y crea la rama
+
 - `git branch` nos muestra todas las ramas locales
+- `git branch --all` asi podemos ver las ramas del repostorio y el repositorio remoto
 - `git branch -a` lista todas las ramas locales y remotas.
 - `git branch -r` esto muestra las ramas remotas
 
+- `git branch "el nombre"` con esto podemos crear una rama 
+- `git checkout "el nombre de la rama"` asi podemos cambiar a la otra rama para trabajar en ella con `git status` podemos ver en que cabecera es en la que estamos
+- `git checkout -b "nombre_rama"` es una union de branch y ckeckout, crea la rama y me cambia a ella
+
+head es un indicador de cual version estamos
+
+- `git show-branch` esto muestra el history de las brach y cual era
+- `git show-branch --all` esto muestra algo similiar pero con mas datos
+
+- `git push origin "el nombre de la rama"` esto es para enviar nuestras branch a repositorio remoto
+- `git branch -M "nombre"` esto mueve todos los cambios de la rama actual a la rama que estamos poniendo pero esto borra la rama actual no lo hagan
+- `git push "repositorio remoto" --delete "el nombre de la rama"` eliminar una rama del repositorio remoto
+- `git branch -d "el nombre del branch"` asi se borra la branch del local
+
+
+
+
 ## Remote
+
+Normalmente el repositorio remoto se llama `origin` 
+
+- `git clone url_del_servidor_remoto` nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
+- `git push` ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto
+- `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
+- `git merge` como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
+- `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (pull, merge)
 
 ## Extras
 

@@ -6,42 +6,8 @@ git remote prune origin: Actualiza tu repositorio remoto en caso que algún otro
 
 git revert <hash_commit>: Revierte el commit realizado, identificado por el “hash_commit”.
 
-
-trabajo remoto con git
-git clone url_del_servidor_remoto        nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
-git push            ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto 
-git fetch           esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
-git merge           como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
-git pull            este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos            
-
-git shortlog - Indica que commits ha realizado un usuario, mostrando el usuario y el titulo de sus commits.
-
-ramas en git 
-master rama principal
-head cabecera la cabeza
-cuando creamos una rama agarra el ultimo commit y ya podemos cambiar y eso no lo ve la rama master hasta que lo volvamos a fucionar
-
-git show        esto muestra los cambios y con esto podemos ver donde esta el head en este caso esta en el master
-las ramas se crean donde estan 
-git branch "el nombre"       con esto podemos crear una rama 
-git checkout "el nombre de la rama"         asi podemos cambiar a la otra rama para trabajar en ella  con git status podemos ver en que cabecera es en la que estamos
-despues de hacer los cambios si cambiamos de rama tambien cambia mi archivo
-head es un indicador de cual version estamos viendo en nuestra computadora por eso puede cambiar las head 
-git checkout -b "nombre_rama" es una union de los dos git con branch
-recordar si no haces un add y un commit y te pasas a otra rama pierdes todo lo que habias cambiado
-git show-branch         esto muestra el history de las brach y cual era
-git show-branch --all       esto muestra algo similiar pero con mas datos
-git branch --all    asi podemos ver las ramas del repostorio y el repositorio remoto
-gitk        te habre visualmente las ramas
-entonces para enviarle las demas branchs solo hacemos lo siguiente
-git push origin "el nombre de la rama"
-entonces puedes enviar las ramas al repositorio remoto o solo en tu computador mantenerlas
-git branch -M main  esto mueve todos los cambios de la rama actual a la rama que estamos poniendo       pero esto borra la rama actual no lo hagan
-
 para borrar una rama en el ropositorio remoto se hace de la siguiente manera
-git push "repositorio remoto" --delete "el nombre de la rama"
 git push origin --delete master     asi seria un ejemplo
-git branch -d "el nombre del branch"        asi se borra la branch del local
 
 para unir una rama con el master se hace el marge pero si tiene que hacer en el master o si no el master o la rama principal se cambia 
 git merge "el nombre de la rama que quermos unir"         esto nos une la ultima version de la rama y la de master y nos crea una nueva version 
