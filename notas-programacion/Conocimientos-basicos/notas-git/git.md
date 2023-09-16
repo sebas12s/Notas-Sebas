@@ -126,7 +126,6 @@ Para ver los cambios de una o de otra ejecutamos:
 - `git rm archivo` esto elimina el archivo o directorio pero todavia esta en el staged ya para eliminarlo hacemos otro commit o podemos volver a tenerlo con un reset
 
 ## Renombrar
-
 - `git mv archivo archivo` si ponemos el mismo archivo lo renombra
 
 ## Ramas
@@ -159,7 +158,10 @@ head es un indicador de cual version estamos
 
 Recordar que marge es como un commit entonces tiene que llevar un mensaje git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
 
-- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos
+- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos 
+
+### Conflictos
+Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimos que dejar y que no 
 
 ### Conflictos
 
@@ -225,7 +227,15 @@ Nos sirve para que los cambios del master si los queremos en otra rama que no te
 
 - `git rebase main` esto se coloca en la rama y trae los nuevos commits que no estan en la rama y los coloca atras de los commits de la rama
 
+## Clean
 
+- `git clean` solo sirve para archivos que estan pendientes a darles add
+- `git clean --dry-run` este comando nos sirve para que nos muestre que archivos nos borrara sin borrarlos
+- `git clean -f` y ya este nos borra esos archivos pero solo archivos no carpetas tambien ignora todo lo que esta en gitignore
+- `git clean -q` nos muestra los errores que tuvo la ejecucion pero no los archivos que fueron borrados
+- `git clean -x` borra las copias incluso las que estan en gitignore
+- `git clean -X` borra archivos que fueron ignorados por git
+- `git clean -f -d` tambien borra directorios
 
 ## Cherry-pick
 
