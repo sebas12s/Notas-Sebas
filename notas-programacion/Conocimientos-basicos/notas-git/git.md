@@ -227,6 +227,8 @@ Nos sirve para que los cambios del master si los queremos en otra rama que no te
 
 - `git rebase main` esto se coloca en la rama y trae los nuevos commits que no estan en la rama y los coloca atras de los commits de la rama
 
+- `git rebase -i HEAD~3` el head y cuantos commits queremos tomar y nos abre una interface para poder unir commits si queremos unir cambiamos el pick por squash si queremos solo unir el mas nuevo con el anterior solamente se le coloca squash al primero no a los dos
+
 ## Clean
 
 - `git clean` solo sirve para archivos que estan pendientes a darles add
