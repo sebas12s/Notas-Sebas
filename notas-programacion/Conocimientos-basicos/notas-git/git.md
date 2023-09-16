@@ -154,10 +154,14 @@ head es un indicador de cual version estamos
 - `git branch -M "nombre"` esto mueve todos los cambios de la rama actual a la rama que estamos poniendo pero esto borra la rama actual no lo hagan
 - `git push "repositorio remoto" --delete "el nombre de la rama"` eliminar una rama del repositorio remoto
 - `git branch -d "el nombre del branch"` asi se borra la branch del local
+- `git branch -d "el nombre del branch" -f` borrar la rama de manera forzada
 
 Recordar que marge es como un commit entonces tiene que llevar un mensaje git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
 
-- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos
+- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos 
+
+### Conflictos
+Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimos que dejar y que no 
 
 ## Remote
 
@@ -179,6 +183,7 @@ Normalmente el repositorio remoto se llama `origin`
 - `git tag -a v0.1 -m ""` con la m es obligatorio que lleve un mensaje
 - `git tag -a v0.1 -m "" "la clave del commit"` asi le puedo poner tag a antiguos commits
 - `git tag` si solo ponemos asi podemos ver los tags que tenemos
+- `git show nombretag` esto muestra cosas del tag incluyendo el mensaje
 - `git show-ref --tags` pero asi muestra la clave de donde esta ese tag
 - `git push origin --tags` asi podemos subir nuestro tags al repositorio remoto
 - `git tag -d "el nombre del tag"` asi se borra un tag
@@ -187,6 +192,8 @@ Normalmente el repositorio remoto se llama `origin`
 ## Stashed
 
 Es como guardar unos cambios en alguna parte y volver al ultimo commit es como que esos cambios nunca hubieran pasado pero estan ahi guardados, nos ayuda si hicimos unos cambios pero queremos volver al ultimo commit sin perder los cambios
+
+No se recomienda guardar muchas cosas en stash mientras resolvamos saquemos de stash lo que tengamos
 
 - `git stash` esto me regresa al ultimo commit
 - `git stash list` esto nos muestra el stash hecho esto guarda los cambios en algun lado
