@@ -229,7 +229,6 @@ Nos sirve para que los cambios del master si los queremos en otra rama que no te
 
 - `git rebase -i HEAD~3` el head y cuantos commits queremos tomar y nos abre una interface para poder unir commits si queremos unir cambiamos el pick por squash si queremos solo unir el mas nuevo con el anterior solamente se le coloca squash al primero no a los dos
 
-Probando
 
 ## Clean
 
