@@ -46,6 +46,7 @@ Para salir del editor de codigo de git le da uno esc despues `:x!`
 - `git rm --cached "nombre del archivo"` con esto se le quita el add tambien
 - `git reset HEAD` esto le quita el add a los archivos
 - `git checkout -- .` esto nos devuelve los cambios al ultimo commit
+- `git checkout -- archivo` esto nos devuelve los cambios al ultimo commit solo en el archivo
 
 ## Buscar palabras
 
@@ -229,6 +230,9 @@ Nos sirve para que los cambios del master si los queremos en otra rama que no te
 
 - `git rebase -i HEAD~3` el head y cuantos commits queremos tomar y nos abre una interface para poder unir commits si queremos unir cambiamos el pick por squash si queremos solo unir el mas nuevo con el anterior solamente se le coloca squash al primero no a los dos
 
+Tambien se le puede cambiar el nombre con la r de reword    
+
+Tambien se puede editar don edit o e, con 
 
 ## Clean
 
