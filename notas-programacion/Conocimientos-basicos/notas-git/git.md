@@ -172,10 +172,11 @@ Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimo
 
 Normalmente el repositorio remoto se llama `origin`
 
-- `git remote add origin url_del_servidor_remoto` para agregar un repositorio remoto
+- `git remote add origin url_del_servidor_remoto` para agregar un repositorio remoto, el origin es cualquier nombre pero es un estandar que se llame origin 
 - `git clone url_del_servidor_remoto` nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
 - `git clone url_del_servidor_remoto "carpeta` esto es si queremos ponerlo en una carpeta
 - `git push` ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto
+- `git push -u origin main` esto ya deja por defecto el origin main entonces solo ejecutamos el `git push` y `git pull` sin especificar nada ya que la `-u` configuro por defecto
 - `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
 - `git merge` como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
 - `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (fetch, merge)
@@ -281,3 +282,13 @@ Para crear el alias se hace de la siguiente manera:
 `.gitignore` es una archivo donde adentro de el podemos poner que archivos o carpetas queremos que no se le de seguimiento que git los ignore
 
 Se pueden usar expresiones regulares ejemplo `*.log` todos los archivos .log seran ignorados
+
+## Github
+
+Si te sale un error de octobre no se que, genera un token y pon ese token como contraseña y tu correo
+
+- `git remote` sale nuestro repositorio remoto 
+- `git remote -v` nos sale estas opciones: fetch-traer cosas, push-enviar cosas 
+
+### Release tag
+Son como mas informacion de los tags es para explicar mejor nuestros tags
