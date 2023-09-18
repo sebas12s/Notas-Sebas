@@ -107,6 +107,7 @@ Para ver los cambios de una o de otra ejecutamos:
 
 - `git checkout main "el archivo que queremos que nos devuelva"` con solo poner main nos muestra la ultima version
 - `git checkout` esta es una manera de volver a versiones anteriores, igual tener mucho cuidado
+- `git checkout "hash" archivo` esto solo devuelve el archivo que queremos al hash que pusimos, no todo el commit
 
 ## Reset
 
@@ -127,6 +128,7 @@ Para ver los cambios de una o de otra ejecutamos:
 - `git rm archivo` esto elimina el archivo o directorio pero todavia esta en el staged ya para eliminarlo hacemos otro commit o podemos volver a tenerlo con un reset
 
 ## Renombrar
+
 - `git mv archivo archivo` si ponemos el mismo archivo lo renombra
 
 ## Ramas
@@ -152,17 +154,22 @@ head es un indicador de cual version estamos
 - `git show-branch --all` esto muestra algo similiar pero con mas datos
 
 - `git push origin "el nombre de la rama"` esto es para enviar nuestras branch a repositorio remoto
+- `git push --set-upstream origin rama` asi tambien podemos configurar para que solamente hagamos git push y la envie [Mas informacion](https://stackoverflow.com/questions/37770467/why-do-i-have-to-git-push-set-upstream-origin-branch)
 - `git branch -M "nombre"` esto mueve todos los cambios de la rama actual a la rama que estamos poniendo pero esto borra la rama actual no lo hagan
 - `git push "repositorio remoto" --delete "el nombre de la rama"` eliminar una rama del repositorio remoto
 - `git branch -d "el nombre del branch"` asi se borra la branch del local
 - `git branch -d "el nombre del branch" -f` borrar la rama de manera forzada
+- `git push origin :nombrerama` esto es si eliminamos una rama desde el local y la queremos eliminar en el remoto
+
+- `git remote prune origin` esto revisa nuestro remoto y local y en este caso si tenemos ramas que el remoto no tiene este comando las borra
 
 Recordar que marge es como un commit entonces tiene que llevar un mensaje git merge se puede hacer en cualquier rama para traer las ultimas versiones del trabajo
 
-- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos 
+- `git merge "el nombre de la rama que quermos unir"` esto une la rama actual con la que pongamos, pero los cambios se quedan en la rama que estemos
 
 ### Conflictos
-Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimos que dejar y que no 
+
+Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimos que dejar y que no
 
 ### Conflictos
 
@@ -172,14 +179,15 @@ Se soluciona manualmente, nos aparece los cambios de las dos ramas y ya decidimo
 
 Normalmente el repositorio remoto se llama `origin`
 
-- `git remote add origin url_del_servidor_remoto` para agregar un repositorio remoto, el origin es cualquier nombre pero es un estandar que se llame origin 
+- `git remote add origin url_del_servidor_remoto` para agregar un repositorio remoto, el origin es cualquier nombre pero es un estandar que se llame origin
 - `git clone url_del_servidor_remoto` nos trae una copia master a nuestro directorio y todos los cambios al repositorio local esto lo trae del repositorio remoto
 - `git clone url_del_servidor_remoto "carpeta` esto es si queremos ponerlo en una carpeta
 - `git push` ejecutamos esto despues de hacer add y commit entonces cuando ejecutemos enviamos la ultima version del repositorio local al repositorio remoto
 - `git push -u origin main` esto ya deja por defecto el origin main entonces solo ejecutamos el `git push` y `git pull` sin especificar nada ya que la `-u` configuro por defecto
-- `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local trae todos los cambios
+- `git fetch` esto trae del repositorio remoto las actualizaciones a nuestro repositorio local, trae los cambios o los commits pero en tu repositorio todavia estas en tu ultimo commit, tambien puede traer ramas
 - `git merge` como solo el fetch no te lo copia en tus archivos entonces tienes que hacer este comando para que te lo copie y puedas trabaajar en el
 - `git pull` este fuciona ambos conceptos entonces trae los cambios a nuestro repositorio local y despues lo copia a nuestros archivos (fetch, merge)
+- `git pull --all` esto es para traer todo incluso ramas externas
 - `git remote prune origin` esto actualiza el repositorio local con el remoto, si en el remoto eliminaron ramas, etiquetas etc tambien las eliminan del local
 - `git remote rename origin "nuevo nombre` para cambiarle el nombre al remoto
 
@@ -231,9 +239,9 @@ Nos sirve para que los cambios del master si los queremos en otra rama que no te
 
 - `git rebase -i HEAD~3` el head y cuantos commits queremos tomar y nos abre una interface para poder unir commits si queremos unir cambiamos el pick por squash si queremos solo unir el mas nuevo con el anterior solamente se le coloca squash al primero no a los dos
 
-Tambien se le puede cambiar el nombre con la r de reword    
+Tambien se le puede cambiar el nombre con la r de reword
 
-Tambien se puede editar don edit o e, con 
+Tambien se puede editar don edit o e, con
 
 ## Clean
 
@@ -287,8 +295,120 @@ Se pueden usar expresiones regulares ejemplo `*.log` todos los archivos .log ser
 
 Si te sale un error de octobre no se que, genera un token y pon ese token como contraseña y tu correo
 
-- `git remote` sale nuestro repositorio remoto 
-- `git remote -v` nos sale estas opciones: fetch-traer cosas, push-enviar cosas 
+- `git remote` sale nuestro repositorio remoto
+- `git remote -v` nos sale estas opciones: fetch-traer cosas, push-enviar cosas
 
 ### Release tag
+
 Son como mas informacion de los tags es para explicar mejor nuestros tags
+
+### Pull request
+
+Son cambios que le puedo dar al repositorio pero estos cambios primero los revisan, se puede discutir y si los cambios son aprobados por los administradores se puede aceptar y hacer el merge o el squash
+
+Al cerrarlo se crea un numero con el pull request se recomienda que se deje ese numero, al buscar en `go to file` ponemos el numero y nos puede ayudar a encontrar mas rapido
+
+[Flujo de trabajo Github](https://blog.mergify.com/understanding-the-github-pull-request-workflow/)
+
+### Fork
+
+Al hacer un fork de un proyecto es como si pasara a ser nuestro el proyecto, tenemos una copia exacta como propia entonces nos deja hacer push pull y todo eso ya que tenemos una copia exacta como nuestra.
+
+Fork se hace cuando no tenemos acceso al repositorio pero queremos trabajar con el, como dije nos crea una copia propia.
+
+Ya podemos copiar y trabajar en ella, si queremos enviar cambios al repositorio real se hace un pull request, en `Contribute`, el `Sync fork` es por si el repositorio remoto hizo cambios y para que los tengamos tambien
+
+Ya despues del pull request esperar, discutir y unir como normalmente se haria.
+
+Como necesitamos traer la informacion del repositorio remoto original lo hacemos desde github pero lo podemos hacer en git agregando otro remoto
+
+Copiamos el url del repositorio original y agregamos el remoto
+
+- `git remote add upstream url` cuando solo podemos traer informacion normalmente se pone upstream y ya aqui agregamos otro remoto y para traer los cambios a nuestro repositorio hacemos un pull
+- `git pull upstream main`
+
+### Issues
+
+Es utilizado normalmente para hacer preguntas, para decir si hay errores, tambien se le puede dar seguimiento a los errores o las caracteristicas
+
+Si borramos todo en el buscador, nos muestra todo lo que tenga un indice `#1` este indice github lo trabaja automaticamente no tocar el indice
+
+Se le puede asignar a personas, proyectos y asi
+
+Si nos pide cambios podemos hacerlo y agregarle un comentario desde github a lo que cambiamos y hacer referencia al indice.
+
+En el issues en la conversacion podemos hacer referencia al commit tambien para que vean el cambio
+
+Pero para cerrar un issues desde un commit se puede hacer lo siguiente
+
+- `git commit -am "Fixes #12: Se cambio"` al poner `Fixes #` y el indice ya cierra el issues, lo da como completo
+
+Se puede crear como plantillas para cuando queramos hacer un issues en settings
+
+#### Label
+
+Los labes son muy importantes, se puede editar y crear nuevos y al crear un issues en los ajustes de la derecha podemos ponerlo
+
+#### Milestone
+
+Son como para agrupar issues, un ejemplo es que necesitamos completar o resolver todas esas issues para octubre, creamos un milestone y se lo asignamos
+
+### Github Pages
+
+Es como subir a internet tu pagina pero solamente acepta html, md, js y css
+
+No solamente de tu proyectos si no tambien se puede subir pagina de tu perfil de github, para hacerlo: 
+- Crear un nuevo repositorio
+- Ponerle el nombre del respositorio : `TuNickName.github.io`
+- Ponerlo publico
+- Ir a settings>pages
+- Seleccionar un tema (opcional)
+- settings>pages ahi encontramos la url
+Y ya se puede editar el archivo o podemos subir uno creado desde 0
+
+Si queremos crear uno desde 0
+- Crear una carpeta `docs` (opcional pero recomendado) adentro va el contenido estatico
+- Subimos nuestros cambios
+- En github settings>pages
+- No seleccionar un tema, seleccionar una rama
+- Seleccionar la carpeta > save 
+
+### Wikis
+
+Podemos poner nuestra documentacion y cualquier documentacion, solo que para repositorios privados se tiene que pagar
+
+Es como una mini pagina web 
+
+Si queremos poner direccion entre paginas que tendramos en wiki, ponemos como cualquier link y ponemos ademas de la url el nombre de esa pagina
+
+### Projects
+
+Es un administrador de proyectos, algo como jira.
+
+Creamos uno y se lo podemos asignar ya despues a nuestros repositorios, podemos crear las tareas normales o crear issues o cambiarlos a issues
+
+Incluso podemos ya asignar de issues existentes
+
+### Organizaciones
+
+Son como para poner a todos los integrantes de tu trabajo y ahi mismo trabajar en muchos proyectos, restringir acceso y todo eso
+
+Se pueden transferir nuestro proyectos a la organizacion en settings y danger zone hasta transferir, lo podemos recuperar si hacemos un fork
+
+#### Teams
+Podemos crear minis organizaciones para los teams, grupos adentro del la organizacion, tambien le podemos dar permisos a cada team o a los integrantes
+
+### Gist
+
+Son utilizados para cuando queramos pasar pedazos de codigos, alias, informacion que queramos compartir y asi, incluso subir archivos y asi
+
+Secretos no son privados igual se puede buscar con el url
+
+Tambien una funcionalidad que le podemos dar es que pedazos de codigo que podamos reutilizar despues ponerlo en un gist y con una extencion en vscode acceder rapido a el 
+
+- `Gist` extension
+- ctrl + shift + p 
+- `Gist: select profile`
+- Creamos un token de acceso
+- Lo ponemos y ya podemos abrirlos
+- En insert text from gist file ahi podemos ingresar el codigo
