@@ -118,7 +118,7 @@ FirstLove.defaultProps = {
 
 [Documentacion](https://es.legacy.reactjs.org/docs/events.html)
 
-### Despliegue
+## Despliegue
 
 Hacemos un `yarn build o npm run build` ya que ese html tenemos que subir el de buil de produccion
 
@@ -149,3 +149,15 @@ Se dividen en dos:
 
 - Unitarias: enfocadas en pequeñas funcionalidades
 - Integracion: enfocadas en como reaccionan varias piezas en conjunto
+
+
+## .env
+En react se crea el archivo de .env y se pueden crear asi 
+```
+REACT_APP_API_KEY_GIF=htt
+```
+Y se llaman
+```
+const apiKeyGif = process.env.REACT_APP_API_KEY_GIF
+```
+Ya la podemos asignar a una variable
