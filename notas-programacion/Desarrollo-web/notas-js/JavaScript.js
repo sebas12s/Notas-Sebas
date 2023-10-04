@@ -965,3 +965,18 @@ class Libro {
 		this._autor = nuevoAutor;
 	}
 }
+
+
+
+//funciones de tiempo
+
+//interval se ejecuta cada tiempo que le pongamos en milisegundos
+setInterval(() => {
+	console.log('marce')
+}, 2000);
+
+
+//este espera los segundos pero solo una vez se ejecuta
+setTimeout(() => {
+	console.log('marce')
+}, 2000);
