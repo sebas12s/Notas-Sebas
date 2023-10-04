@@ -1,15 +1,23 @@
 # Codigo de flutter
 
-## Hola mundo  
-* lib/main.dart 
+- [Codigo de flutter](#codigo-de-flutter)
+  - [Hola mundo](#hola-mundo)
+  - [Counter app](#counter-app)
+  - [App mensage](#app-mensage)
+    - [Segunda parte](#segunda-parte)
+
+## Hola mundo
+
+- lib/main.dart
+
 ```dart
 import 'package:flutter/material.dart'; //ctrl + . veremos todo lo que se importo
 
 void main() {
   runApp(
       const MyApp()); //toda app de flutter en su main tiene una ejecucion de un widget principal, runApp espera resivir un widget
-      //aqui tambien se pone const 
-} 
+      //aqui tambien se pone const
+}
 
 class MyApp extends StatelessWidget {
   //'StatelessWidgets ya esta en material.dart'
@@ -31,7 +39,8 @@ class MyApp extends StatelessWidget {
 lib/presentation/screens/counter_screen.dart
 
 MaterialApp puede cambiar muchas veces con la imagen entonces hacemos diferentes archivos por las pantallas
-```dart         
+
+```dart
 class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
 
@@ -43,32 +52,33 @@ class CounterScreen extends StatelessWidget {
   }
 }
 ```
-Y ya solo lo llamamos 
+
+Y ya solo lo llamamos
 
 lib/main.dart
+
 ```dart
 Widget build(Object context) {
-    return const MaterialApp(   
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CounterScreen()     //recuerda importar
     );
   }
 ```
 
-
-
 ## Counter app
 
 lib/main.dart
+
 ```dart
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(Object context) {
-    return MaterialApp(   
-      debugShowCheckedModeBanner: false, 
-      theme: ThemeData(   //esto es el tema resive un ThemeData 
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(   //esto es el tema resive un ThemeData
         useMaterial3: true,  //le decimos que el estilo de material3 estara activado
         colorSchemeSeed: Colors.green  //para cambiar el color del todo el tema o algo asi veo
         //el Color podriamos configurar el color nosotros con rgb o asi, pero si le ponemos colors ya solo ponemos el color y el hara la paleta de colores
@@ -79,8 +89,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-
 lib/presentation/screens/counter_screen.dart
+
 ```dart
 class CounterScreen extends StatefulWidget {
   //cambiaremos a Statuful Widget para poder usar un estado
@@ -185,6 +195,7 @@ class _CounterScreenState extends State<CounterScreen> {
 ```
 
 Construccion de una clase para nuestros botones
+
 ```dart
 class CustomButton extends StatelessWidget {
   //creamos una clase para los botones ya que se estaban repitiendo mucho
@@ -206,13 +217,15 @@ class CustomButton extends StatelessWidget {
       // elevation: 20,    //como la sombra
       onPressed: onPressed,
       // onPressed: () {},    //pero si le mandamos el onPressed tiene el efecto de click
-      // onPressed: null,    //si le mandamos null se desabilitan 
+      // onPressed: null,    //si le mandamos null se desabilitan
       child: Icon(icon),
     );
   }
 }
 ```
+
 Como la llamamos
+
 ```dart
 CustomButton(   //aqui solamente mandamos a llamar a nuestra clase y ponemos los argumentos que pedia
   icon: Icons.exposure_minus_1_outlined,
@@ -224,10 +237,10 @@ CustomButton(   //aqui solamente mandamos a llamar a nuestra clase y ponemos los
 ),
 ```
 
-
 ## App mensage
 
 lib/main.dart
+
 ```dart
 void main() => runApp(const MyApp());
 
@@ -241,14 +254,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme(selectedColor: 6).themeMarce(),    //esto esperea un dato de themeData, nuestra clase, para obtener el tema ponemos nuestro metodo
       //resivimos un numero para seleccionar nuestro tema
-      home: const ChatScreen(), 
+      home: const ChatScreen(),
     );
   }
 }
 ```
 
-
 lib/presentation/screens/chat/chat_screen.dart
+
 ```dart
 class ChatScreen extends StatelessWidget {
   const ChatScreen(
@@ -292,13 +305,13 @@ class _ChatView extends StatelessWidget {
         // lo envolvemos en un padding
         padding: const EdgeInsets.symmetric(
             horizontal:
-                12), 
+                12),
         child: Column(
           //de hijo le dimos la columna para poder trabajar la parte de los mensajes y la parte para enviar los mensajes
           children: [
             Expanded(
               //el expanded se expande a todo el espacio que tenga, en este ejemplo solo le dimos un color
-              // child: Container( 
+              // child: Container(
               //   color: Colors.green     //ya solo le dimos un color
               // )
               child: ListView.builder(
@@ -318,8 +331,8 @@ class _ChatView extends StatelessWidget {
 }
 ```
 
-
 lib/config/theme.dart
+
 ```dart
 const Color _customColor =
     Color(0xFF0A8B60); //se pone 0xFF antes de las letras para los colores
@@ -335,14 +348,14 @@ const List<Color> _colorTheme = [   //nuestro arreglo de colores
 
 class AppTheme {
   final int selectedColor;    //inicialisamos un argumento
-  AppTheme({this.selectedColor = 0})  
+  AppTheme({this.selectedColor = 0})
       : assert(selectedColor >= 0 && selectedColor <= _colorTheme.length - 1,   //las assert para ponerle una condicion al argumento
             'El numero ingresado tiene que estar entre 0 y ${ _colorTheme.length }'); //despues de la coma va el mensaje que queremos poner
   ThemeData themeMarce() {    //nuestro metodo para obtener nuestro tema ya que aqui lo retornamos
     return ThemeData(
-      useMaterial3: true,   
+      useMaterial3: true,
       colorSchemeSeed: _colorTheme[selectedColor],  //seleccionamos el color que tendra y ya los pusimos en nuestro arreglo
-      // brightness: Brightness.dark,    //esto pone el modo oscuro 
+      // brightness: Brightness.dark,    //esto pone el modo oscuro
     );
   }
 }
@@ -351,6 +364,7 @@ class AppTheme {
 ### Segunda parte
 
 lib/presentation/widgets/chat/my_menssage_bubble.dart
+
 ```dart
 class MyMenssageBobble extends StatelessWidget {
   const MyMenssageBobble({super.key});
@@ -367,14 +381,14 @@ class MyMenssageBobble extends StatelessWidget {
             // width: ,   //se pueden poner width y heihgt
             // height: ,
             decoration: BoxDecoration(    //la decoracicon de esta columna
-                color: colorsM.primary, borderRadius: BorderRadius.circular(20)),   //borderRadius, le puse un circular, 
+                color: colorsM.primary, borderRadius: BorderRadius.circular(20)),   //borderRadius, le puse un circular,
                 //de colores ponemos nuestra variale y ahi estan todos los colores
-            child: const Padding(   
+            child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text('Me gusta mucho mi Novia',
                   style: TextStyle(color: Colors.white)),   //el estilo del texto, un color white
             )),
-        const SizedBox(   
+        const SizedBox(
           height: 10,   //para que tenga un espacio entre los mensajes
         )
       ],
@@ -384,6 +398,7 @@ class MyMenssageBobble extends StatelessWidget {
 ```
 
 lib/presentation/widgets/chat/her_menssage_bubble.dart
+
 ```dart
 class HerMenssageBobble extends StatelessWidget {
   const HerMenssageBobble({super.key});
@@ -456,6 +471,7 @@ class _ImageBobble extends StatelessWidget {
 ```
 
 lib/presentation/screens/chat/chat_screen.dart
+
 ```dart
 class _ChatView extends StatelessWidget {
   @override
@@ -486,6 +502,7 @@ class _ChatView extends StatelessWidget {
 ```
 
 lib\presentation\widgets\shared\menssage_field_box.dart
+
 ```dart
 class MenssageFieldBox extends StatelessWidget {
   const MenssageFieldBox({super.key});

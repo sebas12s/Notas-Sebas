@@ -1,5 +1,29 @@
 # Codigo
 
+- [Codigo](#codigo)
+  - [Link](#link)
+  - [Layout](#layout)
+  - [Metadata](#metadata)
+  - [Font](#font)
+  - [not-found](#not-found)
+  - [cliente servidor](#cliente-servidor)
+  - [FetchData](#fetchdata)
+  - [Loading](#loading)
+  - [Parametros de la url](#parametros-de-la-url)
+  - [Suspense](#suspense)
+  - [Import Alias](#import-alias)
+  - [useRouter](#userouter)
+  - [useParams](#useparams)
+  - [API Route Handlers](#api-route-handlers)
+    - [Params](#params)
+    - [Querys](#querys)
+    - [Post](#post)
+  - [.env](#env)
+- [App CRUD Prisma](#app-crud-prisma)
+  - [Formulario POST](#formulario-post)
+  - [Listar las tareas](#listar-las-tareas)
+  - [Nuevo formulario create, update, delete](#nuevo-formulario-create-update-delete)
+
 layout.js
 
 ```jsx
@@ -697,11 +721,13 @@ function TaskCard({ task }) {
   );
 }
 ```
-```jsx
-import NewPage from "@/app/new/page";   // recordar que en new page tenemos para agregar una nueva tarea
 
-export default NewPage;     //entonces nosotros simplemente exportamos la interface de crear, ya solamente tenemos que cambiar 
+```jsx
+import NewPage from "@/app/new/page"; // recordar que en new page tenemos para agregar una nueva tarea
+
+export default NewPage; //entonces nosotros simplemente exportamos la interface de crear, ya solamente tenemos que cambiar
 ```
+
 ## Nuevo formulario create, update, delete
 
 ```jsx
@@ -806,8 +832,8 @@ function NewPage({ params }) {
                   method: "DELETE",
                 });
 
-                const data = await res.json()
-                console.log(data)
+                const data = await res.json();
+                console.log(data);
 
                 router.refresh();
                 router.push("/");

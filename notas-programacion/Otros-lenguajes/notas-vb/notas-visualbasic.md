@@ -1,6 +1,10 @@
-
 # Visual Basic
+
+- [Visual Basic](#visual-basic)
+  - [Como crear variables](#como-crear-variables)
+
 ## Como crear variables
+
 asi se crea una variable con las palabras reservadas Dim y As y el tipo de dato
 
 su extencion vb
@@ -12,6 +16,7 @@ Sub variables()
     MsgBox nombre
 End Sub
 ```
+
 MsgBox una funcion que muestra una ventana emergente con informacion y despues lo que queremos que muestre
 
 ```vb
@@ -23,6 +28,7 @@ Sub variables()
     MsgBox suma
 End Sub
 ```
+
 Un pequeño ejemplo de sumas y restas
 
 Alt + 62 = >
@@ -44,22 +50,20 @@ Sub condicionales()
     End If
 End Sub
 ```
+
 Asi se hace un if anidado
 
 ```vb
 nombre = "An...": apellido = "Seb.-.."
 ```
+
 con los dos puntos le digo que hare otra sentencia en la misma linea
-
-
-
 
 http://localhost/phpmyadmin/
 asi se abre en el navegador con el xamp
 
 SELECT nombre, apellido FROM `persona` WHERE id_persona = 1
 nuestro primera consulta
-
 
 ```vb
 Sub bucle()
@@ -71,9 +75,8 @@ Sub bucle()
  Wend
 End Sub
 ```
+
 Un while en vb
-
-
 
 ```vb
 Private Sub CommandButton1_Click()
@@ -99,6 +102,7 @@ End Sub
 ```
 
 Calculamos si es el usuario
+
 ```vb
 Private Sub CommandButton1_Click()
     Dim usuario, usuarioG, contrasena, contrasenaG As String
@@ -122,20 +126,21 @@ usuario = emty
     ComboBox1.AddItem "Categoria 4", 3
     ComboBox1.AddItem "Categoria 5", 4
 ```
+
 Asi ponemos datos tambien a un combo box
 
 ```vb
 Private Sub CommandButton1_Click()
     Dim usuario, usuarioG, contrasena, contrasenaG, resultado As String
-    
+
     usuario = TextBox1.Value
     contrasena = TextBox2.Value
     ' usuarioG = Worksheets("Usuarios").Range("A2")
     ' contrasenaG = Worksheets("Usuarios").Range("B2")
     usuarioss = Application.WorksheetFunction.VLookup(TextBox1, Worksheets("Usuarios").Range("A2:A100"), 1, False)
     contrasenass = Application.WorksheetFunction.VLookup(TextBox2, Worksheets("Usuarios").Range("B2:AB100"), 1, False) ' un buscar v
-    
-    
+
+
     MsgBox usuarioss
     MsgBox contrasenass
     If usuario = usuarioss And contrasena = contrasenass Then

@@ -1,5 +1,22 @@
 # Hooks
 
+- [Hooks](#hooks)
+  - [useState](#usestate)
+    - [Custom Hook del Counter](#custom-hook-del-counter)
+    - [Usando mi hook](#usando-mi-hook)
+  - [useEffect](#useeffect)
+    - [Con Hook](#con-hook)
+  - [Multiple Custom Hook](#multiple-custom-hook)
+    - [useFetch](#usefetch)
+  - [useRef](#useref)
+  - [useLayoutEffect](#uselayouteffect)
+  - [useMemo](#usememo)
+    - [Metodo Memo](#metodo-memo)
+    - [useMemo](#usememo-1)
+  - [useCallback](#usecallback)
+  - [useReducer](#usereducer)
+    - [Reducer](#reducer)
+
 ## useState
 
 Algo importante es que cuando cambia el estado el componente se vuelve a ejecutar todo el componente, por eso se recomienda que las funciones y otras cosas si no usan algo del componente se creen afuera.

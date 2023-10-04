@@ -1,5 +1,14 @@
 # Visual Studio Code
 
+- [Visual Studio Code](#visual-studio-code)
+  - [Atajos](#atajos)
+  - [Chrome](#chrome)
+    - [VSCode](#vscode)
+    - [Activity bar](#activity-bar)
+    - [Codigo](#codigo)
+  - [Extenciones](#extenciones)
+
+
 ## Atajos
 
 ## Chrome
@@ -7,6 +16,7 @@
 
 
 ### VSCode
+
 * ctrl + ,    configuraciones
 
 * ctrl + shift + p    comand palette

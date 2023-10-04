@@ -1,5 +1,25 @@
 # Nextjs 13
 
+- [Nextjs 13](#nextjs-13)
+  - [Como crear un proyecto](#como-crear-un-proyecto)
+  - [Carpetas](#carpetas)
+  - [Codigo](#codigo)
+- [Layout](#layout)
+- [Metadata](#metadata)
+  - [Fonts](#fonts)
+  - [not-found](#not-found)
+  - [cliente servidor](#cliente-servidor)
+  - [FetchData](#fetchdata)
+  - [Loading](#loading)
+  - [Parametros en las urls](#parametros-en-las-urls)
+  - [Suspense](#suspense)
+  - [Style](#style)
+  - [Src](#src)
+  - [useRauter](#userauter)
+  - [useParams](#useparams)
+  - [API](#api)
+  - [.env || .env.local](#env--envlocal)
+
 ## Como crear un proyecto
 
 `npx create-next-app "nombre"` sin las comillas
@@ -111,4 +131,5 @@ En una carpeta adentro de app podemos crear api ya podemos crear nuestras rutas 
 Los nombres de las funciones tienen que llevar los metodos http, POST, GET etc.
 
 ## .env || .env.local
+
 .env son para guardar nuestras variables de entorno, como secretas por si queremos, es normal que en otros proyectos solamente se llame .env pero para next es .env.local recordar ignorarlo en .gitignore

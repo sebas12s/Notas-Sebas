@@ -1,5 +1,7 @@
 # App Gif
 
+- [App Gif](#app-gif)
+
 Creamos primero la funcionalidad de agregar con un input nuevos objetos a un arreglo el codigo es el siguiente:
 
 contenedor padre:

@@ -23,7 +23,6 @@
     - [Stream with http](#stream-with-http)
   - [Fetch](#fetch)
 
-
 ## REPEL
 
 En la terminal si escribimos `node` nos habre el interprete de node `REPL`, este es como la consola del navegador, podemos interpretar codigo de js, clg o sumas y eso
@@ -127,9 +126,11 @@ Solo lo que exportamos podemos obtener tambien podemos tener cosas que no export
 #### Export e import
 
 Tambien se pueden importar y exportar como lo hacemos en react pero en el `package.json` debemos color para que podamos usarlo
+
 ```
 "type": "module"
 ```
+
 Importante si ponemos este no podemos usar la antigua manera
 
 ```js
@@ -138,14 +139,14 @@ module.exports = {
   num,
   user,
 };
-//esta es como se haria 
+//esta es como se haria
 export default {
   name,
   num,
   user,
-}
+};
 
-import m from '//..';   //y asi lo importamos
+import m from "//.."; //y asi lo importamos
 ```
 
 #### Os
@@ -188,7 +189,7 @@ Es para trabajar con archivos en node, fs es de File Sistem
 
 ```js
 const fs = require("fs");
-const { readFile } = require('fs')   //tambien se puede desestructurar
+const { readFile } = require("fs"); //tambien se puede desestructurar
 
 const text = fs.readFileSync("//..", "utf-8"); //esto es para leer lo que tenga el archivo el primer argumentoe es la ruta el segundo es para que me ponga en un string
 console.log(text.toString()); // asi tambien podemos convertir en string si no tenemos el utf
@@ -297,7 +298,6 @@ A todo esto npx nos ayuda para ejecutar comandos sin descargarlos en nuestro com
 
 `nodemon archivo` si no esta global no podemos ejecutarlo asi por eso podemos usar el npx para ejecutar modulos que no estan el la computadora
 
-
 ### Event Loop
 
 Hay que recordar que js es async entonces si algo se tarda pasara a la otra accion y asi no espera a que se ejecute para pasar a la otra
@@ -307,7 +307,7 @@ Para eso usamos el codigo async para que se envie a otro lado el codigo que quer
 ## Promise
 
 ```js
-const { readFile } = require('fs')
+const { readFile } = require("fs");
 
 //una funcion que lee un archivo, Promise es una funcion de JavaScript que nos permite hacer lo que esta abajo con el .then
 const getText = (path) => {
@@ -332,20 +332,21 @@ getText("//..")
 Recordemos que el codigo Async no se puede almacenar en una variable ya que tiene que esperar la promesa por eso se puede trabajar con `.then` pero con async y await cambia
 
 ```js
-const { readFile } = require('fs')
+const { readFile } = require("fs");
 
 //esto es lo mismo que los then que tengo arriba ya solo tengo que llamar a la funcion
 //y para manejar errores lo hacemos en el try catch
 try {
-  throw new Error('error')  //el throw es para que acabe a ejecurcion y ponemos un error 
-  const read = async() => {
-    const result = await getText('//..')
-    console.log(result)
-  }
-} catch(err) {
-  console.log(err)
+  throw new Error("error"); //el throw es para que acabe a ejecurcion y ponemos un error
+  const read = async () => {
+    const result = await getText("//..");
+    console.log(result);
+  };
+} catch (err) {
+  console.log(err);
 }
 ```
+
 Recordemos que esto de `await` o el `.then` es porque lo que devuelve es una promesa (la funcion de arriba) pero para no tener que hacer asi tan larga nuestra funcion de promesa hay paquetes
 
 #### Promisify
@@ -353,97 +354,107 @@ Recordemos que esto de `await` o el `.then` es porque lo que devuelve es una pro
 Esto nos ayuda a hacer que una funcion que espera un callback se convierta en una promesa
 
 ```js
-const { readFile } = require('fs')
-const { promisify } = require('util') // ya es de node el modulo util
+const { readFile } = require("fs");
+const { promisify } = require("util"); // ya es de node el modulo util
 
-const readFilePromise = promisify(readFile)   //readFile espera un callback entonces esta linea es lo mismo que la funcion qeu creamos de getText
-const read = async() => {
-    const result = await readFilePromise('//..', 'utf-8')  // y el resultado es el mismo porque convertimos en una promesa el readFile
-    console.log(result)
-  }
+const readFilePromise = promisify(readFile); //readFile espera un callback entonces esta linea es lo mismo que la funcion qeu creamos de getText
+const read = async () => {
+  const result = await readFilePromise("//..", "utf-8"); // y el resultado es el mismo porque convertimos en una promesa el readFile
+  console.log(result);
+};
 ```
 
-Aunque ahora podemos saltarnos usar el `util` 
-```js
-const { readFile } = require('fs/promise')  //usando esta direccion ya nos devuelve una promesa
+Aunque ahora podemos saltarnos usar el `util`
 
-const read = async() => {
-    const result = await readFile('//..', 'utf-8')  //ya esto es lo mismo
-    console.log(result)
-  }
+```js
+const { readFile } = require("fs/promise"); //usando esta direccion ya nos devuelve una promesa
+
+const read = async () => {
+  const result = await readFile("//..", "utf-8"); //ya esto es lo mismo
+  console.log(result);
+};
 ```
 
 ## Event
-Un evento en el front es el `addEventListener` el click y eso tambien es importante en en node
-```js
-const EventEmitter = require('events')  //con este modulo lo que nos ayuda a crear nuevos eventos, el nombre de la variable es un estandar
 
-const customeEmitter = new EventEmitter()    //recordemos que la palabra new es para crear un nuevo objeto, este objeto me permite poder escuchar determinados eventos
+Un evento en el front es el `addEventListener` el click y eso tambien es importante en en node
+
+```js
+const EventEmitter = require("events"); //con este modulo lo que nos ayuda a crear nuevos eventos, el nombre de la variable es un estandar
+
+const customeEmitter = new EventEmitter(); //recordemos que la palabra new es para crear un nuevo objeto, este objeto me permite poder escuchar determinados eventos
 //Ya con esta variable tengo un nuevo manejador de eventos
 
-customeEmitter.on('response', (data, masDatos) => {   
-// con el on es un escuchador, encontces le digo que cuando escuche un evento, en este caso response haga algo  
-//el response solo es el nombre del evento que estoy creando, le puedo poner cualquier nombre
-//tambien podemos recibir mas datos
+customeEmitter.on("response", (data, masDatos) => {
+  // con el on es un escuchador, encontces le digo que cuando escuche un evento, en este caso response haga algo
+  //el response solo es el nombre del evento que estoy creando, le puedo poner cualquier nombre
+  //tambien podemos recibir mas datos
 
-  console.log(data)
-})
+  console.log(data);
+});
 
-customeEmitter.emit('response', 'Marcela hermosa', 12)  //y asi emito el evento, es como un click pero aqui le digo que emita el evento response y envie los datos como los espera el evento
+customeEmitter.emit("response", "Marcela hermosa", 12); //y asi emito el evento, es como un click pero aqui le digo que emita el evento response y envie los datos como los espera el evento
 
 //Es importante que primero creemos el evento y despues lo emitamos
 ```
 
 ## Streams
+
 Nos ayuda a dividir un archivo en multiples partes, como cuando miramos un video solo trae un pedazo y asi se va descargando asi mismo funciona esto
+
 ```js
-const {writeFile} = require('fs/promises')
+const { writeFile } = require("fs/promises");
 
-const bidData = async() => {
-  await writeFile('./amor.txt', 'Te Amo Marcela ❤️'.repeat(1000000))
-}
+const bidData = async () => {
+  await writeFile("./amor.txt", "Te Amo Marcela ❤️".repeat(1000000));
+};
 
-bidData()
+bidData();
 ```
+
 Este es un ejemplo para crear un archivo pesado, con el repeat le digo que se repita ese string las veces que ponga
 
 ```js
-const {createReadStream} = require('fs')  
+const { createReadStream } = require("fs");
 //el stream no es en promise ya que esta creado en eventos entonces se ejecutara cuando ocurra un evento
 
-const stream = createReadStream('./amor.txt', {
-  encoding: 'utf-8',
+const stream = createReadStream("./amor.txt", {
+  encoding: "utf-8",
   // highWaterMark    este es para aumentar las megas por llamada y asi tienen bastante propiedades este Stream
-})
+});
 
-stream.on('data', (chunk) => {    //aqui el nombre data si es necesario, esto esta leyendo y esta devolvio por pedazos de codigo con peso de 6kb y los devuelve en esa variable chuck 
-  console.log(chunk)
-})
+stream.on("data", (chunk) => {
+  //aqui el nombre data si es necesario, esto esta leyendo y esta devolvio por pedazos de codigo con peso de 6kb y los devuelve en esa variable chuck
+  console.log(chunk);
+});
 
-stream.on('end', () => {  //ademas del evento data hay mas eventos como este que es cuando termine de ver el archivo
-  console.log('Terminado')
-})
+stream.on("end", () => {
+  //ademas del evento data hay mas eventos como este que es cuando termine de ver el archivo
+  console.log("Terminado");
+});
 ```
 
 ### Stream with http
+
 ```js
-const http = require('http')
-const {createReadStream} = require('fs')
+const http = require("http");
+const { createReadStream } = require("fs");
 
-const server = http.createServer((req, res)=> {
-  const fileStream = createReadStream('./amor.txt', {
-    encoding: 'utf-8'
-  })
-  fileStream.on('data', (chunk) => {
-    fileStream.pipe(res)  //el Stream tiene un metodo que es el pipe que dice como que le envia el dato a otra funcion en este caso le enviamos los datos al res del http
+const server = http.createServer((req, res) => {
+  const fileStream = createReadStream("./amor.txt", {
+    encoding: "utf-8",
+  });
+  fileStream.on("data", (chunk) => {
+    fileStream.pipe(res); //el Stream tiene un metodo que es el pipe que dice como que le envia el dato a otra funcion en este caso le enviamos los datos al res del http
     //al momenot de responder le paso la porsion de daots
-  })
-})
+  });
+});
 
-server.listen(3000)
+server.listen(3000);
 ```
 
 ## Fetch
+
 Se puede hacer peticiones normales con fetch
 
 ```js
@@ -455,4 +466,5 @@ const dataFetch = async () => {
 
 dataFetch();
 ```
+
 Aunque node y con el `type: module` del `package.json` ahora acepta que no este en una funcion async

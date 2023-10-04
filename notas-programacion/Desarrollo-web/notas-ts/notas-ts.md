@@ -1,5 +1,41 @@
 # Notas TypeScript
 
+- [Notas TypeScript](#notas-typescript)
+  - [Variables](#variables)
+  - [Configuracion tsconfig.json](#configuracion-tsconfigjson)
+  - [Tipos de datos](#tipos-de-datos)
+    - [Number](#number)
+    - [Boolean](#boolean)
+    - [String](#string)
+    - [Any](#any)
+    - [Arrays](#arrays)
+    - [Tuples](#tuples)
+    - [Enums](#enums)
+    - [Void](#void)
+    - [Null y Undefined](#null-y-undefined)
+  - [Funciones](#funciones)
+  - [Objetos](#objetos)
+  - [ES6](#es6)
+    - [Desestructuracion](#desestructuracion)
+      - [Objetos](#objetos-1)
+      - [Arreglos](#arreglos)
+      - [For of](#for-of)
+      - [Clases en JavaScript](#clases-en-javascript)
+  - [Clases en TypeScript](#clases-en-typescript)
+    - [Protected Get Set](#protected-get-set)
+    - [Abstract](#abstract)
+  - [Interface](#interface)
+    - [En clases](#en-clases)
+    - [En funciones](#en-funciones)
+  - [NameSpace](#namespace)
+  - [Export Import](#export-import)
+  - [Generics](#generics)
+  - [Exportaciones agrupadas](#exportaciones-agrupadas)
+  - [HTTP Axios](#http-axios)
+  - [Decoradores](#decoradores)
+    - [Factory decorators](#factory-decorators)
+    - [Decoradores de metodos](#decoradores-de-metodos)
+
 ## Variables
 
 ```ts
@@ -765,4 +801,3 @@ pokemonSave(id: number) {
 }
 
 ```
-

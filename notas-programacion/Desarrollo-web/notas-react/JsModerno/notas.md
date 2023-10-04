@@ -1,5 +1,23 @@
 # JavaScript Moderno
 
+- [JavaScript Moderno](#javascript-moderno)
+  - [Conceptos](#conceptos)
+  - [Codigo introduccion](#codigo-introduccion)
+  - [Js moderno](#js-moderno)
+  - [variables](#variables)
+  - [Objetos literales](#objetos-literales)
+    - [Operador Spreet](#operador-spreet)
+  - [Arreglos](#arreglos)
+  - [Funciones](#funciones)
+  - [Desestructuracion](#desestructuracion)
+    - [Objetos](#objetos)
+    - [Arreglos](#arreglos-1)
+  - [Import and Export](#import-and-export)
+  - [Promesas](#promesas)
+  - [Fetch](#fetch)
+  - [Async y Await](#async-y-await)
+  - [Operador Ternario](#operador-ternario)
+
 ## Conceptos
 
 - Babel: en js nos ayuda a la traduccion de codigo para que compile codigo moderno en los navegadores
@@ -307,6 +325,3 @@ const mesaje = activo ? "Activo" : "Inactivo"; //le digo que si activo es true e
 //si solo queremos que se ejecute la condicion de verdadero
 const mensaje2 = activo && "Activo"; //esto ayuda para que solamente se ejecute la condicion de if y no la de else porque el de arriba no funciona si no hay algo despues de los dos puntos
 ```
-
-
-

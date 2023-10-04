@@ -1,5 +1,17 @@
 # React
 
+- [React](#react)
+  - [Componentes](#componentes)
+  - [Instalacion vite](#instalacion-vite)
+  - [Importaciones](#importaciones)
+  - [Codigo](#codigo)
+    - [Fragmento](#fragmento)
+    - [Propiedades](#propiedades)
+    - [Eventos](#eventos)
+  - [Despliegue](#despliegue)
+  - [Pruebas](#pruebas)
+  - [.env](#env)
+
 ## Componentes
 
 Es una pieza de codigo encapsulada que puede tener un estado o no
@@ -150,14 +162,18 @@ Se dividen en dos:
 - Unitarias: enfocadas en pequeñas funcionalidades
 - Integracion: enfocadas en como reaccionan varias piezas en conjunto
 
-
 ## .env
-En react se crea el archivo de .env y se pueden crear asi 
+
+En react se crea el archivo de .env y se pueden crear asi
+
 ```
 REACT_APP_API_KEY_GIF=htt
 ```
+
 Y se llaman
+
 ```
 const apiKeyGif = process.env.REACT_APP_API_KEY_GIF
 ```
+
 Ya la podemos asignar a una variable
