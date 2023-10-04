@@ -1,5 +1,29 @@
 # Nodejs
 
+- [Nodejs](#nodejs)
+  - [REPEL](#repel)
+  - [JavaScript](#javascript)
+  - [Node](#node)
+    - [Async/Sync](#asyncsync)
+    - [Objetos globales](#objetos-globales)
+    - [Modules](#modules)
+      - [Export e import](#export-e-import)
+      - [Os](#os)
+      - [Path](#path)
+      - [Fs](#fs)
+      - [HTTP](#http)
+      - [npm](#npm)
+      - [npx](#npx)
+    - [Event Loop](#event-loop)
+  - [Promise](#promise)
+    - [Async / Await](#async--await)
+      - [Promisify](#promisify)
+  - [Event](#event)
+  - [Streams](#streams)
+    - [Stream with http](#stream-with-http)
+  - [Fetch](#fetch)
+
+
 ## REPEL
 
 En la terminal si escribimos `node` nos habre el interprete de node `REPL`, este es como la consola del navegador, podemos interpretar codigo de js, clg o sumas y eso
