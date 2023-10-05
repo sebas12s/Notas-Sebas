@@ -4,18 +4,19 @@ Recordar que esto usa el modelo client/server
 
 - [Express](#express)
   - [Codigo](#codigo)
-    - [Routing /URL](#routing-url)
-    - [Metodos HTTP](#metodos-http)
-      - [Get](#get)
-      - [POST](#post)
-      - [PUT](#put)
-      - [DELETE](#delete)
-      - [PATCH](#patch)
-    - [Response HTTP](#response-http)
-    - [HTTP response status codes](#http-response-status-codes)
-    - [Request Body](#request-body)
-    - [Request Params](#request-params)
-    - [Query](#query)
+  - [Routing /URL](#routing-url)
+  - [Metodos HTTP](#metodos-http)
+    - [Get](#get)
+    - [POST](#post)
+    - [PUT](#put)
+    - [DELETE](#delete)
+    - [PATCH](#patch)
+  - [Response HTTP](#response-http)
+  - [HTTP response status codes](#http-response-status-codes)
+  - [Request Body](#request-body)
+  - [Request Params](#request-params)
+  - [Query](#query)
+  - [Middlewares](#middlewares)
 
 ## Codigo
 
@@ -55,7 +56,7 @@ app.listen(3000, () => {
 });
 ```
 
-### Routing /URL
+## Routing /URL
 
 ```js
 const express = require("express");
@@ -63,6 +64,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
+  //para obtener toda la url podemos hacer el req.url
   res.send("Welcome"); //ademas de enviar el metodo end usamos send que es de express
 });
 
@@ -81,27 +83,27 @@ app.listen(3000, () => {
 });
 ```
 
-### Metodos HTTP
+## Metodos HTTP
 
 Estos son lo verbos relacionados con HTTP no con el servidor
 
-#### Get
+### Get
 
 El cliente esta obteniendo algo por eso es get, cuando el cliente pide y el servidor envia algo
 
-#### POST
+### POST
 
 Es cuando el cliente envia algo al servidor o crea
 
-#### PUT
+### PUT
 
 Es cuando el cliente esta intentando actualizar algo
 
-#### DELETE
+### DELETE
 
 Es cuando queremos eliminar algo
 
-#### PATCH
+### PATCH
 
 Cuando usamos put actualizamos todos los datos, pero con PATCH solo actualizamos una parte de ellos
 
@@ -127,7 +129,7 @@ app.all("/info", (req, res) => {
 
 ---
 
-### Response HTTP
+## Response HTTP
 
 El servidor puede responder con muchas cosas como html, videos, audios, texto, json y asi
 
@@ -160,11 +162,11 @@ app.get("/isLive", (req, res) => {
 });
 ```
 
-### HTTP response status codes
+## HTTP response status codes
 
 [Documentacion](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
-### Request Body
+## Request Body
 
 Los request no solo es un titulo si no se divide en algunas areas
 
@@ -186,7 +188,7 @@ app.post("/user", (req, res) => {
 });
 ```
 
-### Request Params
+## Request Params
 
 ```js
 app.get("/hello/:user", (req, res) => {
@@ -204,7 +206,7 @@ app.get("/hello/:user", (req, res) => {
 });
 ```
 
-### Query
+## Query
 
 Se da en la url y es el signo `?` que ponemos, es una consulta como ejemplo: `http://localhost:3000/hello?name=Sebastian` asi se veria la url, si queremos poner mas de un query `http://localhost:3000/hello?name=sebas&age=18`
 
@@ -223,3 +225,50 @@ app.get("/hello", (req, res) => {
   }
 });
 ```
+
+## Middlewares
+
+Estas son funciones que antes que llegue a la ruta pedida se ejecuta logica o lo que queramos
+
+```js
+//esto simplemente es una funcion y para que le ejecute express la utiliza y por eso usamos use
+//por estas funciones pasan antes que cualquier otra ruta
+app.use((req, res, next) => {
+  //primero pasara por esta ruta antes que toodas las url
+  console.log(`Route: ${req.url} Method: ${req.method}`); //Route: /profile Method: GET
+
+  next(); //este argumento no lo da express para que siga con el flujo a donde pedimos
+});
+
+app.get("/profile", (req, res) => {
+  res.send("Profile");
+});
+```
+
+Se pueden tener dos o mas middlewares y se ejecutaran como estas en el codigo en cascada
+
+```js
+app.use((req, res, next) => {
+  //asi podriamos hacer un poco de logica
+  if (req.query.login === "sebasplashba") {
+    next();
+  } else {
+    res.send("No autorizado");
+  }
+});
+//recordar que el orden importa ya que todas las rutas que esten despues de este middleware esperan el query login
+//entonces si no quiero proteger alguna ruta solo la pongo arriba del middleware
+app.get("/profile", (req, res) => {
+  res.send("Admin");
+});
+```
+
+Recordar que simplemente son funciones entonces podemos importarlas
+
+Este es un ejemplo la importamos en nuestro archivo y ya la podemos usar
+
+```js
+app.use(morgan("dev"));
+```
+
+Este es muy basico pero hay muchos que hacen mejores funcionalidades
