@@ -17,18 +17,25 @@ Recordar que esto usa el modelo client/server
   - [Request Params](#request-params)
   - [Query](#query)
   - [Middlewares](#middlewares)
+  - [Express Settings](#express-settings)
+  - [Static Files](#static-files)
+  - [Router](#router)
+  - [Template engine](#template-engine)
+    - [Ejs](#ejs)
+    - [Partial ejs](#partial-ejs)
+  - [Fetch](#fetch)
 
 ## Codigo
 
 Un ejemplo sin express:
 
 ```js
-import http from "http";
-import { createReadStream } from "fs";
+import http from 'http';
+import { createReadStream } from 'fs';
 
 //normalmente nosotros devolvemos un html, aqui estoy devolviendo un simple html y se lo mando al res
 const server = http.createServer((req, res) => {
-  const datos = createReadStream("./static/index.html");
+  const datos = createReadStream('./static/index.html');
   datos.pipe(res);
 });
 
@@ -38,13 +45,13 @@ server.listen(3000);
 Con express
 
 ```js
-const express = require("express");
+const express = require('express');
 
 const app = express();
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   //tiene el req y res como siempre y la ruta
-  res.sendFile("./static/index.html", {
+  res.sendFile('./static/index.html', {
     //este sendFile ya es un especial para poder enviar archivos
     root: __dirname, //recuerden que el __dirname nos da la ruta hasta donde esta el archivo, por eso lo ponemos como root y ya podemos poner la ruta del archivo arriba
   });
@@ -52,34 +59,34 @@ app.get("/", (req, res) => {
 
 app.listen(3000, () => {
   //le digo con la funcion que cuando este escuchando ejecute eso
-  console.log("Escuchando en el puerto 3000");
+  console.log('Escuchando en el puerto 3000');
 });
 ```
 
 ## Routing /URL
 
 ```js
-const express = require("express");
+const express = require('express');
 
 const app = express();
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   //para obtener toda la url podemos hacer el req.url
-  res.send("Welcome"); //ademas de enviar el metodo end usamos send que es de express
+  res.send('Welcome'); //ademas de enviar el metodo end usamos send que es de express
 });
 
-app.get("/she", (req, res) => {
+app.get('/she', (req, res) => {
   //asi se pueden ir creando rutas las que queramos
-  res.send("Mar");
+  res.send('Mar');
 });
 
 app.use((req, res) => {
   //este use es si ya visito tadasa las poagina y ni una coicide con la que estamos colocando en la url busca esta
-  res.status(404).send("No se encontro la pagina"); //el estatus como su nombre le dice es para ponerle un estado a la peticion
+  res.status(404).send('No se encontro la pagina'); //el estatus como su nombre le dice es para ponerle un estado a la peticion
 });
 
 app.listen(3000, () => {
-  console.log("Escuchando en el puerto 3000");
+  console.log('Escuchando en el puerto 3000');
 });
 ```
 
@@ -109,21 +116,21 @@ Cuando usamos put actualizamos todos los datos, pero con PATCH solo actualizamos
 
 ```js
 //asi podemos obtener todos los petodos http
-app.get("/products", (req, res) => {
-  res.send("list");
+app.get('/products', (req, res) => {
+  res.send('list');
 });
 
-app.post("/products", (req, res) => {
-  res.send("creando");
+app.post('/products', (req, res) => {
+  res.send('creando');
 });
 ```
 
 ---
 
 ```js
-app.all("/info", (req, res) => {
+app.all('/info', (req, res) => {
   //el metodo all, le digo que esta funcionando en todo los petodos, get, post, etc
-  res.send("info");
+  res.send('info');
 });
 ```
 
@@ -135,9 +142,9 @@ El servidor puede responder con muchas cosas como html, videos, audios, texto, j
 
 ```js
 //como anteriormente texto tambien imagenes o archivos
-app.get("/archivo", (req, res) => {
+app.get('/archivo', (req, res) => {
   //para este tipo de archivos usamos el sendFile
-  res.sendFile("./static/img.jpg", {
+  res.sendFile('./static/img.jpg', {
     root: __dirname, //le digo que desde la raiz comience a buscar aqui
   });
 });
@@ -146,10 +153,10 @@ app.get("/archivo", (req, res) => {
 Tambien se puede enviar json
 
 ```js
-app.get("/user", (req, res) => {
+app.get('/user', (req, res) => {
   res.json({
     //tambien se puede enviar el json
-    name: "Marcela", //en esto de json si deja enviar sin las comillas pero recurden que no es asi el json
+    name: 'Marcela', //en esto de json si deja enviar sin las comillas pero recurden que no es asi el json
   });
 });
 ```
@@ -157,7 +164,7 @@ app.get("/user", (req, res) => {
 Status
 
 ```js
-app.get("/isLive", (req, res) => {
+app.get('/isLive', (req, res) => {
   res.sendStatus(204); //asi tambien podemos enviar solamente un status
 });
 ```
@@ -182,16 +189,16 @@ app.use(express.text()); //esto es para que express pueda procesar texto
 app.use(express.json()); //de la misma manera si queremos enviar datos json
 app.use(express.urlencoded({ extended: false })); //esto nos ayuda a poder procesar formularios, el objeto y el extended false, le estoy diciendo que los valores seran simples como strings o arreglos basicos si le pongo en true acepta el analisis de objetos anidados
 
-app.post("/user", (req, res) => {
+app.post('/user', (req, res) => {
   console.log(req.body); //aqui simplemente hacemos un clg de body, en este caso fue texto pero tambien pueden ser json y todo eso
-  res.send("Contenido creado");
+  res.send('Contenido creado');
 });
 ```
 
 ## Request Params
 
 ```js
-app.get("/hello/:user", (req, res) => {
+app.get('/hello/:user', (req, res) => {
   //los dos puntos hacen que esa parte de la url sean como una variable y poder acceder a ella
   console.log(req.params); // en este ejemplo me aparece asi { user: 'sebas' }
   // tambien podemos hacer /hello/:user/:nada asi bastantes y ya nos aparece en params
@@ -215,10 +222,10 @@ Recordar que podemos convinar los params y el query
 Si en la url en diferentes espacios ponemos `name=sebas&name=marcela` esto devuelve un arreglo `{name: ['sebas', 'marce']}`
 
 ```js
-app.get("/hello", (req, res) => {
+app.get('/hello', (req, res) => {
   console.log(req.query); //aqui podemos obtener las query, ya lo recibimos nosotros como un objeto { name: 'sebas', age: '18' }
   //ya podemos hacer logica con el query
-  if (req.query.name === "sebas") {
+  if (req.query.name === 'sebas') {
     res.send(`Hello Admin`);
   } else {
     res.send(`Hello`);
@@ -240,8 +247,8 @@ app.use((req, res, next) => {
   next(); //este argumento no lo da express para que siga con el flujo a donde pedimos
 });
 
-app.get("/profile", (req, res) => {
-  res.send("Profile");
+app.get('/profile', (req, res) => {
+  res.send('Profile');
 });
 ```
 
@@ -250,16 +257,16 @@ Se pueden tener dos o mas middlewares y se ejecutaran como estas en el codigo en
 ```js
 app.use((req, res, next) => {
   //asi podriamos hacer un poco de logica
-  if (req.query.login === "sebasplashba") {
+  if (req.query.login === 'sebasplashba') {
     next();
   } else {
-    res.send("No autorizado");
+    res.send('No autorizado');
   }
 });
 //recordar que el orden importa ya que todas las rutas que esten despues de este middleware esperan el query login
 //entonces si no quiero proteger alguna ruta solo la pongo arriba del middleware
-app.get("/profile", (req, res) => {
-  res.send("Admin");
+app.get('/profile', (req, res) => {
+  res.send('Admin');
 });
 ```
 
@@ -268,7 +275,205 @@ Recordar que simplemente son funciones entonces podemos importarlas
 Este es un ejemplo la importamos en nuestro archivo y ya la podemos usar
 
 ```js
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 ```
 
 Este es muy basico pero hay muchos que hacen mejores funcionalidades
+
+## Express Settings
+
+```js
+app.set('appName', 'Express Curse'); //set de settings, asi podemos guardar como varaibles y las llamamos con get como esta abajo, clave y valor es lo que nos devuelve
+app.set('port', 3000); //tambien podemos tener muchas mas
+app.set('case sensitive routing', true); //como esta configuracion ayuda para que respete si la url esta en mayuscula o minuscula
+
+//no se usa mucho eso pero es un ejemplo de las configuraciones
+
+//normalmente se trabaja en este orden
+//settings
+//middlewares
+//routes
+
+app.listen(app.get('port'), () => {
+  console.log(
+    `Escuchando ${app.get('appName')} en el puerto ${app.get('port')}`
+  );
+});
+```
+
+## Static Files
+
+Esto es cuando queremos enviar mas de un archivo al front entonces cofiguramos en express la carpeta en la que esta, normalmente estas carpetas se llaman public o static
+
+Para esto usamos un middleware
+
+```js
+//normalmente estas public se colocan en lo ultimo despues de las rutas
+app.use(express.static('./public')); //ya con esto puede ser visto en el navegador, todo lo que coloque en esta carpeta puede ser accedido
+//tambien podemos poner mas carptas
+app.use('/public', express.static('./public')); //si le agrego el primer parametro le estoy diciendo que solo puede ser accedido en esa url
+```
+
+Hay un caso si tenemos todos los archivos en una carpeta en src tenemos que mandar toda la ruta relativa, completa, ya que no funcionara solo poner `./public` si no tenemos que poner toda la ruta entonces para eso usamos el modulo `path`
+
+```js
+app.use('/public', express.static(path.join(__dirname, 'public')));
+```
+
+De esta manera unimos hasta la carpeta donde estamos con la carpeta que queremos hacer publica
+
+## Router
+
+Es para manejar las rutas que tenemos en diferentes archivos, express ya nos da un modulo para esto
+
+```js
+const express = require('express');
+
+const router = express.Router();
+
+router.get('/ella', (req, res) => {
+  res.json({
+    love: 'Marcela',
+  });
+});
+//almacena todas las rutas en esa variable router, asi puedo poner muchas rutas en el mismo archivo y solo exportamos la variable
+module.exports = router;
+```
+
+```js
+const express = require('express');
+const routerGet = require('./routes/get');
+//solo la importamos
+const app = express();
+
+app.use(routerGet); //y ya lo usamos y podemos acceder a las rutas normalmente
+
+app.listen(3000, () => {
+  console.log('Escuchando en el puerto 3000');
+});
+```
+
+## Template engine
+
+### Ejs
+
+Hay un modulo que nos ayuda a enviar html al front y asi enviar muchos archivos con funcionalidades extras ese es ejs
+
+Los archivos se guardan con la extension `ejs` como `index.ejs`
+
+Este es un motor de plantillas
+
+```js
+const express = require('express');
+const path = require('path');
+const routerGet = require('./routes/get');
+const app = express();
+require('ejs'); //solo haciendo esto ya esta en nuestra app
+
+//esta configuracin es importante, con la primera le estoy diciendo a express que utilice ejs para renderizar nuestras paginas
+//con el segundo le estoy diciendo donde buscar las paginas, por eso solamente utilizamos render para enviar solamente el archivo
+app.set('view engine', 'ejs'); //este es la configuracion del motor de plantillas que estamos utilizando
+app.set('views', path.join(__dirname, 'views')); //estoy configurando que hare publico
+
+app.use(routerGet);
+
+app.listen(3000, () => {
+  console.log('Escuchando en el puerto 3000');
+});
+```
+
+```js
+const { Router } = require('express');
+const router = Router();
+
+router.get('/', (req, res) => {
+  //aqui podemos usar mas logica y pasar esas variables o datos al html gracias a ejs
+  const title = 'Marcela linda preciosa';
+
+  //y para pasar los datos al html le pasamos un objeto con los datos
+  res.render('index', { title }); //ejs nos da este metodo que es render
+});
+
+router.get('/she', (req, res) => {
+  //si quiero mandar mas solo pongo el render
+  res.render('she'); //recordar que en el render pongo el archivo
+});
+
+module.exports = router;
+```
+
+Y si queremos obtener las variables en el html hacemos lo siguiente `<h1><%= title %></h1>` la sintaxis es la de `<%= %>`
+
+### Partial ejs
+
+Esto nos ayuda a separar pedazos de codigo de ejs y poderlos unir a otros ejs
+
+En este ejemplo separamos el header y el footer de la pagina ya que se usara siempre
+
+header
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejs</title>
+  </head>
+  <body>
+```
+
+footer
+```html
+</body>
+</html>
+```
+
+y ya en las paginas lo usabamos de esta manera
+```js
+<%- include('partials/header.ejs') %>
+    <h1>She is beatiful</h1>
+<%- include('partials/footer.ejs') %>
+```
+Esa tambien seria la sintaxis e incluir la ruta al archivo
+
+---
+Este es otro ejemplo ya usando mas sintaxis de js en este caso un if como en en la sintaxis de ejs solo incluyo `<% %>`
+
+```js
+<%- include('partials/header.ejs') %>
+<h1><%= title %></h1>
+
+<% if(isActive) { %>
+  <p>Esta activo</p>
+<% } else { %>
+  <p>Esta inactivo</p>
+<% } %> 
+<%- include('partials/footer.ejs') %>
+```
+---
+
+## Fetch
+
+En este ejemplo no usamos fetch si no axios pero hicimos la petcion a otro servidor y ya podemos enviar los datos al cliente, como un json o con la pagina
+
+```js
+router.get('/api', async (req, res) => {
+  const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/');
+  console.log(data.results);
+
+  res.render('api', {
+    data: data.results,
+  });
+});
+```
+
+```js
+<%- include('partials/header.ejs') %>
+<h1>Api</h1>
+
+<% data.map((d) => { %>
+    <h2><%= d.name %></h2>
+<% }) %>
+
+<%- include('partials/footer.ejs') %>
+```
