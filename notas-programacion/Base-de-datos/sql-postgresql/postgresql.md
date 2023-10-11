@@ -51,3 +51,49 @@ SELECT * FROM users LIMIT 3;  --para que tenga un limite de los registros que de
 
 SELECT * FROM users LIMIT 2 OFFSET 2;   --offset nos ayuda para saltar dos, entonces si devuelve 1 y 2 ahora devuelve 3 y 4
 ```
+
+### Where
+
+```sql
+SELECT * FROM users WHERE name = 'Mar';		--aqui podemos usar where para decir que me muestre todas donde el nombre sea Mar
+SELECT * FROM users WHERE (name) LIKE 'Mar%'; --este LIKE y el signo de porcentaje nos ayuda como una expresion regular le digo que por lo menos tenga esas primeras litras y despues no me importa lo que venga
+SELECT * FROM users WHERE (name) LIKE '%cela'; --al comienzo tambien puede estar
+SELECT * FROM users WHERE (name) LIKE '%a%'; --tambien si tienen una letra a y asi podemos hacer las convinaciones que queremos
+SELECT * FROM users WHERE (name) LIKE '_arcela'; --asi tambien le decimos que solamente esperamos un caracter con el guion bajo
+```
+
+### Delete
+
+```sql
+DELETE FROM users WHERE (name) LIKE 'Marcela%';	--asi tambien podemo eliminar siempre intentar poner el where
+DELETE FROM users WHERE (name) = 'Mar';
+DELETE FROM users;		--esto elimina todos los registros cuidado
+```
+
+### Drop table / Truncate table
+
+```sql
+DROP TABLE users;	--esto elimina una tabla
+
+TRUNCATE TABLE users; 	--esto lo que hace es que borra todos sus registros pero deja la tabla, es lo mismo que DELETE pero en DELETE nos da la posibilidad de hacer un where
+```
+
+### Funciones de agregacion
+
+Son funciones que ya trae sql para ayudarnos
+
+```sql
+SELECT max(id) FROM users	--aqui utilizamos el max y espera una expresion en este caso le dije que me seleccionara el id maximo de la tabla users
+
+DELETE FROM users WHERE id = ( SELECT max(id) FROM users )	--tambien puedo ejecutar un subquery
+```
+
+### Operadores de strings
+
+```sql
+--estas funciones no estan afectando a la base de datos por que es un select otra cosa seria se fuera un update
+SELECT id, UPPER(name) from users	--este es para que todo lo que nos regrese lo pase a mayusculas
+SELECT id, UPPER(name), name from users	--incluso asi podemos ver tambien la columna sin modificar
+--Solo que hay algo, como es una funcion el nombre de la columna aparece commo upper si queremos poner un alias a la culumna es de la siguiente manera
+SELECT id, UPPER(name) as nombrecolum, name from users --el as no solo lo puedo poner ahi si no en cualquier coulmna
+```
