@@ -60,6 +60,11 @@ SELECT * FROM users WHERE (name) LIKE 'Mar%'; --este LIKE y el signo de porcenta
 SELECT * FROM users WHERE (name) LIKE '%cela'; --al comienzo tambien puede estar
 SELECT * FROM users WHERE (name) LIKE '%a%'; --tambien si tienen una letra a y asi podemos hacer las convinaciones que queremos
 SELECT * FROM users WHERE (name) LIKE '_arcela'; --asi tambien le decimos que solamente esperamos un caracter con el guion bajo
+
+--recordar que en el where tambien podemos poner operadores logicos
+WHERE followers > 4600		--recordar que tambien se pueden poner estos operadores
+WHERE followers >= 4600
+WHERE followers <= 4600 --y asi
 ```
 
 ### Delete
@@ -90,10 +95,53 @@ DELETE FROM users WHERE id = ( SELECT max(id) FROM users )	--tambien puedo ejecu
 
 ### Operadores de strings
 
+#### UPPER / LOWER / CONCAT
+
 ```sql
 --estas funciones no estan afectando a la base de datos por que es un select otra cosa seria se fuera un update
 SELECT id, UPPER(name) from users	--este es para que todo lo que nos regrese lo pase a mayusculas
-SELECT id, UPPER(name), name from users	--incluso asi podemos ver tambien la columna sin modificar
+SELECT id, UPPER(name), name from users	--incluso asi podemos ver tambien la columna sin modificar (name)
 --Solo que hay algo, como es una funcion el nombre de la columna aparece commo upper si queremos poner un alias a la culumna es de la siguiente manera
-SELECT id, UPPER(name) as nombrecolum, name from users --el as no solo lo puedo poner ahi si no en cualquier coulmna
+SELECT --el as se puede poner en cualquier coulmna
+	id,
+	UPPER(name) AS nombrecolum,
+	LOWER(name) AS nombrecolum,	--en minuscula
+	LENGTH(name), --para contar los caracteres
+	name,
+	(12 * 2) AS calculo,	--tambien se pueden poner calculos o cosas y esto crea una columna
+	CONCAT(id, ' ', UPPER(name)),  --asi tambien podemos concatenenar
+	(id || ' ' ||  name) AS Concator	--asi tambien podemos unir cadenas
+FROM users
+```
+
+#### SUBSTRING / POSITION
+
+```sql
+SELECT
+	name,
+	SUBSTRING(name, 0, 5),	--nos ayuda a cortar el string, le digo desde la posicion 0 hasta la 5 en este caso
+	POSITION( 'E' in name ) --esta funcion nos da la posicion desde 1 y nos devuelve el numero de donde este, in la columna
+FROM
+	users
+```
+
+Un ejemplo para separar el nombre y el apellido
+
+```sql
+SELECT
+	name,
+	SUBSTRING(name, 0, POSITION( ' ' in name )) AS FirstName,
+	SUBSTRING(name, POSITION( ' ' in name ) + 1) AS LastName  --esto comienza a cortar desde el espacio entonces nos devuelve el espacio para evitar eso le sumo 1
+FROM
+	users
+```
+
+Actualizar datos:
+
+```sql
+UPDATE users
+SET
+	first_name = SUBSTRING(name, 0, POSITION( ' ' in name )),
+	last_name = SUBSTRING(name, POSITION( ' ' in name ) + 1);
+--no le pongo where porque quiero que se actualice en todos lados
 ```
