@@ -2,6 +2,25 @@
 
 Desactiva el auto commit de la db para evitar errores
 
+## Terminologia SQL
+
+- DLL (Data Definition Language): Create, Alter, Drop, Truncate
+- DML (Data Manipulation Language): Insert, Delete, Update
+- TCL (Transaction Control Language): Commit, Rollback
+- DQL (Data Query Language): Select
+
+## Estructura general
+
+Asi como normalmente se deberian de hacer las sentencias
+
+- `SELECT`, \*, campos, alias, funciones
+- `WHERE`, condicion, and, or, in, like
+- `GROUP BY`, campo agrupador, ALL
+- `HAVING`, condicion
+- `ORDER BY`, exprecion, ASC, DESC
+- `LIMIT`, valor, ALL
+- `OFFSET`, punto de inicio
+
 ## Comenzando en PgAdmin
 
 - `ctrl + e` para abrir sql
@@ -145,3 +164,122 @@ SET
 	last_name = SUBSTRING(name, POSITION( ' ' in name ) + 1);
 --no le pongo where porque quiero que se actualice en todos lados
 ```
+
+### BETWEEN
+
+```sql
+SELECT
+    first_name,
+    last_name,
+    followers
+FROM
+    users
+WHERE
+    -- followers > 4400 AND followers < 4700		--se puede poner el AND y todos esos
+    followers BETWEEN 4400 AND 4700		--esto es lo mismo que la linea de arriba pero mejor
+ORDER BY  --le digo que ordene por, lo followers descendentes tambien esta ascendentes (ASC)
+	followers DESC
+```
+
+### Funciones agregadas
+
+```sql
+SELECT
+	--solo si es necesario colocar alias
+    COUNT(*) AS totalre_gistros, --esto cuenta cuantos registros tenemos
+	MIN(followers) AS min_followers, --esto nos devuelve cual es el minimo de esa columna
+	MAX(followers) AS max_followers, --esto nos devuelve cual es el maximo de esa columna
+	AVG(followers) AS avg_followers, --esto saca el promedio suma todo y divide por el total
+	ROUND(AVG(followers)) AS avg_followers,	--esto es para redondearlo o quitarle los decimales
+	SUM(followers) / COUNT(*) AS promedio_manual --esto es otra forma de sacar el promedio sin la funcion
+FROM
+    users
+```
+
+### GROUP BY
+
+No podemos poner una funcion de agregacion y una columna sin un GROUP BY
+
+```sql
+--para conocer cuantas personas cumplen con esos datos
+--aunque con group by se puede agrupar por medio el que le pongamos
+SELECT COUNT(*), followers
+from users
+WHERE followers = 4 or followers = 4999
+GROUP BY followers		--con esto le digo que me muestre agrupadas mediante los followers entonces si 4 followers cumplen con eso lo separa a la otra condicion
+
+--tambien puedo hacer esto que cuente cuantos hay en en cada followeres mediante el grupo by
+SELECT COUNT(*), followers
+from users
+WHERE followers BETWEEN 4000 and 4800
+GROUP BY followers
+ORDER BY followers DESC
+```
+
+---
+
+Ejercicio con group by, el ejercicio era extraer los dominios de los correos electronicos y contar cuantos tenian cada uno, y mostrar los que tuvieran mas de un dominio igual
+
+```sql
+SELECT
+    COUNT(*),
+    SUBSTRING(email, POSITION('@' in email) + 1 ) AS dominio	--extraigo el dominio
+FROM
+    users
+GROUP BY SUBSTRING(email, POSITION('@' in email) + 1 )	--con el count de arriba cuento todos y lo agrupo por dominio, por eso pongo toda esta funcion, muy importante no por email si no el dominio
+HAVING COUNT(*) > 1 	--y ya le pongo que esten arriba de uno
+```
+
+### HAVING
+
+Esta va muy de la mano con GRUOP BY
+
+```sql
+SELECT
+	COUNT(*),
+	country
+FROM
+	users
+GROUP BY country
+HAVING COUNT(*) > 5		--le digo que me comience a agrupar o mostrar desde que el count sea mayor a 5
+ORDER BY COUNT(*) DESC
+```
+
+### DISTINCT
+
+```sql
+SELECT DISTINCT country from users	--esto me trae solo una vez todos los paises en este caso, los distintos
+```
+
+### Subquerys
+
+Son querys que se ejecutan dentro de un query y se pueden poner donde quieras
+
+Tener presente que pueden llegar a ser muy ineficientes ya que funciona como un ciclo, el query principal ejecutara por cada dato que tenga el subquery entonces si tenemos un millon de datos eso seria muy lento
+
+### Relaciones
+
+Existen estas relaciones en las bases de datos
+
+- Uno a uno - One to one
+- Uno a muchos - One to many
+- Relaciones a si mismas - Self Joining relationships
+- Muchos a muchos - Many to many
+
+Muchos a muchos la particularidad que tiene es que tienen una tabla intermedia
+
+En estas relaciones viene un tema importante que es el de las llaves
+
+### Keys - LLaves
+
+Se puede trabajar sin llaves pero no es para nada recomendado
+
+Hay diferentes tipos de keys:
+
+- Primary key: identifica un registro de forma unica. usa un id idenpendiente controlado por nosotros los creadores de la tabla
+- Super key: es un conjunto de atributos que se pueden identificar como forma unica
+- Canditate key: son un conjunto de atributos que se identifican como unicos pero no es el primary key, son los canditos
+- Foreing key: es la llave primaria de otra tabla, tienen que ser del mismo tipo y de la misma longitud
+- Composite key: cuando una llave primaria consta de mas de un atributo
+- Alternate key
+- Artificial key
