@@ -17,6 +17,9 @@
   - [useReducer](#usereducer)
     - [Reducer](#reducer)
     - [useReducer practico](#usereducer-practico)
+      - [Con un custom Hook useTodo](#con-un-custom-hook-usetodo)
+  - [ReactRouter](#reactrouter)
+  - [useContext](#usecontext)
 
 ## useState
 
@@ -858,6 +861,7 @@ export const TodoItem = ({
         } `}
         onClick={() => {
           onDoneTodo(todo);
+          //esta funcion esta desde el padre y la fuimos llamando por commponente por componente cuando ya la usamos hasta aqui recordar qeu solo es una funcion que llamamos o importamos entonces la pudemos usar como si estuviera en este archivo y ya sabemos que es lo que recibe y ya le enviamos eso y la funcion hace la logica
         }}
       >
         {todo.description}
@@ -929,6 +933,244 @@ export const TodoAdd = ({ onNewTodo }: OnNewTodo) => {
         Agregar formulario
       </button>
     </form>
+  );
+};
+```
+
+#### Con un custom Hook useTodo
+
+Paso toda la logica a un cutomHook y ya solo obtengo en el padre lo que estoy retornando las funciones y los todos
+
+```tsx
+import { useEffect, useReducer } from 'react';
+import { TodoState } from '../interfaces';
+import { todoReducer } from '../08-useReducer/todoReducer';
+
+const initialState: TodoState[] = [];
+
+const init = () => {
+  return JSON.parse(localStorage.getItem('todos') || '[]');
+};
+
+export const useTodo = () => {
+  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const onNewTodo = (todo: TodoState): void => {
+    const action = {
+      type: 'Add Todo',
+      payload: todo,
+    };
+
+    dispatch(action);
+  };
+
+  const onDeleteTodo = (todo: TodoState): void => {
+    const action = {
+      type: 'Delete Todo',
+      payload: todo,
+    };
+
+    dispatch(action);
+  };
+
+  const onDoneTodo = (todo: TodoState) => {
+    dispatch({
+      type: 'Done Todo',
+      payload: todo,
+    });
+  };
+
+  const todosCount = todos.length; //para saber cuantos todos tenemos
+  const todosDone = todos.filter((todo) => todo.done === false).length; //para saber cuantas tenemos sin completar
+
+  return {
+    todos,
+    todosCount,
+    todosDone,
+    onDeleteTodo,
+    onNewTodo,
+    onDoneTodo,
+  };
+};
+```
+
+## ReactRouter
+
+Tenemos que instalarlo a nuestras dependencias y ya envolvemos nuestra aplicacion con el router
+
+higher-order component (HOC), asi se le conoce a los componentes como el BrowserRouter ya que son componentes comunes pero estan solo para almacenar otros componentes
+
+```tsx
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+import { BrowserRouter } from 'react-router-dom';
+//usamos el browserRouter porque estamos en un navegador pero ne react native es otro y asi con los demas framworks de js
+
+import { MainApp } from './09-useContext/MainApp';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <BrowserRouter>
+    {/* tenemos que envolver a toda nuestra app */}
+    <MainApp />
+  </BrowserRouter>
+);
+```
+
+```tsx
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { HomePage } from './HomePage';
+import { AboutPage } from './AboutPage';
+import { LoginPage } from './LoginPage';
+import { Navbar } from './Navbar';
+
+export const MainApp = () => {
+  return (
+    <>
+      <Navbar />
+      <hr />
+
+      {/* podemos definir las rutas en cualquier lado pero normalmente se hacen en el padre  */}
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/about' element={<AboutPage />} />
+
+        {/* <Route path='/*' element={<AboutPage />} /> */
+        /*Asi tambien podemos enviarlos a una pagia por si no se encuentra ninguna pagina con lo que esta poniendo */}
+        <Route path='/*' element={<Navigate to='/about' />} />
+        {/* pero normalmente se hace esto con navigate porque antes con la solucion de arriba se quedaba en la direccion que hayamos puesto en la url pero esto nos ayuda a navegar directamente a esa url */}
+      </Routes>
+    </>
+  );
+};
+```
+
+```tsx
+import { Link, NavLink } from 'react-router-dom';
+
+export const Navbar = () => {
+  return (
+    <nav className='navbar navbar-expand-lg bg-body-tertiary rounded-3'>
+      <div className='container-fluid'>
+        {/* esto funciona como en next, primero si queremos  navegar a las diferentes paginas podriamos poner una etiqueta 'a' pero esa etiqueta hace un refresh y eso puede perjudicar entonces para eso se usa Link que nos ayuda a solo cambiar lo necesario sin refresh */}
+        <Link className='navbar-brand' to='/'>
+          useContext
+        </Link>
+        <div className='collapse navbar-collapse' id='navbarNav'>
+          <ul className='navbar-nav'>
+            {/* NavLink es un link especial para los navs, nos deja ponerle una clase especial si el componente esta activo, eso es lo que recibimos en las props de la clase si esta activo y si esta activo solamente le ponemos otra clase, todas las clases son de bootstrap */}
+            {/* aunque no solo eso se usa cuando el link necesita reaccion basado en la ruta en la que se encuentre no solo le podemos dar clases si no escribir logica */}
+            <NavLink
+              to='/'
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to='/login'
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to='/about'
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+            >
+              About
+            </NavLink>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+```
+
+## useContext
+
+Nos ayuda a que podamos compartir informacion entre componentes no solo en cascada si no en cualquier componente qeu queramos, 3 abajo o 2 arriba asi se podria compartir la informacion, entonces esta el `context` ahi es donde se guarda la informacion y ya no tenemos que enviar por propiedades
+
+Un ejemplo donde podemos usar useContext es en el ejemplo anterior de router donde las paginas se tienen que conectar pero no estan adentro de una ni de otra para poder usar las props
+
+Toda la extructura de componentes se podria decir que tambien es un concepto, el router nos crea componentes ya como el `Navigarion.Provider` cuando ponemos `Provider` queremos decir que proveemos algo
+
+Normalmente se crea un directorio con el nombre `context`
+
+Se crean dos archivos, recomendacion
+
+Normalmente el provider y el context los ponen juntos pero es mejor que vayan separado
+
+UserContext.tsx el nombre le podemos poner cualquiera pero mientras lleve el `Context` para saber que es un contexto
+
+```tsx
+import React, { createContext } from 'react';
+
+interface UserContextInterface {
+  amor: string;
+  setAmor: React.Dispatch<React.SetStateAction<string>>; //con esto hacemos que acepte la funcion del useState
+}
+export const UserContext = createContext({} as UserContextInterface); //con el as le estoy diciendo que confie que lo que recibire sera de este tipo aunque no lo especifique
+```
+
+Y aparte esta el provider
+
+```tsx
+import { UserContext } from './UserContext';
+import { useState } from 'react';
+
+//como el provider son higher-order component (HOC) entonces siempre tiene que llevar sus children, aunque tambien puede tener otras props pero esas son las comunes
+export const UserProvider = ({ children }: any) => {
+  const [amor, setAmor] = useState('');
+
+  return (
+    //usamos nuestro userContext y le ponemos el provider y en value estara toda la informacion que cualquier hijo obtendra, ya despues solamente ponemos el componente lo mas alto que podamos o donde creamos que necesitaremos para que todos tengan la informacion
+    //en value puedo poner funciones numero de todo
+    <UserContext.Provider value={{ amor, setAmor }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+```
+
+Colocamos este componente donde queramos y donde encierre todos los hijos que queremos que obtenga los valores
+
+Y ya aqui podemos obtener lo que provea el provider
+
+```tsx
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
+
+export const LoginPage = () => {
+  const { amor, setAmor } = useContext(UserContext); //tenemos que poner y usar el hook y ponemos nuestro contexto creado
+  //siempre va en busca de arriba no para abajo, busca en sus padres no en los hijos
+  console.log(amor); //y aqui ya podemos ver el value que tenemos en el provider
+
+  return (
+    <>
+      <h1>LoginPage</h1>
+      <hr />
+      <h4>{amor}</h4>
+      {/* //y ya podemos trabajar con esa informacion */}
+      <button
+        className='btn btn-primary'
+        onClick={() => {
+          setAmor('Macela'); //inlcuso podemos obtener funciones gracias al provider y poder establecer el valor del value desde aqui ya que es un useState y el estado es el que esta en el value
+        }}
+      >
+        Establecer amor
+      </button>
+    </>
   );
 };
 ```
