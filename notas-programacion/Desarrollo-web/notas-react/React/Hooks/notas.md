@@ -711,6 +711,8 @@ const initialState: TodoState[] = [
 ];
 
 const init = () => {
+  //este argumento el tercero es cuando el valor inicial depende de alguna logica mayor que el initialState, ya que usamos el initialState cuando conocemos el valor inicial y no depende de mucha logica o de peticion, para eso usamos el init que es una funcion que nos ayuda a eso, no como el valor inicial que no es una funcion
+
   //el tercer argumento del reducer el valor inicial,
   return JSON.parse(localStorage.getItem('todos') || '[]');
   //le estoy pasando el arreglo de objetos que estan en el storage, todos los valores que tengan la clave todos, y con parse paso el string a json
@@ -783,6 +785,8 @@ export const TodoApp = () => {
 ```
 
 TodoReducer.ts, nuestra funcion que maneja todas nuestras accione para nuestro reducer
+
+ALGO MUY IMPORTANTE, NO LLAMAR FUNCIONES EXTERNAS EN EL REDUCER O MANEJAR ALGO QUE NO SEA EL NUEVO ESTADO, SOLO PARA ESO ES ESTA FUNCION SOLO PARA MENEJAR UN NUEVO ESTADO
 
 ```ts
 import { TodoAction, TodoState } from '../interfaces';

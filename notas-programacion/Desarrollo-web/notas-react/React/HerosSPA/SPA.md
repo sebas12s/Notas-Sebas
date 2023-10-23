@@ -1,5 +1,33 @@
 # App de heros Single Page Application (SPA)
 
+- [App de heros Single Page Application (SPA)](#app-de-heros-single-page-application-spa)
+  - [Estructura de directorios](#estructura-de-directorios)
+  - [codigo](#codigo)
+    - [main.tsx](#maintsx)
+    - [HeroesApp.tsx](#heroesapptsx)
+    - [AppRouter.tsx](#approutertsx)
+      - [LoginPages](#loginpages)
+      - [HeroesRoutes](#heroesroutes)
+        - [Navbar.tsx](#navbartsx)
+        - [MarvelPage.tsx](#marvelpagetsx)
+          - [HeroList.tsx](#herolisttsx)
+          - [getHeroesByPublisher.ts](#getheroesbypublisherts)
+          - [HeroCard.tsx](#herocardtsx)
+        - [DcPages.tsx](#dcpagestsx)
+        - [SearchPages.tsx](#searchpagestsx)
+          - [getHerosByName.ts](#getherosbynamets)
+        - [HerosPages.tsx](#herospagestsx)
+          - [getHeroById.ts](#getherobyidts)
+  - [Proteccion de Rutas](#proteccion-de-rutas)
+    - [AuthContext.tsx](#authcontexttsx)
+    - [AuthProvider.tsx](#authprovidertsx)
+    - [HeroApp.tsx](#heroapptsx)
+    - [authReducer.ts](#authreducerts)
+    - [LoginPage.tsx](#loginpagetsx)
+    - [PrivateRoute.tsx](#privateroutetsx)
+    - [PublicRoute.tsx](#publicroutetsx)
+    - [AppRouter.tsx](#approutertsx-1)
+
 ## Estructura de directorios
 
 - `public`: donde ponemos las imagenes y eso
@@ -7,8 +35,10 @@
   - Esta app se dividia en dos partes, la autenticacion y la parte de heroes, entonces creamos dos directorios para divir eso
   - `auth`: directorio de las pantallas principales de autenticacion
     - `components`: sus componentes de esta pantalla
+    - `context`: nuestro contexto y provider para manejar nuestra informacion
     - `hooks`: sus hooks de esta pantalla
     - `pages`: los componentes que ocupan por completo la pantalla por eso pages
+    - `types`: nusetros types que tendra nuestro useReducer
   - `heroes`: directorio de las pantallas principales heroes
     - `components`: sus componentes de esta pantalla
     - `data`: la data que usamos en estas pantallas, como nombres, titulos etc
@@ -363,7 +393,9 @@ export const SearchPages = () => {
   const heroes = getHerosByName(q); //esta funcion nos devuelve un arreglo de heroes que incluyan en su nombre lo este en la variable del query que es lo que escribimos
 
   //estos booleanos nos ayudan para mostrar o ocultar partes, si la query.length es 0 es porque no hemos escrito nada esto es true
-  const showSearch = q?.length === 0;
+
+  const showSearch = q ? q.length === 0 : true; //con este ternario le digo que si q existe y su longitud es igual a 0 sera true, pero si no existe igual sera true, el unico casoo que no sea true es que si existe pero su longitud es mayor a 0
+
   // y aqui primero pregunto si q hay valores o si es true hay valores, entonces pregunto si q.length es mayor a 0 en otras palabras si ya escribi algo, y si heroes.lenght, mi arreglo de heroes este en 0 esto sera true
   const showError = q && q?.length > 0 && heroes.length === 0;
 
@@ -453,7 +485,7 @@ import { heroes } from '../data/data';
 
 export const getHerosByName = (name: string) => {
   //al query que recibimos de la url lo pasamos a minusculas y le quitamos los espacios al principio y al final
-  name.toLowerCase().trim();
+  name = name ? name.toLowerCase().trim() : ''; //le digo que si name tiene un valor que le aplique el toLowerCase y si no pues que sea un string vacio
 
   if (name.length === 0) return []; //si no tiene ninguna letra pues solamente retornamos un arreglo vasio
 
@@ -531,5 +563,280 @@ import { heroes } from '../data/data';
 export const getHeroById = (id: string) => {
   //devuelvo el heroe por eso el find para buscar uno con el id que tenga el que recibimos
   return heroes.find((hero) => hero.id === id);
+};
+```
+
+## Proteccion de Rutas
+
+Antes de proteger las rutas trabajamos en un reducer y un context para poder compartir la informacion del login, no es obligatorio usar un reducer para el context pero nos da de alguna manera mas control
+
+### AuthContext.tsx
+
+```tsx
+import { createContext } from 'react';
+
+//creamos nuestro context y le doy como valor inicial mi estructura, aunque tambien le puedo poner una interface y decir que asi sera la estructura y creo que es la manera recomendada
+export const AuthContext = createContext({
+  state: {
+    logged: false,
+    name: '',
+  },
+  login: (name: string) => {},
+  logout: () => {},
+});
+```
+
+Mejor manera
+
+```tsx
+import { createContext } from 'react';
+
+export interface AuthContextInteface {
+  state: {
+    logged: boolean;
+    name: string;
+  };
+  login: (name: string) => void;
+  logout: () => void;
+}
+
+export const AuthContext = createContext({} as AuthContextInteface);
+```
+
+### AuthProvider.tsx
+
+```tsx
+import { useReducer } from 'react';
+import { AuthContext, authReducer } from './index';
+import { AuthProviderInterface, AuthReducerInterface } from '../../interfaces';
+import { types } from '../types/types';
+
+const initialState: AuthReducerInterface = {
+  logged: false,
+  name: '',
+};
+
+const init = () => {
+  //recordemos que init nos ayuda a poder obtener el valor inicial si tenemos que hacer mayor logica
+  const name = localStorage.getItem('user') || ''; //lo traemos del localStorage abajo en las funciones lo estamos guardando si no hay nada sera un string vacio
+
+  return {
+    logged: name === '' ? false : true, //si no hay valor en name entonces no se a logeado por eso es falso, si hay un valor es true
+    name: name,
+  };
+};
+
+export const AuthProvider = ({ children }: AuthProviderInterface) => {
+  //el authReducer lo creamos por aparte
+  const [state, dispatch] = useReducer(authReducer, initialState, init);
+
+  // con el context le envio dos funcion y el estado actual para que las funciones me ayuden a cambiar entre login y logout, hago estas funciones para no tenerles que enviar directamente el dispath
+  const login = (name: string): void => {
+    const action = {
+      //ya aqui hago la action con el login ya que es la funcion
+      type: types.login,
+      payload: name,
+    };
+
+    localStorage.setItem('user', name);
+    //aqui estoy guardando un item en el localStorage con el name que se autentico porque la funcion recibe el nombre
+    dispatch(action);
+  };
+
+  const logout = (): void => {
+    //de igual manera con el logout, esta funcion que estamos enviando al context la llamamos en el navbar cuando hacemos click al localStorage
+    const action = {
+      type: types.logout,
+      payload: '',
+    };
+    localStorage.removeItem('user');
+    dispatch(action);
+  };
+  return (
+    <AuthContext.Provider
+      value={{
+        state,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+```
+
+Types:
+
+```ts
+export const types = {
+  login: 'Login',
+  logout: 'Logout',
+};
+```
+
+### HeroApp.tsx
+
+Pusimos el provider en lo mas alto de la aplicacion
+
+```tsx
+import { AuthProvider } from './auth';
+import { AppRouter } from './router/AppRouter';
+
+export const HeroesApp = () => {
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
+};
+```
+
+### authReducer.ts
+
+```ts
+import { AuthReducerInterface } from '../../interfaces';
+import { ActionReducer } from '../../interfaces/ActionReducerInterfaces';
+import { types } from '../types/types';
+
+export const authReducer = (
+  state: AuthReducerInterface,
+  action: ActionReducer
+) => {
+  switch (action.type) {
+    case types.login:
+      return {
+        // se aconseja que enviemos todas las propiedades del state y ya solo cambiemos las que necesitemos aunque solo tengamos dos y cambiemos esas
+        ...state,
+        logged: true,
+        name: action.payload,
+      };
+    case types.logout:
+      return {
+        ...state,
+        logged: false,
+        name: '',
+      };
+
+    default:
+      return state;
+  }
+};
+```
+
+### LoginPage.tsx
+
+```tsx
+import { useContext } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '..';
+
+export const LoginPages = () => {
+  const navigate = useNavigate();
+  //gracias al context puedo desestructurar el login la funcion
+  const { login } = useContext(AuthContext);
+
+  const onLogin = () => {
+    login('Sebas Mar'); //y aqui uso la funcion que simplemente le enviamos un nombre para hacer login
+
+    const lastPath = localStorage.getItem('lastPath') || '/';
+    //aqui gracias cuando hago el login guardo la url en este item entonces lo hago para guardar en donde estabamos cuando nos salimos y para cuando hagamos login poder estar en la misma pagina
+
+    navigate(lastPath, {
+      //por eso ponemos la url que teniamos en el item del local storage y si no hay nada sera la ruta principal
+      replace: true,
+    });
+  };
+
+  return (
+    <div className='container mt-5'>
+      <h1>Login</h1>
+      <hr />
+
+      <button className='btn btn-info' onClick={onLogin}>
+        Login
+      </button>
+    </div>
+  );
+};
+```
+
+### PrivateRoute.tsx
+
+```tsx
+import { useContext } from 'react';
+import { AuthContext } from '../auth';
+import { Navigate, useLocation } from 'react-router-dom';
+
+export const PrivateRoute = ({ children }: any) => {
+  //para hacer una ruta privada hacemos esto de  higher-order component (HOC) para que solo obtenga las demas navegaciones y hagamos la logica aqui
+  const {
+    state: { logged }, //estraemos el logged que nos dice si esta logeado
+  } = useContext(AuthContext);
+
+  const { pathname, search } = useLocation(); //esto nos da informacion sobre la url
+
+  const lastPath = pathname + search; //unimos la url y si hay algunas variables se unen
+  localStorage.setItem('lastPath', lastPath); //y creamos un item en el localStorage para usarlo despues
+
+  return logged ? children : <Navigate to='/login' />; //con esto le digo que si esta logeado que me devuelva los childres que en este caso seria las demas paginas y si no simplemente me devuelve al login
+};
+```
+
+### PublicRoute.tsx
+
+```tsx
+import { useContext } from 'react';
+import { AuthContext } from '../auth';
+import { Navigate } from 'react-router-dom';
+
+export const PublicRoute = ({ children }: any) => {
+  const {
+    state: { logged },
+  } = useContext(AuthContext);
+  return !logged ? children : <Navigate to='/marvel' />; //de igual manera con las rutas publicas pero con esto hacemos que si esta logeado no pueda regresar al login si no que lo devuelva a la pagina principal
+  //entonces estos componentes los envolvemos en las rutas que queremos que tengan esta seguridad en este caso login por eso verifica si esta logeado y si esta lo devuelve a la pagina principal
+};
+```
+
+### AppRouter.tsx
+
+```tsx
+import { Routes, Route } from 'react-router-dom';
+import { LoginPages } from '../auth/pages';
+import { HeroesRoutes } from '../Heroes';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+
+export const AppRouter = () => {
+  return (
+    <>
+      <Routes>
+        {/* normal hago la ruta a donde quiero pero antes de poner la pagina lo envolvemos en el componente que contiene la logica para verificar lo que quiero en este caso si esta logeado no puede entrar al login */}
+        <Route
+          path='/login'
+          element={
+            <PublicRoute>
+              <LoginPages />
+            </PublicRoute>
+          }
+        />
+
+        {/* <Route path='login' element={<LoginPages />} /> */}
+        {/* de igual manera con las rutas privadas si no esta logeado no puede entrar a ninguna de estas */}
+        <Route
+          path='/*'
+          element={
+            <PrivateRoute>
+              <HeroesRoutes />
+            </PrivateRoute>
+          }
+        />
+
+        {/* <Route path='/*' element={<HeroesRoutes />} /> */}
+      </Routes>
+    </>
+  );
 };
 ```
