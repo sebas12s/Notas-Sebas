@@ -36,3 +36,32 @@ export const Navbar = () => {
 ## Active Link
 
 Para saber en que ruta estamos y nuestro primer client component
+
+```tsx
+'use client';
+
+import Link from 'next/link';
+import style from './ActiveLink.module.css';
+import { usePathname } from 'next/navigation';
+
+interface Props {
+  path: string;
+  title: string;
+}
+
+export const ActiveLink = ({ path, title }: Props) => {
+  const pathName = usePathname(); //este hook de de next nos da el path de donde estamos
+
+  return (
+    <Link
+      className={`${style.link} ${path === pathName && style['active-link']}`}
+      //   asi gracias al hook pudimos saber en donde estabamos y aplicarlo una clase mediante eso
+      href={path}
+    >
+      {/* los estyles son simplemente strings entonces podemos concatenarlos para poner mas */}
+      {/* recordemos que no es permitida esa sintaxis con el guion por eso ponemos esa sintaxis remplazando el punto */}
+      {title}
+    </Link>
+  );
+};
+```
