@@ -323,7 +323,7 @@ export const HeroCard = ({
   first_appearance,
   characters,
 }: HeroCardInterface) => {
-  const heroImgUrl = `/public/heroes/${id}.jpg`; //gracias a como guardamos las imagenes de forma especial por eso ponemos traer cada imagen ya que tienen el id y por eso la almacenamos asi
+  const heroImgUrl = `/public/heroes/${id}.jpg`; //gracias a como guardamos las imagenes de forma especial por eso podemos traer cada imagen ya que tienen el id y por eso la almacenamos asi
 
   return (
     // aqui solamente creamos una tarjeta ayudandonos con clases de bootstrap y animaciones especiales de Animate.css, para usar primero importarlas o poner el link en el html

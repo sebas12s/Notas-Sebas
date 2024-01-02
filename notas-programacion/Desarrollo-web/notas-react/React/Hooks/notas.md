@@ -19,6 +19,12 @@
     - [useReducer practico](#usereducer-practico)
       - [Con un custom Hook useTodo](#con-un-custom-hook-usetodo)
   - [ReactRouter](#reactrouter)
+    - [Funcionalidades](#funcionalidades)
+      - [useNavigate](#usenavigate)
+      - [useLocation](#uselocation)
+      - [useParams](#useparams)
+      - [Link](#link)
+      - [navLink](#navlink)
   - [useContext](#usecontext)
 
 ## useState
@@ -1099,6 +1105,63 @@ export const Navbar = () => {
     </nav>
   );
 };
+```
+
+### Funcionalidades
+
+#### useNavigate
+
+Podemos navegar a otros lugar gracias a muchas funciones que nos da react router dom
+
+```tsx
+const navigate = useNavigate();
+// esto nos ayuda a ir a otra direccion de la app
+navigate('/', {
+  // con este remplace le digo que remplazca la ruta en la que estamos entonces no se va a otra si no la remplaza
+  replace: true,
+});
+```
+
+#### useLocation
+
+Esto nos da informacion de la url como la ruta y las variables
+
+```tsx
+const location = useLocation();
+```
+
+#### useParams
+
+Esto nos ayuda a poder acceder a las variables que configuramos en nuestro router como `user/:id` y esto ayuda a acceder al id
+
+```tsx
+const { id } = useParams();
+```
+
+#### Link
+
+Nos ayuda a poder ir a otros lados de la app
+
+```tsx
+<Link className='navbar-brand' to='/'>
+  Asociaciones
+</Link>
+```
+
+#### navLink
+
+```tsx
+{
+  /* este componente es especial para el nav ya que nos devuelve unas propiedades que nos pueden ayudar como este isActive esto nos devuelve true si estamos parados en esa pagina por eso le puse clases especiales */
+}
+<NavLink
+  className={({ isActive }) => {
+    return isActive ? 'nav-item nav-link active' : 'nav-item nav-link';
+  }}
+  to='/marvel'
+>
+  Marvel
+</NavLink>;
 ```
 
 ## useContext

@@ -571,6 +571,70 @@ export async function GET(request: Request) {
 
 Y ya podemos hacer una peticion simplemente asi `localhost:3000/api/counter` y ya aparece lo que establezcamos
 
+Next ofrece ya los response y request para enviar y recibir que son los siguientes
+
+```ts
+import { NextResponse, NextRequest } from 'next/server';
+
+export async function GET(request: Request) {
+  return NextResponse.json({ message: 'Marcela' });
+}
+```
+
+### RESTful Api Endpoint
+
+En un contexto de API RESTful, un "endpoint" es una URL específica o URI (Identificador de Recursos Uniforme) que representa un recurso o un conjunto de recursos. Los recursos son entidades de datos o servicios que pueden ser manipulados a través de las operaciones estándar de HTTP, como GET, POST, PUT y DELETE.
+
+Un endpoint entonces es la url y con eso creamos gracias
+
+### Seed
+
+La semilla como la data para empezar en la base de datos, pero solo es al comienzo ya que borramos todos los datos y ponemos nuestros datos para empezar
+
+```ts
+import prisma from '@/lib/prisma'; //este prisma es el prismaClient que configuramos en esta direccion recordar, que es lo recomendado por next esa configuracion
+// el prima client nos ayuda a crear traer y todo eso de la base de datos, en si todas las querys
+import { NextResponse, NextRequest } from 'next/server';
+
+export async function GET(request: Request) {
+  await prisma.todo.deleteMany(); // delete * from todo, es lo mismo que eso eliminar todo
+
+  // await prisma.todo.deleteMany({ where: {} });   //asi podemos ponerle el where
+
+  // aqui almaceno en una variable lo que creo en prisma
+  // prisma es mi prisma client para poder hacer cosas, y le digo que en mi model todo cree algo y en data le pongo que crear
+  // const todo = await prisma.todo.create({
+  //   data: {
+  //     description: 'Ser novio de la chica mas hermosa',
+  //     complete: true,
+  //   },
+  // });
+  // con esto hacemos una insercion
+
+  // asi podemos crear muchos, ya recibe en data un arreglo
+  const todos = await prisma.todo.createMany({
+    data: [
+      {
+        description: 'Amar a Marcela',
+        complete: true,
+      },
+      {
+        description: 'Besar a Marcela',
+      },
+      {
+        description: 'Abrazar a Marcela',
+      },
+      {
+        description: 'Mar',
+      },
+    ],
+  });
+  return NextResponse.json(todos.count);
+}
+```
+
+Con prisma se puede hacer la paginacion de traer datos despues de algun numero, si tenemos 20 y quiero del 12 al 18 eso seria paginacion por que me estoy saltando el paginado son los 12
+
 ## LocalStorage / SessionStorage / Cookis
 
 - LocalStorage: en el local storage nunca sale de la computadora, es un espacio almacenado por dominio, si reiniciamos la computadora se mantendra en ese dominio, un ejemplo, localhost:3000
@@ -593,4 +657,116 @@ Y para obtenerlo se usa lo siguiente
 JSON.parse(localStorage.getItem('nombre') ?? '{}');
 ```
 
-En este caso lo convertimos ne un objeto con el parse, no es necesario si solo enviamos un string normal, y tambien puse una validacion que si no viene nada que convierta ese string
+En este caso lo convertimos ne un objeto con el parse, no es necesario si solo enviamos un string normal, y tambien puse una validacion que si no viene nada que convierta ese strin
+
+## Server Actions
+
+un ejemplo, esto nos ayuda a ahorrarnos la api las peticiones del get y tanta cosa las validaciones y eso, nos ahorramos en si todo el RESTfull API
+
+Si queremos crear un archivo donde todas esas funciones seran ejecutadas en el lado del servidor ponemos el `use server` al inicio del archivo o si no solo una funcion le ponemos al principio de todo el cuero el `use server`
+
+Y estas funciones el cliente las puede llamar normalmente como cualquier funcion
+
+Algo a tener en cuenta que en las props de las funciones de server action solamente objetos planos se puede enviar o strings y asi simples no metodos ni tanta cosa complicada
+
+## useOptimistic
+
+Es un hook propio de react pero lo use en next para cambiar de manera instantanea un estado
+
+```tsx
+'use client';
+
+import { startTransition, useOptimistic } from 'react';
+import { Todo } from '@prisma/client';
+import style from './TodoItem.module.css';
+import { IoCheckboxOutline, IoSquareOutline } from 'react-icons/io5';
+
+interface Props {
+  todo: Todo;
+  toggleTodo: (id: string, complete: boolean) => Promise<Todo | void>;
+}
+
+export const TodoItem = ({ todo, toggleTodo }: Props) => {
+  // este es como un useStete, entonces mi estado inicial es mi todo
+  const [todoOp, toggleTodoOp] = useOptimistic(
+    todo,
+    // como segundo argumento es un callback que como primer argumentos es el estado actual, y el segundo el argumento que resivimos en la funcion para cambiarlo en este caso el toggle
+    (stateTodo, newCompleteValue: boolean) => ({
+      // y pues aqui creamos un nuevo estado copiando el que teniamos y cambiamos el complete con el que enviemos
+      // esto pues hace el cambio de true a false
+      ...stateTodo,
+      complete: newCompleteValue,
+    })
+  );
+
+  const onToggleTodo = async () => {
+    // aqui ya puedo usar mi funcion para cambiar algo que le este diciendo y el argumento que estoy enviando es el segundo argumento que pusimos en el callback
+    startTransition(() => toggleTodoOp(!todoOp.complete)); //react nos hace que usemos un startTransition y ahi podamos usar la accion para cambiar el estado
+    await toggleTodo(todoOp.id, !todoOp.complete);
+  };
+
+  return (
+    <div className={todoOp.complete ? style.todoDone : style.todoPending}>
+      <div className='flex flex-col sm:flex-row justify-start items-center gap-4'>
+        <div
+          // aqui usamos nuestro todoOp para que los cambios al darle click sean instantaneos ya que estaremos cambiando como un useState y son muy rapidos y no tiene que esperar a la base de datos para cambiar el estado
+          // pero de igual manera cambio la base de datos
+          onClick={() => onToggleTodo()}
+          className={`
+            flex p-2 rounded-md cursor-pointer
+            hover:bg-opacity-60
+            ${todoOp.complete ? 'bg-blue-100' : 'bg-red-100'}
+            
+         `}
+        >
+          {todoOp.complete ? (
+            <IoCheckboxOutline size={30} />
+          ) : (
+            <IoSquareOutline size={30} />
+          )}
+        </div>
+
+        <div className='text-center sm:text-left'>{todoOp.description}</div>
+      </div>
+    </div>
+  );
+};
+```
+
+## Route Segment Config
+
+Esto es normalmente cuandon no estamos trabajando con el fetch API, son configuracion para manejar la cache si no usamos nuestro fetch y sus cualidades para manejar el cache que tienen
+
+[Documentacion](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)
+
+ya que la cache si genera una pagina del lado del servidor nos salgamos o no no se vuelve a generar por que esta en cache pero estas configuraciones ayudan a manejarla diferente
+
+Pero estas funciones solo funcion en archivos, page, layout, o router handler
+
+```tsx
+//estas dos lineas hacen que la cache se maneje diferente en otras palabras que se vuelva a recargar
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+```
+
+## Cookies
+
+Las cookies viajan al servidor al realizar cualquier peticion http, las cookies tienen menos espacio que el localstorage
+
+Entonces en next como todo es generado por server components, entonces estos server components pueden leer las cookies para genera el contenido del lado del servidor
+
+Un ejemplo para usar las cookies son, almacenar cuantos productos y que productos esta seleccionando mas el usuario y dependiendo eso desde el servidor leer y mostrar ma contenido dependiendo eso
+
+### Client
+
+Para manejarlas del lado del cliente hay una libreria muy facil de usar
+[Libreria](https://www.npmjs.com/package/cookies-next)
+
+Y ya podemos almacenar las coockies del lado del cliente
+
+### Server
+
+Aqui no debemos importar nada ya que esto ya lo trae en next para manejarlas del lado del servidor
+
+[Documentacion](https://nextjs.org/docs/app/api-reference/functions/cookies)

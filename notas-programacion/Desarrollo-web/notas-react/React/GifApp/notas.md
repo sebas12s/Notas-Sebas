@@ -8,7 +8,7 @@ contenedor padre:
 
 ```jsx
 const GifExpertApp = () => {
-  const [categorias, setCategorias] = useState(["One Piece", "Dragon Ball"]);
+  const [categorias, setCategorias] = useState(['One Piece', 'Dragon Ball']);
 
   // const addCategory = () => {    ya no usaremos esto
   // setCategorias([...categorias, 'Naruto'])   //asi puedo agregar un nuevo elemento a un arreglo con useState
@@ -37,7 +37,7 @@ AddCategory:
 
 ```jsx
 export const AddCategory = ({ setCategorias }) => {
-  const [inputValue, setInputValue] = useState("Marcela");
+  const [inputValue, setInputValue] = useState('Marcela');
   const onChangesEvent = ({ target }) => {
     //aqui de una vez desestrocturo el target
     setInputValue(target.value);
@@ -51,18 +51,17 @@ export const AddCategory = ({ setCategorias }) => {
     //.length nos dice cuantas letras tiene y si son pocas o no hay retorna la funcion, entonces no actualiza el arreglo
 
     setCategorias((cat) => [inputValue.trim(), ...cat]);
-    setInputValue(""); //esto para que el input value se limpie, ya que ese valor tenemos en el input
+    setInputValue(''); //esto para que el input value se limpie, ya que ese valor tenemos en el input
   };
 
   return (
     <form onSubmit={onSubmitEvent}>
-      {" "}
       {/*Gracias al form al simplemente darle enter ya envia el formulario, sin necesidad de de un boton */}
       <input
         // onChange={event => onChangesEvent(event)}
         onChange={onChangesEvent} //es lo mismo que lo de arriba
-        type="text"
-        placeholder="Buscar Gifs"
+        type='text'
+        placeholder='Buscar Gifs'
         value={inputValue}
       />
     </form>
@@ -74,7 +73,7 @@ Otra manera de hacerlo
 
 ```jsx
 const GifExpertApp = () => {
-  const [categorias, setCategorias] = useState(["One Piece", "Dragon Ball"]);
+  const [categorias, setCategorias] = useState(['One Piece', 'Dragon Ball']);
 
   const onAddCategory = (newCategory) => {
     //aqui resivo el valor enviado por el hijo,
@@ -104,7 +103,7 @@ const GifExpertApp = () => {
 
 ```jsx
 export const AddCategory = ({ onNewCategory }) => {
-  const [inputValue, setInputValue] = useState("Marcela");
+  const [inputValue, setInputValue] = useState('Marcela');
   const onChangesEvent = ({ target }) => {
     setInputValue(target.value);
   };
@@ -116,15 +115,15 @@ export const AddCategory = ({ onNewCategory }) => {
 
     // setCategorias((cat) => [inputValue.trim(), ...cat]);
     onNewCategory(inputValue.trim()); //aqui solamente envio el valor del input a la funcion que resivi como parametro
-    setInputValue("");
+    setInputValue('');
   };
 
   return (
     <form onSubmit={onSubmitEvent}>
       <input
         onChange={onChangesEvent}
-        type="text"
-        placeholder="Buscar Gifs"
+        type='text'
+        placeholder='Buscar Gifs'
         value={inputValue}
       />
     </form>
@@ -175,7 +174,7 @@ export const GigGrid = ({ category }) => {
   return (
     <>
       <h3>{category}</h3>
-      <div className="card-grid">
+      <div className='card-grid'>
         {
           // images.map((img) => (  tambien se puede desestructurara
           //   <li key={img.id}>{img.title}</li>
@@ -198,7 +197,7 @@ export const GigGrid = ({ category }) => {
 //este es el gifitem
 export const GifItem = ({ title, url }) => {
   return (
-    <div className="card">
+    <div className='card'>
       <img src={url} alt={title} />
       <p>{title}</p>
     </div>
@@ -218,7 +217,7 @@ export const GifGrid = ({ category }) => {
     <>
       <h3>{category}</h3>
       {isLoading && <h2>Cargando...</h2>} {/* estoy diciendo que si isLoading es true me muestre la carga si no, no muestra nada  */}
-      <div className="card-grid">
+      <div className='card-grid'>
         {images.map((img) => (
           <GifItem key={img.id} {...img} />
         ))}
