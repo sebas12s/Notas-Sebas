@@ -5,7 +5,7 @@ Poco a poco he adquirido conociemiento y en mis notas esta todo plasmado
 
 No prometo que sean las mas acertadas o las mas entendibles pero son todas mis notas
 
-Ya tengo trabajo
+Ya tengo trabajo de nuevo
 
 ---
 
