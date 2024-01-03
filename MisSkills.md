@@ -30,6 +30,12 @@ Se trabajo con:
 - Firebase
 - Libreria [Sweetalert2](https://sweetalert2.github.io/)
 
+### Calender-APP
+
+Se trabajo con:
+- Libreria [react-big-calendar](https://www.npmjs.com/package/react-big-calendar)
+- Libreria [date-fsn](https://www.npmjs.com/package/date-fns)
+
 ## Conocimientos
 
 ### React
